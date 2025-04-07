@@ -6,6 +6,6 @@ export interface Registers {
 	e: Uint8Array;
 	f: Uint8Array;
 	g: Uint8Array;
-	h: Uint8Array;
+	h: Uint8Array;	
 	i: Uint8Array;
 }
