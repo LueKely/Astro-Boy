@@ -16,7 +16,9 @@ import background from '../assets/background.svg';
 
 	input?.addEventListener('change', async (e) => {
 		if (!output) throw new Error('Output element missing');
-		await loadFile(e);
+		const game = await loadFile(e);
+		console.log(new DataView(game).getUint8(0x147));
+
 		output.innerText = 'Game Loaded';
 	});
 </script>

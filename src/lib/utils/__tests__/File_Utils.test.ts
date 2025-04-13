@@ -7,6 +7,6 @@ describe('File Handler', () => {
 			type: 'text/plain',
 		});
 
-		expect(await fileToArrayBuffer(mockFile)).toHaveReturned();
+		expect(await fileToArrayBuffer(mockFile)).toBeDefined();
 	});
 });

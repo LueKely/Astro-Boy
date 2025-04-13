@@ -3,9 +3,6 @@
  please refer to this link in regards of the Rom Header
 **/
 
-// Note To self
-// i find a lot of coding styles when
-
 type TFourBitArray = Uint8Array & { length: 4 };
 type TLogoSizeArray = Uint8Array & { length: 0x30 };
 type TManufacturerCodeArray = Uint8Array & { length: 3 };
