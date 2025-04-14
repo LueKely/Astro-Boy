@@ -9,6 +9,7 @@ import background from '../assets/background.svg';
 </div>
 
 <script>
+	import { GameBoyCatridge } from '../lib/Cartridge/Cartridge';
 	import { loadFile } from '../lib/utils/File_Utils';
 
 	const input = document.getElementById('fileInput');
@@ -17,7 +18,10 @@ import background from '../assets/background.svg';
 	input?.addEventListener('change', async (e) => {
 		if (!output) throw new Error('Output element missing');
 		const game = await loadFile(e);
-		console.log(new DataView(game).getUint8(0x147));
+
+		const cartridge = new GameBoyCatridge(game);
+
+		console.log(cartridge.getCartridgeHeader());
 
 		output.innerText = 'Game Loaded';
 	});
