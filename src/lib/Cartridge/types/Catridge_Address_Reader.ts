@@ -2,7 +2,7 @@ export class CartHeaderAdress {
 	static Adresses = {
 		entry: [0x100, 0x103],
 		nintendoLogo: [0x104, 0x0133],
-		gameTitle: [0x0134, 0x143],
+		gameTitle: [0x134, 0x143],
 		manufactureCode: [0x13f, 0x0142],
 		cgbFlag: [0x0143],
 		newLicenseeCode: [0x0144, 0x0145],

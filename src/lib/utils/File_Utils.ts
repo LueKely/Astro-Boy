@@ -4,8 +4,6 @@
  * @returns {Promise<ArrayBuffer>} Returns a promise of an Array Buffer
  **/
 
-import { GameBoyCatridge } from '../Cartridge/Cartridge';
-
 function fileToArrayBuffer(file: File): Promise<ArrayBuffer> {
 	const fileReader = new FileReader();
 
