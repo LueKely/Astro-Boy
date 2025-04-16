@@ -83,6 +83,7 @@ export class CartHeaderAdress {
 	};
 	// CGB FLAG
 	// ADD intepriter for the value of the cartridge
+	// FINISH ME
 	static CartridgeType = {
 		0x00: 'ROM ONLY',
 	};
