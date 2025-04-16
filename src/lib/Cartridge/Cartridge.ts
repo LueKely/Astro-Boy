@@ -12,7 +12,7 @@ export class GameBoyCatridge {
 
 	//make cart header be a static value
 	#rawGame: ArrayBuffer;
-	readonly #CatridgeHeader = CartHeaderAdress.Adresses;
+	static #CatridgeHeader = CartHeaderAdress.Adresses;
 	#CartData: DataView;
 	#CartDataToBytes: Uint8Array;
 
@@ -28,35 +28,35 @@ export class GameBoyCatridge {
 		}
 
 		const cartridgeType = this.#CartData.getUint8(
-			this.#CatridgeHeader.cartridgeType[0]
+			GameBoyCatridge.#CatridgeHeader.cartridgeType[0]
 		);
 
 		const cartridgeRomSize = this.#CartData.getUint8(
-			this.#CatridgeHeader.romSize[0]
+			GameBoyCatridge.#CatridgeHeader.romSize[0]
 		);
 
 		const cartridgeRamSize = this.#CartData.getUint8(
-			this.#CatridgeHeader.ramSize[0]
+			GameBoyCatridge.#CatridgeHeader.ramSize[0]
 		);
 
 		const cartridgeCgbFlag = this.#CartData.getUint8(
-			this.#CatridgeHeader.cgbFlag[0]
+			GameBoyCatridge.#CatridgeHeader.cgbFlag[0]
 		);
 
 		const cartridgeDestinationCode = this.#CartData.getUint8(
-			this.#CatridgeHeader.destinationCode[0]
+			GameBoyCatridge.#CatridgeHeader.destinationCode[0]
 		);
 
 		const cartridgeOldLicenseeCode = this.#CartData.getUint8(
-			this.#CatridgeHeader.oldLicenseeCode[0]
+			GameBoyCatridge.#CatridgeHeader.oldLicenseeCode[0]
 		);
 
 		const cartridgeMaskRomVersionNumber = this.#CartData.getUint8(
-			this.#CatridgeHeader.maskRomVersionNumber[0]
+			GameBoyCatridge.#CatridgeHeader.maskRomVersionNumber[0]
 		);
 
 		const cartridgeCheckSum = this.#CartData.getUint8(
-			this.#CatridgeHeader.headerCheckSum[0]
+			GameBoyCatridge.#CatridgeHeader.headerCheckSum[0]
 		);
 
 		// todo fix later this is ugly
@@ -65,8 +65,8 @@ export class GameBoyCatridge {
 			return textDecoder.decode(arg);
 		}
 		const cartridgeTitle = this.#CartDataToBytes.subarray(
-			this.#CatridgeHeader.gameTitle[0],
-			this.#CatridgeHeader.gameTitle[1]
+			GameBoyCatridge.#CatridgeHeader.gameTitle[0],
+			GameBoyCatridge.#CatridgeHeader.gameTitle[1]
 		);
 
 		return {
