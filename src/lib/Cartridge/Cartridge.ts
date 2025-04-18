@@ -1,5 +1,5 @@
 import { CartHeaderAdress } from './types/Catridge_Address_Reader';
-
+// tonight will infer what these ascii code mean
 /**
  * @description
  * This file contains the code for loading a ROM file.
