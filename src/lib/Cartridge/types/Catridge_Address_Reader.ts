@@ -1,4 +1,15 @@
+/**
+ * @description This is a util function class for the headers, this will be a look up table
+ * @link https://gbdev.io/pandocs/The_Cartridge_Header.html
+ *
+ * See link above to get a general direction of what these Header Value infer
+ **/
 export class CartHeaderAdress {
+	/**
+	 * @description This stores an array of memory address that stores a 16 bit value
+	 * @example To see what type of cartridge the game is contained in you need to jump to address 0x0147 and infer its 16bit value
+	 * NOTE: some of the adress have more than 1 address to look at.
+	 **/
 	static Adresses = {
 		entry: [0x100, 0x103],
 		nintendoLogo: [0x104, 0x0133],
@@ -16,16 +27,25 @@ export class CartHeaderAdress {
 		globalCheckSum: [0x014e, 0x014f],
 	};
 
-	//this should have a fallback i suggest using a
-	// a switch
+	/**
+	 * @description This checks if the cartridge is Game Boy Color Compatible
+	 *
+	 * NOTE: I don't inted to make this emulator Cgb friendly (for now, April 19 2025)
+	 **/
 	static CgbFlag = {
 		0x80: 'Backwards Compatible',
 		0xc0: 'CGB Only',
 	};
 
-	// CGB FLAG
 	// ADD intepriter for the value of the cartridge
-	// FINISH ME - FINISHED
+
+	/**
+	 * @description This checks what type of cartridge the game is in
+	 *
+	 * NOTE: this will imporant because of the gameboy's rom size to fit the game which is only 32kb,
+	 * Some of the cartridges provides a built in memory back controller or an MBC that will act as
+	 * external memory, in that case the emulator should also be capable of emulating different types of MBC's
+	 **/
 	static CartridgeType = {
 		0x00: 'ROM ONLY',
 		0x01: 'MBC1',
@@ -57,11 +77,18 @@ export class CartHeaderAdress {
 		0xff: 'HuC1+RAM+BATTERY',
 	};
 
+	/**
+	 * @description this checks if this cartridge is made for japan or overseas
+	 **/
 	static DestinationCode = {
 		0x00: 'Japan',
 		0x01: 'Overseas Only',
 	};
 
+	/**
+	 * @description These are the values of the ascii code that is given by the adress 0x144 & 0x145
+	 * NOTE: You will only check the NewLicenseeCode IF the value of the adress OldLicenseeCode is 0x33
+	 **/
 	static NewLicenseeCode = {
 		0: 'None',
 		1: 'Nintendo Research & Development 1',
@@ -128,6 +155,12 @@ export class CartHeaderAdress {
 		DK: 'Kodansha',
 	};
 
+	/**
+	 @description This stores the values of the old licensee code
+	 * This is the first licensee code the emulator should check
+	 * NOTE: If the address value of the OldLicensee code is 0x33,
+	 * you should now check the New Licensee Code
+	 **/
 	static OldLicenseeCode = {
 		0x00: 'None',
 		0x01: 'Nintendo',
@@ -277,7 +310,9 @@ export class CartHeaderAdress {
 		0xff: 'LJN',
 	};
 
-	// in Kibibytes
+	/**
+	 * @description This Checks the rom size of the cartridge in KiB KibiBytes
+	 **/
 	static RomSize = {
 		0x00: 32,
 		0x01: 64,
@@ -293,7 +328,9 @@ export class CartHeaderAdress {
 		0x54: 1536,
 	};
 
-	// in Kibibytes
+	/**
+	 * @description This Checks the ram size of the cartridge in KiB KibiBytes
+	 **/
 	static RamSize = {
 		// no ram
 		0x00: 0,
