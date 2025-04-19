@@ -276,4 +276,36 @@ export class CartHeaderAdress {
 		0xf3: 'Extreme Entertainment',
 		0xff: 'LJN',
 	};
+
+	// in Kibibytes
+	static RomSize = {
+		0x00: 32,
+		0x01: 64,
+		0x02: 128,
+		0x03: 256,
+		0x04: 512,
+		0x05: 1024,
+		0x06: 2048,
+		0x07: 4096,
+		0x08: 8192,
+		0x52: 1126.4,
+		0x53: 1228.8,
+		0x54: 1536,
+	};
+
+	// in Kibibytes
+	static RamSize = {
+		// no ram
+		0x00: 0,
+		// unused
+		0x01: 'unused',
+		//  1 bank
+		0x02: 8,
+		//  4 banks of 8 KiB each
+		0x03: 32,
+		// 16 banks of 8 KiB each
+		0x04: 128,
+		// 8 banks of 8 KiB each
+		0x05: 64,
+	};
 }
