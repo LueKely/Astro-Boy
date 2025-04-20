@@ -21,7 +21,8 @@ import background from '../assets/background.svg';
 
 		const cartridge = new GameBoyCatridge(game);
 
-		console.log(cartridge.getCartridgeHeader());
+		console.log(cartridge.getCartridgeHeaderRaw());
+		console.log(cartridge.inferCartridgeHeader());
 
 		output.innerText = 'Game Loaded';
 	});
