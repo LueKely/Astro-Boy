@@ -15,7 +15,7 @@ export class CartHeaderAdress {
     nintendoLogo: [0x104, 0x133],
     gameTitle: [0x134, 0x143],
     manufactureCode: [0x13f, 0x0142],
-    cgbFlag: [0x0143],
+    cgbFlag: [0x143],
     newLicenseeCode: [0x144, 0x145],
     cartridgeType: [0x0147],
     romSize: [0x148],
@@ -33,11 +33,10 @@ export class CartHeaderAdress {
    * NOTE: I don't inted to make this emulator Cgb friendly (for now, April 19 2025)
    **/
   static CgbFlag = new Map([
+    [0x00, "Not Gameboy Color Compatible"],
     [0x80, "Backwards Compatible"],
     [0xc0, "CGB Only"],
   ]);
-
-  // ADD intepriter for the value of the cartridge
 
   /**
    * @description This checks what type of cartridge the game is in

@@ -49,9 +49,7 @@ export class GameBoyCatridge {
       CartHeaderAdress.Adresses.ramSize[0],
     );
 
-    const cartridgeCgbFlag = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.cgbFlag[0],
-    );
+    const cartridgeCgbFlag = this.#CartData.getUint8(0x143);
 
     const cartridgeDestinationCode = this.#CartData.getUint8(
       CartHeaderAdress.Adresses.destinationCode[0],
@@ -116,7 +114,8 @@ export class GameBoyCatridge {
 
   inferCartridgeHeader() {
     const header = this.getCartridgeHeaderRaw();
-
+    const { globalCheckSum, manufactureCode, entryPoint } =
+      this.getCartridgeHeaderRaw();
     return {
       type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
       romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
@@ -131,6 +130,13 @@ export class GameBoyCatridge {
       newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
         GameBoyCatridge.#CipherAscii(header.newLicenseeCode),
       ),
+      cgbFlag:
+        CartHeaderAdress.CgbFlag.get(Number(header.cgbFlag)) ||
+        "Doesn't seem to work wdym 32",
+      maskRomVersionNumber: header.maskRomVersionNumber,
+      globalCheckSum,
+      manufactureCode,
+      entryPoint,
     };
   }
 
