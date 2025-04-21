@@ -86,7 +86,7 @@ export class GameBoyCatridge {
       CartHeaderAdress.Adresses.manufactureCode[0],
       CartHeaderAdress.Adresses.manufactureCode[1] + 0x01,
     );
-
+    // pandev says this isn't supported
     const globalCheckSum = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.globalCheckSum[0],
       CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01,
@@ -96,6 +96,7 @@ export class GameBoyCatridge {
       type: GameBoyCatridge.#ToHex(cartridgeType),
       romSize: GameBoyCatridge.#ToHex(cartridgeRomSize),
       ramSize: GameBoyCatridge.#ToHex(cartridgeRamSize),
+      // FIX ME: WHY AM I SHOWING AS 32 BRO
       cgbFlag: GameBoyCatridge.#ToHex(cartridgeCgbFlag),
       destinationCode: GameBoyCatridge.#ToHex(cartridgeDestinationCode),
       oldLicenseeCode: GameBoyCatridge.#ToHex(cartridgeOldLicenseeCode),
@@ -114,7 +115,7 @@ export class GameBoyCatridge {
 
   inferCartridgeHeader() {
     const header = this.getCartridgeHeaderRaw();
-    const { globalCheckSum, manufactureCode, entryPoint } =
+    const { globalCheckSum, manufactureCode, entryPoint, checkSum } =
       this.getCartridgeHeaderRaw();
     return {
       type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
@@ -137,7 +138,17 @@ export class GameBoyCatridge {
       globalCheckSum,
       manufactureCode,
       entryPoint,
+      checkSum,
     };
+  }
+  checkSum() {
+    const { checkSum } = this.getCartridgeHeaderRaw();
+    let currentSum = 0;
+    for (let i = 0x0134; i <= 0x014c; i++) {
+      currentSum = (currentSum - this.#CartDataToBytes[i] - 1) & 0xff;
+    }
+
+    return checkSum === currentSum.toString(16);
   }
 
   // eg.
