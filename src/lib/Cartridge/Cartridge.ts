@@ -173,6 +173,14 @@ export class GameBoyCatridge {
 			checkSum,
 		};
 	}
+	/**
+	  @description This checkSum was need to work before
+	 * you boot into the game and see if the checkSum is correct
+	 * if not it will lock the game and will not run the rom
+	 * AUTHOR'S NOTE: Ofcourse I will not implement a lock system
+	 * if the check sum failed
+	 @returns  a boolean if the checkSum and the currentSum matched values
+	 **/
 	checkSum() {
 		const { checkSum } = this.getCartridgeHeaderRaw();
 		let currentSum = 0;
