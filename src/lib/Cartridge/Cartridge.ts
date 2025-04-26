@@ -3,7 +3,7 @@ import { CartHeaderAdress } from "./types/Catridge_Address_Reader";
 /**
  * @module GameBoyCatridge
  * @description
- * This Class takes the raw Arraybuffer input from the input type 
+ * This Class takes the raw Arraybuffer input from the input type
  * file and uses the CartHeaderAdress and reads mostly the CartHeader
  * of the inputted room and returns either the raw values or the interpretted values
  **/
@@ -98,6 +98,11 @@ export class GameBoyCatridge {
       CartHeaderAdress.Adresses.gameTitle[0],
       CartHeaderAdress.Adresses.gameTitle[1] + 0x01,
     );
+    // please dont sue me
+    const nintendoLogo = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.nintendoLogo[0],
+      CartHeaderAdress.Adresses.nintendoLogo[1],
+    );
 
     const entryPoint = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.entry[0],
@@ -133,6 +138,7 @@ export class GameBoyCatridge {
       checkSum: GameBoyCatridge.#ToHex(cartridgeCheckSum),
       title: cartridgeTitle,
       entryPoint: entryPoint,
+      nintendoLogo: nintendoLogo,
       // this part should be an ASCII code
       newLicenseeCode: newLicenseeCode,
       manufactureCode: manufactureCode,
@@ -145,8 +151,13 @@ export class GameBoyCatridge {
 	  **/
   inferCartridgeHeader() {
     const header = this.getCartridgeHeaderRaw();
-    const { globalCheckSum, manufactureCode, entryPoint, checkSum } =
-      this.getCartridgeHeaderRaw();
+    const {
+      globalCheckSum,
+      manufactureCode,
+      entryPoint,
+      checkSum,
+      nintendoLogo,
+    } = this.getCartridgeHeaderRaw();
     return {
       type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
       romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
@@ -169,14 +180,15 @@ export class GameBoyCatridge {
       manufactureCode,
       entryPoint,
       checkSum,
+      nintendoLogo,
     };
   }
 
   /**
   @description
- * CheckSum is an operation inside the gameboy to
+ * CheckSum is an operation inside the gameboy
  * to check if the checkSum Adress value is correct.
- * The gameboy will read the cartridge headers and see if the 
+ * The gameboy will read the cartridge headers and see if the
  * checkSum is correct if not it will lock the game and will not run the rom
  *
  * AUTHOR'S NOTE: Ofcourse I will not implement a lock system

@@ -1,11 +1,20 @@
-export interface Registers {
-	a: Uint8Array;
-	b: Uint8Array;
-	c: Uint8Array;
-	d: Uint8Array;
-	e: Uint8Array;
-	f: Uint8Array;
-	g: Uint8Array;
-	h: Uint8Array;	
-	i: Uint8Array;
+export interface IRegisters {
+  A: number;
+  B: number;
+  C: number;
+  D: number;
+  E: number;
+  F: number;
+  G: number;
+  H: number;
+  L: number;
+}
+
+export interface HexRegisters {
+  AF: Uint8Array;
+  BC: Uint8Array;
+  DE: Uint8Array;
+  HL: Uint8Array;
+  SP: Uint8Array;
+  PC: Uint8Array;
 }
