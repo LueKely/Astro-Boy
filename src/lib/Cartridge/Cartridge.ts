@@ -1,195 +1,197 @@
-import { CartHeaderAdress } from './types/Catridge_Address_Reader';
+import { CartHeaderAdress } from "./types/Catridge_Address_Reader";
 // tonight will infer what these ascii code mean
 /**
  * @module GameBoyCatridge
  * @description
- * This Class takes the raw Arraybuffer input from the input type file
- * and uses the CartHeaderAdress and reads mostly the CartHeader of
- * the inputted room and returns either the raw values or the interpretted values
+ * This Class takes the raw Arraybuffer input from the input type 
+ * file and uses the CartHeaderAdress and reads mostly the CartHeader
+ * of the inputted room and returns either the raw values or the interpretted values
  **/
 
 export class GameBoyCatridge {
-	#rawGame: ArrayBuffer;
-	#CartData: DataView;
-	#CartDataToBytes: Uint8Array;
+  #rawGame: ArrayBuffer;
+  #CartData: DataView;
+  #CartDataToBytes: Uint8Array;
 
-	/** 
+  /**
    @private
-   @static  
+   @static
    @function ToHex this util function will just turn the decimal number into Hexadecimal
   **/
-	static #ToHex(value: number) {
-		return value.toString(16);
-	}
+  static #ToHex(value: number) {
+    return value.toString(16);
+  }
 
-	/** 
+  /**
    @function #ReadSubArray Another util function, this is primarily for making sense of the title address values
-    this is will take 
    @private
-   @static  
+   @static
    @param {Uint8Array} arg - this is the values of the title addresses
    @returns A string from the decoded argument
 	 **/
-	static #ReadSubArray(arg: Uint8Array) {
-		const textDecoder = new TextDecoder();
-		return textDecoder.decode(arg);
-	}
+  static #ReadSubArray(arg: Uint8Array) {
+    const textDecoder = new TextDecoder();
+    return textDecoder.decode(arg);
+  }
 
-	/** 
+  /**
    @function #CipherAscii decodes the new license values into ascii characters
    @private
-   @static  
-   @param {Uint8Array} arg - this are the values of the 2 addresses of the new license
+   @static
+   @param {Uint8Array} args - this are the values of the 2 addresses of the new license
    @returns the combined ascii code
 	 **/
 
-	static #CipherAscii(args: Uint8Array<ArrayBufferLike>) {
-		const a = String.fromCharCode(args[0]);
-		const b = String.fromCharCode(args[1]);
+  static #CipherAscii(args: Uint8Array<ArrayBufferLike>) {
+    const a = String.fromCharCode(args[0]);
+    const b = String.fromCharCode(args[1]);
 
-		return a + b;
-	}
+    return a + b;
+  }
 
-	/**
-	 * @constructor
-	 * @param {ArrayBuffer}rawGame this is cartridge and making
-	 *  it an arraybuffer for this class to read
-	 **/
+  /**
+   * @constructor
+   * @param {ArrayBuffer}rawGame this is cartridge as an arraybuffer for this class to read
+   **/
 
-	constructor(rawGame: ArrayBuffer) {
-		this.#rawGame = rawGame;
-		this.#CartData = new DataView(this.#rawGame);
-		this.#CartDataToBytes = new Uint8Array(this.#CartData.buffer);
-	}
+  constructor(rawGame: ArrayBuffer) {
+    this.#rawGame = rawGame;
+    this.#CartData = new DataView(this.#rawGame);
+    this.#CartDataToBytes = new Uint8Array(this.#CartData.buffer);
+  }
 
-	/**
-	 @returns the raw and sliced up version of the values from the CartData 
+  /**
+	 @returns the raw and sliced up version of the values from the CartData
 	  **/
-	getCartridgeHeaderRaw() {
-		const cartridgeType = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.cartridgeType[0]
-		);
+  getCartridgeHeaderRaw() {
+    const cartridgeType = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.cartridgeType[0],
+    );
 
-		const cartridgeRomSize = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.romSize[0]
-		);
+    const cartridgeRomSize = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.romSize[0],
+    );
 
-		const cartridgeRamSize = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.ramSize[0]
-		);
+    const cartridgeRamSize = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.ramSize[0],
+    );
 
-		const cartridgeCgbFlag = this.#CartData.getUint8(0x143);
+    const cartridgeCgbFlag = this.#CartData.getUint8(0x143);
 
-		const cartridgeDestinationCode = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.destinationCode[0]
-		);
+    const cartridgeDestinationCode = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.destinationCode[0],
+    );
 
-		const cartridgeOldLicenseeCode = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.oldLicenseeCode[0]
-		);
+    const cartridgeOldLicenseeCode = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.oldLicenseeCode[0],
+    );
 
-		const cartridgeMaskRomVersionNumber = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.maskRomVersionNumber[0]
-		);
+    const cartridgeMaskRomVersionNumber = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.maskRomVersionNumber[0],
+    );
 
-		const cartridgeCheckSum = this.#CartData.getUint8(
-			CartHeaderAdress.Adresses.headerCheckSum[0]
-		);
+    const cartridgeCheckSum = this.#CartData.getUint8(
+      CartHeaderAdress.Adresses.headerCheckSum[0],
+    );
 
-		const cartridgeTitle = this.#CartDataToBytes.subarray(
-			CartHeaderAdress.Adresses.gameTitle[0],
-			CartHeaderAdress.Adresses.gameTitle[1] + 0x01
-		);
+    const cartridgeTitle = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.gameTitle[0],
+      CartHeaderAdress.Adresses.gameTitle[1] + 0x01,
+    );
 
-		const entryPoint = this.#CartDataToBytes.subarray(
-			CartHeaderAdress.Adresses.entry[0],
-			CartHeaderAdress.Adresses.entry[1] + 0x01
-		);
+    const entryPoint = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.entry[0],
+      CartHeaderAdress.Adresses.entry[1] + 0x01,
+    );
 
-		const newLicenseeCode = this.#CartDataToBytes.subarray(
-			CartHeaderAdress.Adresses.newLicenseeCode[0],
-			CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01
-		);
-		// as pandev implies, the manufacturer code has no know purpose
-		const manufactureCode = this.#CartDataToBytes.subarray(
-			CartHeaderAdress.Adresses.manufactureCode[0],
-			CartHeaderAdress.Adresses.manufactureCode[1] + 0x01
-		);
-		// pandev says this isn't supported
-		const globalCheckSum = this.#CartDataToBytes.subarray(
-			CartHeaderAdress.Adresses.globalCheckSum[0],
-			CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01
-		);
+    const newLicenseeCode = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.newLicenseeCode[0],
+      CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01,
+    );
+    // as pandev implies, the manufacturer code has no know purpose
+    const manufactureCode = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.manufactureCode[0],
+      CartHeaderAdress.Adresses.manufactureCode[1] + 0x01,
+    );
+    // pandev says this isn't supported
+    const globalCheckSum = this.#CartDataToBytes.subarray(
+      CartHeaderAdress.Adresses.globalCheckSum[0],
+      CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01,
+    );
 
-		return {
-			type: GameBoyCatridge.#ToHex(cartridgeType),
-			romSize: GameBoyCatridge.#ToHex(cartridgeRomSize),
-			ramSize: GameBoyCatridge.#ToHex(cartridgeRamSize),
-			// FIX ME: WHY AM I SHOWING AS 32 BRO
-			cgbFlag: GameBoyCatridge.#ToHex(cartridgeCgbFlag),
-			destinationCode: GameBoyCatridge.#ToHex(cartridgeDestinationCode),
-			oldLicenseeCode: GameBoyCatridge.#ToHex(cartridgeOldLicenseeCode),
-			maskRomVersionNumber: GameBoyCatridge.#ToHex(
-				cartridgeMaskRomVersionNumber
-			),
-			checkSum: GameBoyCatridge.#ToHex(cartridgeCheckSum),
-			title: cartridgeTitle,
-			entryPoint: entryPoint,
-			// this part should be an ASCII code
-			newLicenseeCode: newLicenseeCode,
-			manufactureCode: manufactureCode,
-			globalCheckSum: globalCheckSum,
-		};
-	}
+    return {
+      type: GameBoyCatridge.#ToHex(cartridgeType),
+      romSize: GameBoyCatridge.#ToHex(cartridgeRomSize),
+      ramSize: GameBoyCatridge.#ToHex(cartridgeRamSize),
+      // FIX ME: WHY AM I SHOWING AS 32 BRO
+      cgbFlag: GameBoyCatridge.#ToHex(cartridgeCgbFlag),
+      destinationCode: GameBoyCatridge.#ToHex(cartridgeDestinationCode),
+      oldLicenseeCode: GameBoyCatridge.#ToHex(cartridgeOldLicenseeCode),
+      maskRomVersionNumber: GameBoyCatridge.#ToHex(
+        cartridgeMaskRomVersionNumber,
+      ),
+      checkSum: GameBoyCatridge.#ToHex(cartridgeCheckSum),
+      title: cartridgeTitle,
+      entryPoint: entryPoint,
+      // this part should be an ASCII code
+      newLicenseeCode: newLicenseeCode,
+      manufactureCode: manufactureCode,
+      globalCheckSum: globalCheckSum,
+    };
+  }
 
-	/**
-	 @returns an interpreted version of the values from the CartData 
+  /**
+	 @returns an interpreted version of the values from the CartData
 	  **/
-	inferCartridgeHeader() {
-		const header = this.getCartridgeHeaderRaw();
-		const { globalCheckSum, manufactureCode, entryPoint, checkSum } =
-			this.getCartridgeHeaderRaw();
-		return {
-			type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
-			romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
-			ramSize: CartHeaderAdress.RamSize.get(Number(header.ramSize)),
-			destination: CartHeaderAdress.DestinationCode.get(
-				Number(header.destinationCode)
-			),
-			title: GameBoyCatridge.#ReadSubArray(header.title),
-			oldLicenseeCode: CartHeaderAdress.OldLicenseeCode.get(
-				Number('0x' + header.oldLicenseeCode)
-			),
-			newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
-				GameBoyCatridge.#CipherAscii(header.newLicenseeCode)
-			),
-			cgbFlag:
-				CartHeaderAdress.CgbFlag.get(Number(header.cgbFlag)) ||
-				"Doesn't seem to work wdym 32",
-			maskRomVersionNumber: header.maskRomVersionNumber,
-			globalCheckSum,
-			manufactureCode,
-			entryPoint,
-			checkSum,
-		};
-	}
-	/**
-	  @description This checkSum was need to work before
-	 * you boot into the game and see if the checkSum is correct
-	 * if not it will lock the game and will not run the rom
-	 * AUTHOR'S NOTE: Ofcourse I will not implement a lock system
-	 * if the check sum failed
-	 @returns  a boolean if the checkSum and the currentSum matched values
-	 **/
-	checkSum() {
-		const { checkSum } = this.getCartridgeHeaderRaw();
-		let currentSum = 0;
-		for (let i = 0x0134; i <= 0x014c; i++) {
-			currentSum = (currentSum - this.#CartDataToBytes[i] - 1) & 0xff;
-		}
+  inferCartridgeHeader() {
+    const header = this.getCartridgeHeaderRaw();
+    const { globalCheckSum, manufactureCode, entryPoint, checkSum } =
+      this.getCartridgeHeaderRaw();
+    return {
+      type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
+      romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
+      ramSize: CartHeaderAdress.RamSize.get(Number(header.ramSize)),
+      destination: CartHeaderAdress.DestinationCode.get(
+        Number(header.destinationCode),
+      ),
+      title: GameBoyCatridge.#ReadSubArray(header.title),
+      oldLicenseeCode: CartHeaderAdress.OldLicenseeCode.get(
+        Number("0x" + header.oldLicenseeCode),
+      ),
+      newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
+        GameBoyCatridge.#CipherAscii(header.newLicenseeCode),
+      ),
+      cgbFlag:
+        CartHeaderAdress.CgbFlag.get(Number(header.cgbFlag)) ||
+        "Doesn't seem to work wdym 32",
+      maskRomVersionNumber: header.maskRomVersionNumber,
+      globalCheckSum,
+      manufactureCode,
+      entryPoint,
+      checkSum,
+    };
+  }
 
-		return checkSum === currentSum.toString(16);
-	}
+  /**
+  @description
+ * CheckSum is an operation inside the gameboy to
+ * to check if the checkSum Adress value is correct.
+ * The gameboy will read the cartridge headers and see if the 
+ * checkSum is correct if not it will lock the game and will not run the rom
+ *
+ * AUTHOR'S NOTE: Ofcourse I will not implement a lock system
+ * if the check sum failed
+ @returns  a boolean if the checkSum and the currentSum matched values
+ **/
+  checkSum() {
+    const { checkSum } = this.getCartridgeHeaderRaw();
+    let currentSum = 0;
+    for (let i = 0x0134; i <= 0x014c; i++) {
+      currentSum = (currentSum - this.#CartDataToBytes[i] - 1) & 0xff;
+    }
 
-	// eg.
+    return checkSum === currentSum.toString(16);
+  }
+
+  // eg.
 }
