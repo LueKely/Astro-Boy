@@ -1,4 +1,18 @@
-import type { HexRegisters, IRegisters } from "./types/CPU_Register_Types";
+import type { IRegisters } from "./types/CPU_Register_Types";
+
+/*
+ * The CPU REGISTER
+ * Please refer to https://gbdev.io/pandocs/CPU_Registers_and_Flags.html
+ * 7-------07-------0
+ * |   A   ||   F   |  => Acumulator & Flags
+ * |   B   ||   C   |
+ * |   D   ||   E   |
+ * |   H   ||   L   |
+ * 15---------------0
+ * |       SP       |  => Stack Pointer
+ * |       PC       |  => Program Counter/Pointer
+ * |----------------|
+ */
 
 export class CPU_Registers {
   register: IRegisters = {
@@ -14,4 +28,32 @@ export class CPU_Registers {
   };
 
   constructor() {}
+  getAF() {
+    return (this.register.A << 8) | (this.register.F & 0xff);
+  }
+
+  getBC() {
+    return (this.register.B << 8) | (this.register.C & 0xff);
+  }
+
+  setBC(value: number) {
+    this.register.B = value & (0xff0 >> 8);
+    this.register.C = value & 0xff;
+  }
+  getDE() {
+    return (this.register.D << 8) | (this.register.E & 0xff);
+  }
+
+  setDE(value: number) {
+    this.register.D = value & (0xff0 >> 8);
+    this.register.E = value & 0xff;
+  }
+
+  getHL() {
+    return (this.register.H << 8) | (this.register.L & 0xff);
+  }
+  setHL(value: number) {
+    this.register.H = value & (0xff0 >> 8);
+    this.register.L = value & 0xff;
+  }
 }
