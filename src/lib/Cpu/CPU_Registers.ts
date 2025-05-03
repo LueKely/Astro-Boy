@@ -1,3 +1,4 @@
+import { CPU_Flag_Register } from "./CPU_Flag_Register";
 import type { IRegisters } from "./types/CPU_Register_Types";
 
 /*
@@ -21,7 +22,7 @@ export class CPU_Registers {
     C: 0,
     D: 0,
     E: 0,
-    F: 0,
+    F: new CPU_Flag_Register(0),
     G: 0,
     H: 0,
     L: 0,
@@ -29,8 +30,9 @@ export class CPU_Registers {
   };
 
   constructor() {}
+  // this is a but suspicious i might check on this later
   getAF() {
-    return (this.register.A << 8) | this.register.F;
+    return (this.register.A << 8) | this.register.F.getFRegister();
   }
 
   getBC() {

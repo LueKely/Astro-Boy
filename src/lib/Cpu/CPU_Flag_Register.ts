@@ -6,7 +6,7 @@ export class CPU_Flag_Register {
   #register: number = 0;
   // 0000 0000
   //   #flag = { Z: 0, N: 0, H: 0, CY: 0 };
-  constuctor(register: number) {
+  constructor(register: number) {
     this.#register = register;
   }
 
