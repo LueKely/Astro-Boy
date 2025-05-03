@@ -8,4 +8,5 @@ export interface IRegisters {
   G: number;
   H: number;
   L: number;
+  PC: number;
 }

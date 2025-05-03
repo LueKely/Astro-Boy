@@ -25,35 +25,36 @@ export class CPU_Registers {
     G: 0,
     H: 0,
     L: 0,
+    PC: 0, // 16 bit register
   };
 
   constructor() {}
   getAF() {
-    return (this.register.A << 8) | (this.register.F & 0xff);
+    return (this.register.A << 8) | this.register.F;
   }
 
   getBC() {
-    return (this.register.B << 8) | (this.register.C & 0xff);
+    return (this.register.B << 8) | this.register.C;
   }
 
   setBC(value: number) {
-    this.register.B = value & (0xff0 >> 8);
+    this.register.B = (value & 0xff0) >> 8;
     this.register.C = value & 0xff;
   }
   getDE() {
-    return (this.register.D << 8) | (this.register.E & 0xff);
+    return (this.register.D << 8) | this.register.E;
   }
 
   setDE(value: number) {
-    this.register.D = value & (0xff0 >> 8);
+    this.register.D = (value & 0xff0) >> 8;
     this.register.E = value & 0xff;
   }
 
   getHL() {
-    return (this.register.H << 8) | (this.register.L & 0xff);
+    return (this.register.H << 8) | this.register.L;
   }
   setHL(value: number) {
-    this.register.H = value & (0xff0 >> 8);
+    this.register.H = (value & 0xff0) >> 8;
     this.register.L = value & 0xff;
   }
 }
