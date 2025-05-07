@@ -36,20 +36,20 @@ export class CPU_Flag_Register {
 		return this.#register;
 	}
 
-	setZFlag(output: number) {
+	setZFlag() {
 		// check if the output of the operation is zero
 		//  if it is zero mark the flag as 1
 		// return add 128
-		this.#register |= output === 0 ? 0b1000000 : 0;
+		this.#register |= 0b10000000;
 	}
 	//   when raising the subtraction flag, it will only be raised when the last operation is subtraction
-	setNFlag(output: number) {
-		this.#register |= output >> CPU_Flag_Register.#subtractionFlagPosition;
+	setNFlag() {
+		this.#register |= 0b01000000;
 	}
-	setHFlag(output: number) {
-		this.#register |= output >> CPU_Flag_Register.#halfCarryFlagPosition;
+	setHFlag() {
+		this.#register |= 0b00100000;
 	}
-	setCYFlag(output: number) {
-		this.#register |= output >> CPU_Flag_Register.#carryFlagPosition;
+	setCYFlag() {
+		this.#register |= 0b00010000;
 	}
 }

@@ -72,6 +72,11 @@ describe('Read And Write in DE Register', () => {
 });
 
 describe('Flag Register', () => {
-	test('Individual Flags');
+	test('Individual Flags', () => {
+		Register.register.F.setZFlag();
+		Register.register.F.setCYFlag();
+		expect(Register.register.F.getZFlag()).toBe(1);
+		expect(Register.register.F.getCYFlag()).toBe(1);
+	});
 	test('Combined Flags');
 });
