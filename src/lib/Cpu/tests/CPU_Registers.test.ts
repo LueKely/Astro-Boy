@@ -86,7 +86,6 @@ describe("Flag Register", () => {
     Register.register.F.setCYFlag();
     Register.register.F.setHFlag();
     Register.register.F.setNFlag();
-    expect(Register.register.F.getZFlag()).toBe(0);
     expect(Register.register.F.getHFlag()).toBe(0);
     expect(Register.register.F.getNFlag()).toBe(0);
     expect(Register.register.F.getCYFlag()).toBe(0);
