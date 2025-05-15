@@ -17,6 +17,7 @@ export class CPU_Flag_Register {
   }
   // FIX ME/UNDERSTAND ME: Clearly lue you kinda don't know how this works
   // present lue i know na this bro
+  // ganto nalang muna to because pag get lang naman muna eh so we gucci bro
   getZFlag() {
     return this.#register >> CPU_Flag_Register.#zeroFlagPosition;
   }
