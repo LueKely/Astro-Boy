@@ -16,6 +16,7 @@ export class CPU_Flag_Register {
     this.#register = register;
   }
   // FIX ME/UNDERSTAND ME: Clearly lue you kinda don't know how this works
+  // present lue i know na this bro
   getZFlag() {
     return this.#register >> CPU_Flag_Register.#zeroFlagPosition;
   }
