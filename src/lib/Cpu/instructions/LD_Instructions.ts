@@ -117,4 +117,5 @@ export {
   LDHN16A,
   LDAPN16,
   LDHAN16,
+  LDHLR8,
 };
