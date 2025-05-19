@@ -22,7 +22,7 @@ export class CPU_Registers_Group {
 	 *	These 8bit Registers we can also combine into 16bit
 	 *  using bitshifting and other bitwise operations
 	 **/
-	register = {
+	readonly register = {
 		A: new Cpu_Register(0),
 		B: new Cpu_Register(0),
 		C: new Cpu_Register(0),
@@ -34,12 +34,12 @@ export class CPU_Registers_Group {
 	};
 
 	// NOTE: hmmm i might remove this and just make a object for PC and SP
-	pointers = {
-		PC: 0,
-		SP: 0,
+	readonly pointers = {
+		PC: new Cpu_Register(0),
+		SP: new Cpu_Register(0),
 	};
 
-	register16Bit = {
+	readonly register16Bit = {
 		AF: new Cpu_Register_16Bit(this.register.A, this.register.F),
 		BC: new Cpu_Register_16Bit(this.register.B, this.register.C),
 		DE: new Cpu_Register_16Bit(this.register.D, this.register.E),

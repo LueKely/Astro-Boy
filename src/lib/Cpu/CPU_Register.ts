@@ -7,7 +7,8 @@ export class Cpu_Register {
 		return this.value;
 	}
 	setRegister(value: number) {
-		this.value = value;
+		// sanitize our value to only store 8bits
+		this.value = value & 0xff;
 	}
 }
 
@@ -46,9 +47,13 @@ export class Cpu_Register_16Bit {
 	 **/
 	setRegister(value: number) {
 		// mask out the bits 7-0 and shift bits 15-8 to the right by 8bits
-		// to make it 8bits
-		this.firstRegister.setRegister((value & 0xff00) >> 8);
+		// to make it 8bit
+
+		// sanitize our value to only store up to 16bits
+		const value16 = value & 0xffff;
+
+		this.firstRegister.setRegister((value16 & 0xff00) >> 8);
 		//mask out the bits 15-8 to get only bits 8-0
-		this.secondRegister.setRegister(value & 0xff);
+		this.secondRegister.setRegister(value16 & 0xff);
 	}
 }
