@@ -1,4 +1,4 @@
-import type { CPU_Registers } from "../CPU_Registers";
+import type { CPU_Registers_Address } from "../CPU_Registers_Address";
 // note:
 // [XX] means it is a pointer pointing to the address bus
 // bro all of this shit doesn't work hahaha
@@ -17,17 +17,17 @@ function LDR16N16(r16: (value: number) => void, n16: number) {
 }
 
 // LD [HL], R8
-function LDHLR8(HL: CPU_Registers, r8: number, memAdd: Uint8Array) {
+function LDHLR8(HL: CPU_Registers_Address, r8: number, memAdd: Uint8Array) {
   memAdd[HL.getHL()] = r8;
 }
 
 // LD [HL], N8
-function LDHLN8(HL: CPU_Registers, n8: number, memAdd: Uint8Array) {
+function LDHLN8(HL: CPU_Registers_Address, n8: number, memAdd: Uint8Array) {
   memAdd[HL.getHL()] = n8;
 }
 
 // LD R8, [HL]
-function LDR8HL(r8: number, HL: CPU_Registers, memAdd: Uint8Array) {
+function LDR8HL(r8: number, HL: CPU_Registers_Address, memAdd: Uint8Array) {
   r8 = memAdd[HL.getHL()];
 }
 // LD[n16],A
@@ -77,25 +77,25 @@ function LDHAC(c: number, a: number, address: Uint8Array) {
 }
 
 // LD [HLI], A
-function LDHLIA(HLPointer: number, HL: CPU_Registers, a: number) {
+function LDHLIA(HLPointer: number, HL: CPU_Registers_Address, a: number) {
   HLPointer = a;
   HL.setHL(HL.getHL() + 1);
 }
 // LD [HLD], A
-function LDHLDA(HLPointer: number, HL: CPU_Registers, a: number) {
+function LDHLDA(HLPointer: number, HL: CPU_Registers_Address, a: number) {
   HLPointer = a;
   HL.setHL(HL.getHL() - 1);
 }
 
 // LD A,[HLD]
-function LDAHLD(a: number, HL: CPU_Registers, address: Uint8Array) {
+function LDAHLD(a: number, HL: CPU_Registers_Address, address: Uint8Array) {
   a = address[HL.getHL()];
 
   HL.setHL(HL.getHL() - 1);
 }
 
 // LD A, [HLI]
-function LDAHLI(a: number, HL: CPU_Registers, address: Uint8Array) {
+function LDAHLI(a: number, HL: CPU_Registers_Address, address: Uint8Array) {
   a = address[HL.getHL()];
   HL.setHL(HL.getHL() + 1);
 }
