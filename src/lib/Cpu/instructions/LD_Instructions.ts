@@ -72,8 +72,8 @@ function LDHAN16(n16: number, a: Cpu_Register, memAdd: Uint8Array) {
 }
 
 // LDH A, [C]
-function LDHAC(c: number, a: number, address: Uint8Array) {
-  a = address[c + 0xff00];
+function LDHAC(c: number, a: Cpu_Register, address: Uint8Array) {
+  a.setRegister(address[c + 0xff00]);
 }
 
 // LD [HLI], A
