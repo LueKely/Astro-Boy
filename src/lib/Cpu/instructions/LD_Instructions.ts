@@ -1,7 +1,7 @@
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 // note:
 // [XX] means it is a pointer pointing to the address bus
-// bro all of this shit doesn't work hahaha
+
 // LD R8, R8
 // LD r, r'
 function LDR8R8(r8l: Cpu_Register, r8r: Cpu_Register) {
