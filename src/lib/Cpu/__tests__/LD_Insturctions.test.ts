@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import {
+	LDHLN8,
 	LDHLR8,
 	LDR16N16,
 	LDR8N8,
@@ -72,4 +73,19 @@ describe('This will test LD[HL], R8', () => {
 			}
 		);
 	}
+});
+
+describe('This will test LD[HL], N8', () => {
+	const CpuCluster = new CPU_Registers_Group();
+	CpuCluster.register16Bit.HL.setRegister(0xffff);
+	const dummyMemory = new Uint8Array(0x10000);
+
+	test('Add the value 15 to the [HL] pointed into the ram', () => {
+		const testValue = 15;
+
+		LDHLN8(CpuCluster.register16Bit.HL, testValue, dummyMemory);
+		expect(dummyMemory[CpuCluster.register16Bit.HL.getRegister()]).toBe(
+			testValue
+		);
+	});
 });
