@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+  LDHCA,
   LDHLN8,
   LDHLR8,
   LDHN16A,
@@ -180,5 +181,39 @@ describe("This will test function LDH[N16],A", () => {
     expect(() =>
       LDHN16A(testPointer, CpuCluster.register.A, DummyMemory)
     ).toThrowError();
+  });
+});
+
+describe("Testing function LDH[C], A", () => {
+  test("Expect the register A to be written into the value of [C + 0xff00]", () => {
+    const CpuCluster = new CPU_Registers_Group();
+    const { A, C } = CpuCluster.register;
+    const DummyRam = new Ram();
+    const testValue = 0xff;
+    const testPointer = 0xff;
+    A.setRegister(testValue);
+    C.setRegister(testPointer);
+    LDHCA(DummyRam, A, C);
+
+    expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(testValue);
+    expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(
+      A.getRegister()
+    );
+  });
+
+  test("Expect the register A to be written into the value of [C + 0xff00]", () => {
+    const CpuCluster = new CPU_Registers_Group();
+    const { A, C } = CpuCluster.register;
+    const DummyRam = new Ram();
+    const testValue = 0x0f;
+    const testPointer = 0xff;
+    A.setRegister(testValue);
+    C.setRegister(testPointer);
+    LDHCA(DummyRam, A, C);
+
+    expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(testValue);
+    expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(
+      A.getRegister()
+    );
   });
 });
