@@ -3,6 +3,7 @@ import {
   LDHLN8,
   LDHLR8,
   LDR16N16,
+  LDR8HL,
   LDR8N8,
   LDR8R8,
 } from "../instructions/LD_Instructions";
@@ -62,7 +63,8 @@ describe("This will test LD[HL], R8", () => {
   const dummyMemory = new Ram();
   for (const [key, value] of Object.entries(CpuGroupRegister.register)) {
     test(
-      "This will add the number 0x00FF to register when [HL] = 0xFFFF" + key,
+      "This will add the number 0x00FF to register when [HL] = 0xFFFF on register " +
+        key,
       () => {
         value.setRegister(0xff);
 
@@ -91,4 +93,22 @@ describe("This will test LD[HL], N8", () => {
       dummyMemory.getMemoryAt(CpuCluster.register16Bit.HL.getRegister())
     ).toBe(testValue);
   });
+});
+
+describe("This will test LD R8, [HL]", () => {
+  const CpuCluster = new CPU_Registers_Group();
+  const DummyMemory = new Ram();
+  const testPointer = 0xffff;
+  const testValue = 0xff;
+  // setup the environment
+  // let hl get the value of where to point in the mem address
+  CpuCluster.register16Bit.HL.setRegister(testPointer);
+  DummyMemory.setMemoryAt(CpuCluster.register16Bit.HL.getRegister(), testValue);
+
+  for (const [key, value] of Object.entries(CpuCluster.register)) {
+    test(`The register ${key} should have the value ${testValue}`, () => {
+      LDR8HL(value, CpuCluster.register16Bit.HL, DummyMemory);
+      expect(value.getRegister()).toBe(DummyMemory.getMemoryAt(testPointer));
+    });
+  }
 });
