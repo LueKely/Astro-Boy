@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   LDHLN8,
   LDHLR8,
+  LDHN16A,
   LDN16A,
   LDR16N16,
   LDR8HL,
@@ -140,5 +141,44 @@ describe("This will test function LD[N16],A", () => {
     CpuCluster.register.A.setRegister(testValue);
     LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
     expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
+});
+
+describe("This will test function LDH[N16],A", () => {
+  const CpuCluster = new CPU_Registers_Group();
+  const DummyMemory = new Ram();
+
+  test("Set the value of register A to 15 and set the value of A to Ram pointed at N16", () => {
+    const testValue = 15;
+    const testPointer = 0xffff;
+    CpuCluster.register.A.setRegister(testValue);
+    LDHN16A(testPointer, CpuCluster.register.A, DummyMemory);
+    expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
+
+  test("Set the value of register A to 0xff and set the value of A to Ram pointed at N16", () => {
+    const testValue = 0xff;
+    const testPointer = 0xff00;
+    CpuCluster.register.A.setRegister(testValue);
+    LDHN16A(testPointer, CpuCluster.register.A, DummyMemory);
+    expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
+
+  test("Expect to throw an error because the pointer value 0 is out of scope", () => {
+    const testValue = 0xff;
+    const testPointer = 0x0;
+    CpuCluster.register.A.setRegister(testValue);
+    expect(() =>
+      LDHN16A(testPointer, CpuCluster.register.A, DummyMemory)
+    ).toThrowError();
+  });
+
+  test("Expect to throw an error because the pointer value 32bit is out of scope", () => {
+    const testValue = 0xff;
+    const testPointer = 0xfffff;
+    CpuCluster.register.A.setRegister(testValue);
+    expect(() =>
+      LDHN16A(testPointer, CpuCluster.register.A, DummyMemory)
+    ).toThrowError();
   });
 });

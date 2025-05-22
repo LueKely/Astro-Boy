@@ -35,9 +35,9 @@ function LDR8HL(r8: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
 function LDN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
   memAdd.setMemoryAt(n16, a.getRegister());
 }
-// LDH [n16], A
+// LDH [n16], A tested
 function LDHN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
-  if (n16 >= 0xff00 && 16 <= 0xffff) {
+  if (n16 >= 0xff00 && n16 <= 0xffff) {
     memAdd.setMemoryAt(n16, a.getRegister());
   } else {
     throw new Error("pos is out of scope");
