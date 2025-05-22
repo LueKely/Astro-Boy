@@ -27,11 +27,11 @@ function LDHLN8(HL: Cpu_Register_16Bit, n8: number, memAdd: Ram) {
   memAdd.setMemoryAt(HL.getRegister(), n8);
 }
 
-// LD R8, [HL]
+// LD R8, [HL] tested
 function LDR8HL(r8: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
   r8.setRegister(memAdd.getMemoryAt(HL.getRegister()));
 }
-// LD[n16],A
+// LD[n16],A tested
 function LDN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
   memAdd.setMemoryAt(n16, a.getRegister());
 }

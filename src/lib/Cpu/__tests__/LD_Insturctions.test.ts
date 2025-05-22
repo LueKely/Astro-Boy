@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   LDHLN8,
   LDHLR8,
+  LDN16A,
   LDR16N16,
   LDR8HL,
   LDR8N8,
@@ -111,4 +112,33 @@ describe("This will test LD R8, [HL]", () => {
       expect(value.getRegister()).toBe(DummyMemory.getMemoryAt(testPointer));
     });
   }
+});
+
+describe("This will test function LD[N16],A", () => {
+  const CpuCluster = new CPU_Registers_Group();
+  const DummyMemory = new Ram();
+
+  test("Set the value of register A to 15 and set the value of A to Ram pointed at N16", () => {
+    const testValue = 15;
+    const testPointer = 0xffff;
+    CpuCluster.register.A.setRegister(testValue);
+    LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+    expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
+
+  test("Set the value of register A to 0xff and set the value of A to Ram pointed at N16", () => {
+    const testValue = 0xff;
+    const testPointer = 0xff;
+    CpuCluster.register.A.setRegister(testValue);
+    LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+    expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
+
+  test("Set the value of register A to 0 and set the value of A to Ram pointed at N16", () => {
+    const testValue = 0xff;
+    const testPointer = 0x0;
+    CpuCluster.register.A.setRegister(testValue);
+    LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+    expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+  });
 });
