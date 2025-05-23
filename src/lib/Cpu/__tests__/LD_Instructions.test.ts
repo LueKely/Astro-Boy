@@ -1,10 +1,14 @@
 import { describe, expect, test } from "vitest";
 import {
+  LDAHLD,
+  LDAHLI,
   LDAN16,
   LDAR16,
   LDHAC,
   LDHAN16,
   LDHCA,
+  LDHLDA,
+  LDHLIA,
   LDHLN8,
   LDHLR8,
   LDHN16A,
@@ -311,5 +315,61 @@ describe("This will test the function LDH A, [C]", () => {
     expect(A.getRegister()).toBe(
       dummyMemory.getMemoryAt(C.getRegister() + 0xff00)
     );
+  });
+});
+
+describe("This will test the function LD [HLI], A", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const HLI = cpuCluster.register16Bit.HL;
+  const dummyMemory = new Ram();
+
+  test("This will Load the value of A into Register [HLI]", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1110;
+    A.setRegister(testValue);
+
+    HLI.setRegister(testPointer);
+    LDHLIA(dummyMemory, HLI, A);
+    expect(dummyMemory.getMemoryAt(HLI.getRegister() - 1)).toBe(
+      A.getRegister()
+    );
+  });
+
+  test("Expect HLI will incriment after the instruction", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1110;
+    A.setRegister(testValue);
+    HLI.setRegister(testPointer);
+    LDHLIA(dummyMemory, HLI, A);
+    expect(HLI.getRegister()).toBe(testPointer + 1);
+  });
+});
+
+describe("This will test the function LD [HLD], A", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const HLD = cpuCluster.register16Bit.HL;
+  const dummyMemory = new Ram();
+
+  test("This will Load the value of A into Register [HLD]", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1111;
+    A.setRegister(testValue);
+
+    HLD.setRegister(testPointer);
+    LDHLDA(dummyMemory, HLD, A);
+    expect(dummyMemory.getMemoryAt(HLD.getRegister() + 1)).toBe(
+      A.getRegister()
+    );
+  });
+
+  test("Expect HLD will incriment after the instruction", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1111;
+    A.setRegister(testValue);
+    HLD.setRegister(testPointer);
+    LDHLDA(dummyMemory, HLD, A);
+    expect(HLD.getRegister()).toBe(testPointer - 1);
   });
 });

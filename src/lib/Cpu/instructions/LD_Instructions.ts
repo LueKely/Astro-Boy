@@ -74,12 +74,12 @@ function LDHAC(c: Cpu_Register, a: Cpu_Register, address: Ram) {
   a.setRegister(address.getMemoryAt(c.getRegister() + 0xff00));
 }
 
-// LD [HLI], A
+// LD [HLI], A tested
 function LDHLIA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
   memAdd.setMemoryAt(HL.getRegister(), a.getRegister());
   HL.setRegister(HL.getRegister() + 1);
 }
-// LD [HLD], A
+// LD [HLD], A tested
 function LDHLDA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
   memAdd.setMemoryAt(HL.getRegister(), a.getRegister());
   HL.setRegister(HL.getRegister() - 1);
