@@ -422,7 +422,7 @@ describe("This will test the function LD A,[HLI]", () => {
 
   test("Expect HL to decrement", () => {
     const testValue = 0xff;
-    const testPointer = 0b1111_1111_1111_1110;
+    const testPointer = 0b1111_1111_1111_0000;
     HLI.setRegister(testPointer);
     dummyMemory.setMemoryAt(HLI.getRegister(), testValue);
 
