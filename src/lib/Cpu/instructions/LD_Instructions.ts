@@ -55,8 +55,8 @@ function LDAR16(a: Cpu_Register, r16: Cpu_Register_16Bit, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(r16.getRegister()));
 }
 
-// LD A, [N16]
-function LDAPN16(a: Cpu_Register, n16: number, memAdd: Ram) {
+// LD A, [N16] tested
+function LDAN16(a: Cpu_Register, n16: number, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(n16));
 }
 
@@ -112,7 +112,7 @@ export {
   LDAHLD,
   LDHAC,
   LDHN16A,
-  LDAPN16,
+  LDAN16,
   LDHAN16,
   LDHLR8,
 };

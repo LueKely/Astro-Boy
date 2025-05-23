@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+  LDAN16,
   LDAR16,
   LDHCA,
   LDHLN8,
@@ -228,7 +229,7 @@ describe("This will test LD A,[R16]", () => {
   for (const [key, value] of Object.entries(CpuCluster.register16Bit)) {
     // skip AF
     if (key == "AF") continue;
-    test(`This will test the 16bit register ${key}`, () => {
+    test(`This will add the values of [${key}] into register a`, () => {
       value.setRegister(testPointer);
       DummyMemory.setMemoryAt(value.getRegister(), testValue);
       LDAR16(A, value, DummyMemory);
@@ -237,4 +238,26 @@ describe("This will test LD A,[R16]", () => {
       );
     });
   }
+});
+
+describe("this will test fucntion LD A,[N16]", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const dummyMemory = new Ram();
+
+  test("Load the value of [0xff] into register A", () => {
+    const testPointer = 0xff;
+    const testValue = 0xff;
+    dummyMemory.setMemoryAt(testPointer, testValue);
+    LDAN16(A, testPointer, dummyMemory);
+    expect(A.getRegister()).toBe(testValue);
+  });
+
+  test("Load the value of [0xf] into register A", () => {
+    const testPointer = 0xf;
+    const testValue = 0xf;
+    dummyMemory.setMemoryAt(testPointer, testValue);
+    LDAN16(A, testPointer, dummyMemory);
+    expect(A.getRegister()).toBe(testValue);
+  });
 });
