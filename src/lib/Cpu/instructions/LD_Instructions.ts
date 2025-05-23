@@ -85,13 +85,13 @@ function LDHLDA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
   HL.setRegister(HL.getRegister() - 1);
 }
 
-// LD A,[HLD]
+// LD A,[HLD] Tested
 function LDAHLD(a: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(HL.getRegister()));
   HL.setRegister(HL.getRegister() - 1);
 }
 
-// LD A, [HLI]
+// LD A, [HLI] tested
 function LDAHLI(a: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(HL.getRegister()));
   HL.setRegister(HL.getRegister() + 1);

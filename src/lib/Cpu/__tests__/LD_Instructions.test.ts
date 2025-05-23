@@ -324,7 +324,7 @@ describe("This will test the function LD [HLI], A", () => {
   const HLI = cpuCluster.register16Bit.HL;
   const dummyMemory = new Ram();
 
-  test("This will Load the value of A into Register [HLI]", () => {
+  test("This will Load the value of Register A into [HLI]", () => {
     const testValue = 0xff;
     const testPointer = 0b1111_1111_1111_1110;
     A.setRegister(testValue);
@@ -352,7 +352,7 @@ describe("This will test the function LD [HLD], A", () => {
   const HLD = cpuCluster.register16Bit.HL;
   const dummyMemory = new Ram();
 
-  test("This will Load the value of A into Register [HLD]", () => {
+  test("This will Load the value of Register A into [HLD]", () => {
     const testValue = 0xff;
     const testPointer = 0b1111_1111_1111_1111;
     A.setRegister(testValue);
@@ -371,5 +371,63 @@ describe("This will test the function LD [HLD], A", () => {
     HLD.setRegister(testPointer);
     LDHLDA(dummyMemory, HLD, A);
     expect(HLD.getRegister()).toBe(testPointer - 1);
+  });
+});
+
+describe("This will test the function LD A,[HLD]", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const HLD = cpuCluster.register16Bit.HL;
+  const dummyMemory = new Ram();
+
+  test("This will Load the value of [HLD] into Register A", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1111;
+    HLD.setRegister(testPointer);
+    dummyMemory.setMemoryAt(HLD.getRegister(), testValue);
+
+    LDAHLD(A, HLD, dummyMemory);
+
+    expect(A.getRegister()).toBe(testValue);
+  });
+
+  test("Expect HL to decrement", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1111;
+    HLD.setRegister(testPointer);
+    dummyMemory.setMemoryAt(HLD.getRegister(), testValue);
+
+    LDAHLD(A, HLD, dummyMemory);
+
+    expect(HLD.getRegister()).toBe(testPointer - 1);
+  });
+});
+
+describe("This will test the function LD A,[HLI]", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const HLI = cpuCluster.register16Bit.HL;
+  const dummyMemory = new Ram();
+
+  test("This will Load the value of [HLI] into Register A", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1110;
+    HLI.setRegister(testPointer);
+    dummyMemory.setMemoryAt(HLI.getRegister(), testValue);
+
+    LDAHLI(A, HLI, dummyMemory);
+
+    expect(A.getRegister()).toBe(testValue);
+  });
+
+  test("Expect HL to decrement", () => {
+    const testValue = 0xff;
+    const testPointer = 0b1111_1111_1111_1110;
+    HLI.setRegister(testPointer);
+    dummyMemory.setMemoryAt(HLI.getRegister(), testValue);
+
+    LDAHLI(A, HLI, dummyMemory);
+
+    expect(HLI.getRegister()).toBe(testPointer + 1);
   });
 });
