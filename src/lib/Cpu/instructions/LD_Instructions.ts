@@ -69,9 +69,9 @@ function LDHAN16(n16: number, a: Cpu_Register, memAdd: Ram) {
   }
 }
 
-// LDH A, [C]
-function LDHAC(c: number, a: Cpu_Register, address: Ram) {
-  a.setRegister(address.getMemoryAt(c + 0xff00));
+// LDH A, [C] tested
+function LDHAC(c: Cpu_Register, a: Cpu_Register, address: Ram) {
+  a.setRegister(address.getMemoryAt(c.getRegister() + 0xff00));
 }
 
 // LD [HLI], A

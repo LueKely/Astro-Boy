@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   LDAN16,
   LDAR16,
+  LDHAC,
   LDHAN16,
   LDHCA,
   LDHLN8,
@@ -290,5 +291,25 @@ describe("This will test the function LDH A, [N16]", () => {
     dummyMemory.setMemoryAt(testPointer, testValue);
 
     expect(() => LDHAN16(testPointer, A, dummyMemory)).toThrowError();
+  });
+});
+
+describe("This will test the function LDH A, [C]", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A, C } = cpuCluster.register;
+  const dummyMemory = new Ram();
+
+  test("This will Load the value of [C] into Register A", () => {
+    const testPointer = 0x00ff;
+    const testValue = 0xf;
+
+    C.setRegister(testPointer);
+    dummyMemory.setMemoryAt(C.getRegister() + 0xff00, testValue);
+
+    LDHAC(C, A, dummyMemory);
+
+    expect(A.getRegister()).toBe(
+      dummyMemory.getMemoryAt(C.getRegister() + 0xff00)
+    );
   });
 });
