@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import {
   LDAN16,
   LDAR16,
+  LDHAN16,
   LDHCA,
   LDHLN8,
   LDHLR8,
@@ -259,5 +260,35 @@ describe("this will test fucntion LD A,[N16]", () => {
     dummyMemory.setMemoryAt(testPointer, testValue);
     LDAN16(A, testPointer, dummyMemory);
     expect(A.getRegister()).toBe(testValue);
+  });
+});
+
+describe("This will test the function LDH A, [N16]", () => {
+  const cpuCluster = new CPU_Registers_Group();
+  const { A } = cpuCluster.register;
+  const dummyMemory = new Ram();
+
+  test("Load the value of [0xffff] into register A", () => {
+    const testPointer = 0xfffa;
+    const testValue = 0xff;
+    dummyMemory.setMemoryAt(testPointer, testValue);
+    LDHAN16(testPointer, A, dummyMemory);
+    expect(A.getRegister()).toBe(testValue);
+  });
+
+  test("Throw an error if the pointer value is lesser than 0xff00", () => {
+    const testPointer = 0xf;
+    const testValue = 0xf;
+    dummyMemory.setMemoryAt(testPointer, testValue);
+
+    expect(() => LDHAN16(testPointer, A, dummyMemory)).toThrowError();
+  });
+
+  test("Throw an error if the pointer value is greater than 0xffff", () => {
+    const testPointer = 0xfffff;
+    const testValue = 0xf;
+    dummyMemory.setMemoryAt(testPointer, testValue);
+
+    expect(() => LDHAN16(testPointer, A, dummyMemory)).toThrowError();
   });
 });

@@ -60,7 +60,7 @@ function LDAN16(a: Cpu_Register, n16: number, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(n16));
 }
 
-// LDH A, [N16]
+// LDH A, [N16] tested
 function LDHAN16(n16: number, a: Cpu_Register, memAdd: Ram) {
   if (n16 >= 0xff00 && n16 <= 0xffff) {
     a.setRegister(memAdd.getMemoryAt(n16));
