@@ -44,17 +44,14 @@ function LDHN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
   }
 }
 
-// LDH [C], A
+// LDH [C], A tested
 function LDHCA(memAdd: Ram, a: Cpu_Register, c: Cpu_Register) {
   memAdd.setMemoryAt(0xff00 + c.getRegister(), a.getRegister());
 }
 
-// this is LD A,[R16]
-// let memory = new unint8Array();
-// let R16 = CPU.Registers.register.getBC
-// let [R16] = memory(R16)
+// this is LD A,[R16] tested
 // LDAPR16
-function LDAPR16(a: Cpu_Register, r16: Cpu_Register_16Bit, memAdd: Ram) {
+function LDAR16(a: Cpu_Register, r16: Cpu_Register_16Bit, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(r16.getRegister()));
 }
 
@@ -108,7 +105,7 @@ export {
   LDR8HL,
   LDHCA,
   LDN16A,
-  LDAPR16,
+  LDAR16,
   LDHLIA,
   LDHLDA,
   LDAHLI,

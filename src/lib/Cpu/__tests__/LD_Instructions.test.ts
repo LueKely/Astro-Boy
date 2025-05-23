@@ -1,5 +1,6 @@
 import { describe, expect, test } from "vitest";
 import {
+  LDAR16,
   LDHCA,
   LDHLN8,
   LDHLR8,
@@ -184,7 +185,7 @@ describe("This will test function LDH[N16],A", () => {
   });
 });
 
-describe("Testing function LDH[C], A", () => {
+describe("Testing function LDH [C], A", () => {
   test("Expect the register A to be written into the value of [C + 0xff00]", () => {
     const CpuCluster = new CPU_Registers_Group();
     const { A, C } = CpuCluster.register;
@@ -216,4 +217,24 @@ describe("Testing function LDH[C], A", () => {
       A.getRegister()
     );
   });
+});
+
+describe("This will test LD A,[R16]", () => {
+  const CpuCluster = new CPU_Registers_Group();
+  const DummyMemory = new Ram();
+  const { A } = CpuCluster.register;
+  const testPointer = 0xfff1;
+  const testValue = 0xfffa;
+  for (const [key, value] of Object.entries(CpuCluster.register16Bit)) {
+    // skip AF
+    if (key == "AF") continue;
+    test(`This will test the 16bit register ${key}`, () => {
+      value.setRegister(testPointer);
+      DummyMemory.setMemoryAt(value.getRegister(), testValue);
+      LDAR16(A, value, DummyMemory);
+      expect(A.getRegister()).toBe(
+        DummyMemory.getMemoryAt(value.getRegister())
+      );
+    });
+  }
 });
