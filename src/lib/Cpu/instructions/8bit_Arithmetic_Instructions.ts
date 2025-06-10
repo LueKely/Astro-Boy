@@ -24,7 +24,7 @@ function ADCAR8(
   // Raise Half Carry flag if overlow from bit 3.
   if (
     (register8.getRegister() & 0xf) +
-      (registerA.getRegister() + 0xf) +
+      (registerA.getRegister() & 0xf) +
       registerF.getHFlag() >
     0xf
   ) {
@@ -34,10 +34,12 @@ function ADCAR8(
   // Raise Carry flag if overlow from bit 7.
   if (
     (register8.getRegister() & 0xff) +
-      (registerA.getRegister() + 0xff) +
+      (registerA.getRegister() & 0xff) +
       registerF.getCYFlag() >
     0xff
   ) {
     registerF.setCYFlag();
   }
 }
+
+export { ADCAR8 };
