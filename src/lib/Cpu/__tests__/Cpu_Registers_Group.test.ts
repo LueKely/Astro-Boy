@@ -9,7 +9,7 @@ describe("Read and Write inside the registers", () => {
     Register.register.C,
     Register.register.D,
     Register.register.E,
-  ])("Each Register should read and right", (address) => {
+  ])("Each Register should read and write", (address) => {
     address.setRegister(5);
     expect(address.getRegister()).equal(5);
   });
@@ -82,10 +82,10 @@ describe("Flag Register", () => {
     Register.register.F.setHFlag();
     Register.register.F.setNFlag();
 
-    expect(Register.register.F.getZFlag()).not.toBe(0);
-    expect(Register.register.F.getNFlag()).not.toBe(0);
-    expect(Register.register.F.getHFlag()).not.toBe(0);
-    expect(Register.register.F.getCYFlag()).not.toBe(0);
+    expect(Register.register.F.getZFlag()).toBe(1);
+    expect(Register.register.F.getNFlag()).toBe(1);
+    expect(Register.register.F.getHFlag()).toBe(1);
+    expect(Register.register.F.getCYFlag()).toBe(1);
     expect(Register.register.F.getFRegister()).toBe(0b1111_0000);
 
     Register.register.F.setZFlag();
