@@ -8,38 +8,34 @@ function ADCAR8(
 ) {
   const sum =
     register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
-  3;
-  registerA.setRegister(sum);
+
   //  set the flag registers
 
   // Raise z flag if result is zero.
   if (sum == 0) {
     registerF.setZFlag();
   }
+
   // Raise N flag to zero.
   if (sum) {
-    registerF.setRegister(registerF.getFRegister() & 0b1011_0000);
+    registerF.clearZFlag();
   }
 
   // Raise Half Carry flag if overlow from bit 3.
-  if (
-    (register8.getRegister() & 0xf) +
-      (registerA.getRegister() & 0xf) +
-      registerF.getHFlag() >
-    0xf
-  ) {
+  if (sum > 0xf) {
     registerF.setHFlag();
+  } else {
+    registerF.clearHFlag();
   }
 
   // Raise Carry flag if overlow from bit 7.
-  if (
-    (register8.getRegister() & 0xff) +
-      (registerA.getRegister() & 0xff) +
-      registerF.getCYFlag() >
-    0xff
-  ) {
+  if (sum > 0xff) {
     registerF.setCYFlag();
+  } else {
+    registerF.clearCYFlag();
   }
+
+  registerA.setRegister(sum);
 }
 
 export { ADCAR8 };

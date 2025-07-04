@@ -17,17 +17,35 @@ describe("ADCAR8", () => {
     expect(CPU.register.F.getHFlag()).toBe(0);
   });
 
-  test("The result of adding the value of register B to A is 1 flags should all be 0", () => {
+  test("The result of adding the value of register B to A is 16 flags of the Halfcarry ", () => {
     const CPU = new CPU_Registers_Group();
     CPU.register.A.setRegister(0x0e);
     CPU.register.B.setRegister(0x01);
     CPU.register.F.setCYFlag();
-    ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
-    expect(CPU.register.A.getRegister()).toBe(0x10);
 
+    ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
+
+    expect(CPU.register.A.getRegister()).toBe(16);
+    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
     expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+
+  test("The result of adding the value of register B to A is 255 flags of the Halfcarry ", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(100);
+    CPU.register.B.setRegister(155);
+    CPU.register.F.setCYFlag();
+
+    ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
+
+    // expect(CPU.register.A.getRegister()).toBe(256);
+    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
   });
 });

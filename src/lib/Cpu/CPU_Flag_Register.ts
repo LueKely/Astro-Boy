@@ -40,19 +40,32 @@ export class Cpu_Flag_Register extends Cpu_Register {
   }
 
   setZFlag() {
-    // check if the output of the operation is zero
-    //  if it is zero mark the flag as 1
-
-    this.value ^= 0b10000000;
+    this.value |= Cpu_Flag_Register.#zeroFlagPosition;
   }
+
   //   when raising the subtraction flag, it will only be raised when the last operation is subtraction
   setNFlag() {
-    this.value ^= 0b01000000;
+    this.value |= Cpu_Flag_Register.#subtractionFlagPosition;
   }
+
   setHFlag() {
-    this.value ^= 0b00100000;
+    this.value |= Cpu_Flag_Register.#halfCarryFlagPosition;
   }
+
   setCYFlag() {
-    this.value ^= 0b00010000;
+    this.value |= Cpu_Flag_Register.#carryFlagPosition;
+  }
+
+  clearZFlag() {
+    this.value &= ~Cpu_Flag_Register.#zeroFlagPosition;
+  }
+  clearNFlag() {
+    this.value &= ~Cpu_Flag_Register.#subtractionFlagPosition;
+  }
+  clearHFlag() {
+    this.value &= ~Cpu_Flag_Register.#halfCarryFlagPosition;
+  }
+  clearCYFlag() {
+    this.value &= ~Cpu_Flag_Register.#carryFlagPosition;
   }
 }
