@@ -14,11 +14,15 @@ function ADCAR8(
   // Raise z flag if result is zero.
   if (sum == 0) {
     registerF.setZFlag();
+  } else {
+    registerF.clearZFlag();
   }
 
   // Raise N flag to zero.
   if (sum) {
-    registerF.clearZFlag();
+    registerF.clearNFlag();
+  } else {
+    registerF.clearNFlag();
   }
 
   // Raise Half Carry flag if overlow from bit 3.
