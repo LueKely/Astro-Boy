@@ -80,6 +80,8 @@ function ADDAN8(
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister()) & 0xff;
+
+  //  validate sum with the flag registers
   validateR8Arythmatic(sum, registerF);
   registerA.setRegister(sum);
 }
