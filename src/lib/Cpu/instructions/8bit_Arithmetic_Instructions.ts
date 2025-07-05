@@ -102,4 +102,6 @@ function ADDHLR16(
 	registerHL.setRegister(sum);
 }
 
+// TODO: Add documentation
+
 export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, ADDHLR16 };
