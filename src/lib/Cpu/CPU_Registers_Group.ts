@@ -1,5 +1,5 @@
 import { Cpu_Flag_Register } from "./CPU_Flag_Register";
-import { CPU_Pointer_Register } from "./CPU_Pointer_Register";
+import { Cpu_Pointer_Register } from "./CPU_Pointer_Register";
 import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
 
 /*
@@ -36,8 +36,8 @@ export class CPU_Registers_Group {
 
   // NOTE: hmmm i might remove this and just make a object for PC and SP
   readonly pointers = {
-    PC: new CPU_Pointer_Register(0),
-    SP: new CPU_Pointer_Register(0),
+    PC: new Cpu_Pointer_Register(0),
+    SP: new Cpu_Pointer_Register(0),
   };
 
   readonly register16Bit = {

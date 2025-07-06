@@ -4,6 +4,7 @@ import {
   validateR8Arithmetic,
 } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
+import type { Cpu_Pointer_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 
 // ADC A, r8  - tested
@@ -113,24 +114,4 @@ function ADDAN8(
   registerA.setRegister(sum);
 }
 
-// 16bit arithmetic
-
-//  ADD HL, R16 - tested
-/**
- * @description Add the value in r16 to HL.
- **/
-function ADDHLR16(
-  r16: number,
-  registerHL: Cpu_Register_16Bit,
-  flagRegister: Cpu_Flag_Register
-) {
-  const sum = r16 + registerHL.getRegister();
-
-  validateR16Arithmetic(sum, flagRegister);
-
-  registerHL.setRegister(sum);
-}
-
-function ADDHLSP(registerHL:Cpu_Register_16Bit, registerSP:){}
-
-export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, ADDHLR16 };
+export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8 };
