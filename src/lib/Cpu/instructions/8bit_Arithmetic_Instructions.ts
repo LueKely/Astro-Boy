@@ -19,9 +19,13 @@ function ADCAR8(
 ) {
   const sum =
     register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
+  const hflagSum =
+    (register8.getRegister() & 0x0f) +
+    (registerA.getRegister() & 0x0f) +
+    registerF.getCYFlag();
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, registerF);
+  validateR8Arithmetic(sum, hflagSum, registerF);
 
   registerA.setRegister(sum);
 }
@@ -40,9 +44,13 @@ function ADCAHL(
       registerF.getCYFlag() +
       registerA.getRegister()) &
     0xff;
+  const hflagSum =
+    (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
+    (registerA.getRegister() & 0x0f) +
+    registerF.getCYFlag();
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, registerF);
+  validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -56,7 +64,10 @@ function ADCAN8(
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
-  validateR8Arithmetic(sum, registerF);
+  const hflagSum =
+    (value & 0x0f) + (registerA.getRegister() & 0x0f) + registerF.getCYFlag();
+
+  validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -72,9 +83,11 @@ function ADDAR8(
   registerA: Cpu_Register
 ) {
   const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
+  const hflagSum =
+    (register8.getRegister() & 0x0f) + (registerA.getRegister() & 0x0f);
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, registerF);
+  validateR8Arithmetic(sum, hflagSum, registerF);
 
   registerA.setRegister(sum);
 }
@@ -93,8 +106,11 @@ function ADDAHL(
     (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
     0xff;
 
+  const hflagSum =
+    (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
+    (registerA.getRegister() & 0x0f);
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, registerF);
+  validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -108,10 +124,35 @@ function ADDAN8(
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister()) & 0xff;
-
+  const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, registerF);
+  validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
+function CPAR8(
+  r8: Cpu_Register,
+  registerA: Cpu_Register,
+  registerF: Cpu_Flag_Register
+) {
+  const difference = registerA.getRegister() - r8.getRegister();
+
+  if (difference == 0) {
+    registerF.setZFlag();
+  } else {
+    registerF.clearZFlag();
+  }
+  registerF.setNFlag();
+  if ((registerA.getRegister() & 0x0f) < (r8.getRegister() & 0x0f)) {
+    registerF.setHFlag();
+  } else {
+    registerF.clearHFlag();
+  }
+
+  if (registerA.getRegister() < r8.getRegister()) {
+    registerF.setHFlag();
+  } else {
+    registerF.clearHFlag();
+  }
+}
 export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8 };
