@@ -156,7 +156,7 @@ function CPAHL(
 		memory.getMemoryAt(registerHL.getRegister())
 	);
 }
-// CP A, N8
+// CP A, N8 - untested
 function CPAN8(
 	n8: number,
 	registerA: Cpu_Register,
