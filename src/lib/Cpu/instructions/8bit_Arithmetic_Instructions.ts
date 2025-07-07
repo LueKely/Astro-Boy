@@ -1,5 +1,8 @@
 import type { Ram } from "../../Ram/Ram";
-import { validateR8Arithmetic } from "../../utils/instructions/instruction_utils";
+import {
+  validateCompareArithmetic,
+  validateR8Arithmetic,
+} from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 
@@ -134,26 +137,24 @@ function CPAR8(
   registerA: Cpu_Register,
   registerF: Cpu_Flag_Register
 ) {
-  const difference = registerA.getRegister() - r8.getRegister();
-
-  if (difference == 0) {
-    registerF.setZFlag();
-  } else {
-    registerF.clearZFlag();
-  }
-
-  registerF.setNFlag();
-
-  if ((r8.getRegister() & 0x0f) > (registerA.getRegister() & 0x0f)) {
-    registerF.setHFlag();
-  } else {
-    registerF.clearHFlag();
-  }
-
-  if (r8.getRegister() > registerA.getRegister()) {
-    registerF.setCYFlag();
-  } else {
-    registerF.clearCYFlag();
-  }
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    r8.getRegister()
+  );
 }
-export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8 };
+// CP A, [HL] - untested
+function CPAHL(
+  memory: Ram,
+  registerA: Cpu_Register,
+  registerHL: Cpu_Register_16Bit,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    memory.getMemoryAt(registerHL.getRegister())
+  );
+}
+
+export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8, CPAHL };

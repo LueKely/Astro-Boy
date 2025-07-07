@@ -57,4 +57,35 @@ function validateR16Arithmetic(sum: number, flagRegister: Cpu_Flag_Register) {
   }
 }
 
-export { validateR8Arithmetic, validateR16Arithmetic };
+function validateCompareArithmetic(
+  registerF: Cpu_Flag_Register,
+  minuen: number,
+  subtrahen: number
+) {
+  const difference = minuen - subtrahen;
+  if (difference == 0) {
+    registerF.setZFlag();
+  } else {
+    registerF.clearZFlag();
+  }
+
+  registerF.setNFlag();
+
+  if ((subtrahen & 0x0f) > (minuen & 0x0f)) {
+    registerF.setHFlag();
+  } else {
+    registerF.clearHFlag();
+  }
+
+  if (subtrahen > minuen) {
+    registerF.setCYFlag();
+  } else {
+    registerF.clearCYFlag();
+  }
+}
+
+export {
+  validateR8Arithmetic,
+  validateR16Arithmetic,
+  validateCompareArithmetic,
+};
