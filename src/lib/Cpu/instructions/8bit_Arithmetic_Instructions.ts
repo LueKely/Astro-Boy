@@ -1,10 +1,10 @@
-import type { Ram } from "../../Ram/Ram";
+import type { Ram } from '../../Ram/Ram';
 import {
-  validateCompareArithmetic,
-  validateR8Arithmetic,
-} from "../../utils/instructions/instruction_utils";
-import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
-import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
+	validateCompareArithmetic,
+	validateR8Arithmetic,
+} from '../../utils/instructions/instruction_utils';
+import type { Cpu_Flag_Register } from '../CPU_Flag_Register';
+import type { Cpu_Register, Cpu_Register_16Bit } from '../CPU_Register';
 
 // ADC A, r8  - tested
 /**
@@ -12,46 +12,46 @@ import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
  * the carry flag to A
  **/
 function ADCAR8(
-  register8: Cpu_Register,
-  registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+	register8: Cpu_Register,
+	registerF: Cpu_Flag_Register,
+	registerA: Cpu_Register
 ) {
-  const sum =
-    register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
-  const hflagSum =
-    (register8.getRegister() & 0x0f) +
-    (registerA.getRegister() & 0x0f) +
-    registerF.getCYFlag();
+	const sum =
+		register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
+	const hflagSum =
+		(register8.getRegister() & 0x0f) +
+		(registerA.getRegister() & 0x0f) +
+		registerF.getCYFlag();
 
-  //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+	//  validate sum with the flag registers
+	validateR8Arithmetic(sum, hflagSum, registerF);
 
-  registerA.setRegister(sum);
+	registerA.setRegister(sum);
 }
 /**
  * @description Add the byte pointed to by HL
  *  plus the carry flag to A.
  **/
 function ADCAHL(
-  pointer: Cpu_Register_16Bit,
-  memory: Ram,
-  registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+	pointer: Cpu_Register_16Bit,
+	memory: Ram,
+	registerF: Cpu_Flag_Register,
+	registerA: Cpu_Register
 ) {
-  const sum =
-    (memory.getMemoryAt(pointer.getRegister()) +
-      registerF.getCYFlag() +
-      registerA.getRegister()) &
-    0xff;
+	const sum =
+		(memory.getMemoryAt(pointer.getRegister()) +
+			registerF.getCYFlag() +
+			registerA.getRegister()) &
+		0xff;
 
-  const hflagSum =
-    (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
-    (registerA.getRegister() & 0x0f) +
-    registerF.getCYFlag();
+	const hflagSum =
+		(memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
+		(registerA.getRegister() & 0x0f) +
+		registerF.getCYFlag();
 
-  //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
-  registerA.setRegister(sum);
+	//  validate sum with the flag registers
+	validateR8Arithmetic(sum, hflagSum, registerF);
+	registerA.setRegister(sum);
 }
 
 // ADC A, [HL] - tested
@@ -59,16 +59,16 @@ function ADCAHL(
  * @description Add the value n8 plus the carry flag to A.
  **/
 function ADCAN8(
-  value: number,
-  registerA: Cpu_Register,
-  registerF: Cpu_Flag_Register
+	value: number,
+	registerA: Cpu_Register,
+	registerF: Cpu_Flag_Register
 ) {
-  const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
-  const hflagSum =
-    (value & 0x0f) + (registerA.getRegister() & 0x0f) + registerF.getCYFlag();
+	const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
+	const hflagSum =
+		(value & 0x0f) + (registerA.getRegister() & 0x0f) + registerF.getCYFlag();
 
-  validateR8Arithmetic(sum, hflagSum, registerF);
-  registerA.setRegister(sum);
+	validateR8Arithmetic(sum, hflagSum, registerF);
+	registerA.setRegister(sum);
 }
 
 // no carry flag functions
@@ -78,18 +78,18 @@ function ADCAN8(
  * @description Add the value in r8 to A.
  **/
 function ADDAR8(
-  register8: Cpu_Register,
-  registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+	register8: Cpu_Register,
+	registerF: Cpu_Flag_Register,
+	registerA: Cpu_Register
 ) {
-  const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
-  const hflagSum =
-    (register8.getRegister() & 0x0f) + (registerA.getRegister() & 0x0f);
+	const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
+	const hflagSum =
+		(register8.getRegister() & 0x0f) + (registerA.getRegister() & 0x0f);
 
-  //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+	//  validate sum with the flag registers
+	validateR8Arithmetic(sum, hflagSum, registerF);
 
-  registerA.setRegister(sum);
+	registerA.setRegister(sum);
 }
 
 // ADD A,[HL] - tested
@@ -97,21 +97,21 @@ function ADDAR8(
  * @description Add the byte pointed to by HL to A.
  **/
 function ADDAHL(
-  pointer: Cpu_Register_16Bit,
-  memory: Ram,
-  registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+	pointer: Cpu_Register_16Bit,
+	memory: Ram,
+	registerF: Cpu_Flag_Register,
+	registerA: Cpu_Register
 ) {
-  const sum =
-    (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
-    0xff;
-  const hflagSum =
-    (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
-    (registerA.getRegister() & 0x0f);
+	const sum =
+		(memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
+		0xff;
+	const hflagSum =
+		(memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
+		(registerA.getRegister() & 0x0f);
 
-  //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
-  registerA.setRegister(sum);
+	//  validate sum with the flag registers
+	validateR8Arithmetic(sum, hflagSum, registerF);
+	registerA.setRegister(sum);
 }
 
 // ADD A,n8 - tested
@@ -119,42 +119,50 @@ function ADDAHL(
  * @description Add the value n8 to A.
  **/
 function ADDAN8(
-  value: number,
-  registerA: Cpu_Register,
-  registerF: Cpu_Flag_Register
+	value: number,
+	registerA: Cpu_Register,
+	registerF: Cpu_Flag_Register
 ) {
-  const sum = (value + registerA.getRegister()) & 0xff;
-  const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
+	const sum = (value + registerA.getRegister()) & 0xff;
+	const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
 
-  //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
-  registerA.setRegister(sum);
+	//  validate sum with the flag registers
+	validateR8Arithmetic(sum, hflagSum, registerF);
+	registerA.setRegister(sum);
 }
 
 // CP A, R8
 function CPAR8(
-  r8: Cpu_Register,
-  registerA: Cpu_Register,
-  registerF: Cpu_Flag_Register
+	r8: Cpu_Register,
+	registerA: Cpu_Register,
+	registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(
-    registerF,
-    registerA.getRegister(),
-    r8.getRegister()
-  );
+	validateCompareArithmetic(
+		registerF,
+		registerA.getRegister(),
+		r8.getRegister()
+	);
 }
 // CP A, [HL] - untested
 function CPAHL(
-  memory: Ram,
-  registerA: Cpu_Register,
-  registerHL: Cpu_Register_16Bit,
-  registerF: Cpu_Flag_Register
+	memory: Ram,
+	registerA: Cpu_Register,
+	registerHL: Cpu_Register_16Bit,
+	registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(
-    registerF,
-    registerA.getRegister(),
-    memory.getMemoryAt(registerHL.getRegister())
-  );
+	validateCompareArithmetic(
+		registerF,
+		registerA.getRegister(),
+		memory.getMemoryAt(registerHL.getRegister())
+	);
+}
+// CP A, N8
+function CPAN8(
+	n8: number,
+	registerA: Cpu_Register,
+	registerF: Cpu_Flag_Register
+) {
+	validateCompareArithmetic(registerF, registerA.getRegister(), n8);
 }
 
 export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8, CPAHL };
