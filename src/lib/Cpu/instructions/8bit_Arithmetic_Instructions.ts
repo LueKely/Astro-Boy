@@ -1,10 +1,6 @@
 import type { Ram } from "../../Ram/Ram";
-import {
-  validateR16Arithmetic,
-  validateR8Arithmetic,
-} from "../../utils/instructions/instruction_utils";
+import { validateR8Arithmetic } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
-import type { Cpu_Pointer_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 
 // ADC A, r8  - tested
@@ -44,6 +40,7 @@ function ADCAHL(
       registerF.getCYFlag() +
       registerA.getRegister()) &
     0xff;
+
   const hflagSum =
     (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
     (registerA.getRegister() & 0x0f) +
@@ -105,10 +102,10 @@ function ADDAHL(
   const sum =
     (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
     0xff;
-
   const hflagSum =
     (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
     (registerA.getRegister() & 0x0f);
+
   //  validate sum with the flag registers
   validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
@@ -125,11 +122,13 @@ function ADDAN8(
 ) {
   const sum = (value + registerA.getRegister()) & 0xff;
   const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
+
   //  validate sum with the flag registers
   validateR8Arithmetic(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
+// CP A, R8
 function CPAR8(
   r8: Cpu_Register,
   registerA: Cpu_Register,
@@ -142,17 +141,19 @@ function CPAR8(
   } else {
     registerF.clearZFlag();
   }
+
   registerF.setNFlag();
-  if ((registerA.getRegister() & 0x0f) < (r8.getRegister() & 0x0f)) {
+
+  if ((r8.getRegister() & 0x0f) > (registerA.getRegister() & 0x0f)) {
     registerF.setHFlag();
   } else {
     registerF.clearHFlag();
   }
 
-  if (registerA.getRegister() < r8.getRegister()) {
-    registerF.setHFlag();
+  if (r8.getRegister() > registerA.getRegister()) {
+    registerF.setCYFlag();
   } else {
-    registerF.clearHFlag();
+    registerF.clearCYFlag();
   }
 }
-export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8 };
+export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8 };

@@ -7,6 +7,7 @@ import {
   ADDAHL,
   ADDAN8,
   ADDAR8,
+  CPAR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
 
@@ -23,6 +24,21 @@ describe("ADCAR8 Functionalitys", () => {
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getCYFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
+  });
+
+  test("Both Half Carry and Carry should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(0xff);
+    CPU.register.B.setRegister(0x0f);
+
+    ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
+
+    expect(CPU.register.A.getRegister()).toBe(14);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
   });
 
   test("The result of adding the value of register B to A is 16 — flags of the Halfcarry should raise ", () => {
@@ -297,5 +313,59 @@ describe("ADDAN8 Functionalitys", () => {
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
     expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+});
+
+describe("CP A, R8 Functionalities", () => {
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(5);
+    CPU.register.C.setRegister(5);
+
+    CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.F.getZFlag()).toBe(1);
+  });
+
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(18);
+    CPU.register.C.setRegister(86);
+
+    CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test("Only H and C flags should be set", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(0x78);
+    CPU.register.C.setRegister(0x9c);
+    CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+  test("Only H Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(66);
+    CPU.register.C.setRegister(55);
+    CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+  test("Only C Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(32);
+    CPU.register.C.setRegister(48);
+    CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
   });
 });
