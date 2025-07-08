@@ -24,14 +24,14 @@ export class CPU_Registers_Group {
    *  using bitshifting and other bitwise operations
    **/
   readonly register = {
-    A: new Cpu_Register(0),
-    B: new Cpu_Register(0),
-    C: new Cpu_Register(0),
-    D: new Cpu_Register(0),
-    E: new Cpu_Register(0),
+    A: new Cpu_Register<"A">(0),
+    B: new Cpu_Register<"B">(0),
+    C: new Cpu_Register<"C">(0),
+    D: new Cpu_Register<"D">(0),
+    E: new Cpu_Register<"E">(0),
     F: new Cpu_Flag_Register(0),
-    H: new Cpu_Register(0),
-    L: new Cpu_Register(0),
+    H: new Cpu_Register<"H">(0),
+    L: new Cpu_Register<"L">(0),
   };
 
   // NOTE: hmmm i might remove this and just make a object for PC and SP
@@ -41,9 +41,9 @@ export class CPU_Registers_Group {
   };
 
   readonly register16Bit = {
-    AF: new Cpu_Register_16Bit(this.register.A, this.register.F),
-    BC: new Cpu_Register_16Bit(this.register.B, this.register.C),
-    DE: new Cpu_Register_16Bit(this.register.D, this.register.E),
-    HL: new Cpu_Register_16Bit(this.register.H, this.register.L),
+    AF: new Cpu_Register_16Bit<"AF">(this.register.A, this.register.F),
+    BC: new Cpu_Register_16Bit<"BC">(this.register.B, this.register.C),
+    DE: new Cpu_Register_16Bit<"DE">(this.register.D, this.register.E),
+    HL: new Cpu_Register_16Bit<"HL">(this.register.H, this.register.L),
   };
 }
