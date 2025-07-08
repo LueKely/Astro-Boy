@@ -3,6 +3,7 @@ type T16BitRegisters = "AF" | "BC" | "DE" | "HL";
 
 export class Cpu_Register<T extends T8BitRegisters> {
   protected value: number = 0;
+  // will use this brand for error throwing but no errors just yet
   private readonly __brand!: T;
 
   constructor(value: number) {
