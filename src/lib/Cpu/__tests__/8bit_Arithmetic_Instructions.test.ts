@@ -7,11 +7,13 @@ import {
   ADDAHL,
   ADDAN8,
   ADDAR8,
+  CPAHL,
+  CPAN8,
   CPAR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
 
-describe("ADCAR8 Functionalitys", () => {
+describe("ADC A, R8 Functionalitys", () => {
   test("The result of adding the value of register B to A is 1 — flags should all be 0", () => {
     const CPU = new CPU_Registers_Group();
     CPU.register.A.setRegister(0x0);
@@ -73,7 +75,7 @@ describe("ADCAR8 Functionalitys", () => {
   });
 });
 
-describe("ADCAHL Functionalitys", () => {
+describe("ADC A, HL Functionalitys", () => {
   test("The result of adding the value of [HL] to A is 1 — flags should all be 0", () => {
     const CPU = new CPU_Registers_Group();
     const dummyMemory = new Ram();
@@ -127,7 +129,7 @@ describe("ADCAHL Functionalitys", () => {
   });
 });
 
-describe("ADCAN8 Functionalitys", () => {
+describe("ADC A, N8 Functionalitys", () => {
   test("The result of adding the value of N8(0) to A is 1 — flags should all be 0", () => {
     const CPU = new CPU_Registers_Group();
     CPU.register.A.setRegister(0x0);
@@ -172,7 +174,7 @@ describe("ADCAN8 Functionalitys", () => {
 
 // ADD functions
 
-describe("ADDAR8 Functionalitys", () => {
+describe("ADD A, R8 Functionalitys", () => {
   test("The result of adding the value of register B to A is 1 — flags should all be 0", () => {
     const CPU = new CPU_Registers_Group();
     CPU.register.A.setRegister(0x0);
@@ -219,7 +221,7 @@ describe("ADDAR8 Functionalitys", () => {
   });
 });
 
-describe("ADDAHL Functionalitys", () => {
+describe("ADD AH, L Functionalitys", () => {
   test("The result of adding the value of [HL] to A is 1 — flags should all be 0", () => {
     const CPU = new CPU_Registers_Group();
     const dummyMemory = new Ram();
@@ -364,6 +366,132 @@ describe("CP A, R8 Functionalities", () => {
     CPU.register.A.setRegister(32);
     CPU.register.C.setRegister(48);
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+});
+
+describe("CP A, [HL] Functionalities", () => {
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    const dummyRam = new Ram();
+    const HL = CPU.register16Bit.HL;
+    const A = CPU.register.A;
+
+    HL.setRegister(16);
+    A.setRegister(16);
+    dummyRam.setMemoryAt(HL.getRegister(), 16);
+    CPAHL(dummyRam, A, HL, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+  });
+
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    const dummyRam = new Ram();
+    const HL = CPU.register16Bit.HL;
+    const A = CPU.register.A;
+
+    HL.setRegister(86);
+    A.setRegister(18);
+    dummyRam.setMemoryAt(HL.getRegister(), 86);
+    CPAHL(dummyRam, A, HL, CPU.register.F);
+
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test("Only H and C flags should be set", () => {
+    const CPU = new CPU_Registers_Group();
+    const dummyRam = new Ram();
+    const HL = CPU.register16Bit.HL;
+    const A = CPU.register.A;
+
+    HL.setRegister(0x9c);
+    A.setRegister(0x78);
+    dummyRam.setMemoryAt(HL.getRegister(), 0x9c);
+    CPAHL(dummyRam, A, HL, CPU.register.F);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test("Only H Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    const dummyRam = new Ram();
+    const HL = CPU.register16Bit.HL;
+    const A = CPU.register.A;
+
+    HL.setRegister(55);
+    A.setRegister(66);
+    dummyRam.setMemoryAt(HL.getRegister(), 55);
+    CPAHL(dummyRam, A, HL, CPU.register.F);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+  test("Only C Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    const dummyRam = new Ram();
+    const HL = CPU.register16Bit.HL;
+    const A = CPU.register.A;
+
+    HL.setRegister(48);
+    A.setRegister(32);
+    dummyRam.setMemoryAt(HL.getRegister(), 48);
+    CPAHL(dummyRam, A, HL, CPU.register.F);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+});
+
+describe("CP A, N8 Functionalities", () => {
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(5);
+
+    CPAN8(5, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+  });
+
+  test("Expect the Zero flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(18);
+
+    CPAN8(86, CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test("Only H and C flags should be set", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(0x78);
+    CPAN8(0x9c, CPU.register.C, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+  test("Only H Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(66);
+    CPAN8(55, CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+  test("Only C Flag should be set ", () => {
+    const CPU = new CPU_Registers_Group();
+    CPU.register.A.setRegister(32);
+    CPAN8(48, CPU.register.A, CPU.register.F);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
     expect(CPU.register.F.getCYFlag()).toBe(1);
