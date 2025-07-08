@@ -9,7 +9,7 @@ import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
  * @description Copies an 8-bit register and loads it
  * into another 8-bit register
  **/
-function LDR8R8(r8l: Cpu_Register, r8r: Cpu_Register) {
+function LDR8R8(r8l: Cpu_Register<any>, r8r: Cpu_Register<any>) {
   r8l.setRegister(r8r.getRegister());
 }
 
@@ -18,7 +18,7 @@ function LDR8R8(r8l: Cpu_Register, r8r: Cpu_Register) {
  * @description Copies an 8-bit number and loads it
  * into a 8-bit register
  **/
-function LDR8N8(r8: Cpu_Register, n8: number) {
+function LDR8N8(r8: Cpu_Register<any>, n8: number) {
   r8.setRegister(n8);
 }
 
@@ -27,7 +27,7 @@ function LDR8N8(r8: Cpu_Register, n8: number) {
  * @description Copies a 16 bit value and loads it
  * into a 16-bit register
  **/
-function LDR16N16(r16: Cpu_Register_16Bit, n16: number) {
+function LDR16N16(r16: Cpu_Register_16Bit<any>, n16: number) {
   r16.setRegister(n16);
 }
 
@@ -36,7 +36,11 @@ function LDR16N16(r16: Cpu_Register_16Bit, n16: number) {
  * @description Copies a 16-bit value and loads it
  * into a 16-bit register
  **/
-function LDHLR8(HL: Cpu_Register_16Bit, r8: Cpu_Register, memAdd: Ram) {
+function LDHLR8(
+  HL: Cpu_Register_16Bit<"HL">,
+  r8: Cpu_Register<any>,
+  memAdd: Ram
+) {
   memAdd.setMemoryAt(HL.getRegister(), r8.getRegister());
 }
 
@@ -45,7 +49,7 @@ function LDHLR8(HL: Cpu_Register_16Bit, r8: Cpu_Register, memAdd: Ram) {
  * @description Copies an 8-bit value and loads it
  * into memory pointed by the HL register
  **/
-function LDHLN8(HL: Cpu_Register_16Bit, n8: number, memAdd: Ram) {
+function LDHLN8(HL: Cpu_Register_16Bit<"HL">, n8: number, memAdd: Ram) {
   memAdd.setMemoryAt(HL.getRegister(), n8);
 }
 
@@ -55,7 +59,11 @@ function LDHLN8(HL: Cpu_Register_16Bit, n8: number, memAdd: Ram) {
  * HL register and loads it
  * into an 8-bit Register
  **/
-function LDR8HL(r8: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
+function LDR8HL(
+  r8: Cpu_Register<any>,
+  HL: Cpu_Register_16Bit<"HL">,
+  memAdd: Ram
+) {
   r8.setRegister(memAdd.getMemoryAt(HL.getRegister()));
 }
 
@@ -64,7 +72,7 @@ function LDR8HL(r8: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
  * @description Copies the value of register A and loads it
  * into memory pointed by a 16-bit value
  **/
-function LDN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
+function LDN16A(n16: number, a: Cpu_Register<"A">, memAdd: Ram) {
   memAdd.setMemoryAt(n16, a.getRegister());
 }
 
@@ -73,7 +81,7 @@ function LDN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
  * @description Copies the value of register A and loads it
  * into memory pointed by a 16-bit value
  **/
-function LDHN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
+function LDHN16A(n16: number, a: Cpu_Register<"A">, memAdd: Ram) {
   if (n16 >= 0xff00 && n16 <= 0xffff) {
     memAdd.setMemoryAt(n16, a.getRegister());
   } else {
@@ -86,7 +94,7 @@ function LDHN16A(n16: number, a: Cpu_Register, memAdd: Ram) {
  * @description Copies the value of Register A and loads it into
  * memory pointed by the value of Register C + 0xff00
  **/
-function LDHCA(memAdd: Ram, a: Cpu_Register, c: Cpu_Register) {
+function LDHCA(memAdd: Ram, a: Cpu_Register<"A">, c: Cpu_Register<"C">) {
   memAdd.setMemoryAt(0xff00 + c.getRegister(), a.getRegister());
 }
 
@@ -96,7 +104,11 @@ function LDHCA(memAdd: Ram, a: Cpu_Register, c: Cpu_Register) {
  * @description Copies the 8-bit value from the memory
  * pointed by a 16-bit register and loads it into Register A
  **/
-function LDAR16(a: Cpu_Register, r16: Cpu_Register_16Bit, memAdd: Ram) {
+function LDAR16(
+  a: Cpu_Register<"A">,
+  r16: Cpu_Register_16Bit<any>,
+  memAdd: Ram
+) {
   a.setRegister(memAdd.getMemoryAt(r16.getRegister()));
 }
 
@@ -105,7 +117,7 @@ function LDAR16(a: Cpu_Register, r16: Cpu_Register_16Bit, memAdd: Ram) {
  * @description Copies the 8-bit value from the memory
  * pointed by a 16-bit value and loads it into Register A
  **/
-function LDAN16(a: Cpu_Register, n16: number, memAdd: Ram) {
+function LDAN16(a: Cpu_Register<"A">, n16: number, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(n16));
 }
 
@@ -115,7 +127,7 @@ function LDAN16(a: Cpu_Register, n16: number, memAdd: Ram) {
  * pointed by a 16-bit value and loads it into Register A
  * only if the 16bit value is greater than 0xff00
  **/
-function LDHAN16(n16: number, a: Cpu_Register, memAdd: Ram) {
+function LDHAN16(n16: number, a: Cpu_Register<"A">, memAdd: Ram) {
   if (n16 >= 0xff00 && n16 <= 0xffff) {
     a.setRegister(memAdd.getMemoryAt(n16));
   } else {
@@ -128,7 +140,7 @@ function LDHAN16(n16: number, a: Cpu_Register, memAdd: Ram) {
  * @description Copies the value from memory pointed by the Register C
  * + 0xf00 and loads it into Register A
  **/
-function LDHAC(c: Cpu_Register, a: Cpu_Register, address: Ram) {
+function LDHAC(c: Cpu_Register<"C">, a: Cpu_Register<"A">, address: Ram) {
   a.setRegister(address.getMemoryAt(c.getRegister() + 0xff00));
 }
 
@@ -138,7 +150,11 @@ function LDHAC(c: Cpu_Register, a: Cpu_Register, address: Ram) {
  * and loads it into memory pointed by the HL register
  * afterwards, HL register increments by 1
  **/
-function LDHLIA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
+function LDHLIA(
+  memAdd: Ram,
+  HL: Cpu_Register_16Bit<"HL">,
+  a: Cpu_Register<"A">
+) {
   memAdd.setMemoryAt(HL.getRegister(), a.getRegister());
   HL.setRegister(HL.getRegister() + 1);
 }
@@ -149,7 +165,11 @@ function LDHLIA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
  * and loads it into memory pointed by the HL register
  * afterwards, HL register decrements by 1
  **/
-function LDHLDA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
+function LDHLDA(
+  memAdd: Ram,
+  HL: Cpu_Register_16Bit<"HL">,
+  a: Cpu_Register<"A">
+) {
   memAdd.setMemoryAt(HL.getRegister(), a.getRegister());
   HL.setRegister(HL.getRegister() - 1);
 }
@@ -160,7 +180,11 @@ function LDHLDA(memAdd: Ram, HL: Cpu_Register_16Bit, a: Cpu_Register) {
  * the HL register and loads it into Register A. Afterwards,
  * HL Register Decrements by 1
  **/
-function LDAHLD(a: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
+function LDAHLD(
+  a: Cpu_Register<"A">,
+  HL: Cpu_Register_16Bit<"HL">,
+  memAdd: Ram
+) {
   a.setRegister(memAdd.getMemoryAt(HL.getRegister()));
   HL.setRegister(HL.getRegister() - 1);
 }
@@ -171,7 +195,11 @@ function LDAHLD(a: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
  * the HL register and loads it into Register A. Afterwards,
  * HL Register Increments by 1
  **/
-function LDAHLI(a: Cpu_Register, HL: Cpu_Register_16Bit, memAdd: Ram) {
+function LDAHLI(
+  a: Cpu_Register<"A">,
+  HL: Cpu_Register_16Bit<"HL">,
+  memAdd: Ram
+) {
   a.setRegister(memAdd.getMemoryAt(HL.getRegister()));
   HL.setRegister(HL.getRegister() + 1);
 }

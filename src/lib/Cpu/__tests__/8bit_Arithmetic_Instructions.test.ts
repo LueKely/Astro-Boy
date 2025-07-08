@@ -474,7 +474,7 @@ describe("CP A, N8 Functionalities", () => {
   test("Only H and C flags should be set", () => {
     const CPU = new CPU_Registers_Group();
     CPU.register.A.setRegister(0x78);
-    CPAN8(0x9c, CPU.register.C, CPU.register.F);
+    CPAN8(0x9c, CPU.register.A, CPU.register.F);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(1);
     expect(CPU.register.F.getHFlag()).toBe(1);

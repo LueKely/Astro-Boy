@@ -1,6 +1,6 @@
 import { Cpu_Register } from "./CPU_Register";
 
-export class Cpu_Flag_Register extends Cpu_Register {
+export class Cpu_Flag_Register extends Cpu_Register<"F"> {
   static #zeroFlagPosition = 0b1000_0000;
   static #subtractionFlagPosition = 0b0100_0000;
   static #halfCarryFlagPosition = 0b0010_0000;

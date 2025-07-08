@@ -12,9 +12,9 @@ import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
  * the carry flag to A
  **/
 function ADCAR8(
-  register8: Cpu_Register,
+  register8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+  registerA: Cpu_Register<"A">
 ) {
   const sum =
     register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
@@ -33,10 +33,10 @@ function ADCAR8(
  *  plus the carry flag to A.
  **/
 function ADCAHL(
-  pointer: Cpu_Register_16Bit,
+  pointer: Cpu_Register_16Bit<"HL">,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+  registerA: Cpu_Register<"A">
 ) {
   const sum =
     (memory.getMemoryAt(pointer.getRegister()) +
@@ -60,7 +60,7 @@ function ADCAHL(
  **/
 function ADCAN8(
   value: number,
-  registerA: Cpu_Register,
+  registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
@@ -78,9 +78,9 @@ function ADCAN8(
  * @description Add the value in r8 to A.
  **/
 function ADDAR8(
-  register8: Cpu_Register,
+  register8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+  registerA: Cpu_Register<"A">
 ) {
   const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
   const hflagSum =
@@ -97,10 +97,10 @@ function ADDAR8(
  * @description Add the byte pointed to by HL to A.
  **/
 function ADDAHL(
-  pointer: Cpu_Register_16Bit,
+  pointer: Cpu_Register_16Bit<"HL">,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register
+  registerA: Cpu_Register<"A">
 ) {
   const sum =
     (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
@@ -120,7 +120,7 @@ function ADDAHL(
  **/
 function ADDAN8(
   value: number,
-  registerA: Cpu_Register,
+  registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister()) & 0xff;
@@ -133,8 +133,8 @@ function ADDAN8(
 
 // CP A, R8
 function CPAR8(
-  r8: Cpu_Register,
-  registerA: Cpu_Register,
+  r8: Cpu_Register<any>,
+  registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
   validateCompareArithmetic(
@@ -146,8 +146,8 @@ function CPAR8(
 // CP A, [HL] - untested
 function CPAHL(
   memory: Ram,
-  registerA: Cpu_Register,
-  registerHL: Cpu_Register_16Bit,
+  registerA: Cpu_Register<"A">,
+  registerHL: Cpu_Register_16Bit<"HL">,
   registerF: Cpu_Flag_Register
 ) {
   validateCompareArithmetic(
@@ -159,7 +159,7 @@ function CPAHL(
 // CP A, N8 - untested
 function CPAN8(
   n8: number,
-  registerA: Cpu_Register,
+  registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
   validateCompareArithmetic(registerF, registerA.getRegister(), n8);
