@@ -175,7 +175,7 @@ function CPAN8(
   validateCompareArithmetic(registerF, registerA.getRegister(), n8);
 }
 
-// DEC r8
+// DEC r8 - untested
 /**
  * @description Decrement the value in register r8 by 1
  **/
@@ -184,5 +184,30 @@ function DECR8(r8: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
   validateR8Decrement(flagRegister, r8.getRegister());
   r8.setRegister(difference);
 }
+// DEC [HL] - untested
+/**
+ * @description Decrement the value in pointed by HL  by 1
+ **/
+function DECHL(
+  registerHL: Cpu_Register_16Bit<"HL">,
+  ram: Ram,
+  flagRegister: Cpu_Flag_Register
+) {
+  const difference = ram.getMemoryAt(registerHL.getRegister()) - 1;
+  validateR8Decrement(flagRegister, ram.getMemoryAt(registerHL.getRegister()));
+  ram.setMemoryAt(registerHL.getRegister(), difference);
+}
 
-export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8, CPAHL, CPAN8 };
+export {
+  ADCAR8,
+  ADCAHL,
+  ADCAN8,
+  ADDAHL,
+  ADDAN8,
+  ADDAR8,
+  CPAR8,
+  CPAHL,
+  CPAN8,
+  DECR8,
+  DECHL,
+};
