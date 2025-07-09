@@ -132,6 +132,9 @@ function ADDAN8(
 }
 
 // CP A, R8
+/**
+ * @description Compares the value in A with the value in r8
+ **/
 function CPAR8(
   r8: Cpu_Register<any>,
   registerA: Cpu_Register<"A">,
@@ -143,7 +146,10 @@ function CPAR8(
     r8.getRegister()
   );
 }
-// CP A, [HL] - untested
+// CP A, [HL]
+/**
+ * @description Compares the value in A with the value in [HL]
+ **/
 function CPAHL(
   memory: Ram,
   registerA: Cpu_Register<"A">,
@@ -156,7 +162,10 @@ function CPAHL(
     memory.getMemoryAt(registerHL.getRegister())
   );
 }
-// CP A, N8 - untested
+// CP A, N8
+/**
+ * @description Compares the value in A with the value in n8
+ **/
 function CPAN8(
   n8: number,
   registerA: Cpu_Register<"A">,
