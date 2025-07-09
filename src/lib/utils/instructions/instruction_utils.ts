@@ -1,4 +1,5 @@
 import type { Cpu_Flag_Register } from "../../Cpu/CPU_Flag_Register";
+import type { Cpu_Register, Cpu_Register_16Bit } from "../../Cpu/CPU_Register";
 
 /**
  * @description this will validate the sum and raise the appropriate flags during R8
@@ -63,6 +64,8 @@ function validateCompareArithmetic(
   subtrahen: number
 ) {
   const difference = minuen - subtrahen;
+
+  // flag conditions below
   if (difference == 0) {
     registerF.setZFlag();
   } else {
@@ -84,8 +87,27 @@ function validateCompareArithmetic(
   }
 }
 
+function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
+  const difference = value - 1;
+  // flag conditions below
+  registerF.setNFlag();
+
+  if (difference == 0) {
+    registerF.setZFlag();
+  } else {
+    registerF.clearZFlag();
+  }
+
+  if (0x1 > (value & 0x0f)) {
+    registerF.setHFlag();
+  } else {
+    registerF.clearHFlag();
+  }
+}
+
 export {
   validateR8Arithmetic,
   validateR16Arithmetic,
   validateCompareArithmetic,
+  validateR8Decrement,
 };

@@ -2,6 +2,7 @@ import type { Ram } from "../../Ram/Ram";
 import {
   validateCompareArithmetic,
   validateR8Arithmetic,
+  validateR8Decrement,
 } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
@@ -172,6 +173,16 @@ function CPAN8(
   registerF: Cpu_Flag_Register
 ) {
   validateCompareArithmetic(registerF, registerA.getRegister(), n8);
+}
+
+// DEC r8
+/**
+ * @description Decrement the value in register r8 by 1
+ **/
+function DECR8(r8: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
+  const difference = r8.getRegister() - 1;
+  validateR8Decrement(flagRegister, r8.getRegister());
+  r8.setRegister(difference);
 }
 
 export { ADCAR8, ADCAHL, ADCAN8, ADDAHL, ADDAN8, ADDAR8, CPAR8, CPAHL, CPAN8 };
