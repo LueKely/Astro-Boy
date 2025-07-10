@@ -233,11 +233,17 @@ function SBCAR8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
-  const r8WithCarry = r8.getRegister() + registerF.getCYFlag();
+  const difference =
+    registerA.getRegister() - r8.getRegister() - registerF.getCYFlag();
 
-  validateCompareArithmetic(registerF, registerA.getRegister(), r8WithCarry);
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    r8.getRegister(),
+    registerF.getCYFlag()
+  );
 
-  registerA.setRegister(registerA.getRegister() - r8WithCarry);
+  registerA.setRegister(difference);
 }
 // SBC A, [HL] - untested
 /**
@@ -250,16 +256,18 @@ function SBCAHL(
   registerHL: Cpu_Register_16Bit<"HL">,
   registerF: Cpu_Flag_Register
 ) {
+  const difference =
+    registerA.getRegister() -
+    (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag());
+
   validateCompareArithmetic(
     registerF,
     registerA.getRegister(),
-    memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag()
+    memory.getMemoryAt(registerHL.getRegister()),
+    registerF.getCYFlag()
   );
 
-  registerA.setRegister(
-    registerA.getRegister() -
-      (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag())
-  );
+  registerA.setRegister(difference);
 }
 // SBC A, N8 - untested
 /**
@@ -271,12 +279,16 @@ function SBCAN8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
+  const difference = registerA.getRegister() - n8 - registerF.getCYFlag();
+
   validateCompareArithmetic(
     registerF,
     registerA.getRegister(),
-    n8 + registerF.getCYFlag()
+    n8,
+    registerF.getCYFlag()
   );
-  registerA.setRegister(registerA.getRegister() - (n8 + registerF.getCYFlag()));
+
+  registerA.setRegister(difference);
 }
 
 // SUB A, R8 - untested
@@ -289,15 +301,16 @@ function SUBAR8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
+  const difference = registerA.getRegister() - r8.getRegister();
+
   validateCompareArithmetic(
     registerF,
     registerA.getRegister(),
-    r8.getRegister() + registerF.getCYFlag()
+    r8.getRegister(),
+    registerF.getCYFlag()
   );
 
-  registerA.setRegister(
-    registerA.getRegister() - (r8.getRegister() + registerF.getCYFlag())
-  );
+  registerA.setRegister(difference);
 }
 // SBC A, [HL] - untested
 /**
@@ -310,16 +323,16 @@ function SUBAHL(
   registerHL: Cpu_Register_16Bit<"HL">,
   registerF: Cpu_Flag_Register
 ) {
+  const difference =
+    registerA.getRegister() - memory.getMemoryAt(registerHL.getRegister());
+
   validateCompareArithmetic(
     registerF,
     registerA.getRegister(),
-    memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag()
+    memory.getMemoryAt(registerHL.getRegister())
   );
 
-  registerA.setRegister(
-    registerA.getRegister() -
-      (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag())
-  );
+  registerA.setRegister(difference);
 }
 // SBC A, N8 - untested
 /**
@@ -331,12 +344,13 @@ function SUBAN8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
+  const difference = registerA.getRegister() - n8;
   validateCompareArithmetic(
     registerF,
     registerA.getRegister(),
     n8 + registerF.getCYFlag()
   );
-  registerA.setRegister(registerA.getRegister() - (n8 + registerF.getCYFlag()));
+  registerA.setRegister(difference);
 }
 
 export {

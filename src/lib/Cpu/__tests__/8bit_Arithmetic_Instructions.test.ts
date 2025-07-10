@@ -636,8 +636,8 @@ describe("SBC A, R8", () => {
     const C = CPU.register.C;
     const F = CPU.register.F;
 
-    A.setRegister(2);
-    C.setRegister(1);
+    A.setRegister(0x10);
+    C.setRegister(0x0f);
     F.setCYFlag();
 
     SBCAR8(C, A, F);
