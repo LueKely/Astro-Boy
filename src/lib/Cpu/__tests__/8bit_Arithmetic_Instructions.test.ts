@@ -12,6 +12,8 @@ import {
   CPAR8,
   DECHL,
   DECR8,
+  INCHL,
+  INCR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
 
@@ -571,5 +573,56 @@ describe("DEC HL Functionalities", () => {
     expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(1);
     expect(CPU.register.F.getZFlag()).toBe(1);
+  });
+});
+
+describe("INC R8 Functionalities", () => {
+  test("When incrementing the value of 254, the value of A should be 255", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(0b1111_1110);
+
+    INCR8(CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+
+    expect(CPU.register.A.getRegister()).toBe(255);
+  });
+  test("When incrementing the value 15, H flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(0b0000_1111);
+
+    INCR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(16);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+});
+
+describe("INC HL Functionalities", () => {
+  test("When incrementing the value of 254, the value of A should be 255", () => {
+    const CPU = new CPU_Registers_Group();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b1111_1110);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 254);
+
+    INCHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(CPU.register.F.getNFlag()).toBe(0);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(255);
+  });
+  test("When incrementing the value 15, H flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b0000_1111);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 15);
+
+    INCHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(16);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
   });
 });

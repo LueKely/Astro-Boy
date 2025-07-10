@@ -3,6 +3,7 @@ import {
   validateCompareArithmetic,
   validateR8Arithmetic,
   validateR8Decrement,
+  validateR8Increment,
 } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
@@ -198,6 +199,30 @@ function DECHL(
   ram.setMemoryAt(registerHL.getRegister(), difference);
 }
 
+//  INC r8
+/**
+ * @description Increment the value in register r8 by 1
+ **/
+function INCR8(register: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
+  const sum = register.getRegister() + 1;
+  validateR8Increment(sum, flagRegister);
+  register.setRegister(sum);
+}
+
+// INC HL
+/**
+ * @description Increment the value in pointed by HL  by 1
+ **/
+function INCHL(
+  registerHL: Cpu_Register_16Bit<"HL">,
+  ram: Ram,
+  flagRegister: Cpu_Flag_Register
+) {
+  const sum = ram.getMemoryAt(registerHL.getRegister()) + 1;
+  validateR8Increment(sum, flagRegister);
+  ram.setMemoryAt(registerHL.getRegister(), sum);
+}
+
 export {
   ADCAR8,
   ADCAHL,
@@ -210,4 +235,6 @@ export {
   CPAN8,
   DECR8,
   DECHL,
+  INCR8,
+  INCHL,
 };

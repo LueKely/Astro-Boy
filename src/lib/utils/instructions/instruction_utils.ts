@@ -105,9 +105,29 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   }
 }
 
+function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
+  // Raise z flag if result is zero.
+  if (sum == 0) {
+    flagRegister.setZFlag();
+  } else {
+    flagRegister.clearZFlag();
+  }
+
+  // Clear N flag to during this operation.
+  flagRegister.clearNFlag();
+
+  // Raise Half Carry flag if overlow from bit 3.
+  if (sum > 0xf) {
+    flagRegister.setHFlag();
+  } else {
+    flagRegister.clearHFlag();
+  }
+}
+
 export {
   validateR8Arithmetic,
   validateR16Arithmetic,
   validateCompareArithmetic,
   validateR8Decrement,
+  validateR8Increment,
 };
