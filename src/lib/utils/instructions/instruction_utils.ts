@@ -60,11 +60,11 @@ function validateR16Arithmetic(sum: number, flagRegister: Cpu_Flag_Register) {
 
 function validateCompareArithmetic(
   registerF: Cpu_Flag_Register,
-  minuen: number,
+  minuend: number,
   subtrahen: number,
   carry: number = 0
 ) {
-  const difference = minuen - subtrahen - carry;
+  const difference = minuend - subtrahen - carry;
 
   // flag conditions below
   if (difference == 0) {
@@ -75,13 +75,13 @@ function validateCompareArithmetic(
 
   registerF.setNFlag();
 
-  if ((subtrahen & 0x0f) > (minuen & 0x0f)) {
+  if (((subtrahen + carry) & 0x0f) > (minuend & 0x0f)) {
     registerF.setHFlag();
   } else {
     registerF.clearHFlag();
   }
 
-  if (subtrahen + carry > minuen) {
+  if (subtrahen + carry > minuend) {
     registerF.setCYFlag();
   } else {
     registerF.clearCYFlag();
