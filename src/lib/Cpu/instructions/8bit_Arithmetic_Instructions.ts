@@ -135,7 +135,7 @@ function ADDAN8(
 
 // CP A, R8
 /**
- * @description Compares the value in A with the value in r8
+ * @description Compares the value in A with the value in r8 - DOES NOT STORE THE RESULT
  **/
 function CPAR8(
   r8: Cpu_Register<any>,
@@ -150,7 +150,7 @@ function CPAR8(
 }
 // CP A, [HL]
 /**
- * @description Compares the value in A with the value in [HL]
+ * @description Compares the value in A with the value in [HL] - DOES NOT STORE THE RESULT
  **/
 function CPAHL(
   memory: Ram,
@@ -166,7 +166,7 @@ function CPAHL(
 }
 // CP A, N8
 /**
- * @description Compares the value in A with the value in n8
+ * @description Compares the value in A with the value in n8 - DOES NOT STORE THE RESULT
  **/
 function CPAN8(
   n8: number,
@@ -223,6 +223,126 @@ function INCHL(
   ram.setMemoryAt(registerHL.getRegister(), sum);
 }
 
+// SBC A, R8 - untested
+/**
+ * @description Subtracts the value in A with the value
+ * in r8 plus the carry and stores it in A
+ **/
+function SBCAR8(
+  r8: Cpu_Register<any>,
+  registerA: Cpu_Register<"A">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    r8.getRegister() + registerF.getCYFlag()
+  );
+
+  registerA.setRegister(
+    registerA.getRegister() - (r8.getRegister() + registerF.getCYFlag())
+  );
+}
+// SBC A, [HL] - untested
+/**
+ * @description Subtracts the value in A with the value in
+ * [HL] plus the carry and stores it in A
+ **/
+function SBCAHL(
+  memory: Ram,
+  registerA: Cpu_Register<"A">,
+  registerHL: Cpu_Register_16Bit<"HL">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag()
+  );
+
+  registerA.setRegister(
+    registerA.getRegister() -
+      (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag())
+  );
+}
+// SBC A, N8 - untested
+/**
+ * @description Subtracts the value in A with the value in n8
+ * plus the carry and stores it in A
+ **/
+function SBCAN8(
+  n8: number,
+  registerA: Cpu_Register<"A">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    n8 + registerF.getCYFlag()
+  );
+  registerA.setRegister(registerA.getRegister() - (n8 + registerF.getCYFlag()));
+}
+
+// SUB A, R8 - untested
+/**
+ * @description Subtracts the value in A with the value in r8 and
+ * stores it in A
+ **/
+function SUBAR8(
+  r8: Cpu_Register<any>,
+  registerA: Cpu_Register<"A">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    r8.getRegister() + registerF.getCYFlag()
+  );
+
+  registerA.setRegister(
+    registerA.getRegister() - (r8.getRegister() + registerF.getCYFlag())
+  );
+}
+// SBC A, [HL] - untested
+/**
+ * @description Subtracts the value in A with the value in [HL]
+ *  and stores it in A
+ **/
+function SUBAHL(
+  memory: Ram,
+  registerA: Cpu_Register<"A">,
+  registerHL: Cpu_Register_16Bit<"HL">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag()
+  );
+
+  registerA.setRegister(
+    registerA.getRegister() -
+      (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag())
+  );
+}
+// SBC A, N8 - untested
+/**
+ * @description Subtracts the value in A with the value in
+ * n8 and stores it in A
+ **/
+function SUBAN8(
+  n8: number,
+  registerA: Cpu_Register<"A">,
+  registerF: Cpu_Flag_Register
+) {
+  validateCompareArithmetic(
+    registerF,
+    registerA.getRegister(),
+    n8 + registerF.getCYFlag()
+  );
+  registerA.setRegister(registerA.getRegister() - (n8 + registerF.getCYFlag()));
+}
+
 export {
   ADCAR8,
   ADCAHL,
@@ -237,4 +357,10 @@ export {
   DECHL,
   INCR8,
   INCHL,
+  SBCAR8,
+  SBCAHL,
+  SBCAN8,
+  SUBAR8,
+  SUBAHL,
+  SUBAN8,
 };
