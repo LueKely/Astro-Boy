@@ -14,6 +14,7 @@ import {
   DECR8,
   INCHL,
   INCR8,
+  SBCAR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
 
@@ -624,5 +625,23 @@ describe("INC HL Functionalities", () => {
     expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(16);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+});
+
+describe("SBC A, R8", () => {
+  test(" Let A be 2 and r8 be 1 and carry be 1 it should return 0", () => {
+    const CPU = new CPU_Registers_Group();
+
+    const A = CPU.register.A;
+    const C = CPU.register.C;
+    const F = CPU.register.F;
+
+    A.setRegister(2);
+    C.setRegister(1);
+    F.setCYFlag();
+
+    SBCAR8(C, A, F);
+    expect(A.getRegister()).toBe(0);
+    expect(F.getZFlag()).toBe(1);
   });
 });

@@ -233,15 +233,11 @@ function SBCAR8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(
-    registerF,
-    registerA.getRegister(),
-    r8.getRegister() + registerF.getCYFlag()
-  );
+  const r8WithCarry = r8.getRegister() + registerF.getCYFlag();
 
-  registerA.setRegister(
-    registerA.getRegister() - (r8.getRegister() + registerF.getCYFlag())
-  );
+  validateCompareArithmetic(registerF, registerA.getRegister(), r8WithCarry);
+
+  registerA.setRegister(registerA.getRegister() - r8WithCarry);
 }
 // SBC A, [HL] - untested
 /**
