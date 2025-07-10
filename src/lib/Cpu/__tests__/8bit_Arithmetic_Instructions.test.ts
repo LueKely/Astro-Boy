@@ -10,6 +10,8 @@ import {
   CPAHL,
   CPAN8,
   CPAR8,
+  DECHL,
+  DECR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
 
@@ -495,5 +497,79 @@ describe("CP A, N8 Functionalities", () => {
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
     expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+});
+
+describe("DEC R8 Functionalities", () => {
+  test("When decrementing the value of 255, the value of A should be 254", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(0b1111_1111);
+
+    DECR8(CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+
+    expect(CPU.register.A.getRegister()).toBe(254);
+  });
+  test("When decrementing the value 16, H flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(0b0001_0000);
+
+    DECR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(15);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+  test("When decrementing the value 1, Z flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+
+    CPU.register.A.setRegister(0b0000_0001);
+
+    DECR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+  });
+});
+
+describe("DEC HL Functionalities", () => {
+  test("When decrementing the value of 255, the value of A should be 254", () => {
+    const CPU = new CPU_Registers_Group();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b1111_1111);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 255);
+
+    DECHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(CPU.register.F.getNFlag()).toBe(1);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(254);
+  });
+  test("When decrementing the value 16, H flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b0001_0000);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 16);
+
+    DECHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(15);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+  test("When decrementing the value 1, Z flag should raise", () => {
+    const CPU = new CPU_Registers_Group();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b0000_0001);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 1);
+
+    DECHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getZFlag()).toBe(1);
   });
 });

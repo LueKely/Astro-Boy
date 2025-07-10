@@ -175,7 +175,7 @@ function CPAN8(
   validateCompareArithmetic(registerF, registerA.getRegister(), n8);
 }
 
-// DEC r8 - untested
+// DEC r8
 /**
  * @description Decrement the value in register r8 by 1
  **/
@@ -184,7 +184,7 @@ function DECR8(r8: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
   validateR8Decrement(flagRegister, r8.getRegister());
   r8.setRegister(difference);
 }
-// DEC [HL] - untested
+// DEC [HL]
 /**
  * @description Decrement the value in pointed by HL  by 1
  **/

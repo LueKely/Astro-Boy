@@ -9,7 +9,7 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  **/
 function ADDHLR16(
   r16: number,
-  registerHL: Cpu_Register_16Bit,
+  registerHL: Cpu_Register_16Bit<"HL">,
   flagRegister: Cpu_Flag_Register
 ) {
   const sum = r16 + registerHL.getRegister();
