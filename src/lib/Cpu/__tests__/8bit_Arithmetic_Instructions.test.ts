@@ -15,6 +15,7 @@ import {
   INCHL,
   INCR8,
   SBCAHL,
+  SBCAN8,
   SBCAR8,
 } from "../instructions/8bit_Arithmetic_Instructions";
 import { Ram } from "../../Ram/Ram";
@@ -811,6 +812,86 @@ describe("SBC A, [HL] functionalities", () => {
     // F.setCYFlag();
 
     SBCAHL(ram, A, HL, F);
+    expect(A.getRegister()).toBe(255);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+});
+
+describe("SBC A, N8 Functionalities", () => {
+  test(" Let A be 15 and r8 be 14 and carry be 1 it should return 0, raising the zero flag", () => {
+    const CPU = new CPU_Registers_Group();
+
+    const { A, F } = CPU.register;
+
+    A.setRegister(0b0000_1111);
+    F.setCYFlag();
+
+    SBCAN8(0b0000_1110, A, F);
+    expect(A.getRegister()).toBe(0);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(1);
+    expect(F.getHFlag()).toBe(0);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test(" Let A be 15 and r8 be 15 and carry be 0 it should return 0, raising the zero flag", () => {
+    const CPU = new CPU_Registers_Group();
+
+    const { A, F } = CPU.register;
+
+    A.setRegister(0b0000_1111);
+
+    // F.setCYFlag();
+
+    SBCAN8(0b0000_1111, A, F);
+    expect(A.getRegister()).toBe(0);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(1);
+    expect(F.getHFlag()).toBe(0);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test(" Let A be 16 and r8 be 1 and carry be 0 it should return 15, raising the Half carry flag", () => {
+    const CPU = new CPU_Registers_Group();
+    const { A, F } = CPU.register;
+
+    A.setRegister(0b0001_0000);
+    // F.setCYFlag();
+
+    SBCAN8(0b0000_0001, A, F);
+    expect(A.getRegister()).toBe(15);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test(" Let A be 32 and r8 be 15 and carry be 1 it should return 0, raising the zero flag", () => {
+    const CPU = new CPU_Registers_Group();
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0b0010_0000);
+    F.setCYFlag();
+
+    SBCAN8(0b0000_1111, A, F);
+    expect(A.getRegister()).toBe(16);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test(" Let A be 0 and r8 be 1 and carry be 0 it should return 0, raising the H and CY flag", () => {
+    const CPU = new CPU_Registers_Group();
+    const { A, F } = CPU.register;
+
+    A.setRegister(0b0000_0000);
+    // F.setCYFlag();
+
+    SBCAN8(0b0000_0001, A, F);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);

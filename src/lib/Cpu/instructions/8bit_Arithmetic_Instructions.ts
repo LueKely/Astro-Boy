@@ -241,7 +241,7 @@ function SBCAR8(
 
   registerA.setRegister(difference);
 }
-// SBC A, [HL] - untested
+// SBC A, [HL]
 /**
  * @description Subtracts the value in A with the value in
  * [HL] plus the carry and stores it in A
