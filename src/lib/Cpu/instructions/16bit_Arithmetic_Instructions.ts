@@ -1,6 +1,6 @@
 //  ADD HL, R16 - tested
 
-import { validateR16Arithmetic } from "../../utils/instructions/instruction_utils";
+import { validateR16Addition } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
 
@@ -14,7 +14,7 @@ function ADDHLR16(
 ) {
   const sum = r16 + registerHL.getRegister();
 
-  validateR16Arithmetic(sum, flagRegister);
+  validateR16Addition(sum, flagRegister);
 
   registerHL.setRegister(sum);
 }

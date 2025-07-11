@@ -1,6 +1,6 @@
 //  ADD HL, SP - untested
 
-import { validateR16Arithmetic } from "../../utils/instructions/instruction_utils";
+import { validateR16Addition } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Pointer_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
@@ -10,13 +10,13 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  * @description Add the value in SP to HL.
  **/
 function ADDHLSP(
-  registerHL: Cpu_Register_16Bit,
+  registerHL: Cpu_Register_16Bit<any>,
   registerSP: Cpu_Pointer_Register,
   registerF: Cpu_Flag_Register
 ) {
   const sum = registerHL.getRegister() + registerSP.getRegister();
 
-  validateR16Arithmetic(sum, registerF);
+  validateR16Addition(sum, registerF);
   registerHL.setRegister(sum);
 }
 // untested

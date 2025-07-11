@@ -1,7 +1,7 @@
 import type { Ram } from "../../Ram/Ram";
 import {
-  validateCompareArithmetic,
-  validateR8Arithmetic,
+  validateR8Subtraction,
+  validateR8Addition,
   validateR8Decrement,
   validateR8Increment,
 } from "../../utils/instructions/instruction_utils";
@@ -26,7 +26,7 @@ function ADCAR8(
     registerF.getCYFlag();
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
 
   registerA.setRegister(sum);
 }
@@ -52,7 +52,7 @@ function ADCAHL(
     registerF.getCYFlag();
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -69,7 +69,7 @@ function ADCAN8(
   const hflagSum =
     (value & 0x0f) + (registerA.getRegister() & 0x0f) + registerF.getCYFlag();
 
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -89,7 +89,7 @@ function ADDAR8(
     (register8.getRegister() & 0x0f) + (registerA.getRegister() & 0x0f);
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
 
   registerA.setRegister(sum);
 }
@@ -112,7 +112,7 @@ function ADDAHL(
     (registerA.getRegister() & 0x0f);
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -129,7 +129,7 @@ function ADDAN8(
   const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
 
   //  validate sum with the flag registers
-  validateR8Arithmetic(sum, hflagSum, registerF);
+  validateR8Addition(sum, hflagSum, registerF);
   registerA.setRegister(sum);
 }
 
@@ -142,11 +142,7 @@ function CPAR8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(
-    registerF,
-    registerA.getRegister(),
-    r8.getRegister()
-  );
+  validateR8Subtraction(registerF, registerA.getRegister(), r8.getRegister());
 }
 // CP A, [HL]
 /**
@@ -158,7 +154,7 @@ function CPAHL(
   registerHL: Cpu_Register_16Bit<"HL">,
   registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     memory.getMemoryAt(registerHL.getRegister())
@@ -173,7 +169,7 @@ function CPAN8(
   registerA: Cpu_Register<"A">,
   registerF: Cpu_Flag_Register
 ) {
-  validateCompareArithmetic(registerF, registerA.getRegister(), n8);
+  validateR8Subtraction(registerF, registerA.getRegister(), n8);
 }
 
 // DEC r8
@@ -236,7 +232,7 @@ function SBCAR8(
   const difference =
     registerA.getRegister() - r8.getRegister() - registerF.getCYFlag();
 
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     r8.getRegister(),
@@ -260,7 +256,7 @@ function SBCAHL(
     registerA.getRegister() -
     (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag());
 
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     memory.getMemoryAt(registerHL.getRegister()),
@@ -281,7 +277,7 @@ function SBCAN8(
 ) {
   const difference = registerA.getRegister() - n8 - registerF.getCYFlag();
 
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     n8,
@@ -303,7 +299,7 @@ function SUBAR8(
 ) {
   const difference = registerA.getRegister() - r8.getRegister();
 
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     r8.getRegister(),
@@ -326,7 +322,7 @@ function SUBAHL(
   const difference =
     registerA.getRegister() - memory.getMemoryAt(registerHL.getRegister());
 
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     memory.getMemoryAt(registerHL.getRegister())
@@ -345,7 +341,7 @@ function SUBAN8(
   registerF: Cpu_Flag_Register
 ) {
   const difference = registerA.getRegister() - n8;
-  validateCompareArithmetic(
+  validateR8Subtraction(
     registerF,
     registerA.getRegister(),
     n8 + registerF.getCYFlag()

@@ -5,7 +5,7 @@ import type { Cpu_Register, Cpu_Register_16Bit } from "../../Cpu/CPU_Register";
  * @description this will validate the sum and raise the appropriate flags during R8
  * operations
  **/
-function validateR8Arithmetic(
+function validateR8Addition(
   sum: number,
   hflagSum: number,
   flagRegister: Cpu_Flag_Register
@@ -39,7 +39,7 @@ function validateR8Arithmetic(
  * @description this will validate the sum and raise the appropriate flags
  * during R16 operations
  **/
-function validateR16Arithmetic(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR16Addition(sum: number, flagRegister: Cpu_Flag_Register) {
   // Clear N flag to during this operation.
   flagRegister.clearNFlag();
 
@@ -58,7 +58,7 @@ function validateR16Arithmetic(sum: number, flagRegister: Cpu_Flag_Register) {
   }
 }
 
-function validateCompareArithmetic(
+function validateR8Subtraction(
   registerF: Cpu_Flag_Register,
   minuend: number,
   subtrahen: number,
@@ -126,9 +126,9 @@ function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
 }
 
 export {
-  validateR8Arithmetic,
-  validateR16Arithmetic,
-  validateCompareArithmetic,
+  validateR8Addition,
+  validateR16Addition,
+  validateR8Subtraction,
   validateR8Decrement,
   validateR8Increment,
 };
