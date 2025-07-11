@@ -219,7 +219,7 @@ function INCHL(
   ram.setMemoryAt(registerHL.getRegister(), sum);
 }
 
-// SBC A, R8 - untested
+// SBC A, R8
 /**
  * @description Subtracts the value in A with the value
  * in r8 plus the carry and stores it in A
