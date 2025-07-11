@@ -308,7 +308,7 @@ function SUBAR8(
 
   registerA.setRegister(difference);
 }
-// SBC A, [HL] - untested
+// SBC A, [HL]
 /**
  * @description Subtracts the value in A with the value in [HL]
  *  and stores it in A
@@ -330,7 +330,7 @@ function SUBAHL(
 
   registerA.setRegister(difference);
 }
-// SBC A, N8 - untested
+// SBC A, N8
 /**
  * @description Subtracts the value in A with the value in
  * n8 and stores it in A
