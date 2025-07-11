@@ -61,10 +61,10 @@ function validateR16Addition(sum: number, flagRegister: Cpu_Flag_Register) {
 function validateR8Subtraction(
   registerF: Cpu_Flag_Register,
   minuend: number,
-  subtrahen: number,
+  subtrahend: number,
   carry: number = 0
 ) {
-  const difference = minuend - subtrahen - carry;
+  const difference = minuend - subtrahend - carry;
 
   // flag conditions below
   if (difference == 0) {
@@ -75,13 +75,12 @@ function validateR8Subtraction(
 
   registerF.setNFlag();
 
-  if (((subtrahen + carry) & 0x0f) > (minuend & 0x0f)) {
+  if ((minuend & 0x0f) < (subtrahend & 0x0f) + carry) {
     registerF.setHFlag();
   } else {
     registerF.clearHFlag();
   }
-
-  if (subtrahen + carry > minuend) {
+  if (subtrahend + carry > minuend) {
     registerF.setCYFlag();
   } else {
     registerF.clearCYFlag();
