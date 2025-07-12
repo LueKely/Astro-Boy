@@ -16,6 +16,10 @@ export class Cpu_Register<T extends T8BitRegisters> {
     // sanitize our value to only store 8bits
     this.value = value & 0xff;
   }
+
+  getBrand() {
+    return this.__brand;
+  }
 }
 
 export class Cpu_Register_16Bit<T extends T16BitRegisters> {
@@ -64,5 +68,9 @@ export class Cpu_Register_16Bit<T extends T16BitRegisters> {
     this.firstRegister.setRegister((value16 & 0xff00) >> 8);
     //mask out the bits 15-8 to get only bits 8-0
     this.secondRegister.setRegister(value16 & 0xff);
+  }
+
+  getBrand() {
+    return this.__brand;
   }
 }

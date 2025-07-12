@@ -1,5 +1,4 @@
 import type { Cpu_Flag_Register } from "../../Cpu/CPU_Flag_Register";
-import type { Cpu_Register, Cpu_Register_16Bit } from "../../Cpu/CPU_Register";
 
 /**
  * @description this will validate the sum and raise the appropriate flags during R8

@@ -1,8 +1,12 @@
 import { describe, test, expect } from "vitest";
 import { CPU_Registers_Group } from "../CPU_Registers_Group";
-import { ADDHLR16 } from "../instructions/16bit_Arithmetic_Instructions";
+import {
+  ADDHLR16,
+  DECR16,
+  INCR16,
+} from "../instructions/16bit_Arithmetic_Instructions";
 
-describe("ADDHLR16 Functionalitys", () => {
+describe("ADD HL, R16 Functionalities", () => {
   test("The sum of the opearation should be 2_082 and no flags should be raised", () => {
     const CPU = new CPU_Registers_Group();
     const r16 = 1_041;
@@ -43,5 +47,26 @@ describe("ADDHLR16 Functionalitys", () => {
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
     expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+});
+
+describe("INC r16 functionalities", () => {
+  test("The value of r16 should increment to 1", () => {
+    const CPU = new CPU_Registers_Group();
+
+    const { BC } = CPU.register16Bit;
+    BC.setRegister(0b0001_0000_0000_0000);
+    INCR16(BC);
+    expect(BC.getRegister()).toBe(0b0001_0000_0000_0001);
+  });
+});
+describe("DEC r16 functionalities", () => {
+  test("The value of r16 should decrement to 1", () => {
+    const CPU = new CPU_Registers_Group();
+
+    const { BC } = CPU.register16Bit;
+    BC.setRegister(0b0001_0000_0000_0001);
+    DECR16(BC);
+    expect(BC.getRegister()).toBe(0b0001_0000_0000_0000);
   });
 });
