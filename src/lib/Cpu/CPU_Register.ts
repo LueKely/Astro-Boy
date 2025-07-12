@@ -54,7 +54,7 @@ export class Cpu_Register_16Bit<T extends T16BitRegisters> {
    * 15------8 7-------0
    * 0000 0000 0000 0000
    * Bits 15-8 are set to register B
-   * Bits 7-0 are set to register
+   * Bits 7-0 are set to register C
    * for further details of bit masking check out
    * @link https://www.geeksforgeeks.org/what-is-bitmasking/
    **/
