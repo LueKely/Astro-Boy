@@ -123,10 +123,22 @@ function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
   }
 }
 
+function validateAndOperation(result: number, flagRegister: Cpu_Flag_Register) {
+  if (result == 0) {
+    flagRegister.setZFlag();
+  } else {
+    flagRegister.clearZFlag();
+  }
+  flagRegister.clearNFlag();
+  flagRegister.setHFlag();
+  flagRegister.clearCYFlag();
+}
+
 export {
   validateR8Addition,
   validateR16Addition,
   validateR8Subtraction,
   validateR8Decrement,
   validateR8Increment,
+  validateAndOperation,
 };

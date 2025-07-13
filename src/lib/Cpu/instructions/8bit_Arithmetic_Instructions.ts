@@ -287,7 +287,7 @@ function SBCAN8(
   registerA.setRegister(difference);
 }
 
-// SUB A, R8 - untested
+// SUB A, R8
 /**
  * @description Subtracts the value in A with the value in r8 and
  * stores it in A
