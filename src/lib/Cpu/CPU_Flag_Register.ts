@@ -35,10 +35,6 @@ export class Cpu_Flag_Register extends Cpu_Register<"F"> {
     return value != 0 ? 1 : 0;
   }
 
-  getFRegister() {
-    return this.value;
-  }
-
   setZFlag() {
     this.value |= Cpu_Flag_Register.#zeroFlagPosition;
   }

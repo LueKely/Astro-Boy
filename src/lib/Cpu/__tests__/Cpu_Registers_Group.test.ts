@@ -86,7 +86,7 @@ describe("Flag Register", () => {
     expect(Register.register.F.getNFlag()).toBe(1);
     expect(Register.register.F.getHFlag()).toBe(1);
     expect(Register.register.F.getCYFlag()).toBe(1);
-    expect(Register.register.F.getFRegister()).toBe(0b1111_0000);
+    expect(Register.register.F.getRegister()).toBe(0b1111_0000);
 
     Register.register.F.clearZFlag();
     Register.register.F.clearCYFlag();
@@ -96,7 +96,7 @@ describe("Flag Register", () => {
     expect(Register.register.F.getHFlag()).toBe(0);
     expect(Register.register.F.getNFlag()).toBe(0);
     expect(Register.register.F.getCYFlag()).toBe(0);
-    expect(Register.register.F.getFRegister()).toBe(0b0);
+    expect(Register.register.F.getRegister()).toBe(0b0);
   });
 
   test("Combined Flags", () => {
@@ -105,32 +105,32 @@ describe("Flag Register", () => {
 
     Register.register.F.setCYFlag();
     Register.register.F.setHFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b0011_0000);
+    expect(Register.register.F.getRegister()).toBe(0b0011_0000);
 
     Register.register.F.clearCYFlag();
     Register.register.F.clearHFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b0);
+    expect(Register.register.F.getRegister()).toBe(0b0);
 
     Register.register.F.setCYFlag();
     Register.register.F.setZFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b1001_0000);
+    expect(Register.register.F.getRegister()).toBe(0b1001_0000);
 
     Register.register.F.clearCYFlag();
     Register.register.F.clearZFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b0);
+    expect(Register.register.F.getRegister()).toBe(0b0);
 
     Register.register.F.setCYFlag();
     Register.register.F.setZFlag();
     Register.register.F.setHFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b1011_0000);
+    expect(Register.register.F.getRegister()).toBe(0b1011_0000);
 
     Register.register.F.clearCYFlag();
     Register.register.F.clearZFlag();
     Register.register.F.clearHFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b0);
+    expect(Register.register.F.getRegister()).toBe(0b0);
 
     Register.register.F.setCYFlag();
     Register.register.F.clearZFlag();
-    expect(Register.register.F.getFRegister()).toBe(0b0001_0000);
+    expect(Register.register.F.getRegister()).toBe(0b0001_0000);
   });
 });

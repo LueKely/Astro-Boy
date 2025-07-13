@@ -134,6 +134,18 @@ function validateAndOperation(result: number, flagRegister: Cpu_Flag_Register) {
   flagRegister.clearCYFlag();
 }
 
+// used both by XOR and OR operations
+function validateOrOperation(result: number, F: Cpu_Flag_Register) {
+  if (result == 0) {
+    F.setZFlag();
+  } else {
+    F.clearZFlag();
+  }
+  F.clearNFlag();
+  F.clearHFlag();
+  F.clearCYFlag();
+}
+
 export {
   validateR8Addition,
   validateR16Addition,
@@ -141,4 +153,5 @@ export {
   validateR8Decrement,
   validateR8Increment,
   validateAndOperation,
+  validateOrOperation,
 };

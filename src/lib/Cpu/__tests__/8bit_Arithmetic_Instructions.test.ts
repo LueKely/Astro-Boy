@@ -62,7 +62,7 @@ describe("ADC A, R8 Functionalitys", () => {
     ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -77,7 +77,7 @@ describe("ADC A, R8 Functionalitys", () => {
     ADCAR8(CPU.register.B, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -96,7 +96,7 @@ describe("ADC A, HL Functionalitys", () => {
     ADCAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(1);
-    expect(CPU.register.F.getFRegister()).toBe(0);
+    expect(CPU.register.F.getRegister()).toBe(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -114,7 +114,7 @@ describe("ADC A, HL Functionalitys", () => {
     ADCAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -131,7 +131,7 @@ describe("ADC A, HL Functionalitys", () => {
     ADCAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBe(0b1000_0000);
+    expect(CPU.register.F.getRegister()).toBe(0b1000_0000);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -146,7 +146,7 @@ describe("ADC A, N8 Functionalitys", () => {
     ADCAN8(1, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(1);
-    expect(CPU.register.F.getFRegister()).toBe(0);
+    expect(CPU.register.F.getRegister()).toBe(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -161,7 +161,7 @@ describe("ADC A, N8 Functionalitys", () => {
     ADCAN8(1, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -174,7 +174,7 @@ describe("ADC A, N8 Functionalitys", () => {
     ADCAN8(0, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBe(0b1000_0000);
+    expect(CPU.register.F.getRegister()).toBe(0b1000_0000);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -208,7 +208,7 @@ describe("ADD A, R8 Functionalitys", () => {
     ADDAR8(CPU.register.B, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -223,7 +223,7 @@ describe("ADD A, R8 Functionalitys", () => {
     ADDAR8(CPU.register.B, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -242,7 +242,7 @@ describe("ADD AH, L Functionalitys", () => {
     ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(1);
-    expect(CPU.register.F.getFRegister()).toBe(0);
+    expect(CPU.register.F.getRegister()).toBe(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -260,7 +260,7 @@ describe("ADD AH, L Functionalitys", () => {
     ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -277,7 +277,7 @@ describe("ADD AH, L Functionalitys", () => {
     ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBe(0b1000_0000);
+    expect(CPU.register.F.getRegister()).toBe(0b1000_0000);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -292,7 +292,7 @@ describe("ADDAN8 Functionalitys", () => {
     ADDAN8(1, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(1);
-    expect(CPU.register.F.getFRegister()).toBe(0);
+    expect(CPU.register.F.getRegister()).toBe(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
@@ -307,7 +307,7 @@ describe("ADDAN8 Functionalitys", () => {
     ADDAN8(2, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(16);
-    expect(CPU.register.F.getFRegister()).toBeGreaterThan(0);
+    expect(CPU.register.F.getRegister()).toBeGreaterThan(0);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -320,7 +320,7 @@ describe("ADDAN8 Functionalitys", () => {
     ADDAN8(0, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.A.getRegister()).toBe(0);
-    expect(CPU.register.F.getFRegister()).toBe(0b1000_0000);
+    expect(CPU.register.F.getRegister()).toBe(0b1000_0000);
     expect(CPU.register.F.getZFlag()).toBe(1);
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
