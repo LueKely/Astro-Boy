@@ -41,7 +41,7 @@ function RESU3HL(
 
 // SET U3,r8
 function SETU3R8(u3: number, r8: Cpu_Register<any>, f: Cpu_Flag_Register) {
-  const testBit = r8.getRegister() & (0b01 << u3);
+  const testBit = r8.getRegister() | (0b01 << u3);
 
   r8.setRegister(testBit);
 }
@@ -52,8 +52,8 @@ function SETU3HL(
   ram: Ram,
   f: Cpu_Flag_Register
 ) {
-  const testBit = ram.getMemoryAt(HL.getRegister()) & (0b01 << u3);
+  const testBit = ram.getMemoryAt(HL.getRegister()) | (0b01 << u3);
   validateBitFlagOperation(testBit, f);
 }
 
-export { BITU3R8, BITU3HL, RESU3R8, RESU3HL };
+export { BITU3R8, BITU3HL, RESU3R8, RESU3HL, SETU3R8, SETU3HL };
