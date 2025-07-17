@@ -146,6 +146,17 @@ function validateOrOperation(result: number, F: Cpu_Flag_Register) {
   F.clearCYFlag();
 }
 
+function validateBitFlagOperation(testBit: number, F: Cpu_Flag_Register) {
+  if (testBit == 0) {
+    F.setZFlag();
+  } else {
+    F.clearZFlag();
+  }
+
+  F.clearNFlag();
+  F.setHFlag();
+}
+
 export {
   validateR8Addition,
   validateR16Addition,
@@ -154,4 +165,5 @@ export {
   validateR8Increment,
   validateAndOperation,
   validateOrOperation,
+  validateBitFlagOperation,
 };
