@@ -1,3 +1,4 @@
+import { test } from "vitest";
 import type { Ram } from "../../Ram/Ram";
 import { validateBitFlagOperation } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
@@ -23,37 +24,27 @@ function BITU3HL(
 }
 
 // RES U3,r8
-function RESU3R8(u3: number, r8: Cpu_Register<any>, f: Cpu_Flag_Register) {
+function RESU3R8(u3: number, r8: Cpu_Register<any>) {
   const testBit = r8.getRegister() & ~(0b01 << u3);
 
   r8.setRegister(testBit);
 }
 // RES U3, [HL]
-function RESU3HL(
-  u3: number,
-  HL: Cpu_Register_16Bit<"HL">,
-  ram: Ram,
-  f: Cpu_Flag_Register
-) {
+function RESU3HL(u3: number, HL: Cpu_Register_16Bit<"HL">, ram: Ram) {
   const testBit = ram.getMemoryAt(HL.getRegister()) & ~(0b01 << u3);
-  validateBitFlagOperation(testBit, f);
+  ram.setMemoryAt(HL.getRegister(), testBit);
 }
 
 // SET U3,r8
-function SETU3R8(u3: number, r8: Cpu_Register<any>, f: Cpu_Flag_Register) {
+function SETU3R8(u3: number, r8: Cpu_Register<any>) {
   const testBit = r8.getRegister() | (0b01 << u3);
 
   r8.setRegister(testBit);
 }
 // SET U3, [HL]
-function SETU3HL(
-  u3: number,
-  HL: Cpu_Register_16Bit<"HL">,
-  ram: Ram,
-  f: Cpu_Flag_Register
-) {
+function SETU3HL(u3: number, HL: Cpu_Register_16Bit<"HL">, ram: Ram) {
   const testBit = ram.getMemoryAt(HL.getRegister()) | (0b01 << u3);
-  validateBitFlagOperation(testBit, f);
+  ram.setMemoryAt(HL.getRegister(), testBit);
 }
 
 export { BITU3R8, BITU3HL, RESU3R8, RESU3HL, SETU3R8, SETU3HL };
