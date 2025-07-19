@@ -2,6 +2,7 @@ import type { Ram } from '../../Ram/Ram';
 import {
 	validateBitShiftAccOperation,
 	validateBitShiftOperation,
+	validateSwapOperation,
 } from '../../utils/instructions/instruction_utils';
 import type { Cpu_Flag_Register } from '../CPU_Flag_Register';
 import type { Cpu_Register, Cpu_Register_16Bit } from '../CPU_Register';
@@ -190,6 +191,25 @@ function SRLHL(HL: Cpu_Register_16Bit<'HL'>, ram: Ram, F: Cpu_Flag_Register) {
 	ram.setMemoryAt(HL.getRegister(), result);
 }
 
+// SWAP, R8
+function SWAPR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
+	const upperBit = (r8.getRegister() & 0b1111_0000) >> 4;
+	const lowerBit = (r8.getRegister() & 0b0000_1111) << 4;
+	const result = upperBit | lowerBit;
+
+	r8.setRegister(result);
+	validateSwapOperation(result, F);
+}
+
+function SWAPHL(HL: Cpu_Register_16Bit<'HL'>, ram: Ram, F: Cpu_Flag_Register) {
+	const upperBit = (ram.getMemoryAt(HL.getRegister()) & 0b1111_0000) >> 4;
+	const lowerBit = (ram.getMemoryAt(HL.getRegister()) & 0b0000_1111) << 4;
+	const result = upperBit | lowerBit;
+	ram.setMemoryAt(HL.getRegister(), result);
+
+	validateSwapOperation(result, F);
+}
+
 export {
 	RLR8,
 	RLHL,
@@ -206,4 +226,6 @@ export {
 	SLAHL,
 	SRLR8,
 	SRLHL,
+	SWAPR8,
+	SWAPHL,
 };
