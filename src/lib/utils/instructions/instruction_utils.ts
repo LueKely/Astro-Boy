@@ -157,6 +157,39 @@ function validateBitFlagOperation(testBit: number, F: Cpu_Flag_Register) {
   F.setHFlag();
 }
 
+function validateBitShiftAccOperation(carryBit: number, F: Cpu_Flag_Register) {
+  if (carryBit == 1) {
+    F.setCYFlag();
+  } else {
+    F.clearCYFlag();
+  }
+
+  F.clearHFlag();
+  F.clearNFlag();
+  F.clearZFlag();
+}
+
+function validateBitShiftOperation(
+  carryBit: number,
+  result: number,
+  F: Cpu_Flag_Register
+) {
+  if (carryBit == 1) {
+    F.setCYFlag();
+  } else {
+    F.clearCYFlag();
+  }
+
+  if (result == 0) {
+    F.setZFlag();
+  } else {
+    F.clearZFlag();
+  }
+
+  F.clearHFlag();
+  F.clearNFlag();
+}
+
 export {
   validateR8Addition,
   validateR16Addition,
@@ -166,4 +199,6 @@ export {
   validateAndOperation,
   validateOrOperation,
   validateBitFlagOperation,
+  validateBitShiftAccOperation,
+  validateBitShiftOperation,
 };

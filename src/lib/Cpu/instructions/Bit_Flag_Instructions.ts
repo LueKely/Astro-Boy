@@ -1,4 +1,3 @@
-import { test } from "vitest";
 import type { Ram } from "../../Ram/Ram";
 import { validateBitFlagOperation } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
