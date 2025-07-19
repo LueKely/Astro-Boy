@@ -151,6 +151,45 @@ function SLAHL(HL: Cpu_Register_16Bit<'HL'>, ram: Ram, F: Cpu_Flag_Register) {
 	ram.setMemoryAt(HL.getRegister(), result);
 }
 
+// SRA, R8
+function SRAR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
+	const bit7 = r8.getRegister() & 0b1000_0000;
+	const bit0 = r8.getRegister() & 0b0000_0001;
+	const result = (r8.getRegister() >> 1) | bit7;
+
+	r8.setRegister(result);
+	validateBitShiftOperation(bit0, result, F);
+}
+
+// SRA, [HL]
+function SRAHL(HL: Cpu_Register_16Bit<'HL'>, ram: Ram, F: Cpu_Flag_Register) {
+	const bit7 = ram.getMemoryAt(HL.getRegister()) & 0b1000_0000;
+	const bit0 = ram.getMemoryAt(HL.getRegister()) & 0b0000_0001;
+	const result = (ram.getMemoryAt(HL.getRegister()) >> 1) | bit7;
+
+	validateBitShiftOperation(bit0, result, F);
+
+	ram.setMemoryAt(HL.getRegister(), result);
+}
+
+// SRL, R8
+function SRLR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
+	const bit0 = r8.getRegister() & 0b0000_0001;
+	const result = r8.getRegister() >> 1;
+
+	r8.setRegister(result);
+	validateBitShiftOperation(bit0, result, F);
+}
+
+// SRL, [HL]
+function SRLHL(HL: Cpu_Register_16Bit<'HL'>, ram: Ram, F: Cpu_Flag_Register) {
+	const bit0 = ram.getMemoryAt(HL.getRegister()) & 0b0000_0001;
+	const result = ram.getMemoryAt(HL.getRegister()) >> 1;
+	validateBitShiftOperation(bit0, result, F);
+
+	ram.setMemoryAt(HL.getRegister(), result);
+}
+
 export {
 	RLR8,
 	RLHL,
@@ -165,4 +204,6 @@ export {
 	RRCHL,
 	SLAR8,
 	SLAHL,
+	SRLR8,
+	SRLHL,
 };
