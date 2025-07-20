@@ -228,13 +228,22 @@ describe("RR R8", () => {
     expect(A.getRegister()).toBe(0b0000_0000);
     expect(F.getRegister()).toBe(0b1001_0000);
   });
-  test("value of register should be 0 CY and Z flag is raised ", () => {
+  test("value of register should be 129 CY and Z flag is raised ", () => {
     const testCPU = new TestCPU();
     const { A, F } = testCPU.cpu.register;
     A.setRegister(0b0000_0011);
     F.setCYFlag();
     RRR8(A, F);
     expect(A.getRegister()).toBe(0b1000_0001);
+    expect(F.getRegister()).toBe(0b0001_0000);
+  });
+  test("value of register should be 1, CY and Z flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0000_0011);
+
+    RRR8(A, F);
+    expect(A.getRegister()).toBe(0b0000_0001);
     expect(F.getRegister()).toBe(0b0001_0000);
   });
 });
