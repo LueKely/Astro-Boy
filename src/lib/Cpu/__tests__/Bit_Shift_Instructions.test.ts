@@ -378,3 +378,32 @@ describe("RRC [HL]", () => {
     expect(F.getRegister()).toBe(0b0001_0000);
   });
 });
+
+describe("RRC A", () => {
+  test("value of register should be 128, CY flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0000_0001);
+    RRCA(A, F);
+    expect(A.getRegister()).toBe(0b1000_0000);
+    expect(F.getRegister()).toBe(0b0001_0000);
+  });
+  test("value of register should be 129, CY flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0000_0011);
+    F.setCYFlag();
+    RRCA(A, F);
+    expect(A.getRegister()).toBe(0b1000_0001);
+    expect(F.getRegister()).toBe(0b0001_0000);
+  });
+  test("value of register should be 4, no flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0000_1000);
+
+    RRCA(A, F);
+    expect(A.getRegister()).toBe(0b0000_0100);
+    expect(F.getRegister()).toBe(0b0000_0000);
+  });
+});
