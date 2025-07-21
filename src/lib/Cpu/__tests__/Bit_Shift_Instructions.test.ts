@@ -16,6 +16,8 @@ import {
   RRR8,
   SLAHL,
   SLAR8,
+  SRAHL,
+  SRAR8,
 } from "../instructions/Bit_Shift_Logic_Instructions";
 
 class TestCPU {
@@ -469,5 +471,67 @@ describe("SLA HL", () => {
     SLAHL(HL, testCPU.ram, F);
     expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0010);
     expect(F.getRegister()).toBe(0b0001_0000);
+  });
+});
+
+describe("SRA R8", () => {
+  test("value of register should be 232, no flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0111_0100);
+    SRAR8(A, F);
+    expect(A.getRegister()).toBe(0b0011_1010);
+    expect(F.getRegister()).toBe(0b0000_0000);
+  });
+  test("value of register should be 74, CY flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b1010_0101);
+    SRAR8(A, F);
+    expect(A.getRegister()).toBe(0b1101_0010);
+    expect(F.getRegister()).toBe(0b0001_0000);
+  });
+  test("value of register should be 4, no flag is raised ", () => {
+    const testCPU = new TestCPU();
+    const { A, F } = testCPU.cpu.register;
+    A.setRegister(0b0000_0001);
+
+    SRAR8(A, F);
+    expect(A.getRegister()).toBe(0b0000_0000);
+    expect(F.getRegister()).toBe(0b1001_0000);
+  });
+});
+
+describe("SRA HL", () => {
+  test("Results Should be 116 and flag zero should raise", () => {
+    const testCPU = new TestCPU();
+    const { F } = testCPU.cpu.register;
+    const { HL } = testCPU.cpu.register16Bit;
+    testCPU.setHLPointTest(0b0111_0100);
+
+    SRAHL(HL, testCPU.ram, F);
+    expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0011_1010);
+    expect(F.getZFlag()).toBe(0);
+  });
+  test("the value of the register should be 0 and CYFlag is raised", () => {
+    const testCPU = new TestCPU();
+    const { F } = testCPU.cpu.register;
+    const { HL } = testCPU.cpu.register16Bit;
+    testCPU.setHLPointTest(0b1010_0101);
+
+    SRAHL(HL, testCPU.ram, F);
+    expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1101_0010);
+    expect(F.getRegister()).toBe(0b0001_0000);
+  });
+
+  test("the value of the register should be 129 and CYFlag is raised", () => {
+    const testCPU = new TestCPU();
+    const { F } = testCPU.cpu.register;
+    const { HL } = testCPU.cpu.register16Bit;
+    testCPU.setHLPointTest(0b0000_0001);
+
+    SRAHL(HL, testCPU.ram, F);
+    expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+    expect(F.getRegister()).toBe(0b1001_0000);
   });
 });

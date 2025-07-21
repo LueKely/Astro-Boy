@@ -7,7 +7,7 @@ import {
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 
-// RL, R8 - tested
+// RL, R8
 function RLR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
   const bit7 = r8.getRegister() >>> 7;
   const oldCarry = F.getCYFlag();
@@ -18,7 +18,7 @@ function RLR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
   r8.setRegister(result);
 }
 
-// RL, [HL] - tested
+// RL, [HL]
 function RLHL(HL: Cpu_Register_16Bit<"HL">, ram: Ram, F: Cpu_Flag_Register) {
   const bit7 = ram.getMemoryAt(HL.getRegister()) >>> 7;
   const oldCarry = F.getCYFlag();
