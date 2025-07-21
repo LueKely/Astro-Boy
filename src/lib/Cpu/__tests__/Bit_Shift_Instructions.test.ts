@@ -38,6 +38,11 @@ class TestCPU {
     this.ram.setMemoryAt(this.cpu.register16Bit.HL.getRegister(), value);
   }
 }
+// to future lue form past lue
+// you could've made all the [Hl] operations and non [HL]
+// operations seperately and made like a loop or something
+// less tedious from this
+// - past lue july 21
 
 describe("RL r8", () => {
   test("Results Should be zero and flag zero should raise", () => {
