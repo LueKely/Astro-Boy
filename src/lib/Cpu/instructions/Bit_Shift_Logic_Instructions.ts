@@ -202,6 +202,7 @@ function SWAPR8(r8: Cpu_Register<any>, F: Cpu_Flag_Register) {
   validateSwapOperation(result, F);
 }
 
+// SWAP, [HL]
 function SWAPHL(HL: Cpu_Register_16Bit<"HL">, ram: Ram, F: Cpu_Flag_Register) {
   const upperBit = (ram.getMemoryAt(HL.getRegister()) & 0b1111_0000) >> 4;
   const lowerBit = (ram.getMemoryAt(HL.getRegister()) & 0b0000_1111) << 4;
