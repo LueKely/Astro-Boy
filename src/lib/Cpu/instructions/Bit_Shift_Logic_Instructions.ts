@@ -224,6 +224,8 @@ export {
   RRCR8,
   RRCA,
   RRCHL,
+  SRAR8,
+  SRAHL,
   SLAR8,
   SLAHL,
   SRLR8,
