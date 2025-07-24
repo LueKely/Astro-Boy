@@ -36,8 +36,8 @@ export class CPU_Registers_Group {
 
   // NOTE: hmmm i might remove this and just make a object for PC and SP
   readonly pointers = {
-    PC: new Cpu_Pointer_Register(0),
-    SP: new Cpu_Pointer_Register(0),
+    PC: new Cpu_Pointer_Register<"SP">(0),
+    SP: new Cpu_Pointer_Register<"PC">(0),
   };
 
   readonly register16Bit = {

@@ -1,6 +1,9 @@
 // note not tested will test later
-export class Cpu_Pointer_Register {
+type PointerType = "SP" | "PC";
+
+export class Cpu_Pointer_Register<T extends PointerType> {
   #value: number;
+  private readonly __brand!: T;
 
   constructor(value: number) {
     this.#value = value;
@@ -13,5 +16,8 @@ export class Cpu_Pointer_Register {
   setRegister(value: number) {
     // sanitize value with and operand
     this.#value = value & 0xffff;
+  }
+  getBrand() {
+    return this.__brand;
   }
 }
