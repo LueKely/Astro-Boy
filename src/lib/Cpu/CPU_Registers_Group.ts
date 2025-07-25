@@ -46,4 +46,6 @@ export class CPU_Registers_Group {
     DE: new Cpu_Register_16Bit<"DE">(this.register.D, this.register.E),
     HL: new Cpu_Register_16Bit<"HL">(this.register.H, this.register.L),
   };
+
+  readonly opcodesInstruction = {};
 }
