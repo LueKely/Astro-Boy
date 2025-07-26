@@ -1,3 +1,4 @@
+import { Ram } from "../Ram/Ram";
 import { Cpu_Flag_Register } from "./CPU_Flag_Register";
 import { Cpu_Pointer_Register } from "./CPU_Pointer_Register";
 import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
@@ -34,11 +35,12 @@ export class CPU_Registers_Group {
     L: new Cpu_Register<"L">(0),
   };
 
-  // NOTE: hmmm i might remove this and just make a object for PC and SP
   readonly pointers = {
     PC: new Cpu_Pointer_Register<"SP">(0),
     SP: new Cpu_Pointer_Register<"PC">(0),
   };
+
+  readonly Ram = new Ram();
 
   readonly register16Bit = {
     AF: new Cpu_Register_16Bit<"AF">(this.register.A, this.register.F),
@@ -46,6 +48,4 @@ export class CPU_Registers_Group {
     DE: new Cpu_Register_16Bit<"DE">(this.register.D, this.register.E),
     HL: new Cpu_Register_16Bit<"HL">(this.register.H, this.register.L),
   };
-
-  readonly opcodesInstruction = {};
 }
