@@ -11,7 +11,7 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  **/
 function ADDHLSP(
   registerHL: Cpu_Register_16Bit<any>,
-  registerSP: Cpu_Pointer_Register,
+  registerSP: Cpu_Pointer_Register<"SP">,
   registerF: Cpu_Flag_Register
 ) {
   const sum = registerHL.getRegister() + registerSP.getRegister();
@@ -23,7 +23,7 @@ function ADDHLSP(
 // not sure about this will gather information about this
 function ADDSPE8(
   e8: number,
-  SP: Cpu_Pointer_Register,
+  SP: Cpu_Pointer_Register<"SP">,
   registerF: Cpu_Flag_Register
 ) {
   const sum = e8 + SP.getRegister();

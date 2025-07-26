@@ -4,7 +4,6 @@ export class MachineCycle {
   constructor() {
     this.totalCycles = 0;
   }
-
   tick() {
     this.totalCycles++;
   }
