@@ -8,7 +8,7 @@ import {
 } from "./instructions/8bit_Arithmetic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
-export function CpuOpcodeTable(CPU: CPU): Record<number, IOpCodeEntry> {
+export function CpuOpcodeRecord(CPU: CPU): Record<number, IOpCodeEntry> {
   const { registers: cpu, ram } = CPU;
 
   return {

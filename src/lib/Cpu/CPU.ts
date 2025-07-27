@@ -1,5 +1,5 @@
 import { Ram } from "../Ram/Ram";
-import { CpuOpcodeTable } from "./CPU_OpcodeTable";
+import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
 import { Cpu_Register_File } from "./CPU_Register_File";
 
 export class CPU {
@@ -8,7 +8,7 @@ export class CPU {
 
   private lowByte = 0;
   private highByte = 0;
-  private opCodes = CpuOpcodeTable(this);
+  private opCodes = CpuOpcodeRecord(this);
 
   readByte(pointer: number, cartridge: []) {
     return cartridge[pointer];

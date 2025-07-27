@@ -8,12 +8,7 @@ export class Cpu_Flag_Register extends Cpu_Register<"F"> {
 
   // 0000 0000
   //   #flag = { Z: 0, N: 0, H: 0, CY: 0 };
-
   //  bits 0-3 are not needed for used in the Flag
-
-  // note to lue
-  // this flag should only be handled by the instruction set
-  // not the actual class itself
 
   getZFlag() {
     const value = this.value & Cpu_Flag_Register.#zeroFlagPosition;

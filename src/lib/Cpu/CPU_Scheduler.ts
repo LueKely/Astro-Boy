@@ -1,1 +1,3 @@
-export class Cpu_Scheduler {}
+export class Cpu_Scheduler {
+  private queue = [];
+}

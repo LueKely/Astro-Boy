@@ -14,8 +14,6 @@ export class GameBoyCatridge {
   #CartDataToBytes: Uint8Array;
 
   /**
-   @private
-   @static
    @function ToHex this util function will just turn the decimal number into Hexadecimal
   **/
   static #ToHex(value: number) {
@@ -24,8 +22,6 @@ export class GameBoyCatridge {
 
   /**
    @function #ReadSubArray Another util function, this is primarily for making sense of the title address values
-   @private
-   @static
    @param {Uint8Array} arg - this is the values of the title addresses
    @returns A string from the decoded argument
 	 **/
@@ -36,8 +32,6 @@ export class GameBoyCatridge {
 
   /**
    @function #CipherAscii decodes the new license values into ascii characters
-   @private
-   @static
    @param {Uint8Array} args - this are the values of the 2 addresses of the new license
    @returns the combined ascii code
 	 **/
@@ -50,10 +44,8 @@ export class GameBoyCatridge {
   }
 
   /**
-   * @constructor
    * @param {ArrayBuffer}rawGame this is cartridge as an arraybuffer for this class to read
    **/
-
   constructor(rawGame: ArrayBuffer) {
     this.#rawGame = rawGame;
     this.#CartData = new DataView(this.#rawGame);
@@ -65,63 +57,63 @@ export class GameBoyCatridge {
 	  **/
   getCartridgeHeaderRaw() {
     const cartridgeType = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.cartridgeType[0],
+      CartHeaderAdress.Adresses.cartridgeType[0]
     );
 
     const cartridgeRomSize = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.romSize[0],
+      CartHeaderAdress.Adresses.romSize[0]
     );
 
     const cartridgeRamSize = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.ramSize[0],
+      CartHeaderAdress.Adresses.ramSize[0]
     );
 
     const cartridgeCgbFlag = this.#CartData.getUint8(0x143);
 
     const cartridgeDestinationCode = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.destinationCode[0],
+      CartHeaderAdress.Adresses.destinationCode[0]
     );
 
     const cartridgeOldLicenseeCode = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.oldLicenseeCode[0],
+      CartHeaderAdress.Adresses.oldLicenseeCode[0]
     );
 
     const cartridgeMaskRomVersionNumber = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.maskRomVersionNumber[0],
+      CartHeaderAdress.Adresses.maskRomVersionNumber[0]
     );
 
     const cartridgeCheckSum = this.#CartData.getUint8(
-      CartHeaderAdress.Adresses.headerCheckSum[0],
+      CartHeaderAdress.Adresses.headerCheckSum[0]
     );
 
     const cartridgeTitle = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.gameTitle[0],
-      CartHeaderAdress.Adresses.gameTitle[1] + 0x01,
+      CartHeaderAdress.Adresses.gameTitle[1] + 0x01
     );
     // please dont sue me
     const nintendoLogo = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.nintendoLogo[0],
-      CartHeaderAdress.Adresses.nintendoLogo[1],
+      CartHeaderAdress.Adresses.nintendoLogo[1]
     );
 
     const entryPoint = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.entry[0],
-      CartHeaderAdress.Adresses.entry[1] + 0x01,
+      CartHeaderAdress.Adresses.entry[1] + 0x01
     );
 
     const newLicenseeCode = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.newLicenseeCode[0],
-      CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01,
+      CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01
     );
     // as pandev implies, the manufacturer code has no know purpose
     const manufactureCode = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.manufactureCode[0],
-      CartHeaderAdress.Adresses.manufactureCode[1] + 0x01,
+      CartHeaderAdress.Adresses.manufactureCode[1] + 0x01
     );
     // pandev says this isn't supported
     const globalCheckSum = this.#CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.globalCheckSum[0],
-      CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01,
+      CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01
     );
 
     return {
@@ -133,7 +125,7 @@ export class GameBoyCatridge {
       destinationCode: GameBoyCatridge.#ToHex(cartridgeDestinationCode),
       oldLicenseeCode: GameBoyCatridge.#ToHex(cartridgeOldLicenseeCode),
       maskRomVersionNumber: GameBoyCatridge.#ToHex(
-        cartridgeMaskRomVersionNumber,
+        cartridgeMaskRomVersionNumber
       ),
       checkSum: GameBoyCatridge.#ToHex(cartridgeCheckSum),
       title: cartridgeTitle,
@@ -163,14 +155,14 @@ export class GameBoyCatridge {
       romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
       ramSize: CartHeaderAdress.RamSize.get(Number(header.ramSize)),
       destination: CartHeaderAdress.DestinationCode.get(
-        Number(header.destinationCode),
+        Number(header.destinationCode)
       ),
       title: GameBoyCatridge.#ReadSubArray(header.title),
       oldLicenseeCode: CartHeaderAdress.OldLicenseeCode.get(
-        Number("0x" + header.oldLicenseeCode),
+        Number("0x" + header.oldLicenseeCode)
       ),
       newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
-        GameBoyCatridge.#CipherAscii(header.newLicenseeCode),
+        GameBoyCatridge.#CipherAscii(header.newLicenseeCode)
       ),
       cgbFlag:
         CartHeaderAdress.CgbFlag.get(Number(header.cgbFlag)) ||
