@@ -1,1 +1,1 @@
-export class CPU_Scheduler {}
+export class Cpu_Scheduler {}

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "vitest";
-import { CPU_Registers_Group } from "../CPU_Registers_Group";
+import { Cpu_Register_File } from "../CPU_Register_File";
 
-const Register = new CPU_Registers_Group();
+const Register = new Cpu_Register_File();
 
 describe("Read and Write inside the registers", () => {
   test.each([

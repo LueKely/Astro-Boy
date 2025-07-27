@@ -17,13 +17,7 @@ import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
  * |----------------|
  */
 
-export class CPU_Registers_Group {
-  /**
-   * @description
-   *  These are the Registers that our gameboy cpu will use.
-   *	These 8bit Registers we can also combine into 16bit
-   *  using bitshifting and other bitwise operations
-   **/
+export class Cpu_Register_File {
   readonly register = {
     A: new Cpu_Register<"A">(0),
     B: new Cpu_Register<"B">(0),
@@ -39,8 +33,6 @@ export class CPU_Registers_Group {
     PC: new Cpu_Pointer_Register<"SP">(0),
     SP: new Cpu_Pointer_Register<"PC">(0),
   };
-
-  readonly Ram = new Ram();
 
   readonly register16Bit = {
     AF: new Cpu_Register_16Bit<"AF">(this.register.A, this.register.F),

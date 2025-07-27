@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { CPU_Registers_Group } from "../CPU_Registers_Group";
+import { Cpu_Register_File } from "../CPU_Register_File";
 import {
   ADDHLR16,
   DECR16,
@@ -8,7 +8,7 @@ import {
 
 describe("ADD HL, R16 Functionalities", () => {
   test("The sum of the opearation should be 2_082 and no flags should be raised", () => {
-    const CPU = new CPU_Registers_Group();
+    const CPU = new Cpu_Register_File();
     const r16 = 1_041;
 
     CPU.register16Bit.HL.setRegister(1_041);
@@ -22,7 +22,7 @@ describe("ADD HL, R16 Functionalities", () => {
   });
 
   test("Sum should be 4_096 and should raise the HF Flag", () => {
-    const CPU = new CPU_Registers_Group();
+    const CPU = new Cpu_Register_File();
     const r16 = 0xfff;
 
     CPU.register16Bit.HL.setRegister(1);
@@ -36,7 +36,7 @@ describe("ADD HL, R16 Functionalities", () => {
   });
 
   test("Sum of the opperation should raise both the HF and CY flag", () => {
-    const CPU = new CPU_Registers_Group();
+    const CPU = new Cpu_Register_File();
     const r16 = 0xffff;
 
     CPU.register16Bit.HL.setRegister(1);
@@ -52,7 +52,7 @@ describe("ADD HL, R16 Functionalities", () => {
 
 describe("INC r16 functionalities", () => {
   test("The value of r16 should increment to 1", () => {
-    const CPU = new CPU_Registers_Group();
+    const CPU = new Cpu_Register_File();
 
     const { BC } = CPU.register16Bit;
     BC.setRegister(0b0001_0000_0000_0000);
@@ -62,7 +62,7 @@ describe("INC r16 functionalities", () => {
 });
 describe("DEC r16 functionalities", () => {
   test("The value of r16 should decrement to 1", () => {
-    const CPU = new CPU_Registers_Group();
+    const CPU = new Cpu_Register_File();
 
     const { BC } = CPU.register16Bit;
     BC.setRegister(0b0001_0000_0000_0001);

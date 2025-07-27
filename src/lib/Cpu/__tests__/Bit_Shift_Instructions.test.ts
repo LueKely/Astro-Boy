@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { CPU_Registers_Group } from "../CPU_Registers_Group";
+import { Cpu_Register_File } from "../CPU_Register_File";
 import { Ram } from "../../Ram/Ram";
 import {
   RLA,
@@ -30,7 +30,7 @@ class TestCPU {
 
   constructor() {
     this.ram = new Ram();
-    this.cpu = new CPU_Registers_Group();
+    this.cpu = new Cpu_Register_File();
   }
 
   setHLPointTest(value: number) {
