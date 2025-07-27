@@ -23,7 +23,23 @@ export function CpuOpcodeRecord(CPU: CPU): Record<number, IOpCodeEntry> {
         },
       ],
     },
-    //  comment theres
+    0x34: {
+      name: "INC HL",
+      cycles: 3,
+      length: 1,
+      jobs: [
+        // M2
+        () => {
+          // read thing
+        },
+        // M3
+        () => {
+          INCHL(cpu.register16Bit.HL, ram, cpu.register.F);
+        },
+        // M4/M1
+        () => {},
+      ],
+    },
   };
 }
 //     0x5: {
