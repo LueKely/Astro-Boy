@@ -1,40 +1,18 @@
 import { CartHeaderAdress } from "./types/Catridge_Address_Reader";
-// tonight will infer what these ascii code mean
-/**
- * @module GameBoyCatridge
- * @description
- * This Class takes the raw Arraybuffer input from the input type
- * file and uses the CartHeaderAdress and reads mostly the CartHeader
- * of the inputted room and returns either the raw values or the interpretted values
- **/
 
 export class GameBoyCatridge {
   #rawGame: ArrayBuffer;
   #CartData: DataView;
-  #CartDataToBytes: Uint8Array;
+  CartDataToBytes: Uint8Array;
 
-  /**
-   @function ToHex this util function will just turn the decimal number into Hexadecimal
-  **/
   static #ToHex(value: number) {
     return value.toString(16);
   }
 
-  /**
-   @function #ReadSubArray Another util function, this is primarily for making sense of the title address values
-   @param {Uint8Array} arg - this is the values of the title addresses
-   @returns A string from the decoded argument
-	 **/
   static #ReadSubArray(arg: Uint8Array) {
     const textDecoder = new TextDecoder();
     return textDecoder.decode(arg);
   }
-
-  /**
-   @function #CipherAscii decodes the new license values into ascii characters
-   @param {Uint8Array} args - this are the values of the 2 addresses of the new license
-   @returns the combined ascii code
-	 **/
 
   static #CipherAscii(args: Uint8Array<ArrayBufferLike>) {
     const a = String.fromCharCode(args[0]);
@@ -43,18 +21,12 @@ export class GameBoyCatridge {
     return a + b;
   }
 
-  /**
-   * @param {ArrayBuffer}rawGame this is cartridge as an arraybuffer for this class to read
-   **/
   constructor(rawGame: ArrayBuffer) {
     this.#rawGame = rawGame;
     this.#CartData = new DataView(this.#rawGame);
-    this.#CartDataToBytes = new Uint8Array(this.#CartData.buffer);
+    this.CartDataToBytes = new Uint8Array(this.#CartData.buffer);
   }
 
-  /**
-	 @returns the raw and sliced up version of the values from the CartData
-	  **/
   getCartridgeHeaderRaw() {
     const cartridgeType = this.#CartData.getUint8(
       CartHeaderAdress.Adresses.cartridgeType[0]
@@ -86,32 +58,32 @@ export class GameBoyCatridge {
       CartHeaderAdress.Adresses.headerCheckSum[0]
     );
 
-    const cartridgeTitle = this.#CartDataToBytes.subarray(
+    const cartridgeTitle = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.gameTitle[0],
       CartHeaderAdress.Adresses.gameTitle[1] + 0x01
     );
     // please dont sue me
-    const nintendoLogo = this.#CartDataToBytes.subarray(
+    const nintendoLogo = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.nintendoLogo[0],
       CartHeaderAdress.Adresses.nintendoLogo[1]
     );
 
-    const entryPoint = this.#CartDataToBytes.subarray(
+    const entryPoint = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.entry[0],
       CartHeaderAdress.Adresses.entry[1] + 0x01
     );
 
-    const newLicenseeCode = this.#CartDataToBytes.subarray(
+    const newLicenseeCode = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.newLicenseeCode[0],
       CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01
     );
     // as pandev implies, the manufacturer code has no know purpose
-    const manufactureCode = this.#CartDataToBytes.subarray(
+    const manufactureCode = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.manufactureCode[0],
       CartHeaderAdress.Adresses.manufactureCode[1] + 0x01
     );
     // pandev says this isn't supported
-    const globalCheckSum = this.#CartDataToBytes.subarray(
+    const globalCheckSum = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.globalCheckSum[0],
       CartHeaderAdress.Adresses.globalCheckSum[1] + 0x01
     );
@@ -138,9 +110,6 @@ export class GameBoyCatridge {
     };
   }
 
-  /**
-	 @returns an interpreted version of the values from the CartData
-	  **/
   inferCartridgeHeader() {
     const header = this.getCartridgeHeaderRaw();
     const {
@@ -185,17 +154,14 @@ export class GameBoyCatridge {
  *
  * AUTHOR'S NOTE: Ofcourse I will not implement a lock system
  * if the check sum failed
- @returns  a boolean if the checkSum and the currentSum matched values
  **/
   checkSum() {
     const { checkSum } = this.getCartridgeHeaderRaw();
     let currentSum = 0;
     for (let i = 0x0134; i <= 0x014c; i++) {
-      currentSum = (currentSum - this.#CartDataToBytes[i] - 1) & 0xff;
+      currentSum = (currentSum - this.CartDataToBytes[i] - 1) & 0xff;
     }
 
     return checkSum === currentSum.toString(16);
   }
-
-  // eg.
 }

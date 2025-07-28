@@ -1,5 +1,5 @@
 import { Ram } from "../Ram/Ram";
-import type { CPU } from "./CPU";
+import type { Gameboy } from "../Gameboy";
 import type { Cpu_Register_File } from "./CPU_Register_File";
 import {
   DECR8,
@@ -8,8 +8,10 @@ import {
 } from "./instructions/8bit_Arithmetic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
-export function CpuOpcodeRecord(CPU: CPU): Record<number, IOpCodeEntry> {
-  const { registers: cpu, ram } = CPU;
+export function CpuOpcodeRecord(
+  gameboy: Gameboy
+): Record<number, IOpCodeEntry> {
+  const { registers: cpu, ram } = gameboy;
 
   return {
     // ALU STUFF

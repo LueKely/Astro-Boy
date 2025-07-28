@@ -1,6 +1,6 @@
-import type { CPU } from './CPU';
-import { CpuOpcodeRecord } from './CPU_Opcode_Record';
-import type { IOpCodeEntry } from './types/Opcode';
+import type { Gameboy } from "../Gameboy";
+import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
+import type { IOpCodeEntry } from "./types/Opcode";
 
 // dear viewer
 // i lue, made an attempt to make a working scheduler
@@ -10,36 +10,36 @@ import type { IOpCodeEntry } from './types/Opcode';
 // hopefully it'll all be bebetter soon lol
 
 export class Cpu_Scheduler {
-	private queue = [];
-	private lowByte = 0;
-	private highByte = 0;
-	private cpu: CPU;
-	private opCodes: Record<number, IOpCodeEntry>;
+  private queue = [];
+  private lowByte = 0;
+  private highByte = 0;
+  private dmg: Gameboy;
+  private opCodes: Record<number, IOpCodeEntry>;
 
-	constructor(CPU: CPU) {
-		this.cpu = CPU;
-		this.opCodes = CpuOpcodeRecord(this.cpu);
-	}
+  constructor(gameboy: Gameboy) {
+    this.dmg = gameboy;
+    this.opCodes = CpuOpcodeRecord(this.dmg);
+  }
 
-	private readByte(pointer: number, cartridge: []) {
-		return cartridge[pointer];
-	}
+  private readByte(pointer: number) {
+    return this.dmg.cartridge.CartDataToBytes[pointer];
+  }
 
-	setLowByte(value: number) {
-		this.lowByte = value & 0b0000_0011;
-	}
+  setLowByte(value: number) {
+    this.lowByte = value & 0b0000_0011;
+  }
 
-	setHighByte(value: number) {
-		this.highByte = (value & 0b0000_1100) >> 2;
-	}
+  setHighByte(value: number) {
+    this.highByte = (value & 0b0000_1100) >> 2;
+  }
 
-	getLowByte() {
-		return this.lowByte;
-	}
+  getLowByte() {
+    return this.lowByte;
+  }
 
-	getHighByte() {
-		return this.highByte;
-	}
+  getHighByte() {
+    return this.highByte;
+  }
 
-	tick() {}
+  tick() {}
 }

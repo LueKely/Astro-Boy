@@ -30,8 +30,8 @@ export class Cpu_Register_File {
   };
 
   readonly pointers = {
-    PC: new Cpu_Pointer_Register<"SP">(0),
-    SP: new Cpu_Pointer_Register<"PC">(0),
+    PC: new Cpu_Pointer_Register<"SP">(0x0100),
+    SP: new Cpu_Pointer_Register<"PC">(0xffee),
   };
 
   readonly register16Bit = {
