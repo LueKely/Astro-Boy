@@ -15,6 +15,17 @@ export function CpuOpcodeRecord(
 
   return {
     // ALU STUFF
+    0x0: {
+      name: "NOP",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        // M1
+        () => {
+          cpu.pointers.SP.setRegister(cpu.pointers.PC.getRegister() + 1);
+        },
+      ],
+    },
     0x4: {
       name: "INC B",
       cycles: 1,
@@ -22,6 +33,7 @@ export function CpuOpcodeRecord(
       jobs: [
         () => {
           INCR8(cpu.register.B, cpu.register.F);
+          cpu.pointers.SP.setRegister(cpu.pointers.PC.getRegister() + 1);
         },
       ],
     },
@@ -30,10 +42,6 @@ export function CpuOpcodeRecord(
       cycles: 3,
       length: 1,
       jobs: [
-        // M2
-        () => {
-          // read thing
-        },
         // M3
         () => {
           INCHL(cpu.register16Bit.HL, ram, cpu.register.F);

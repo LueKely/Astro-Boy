@@ -17,12 +17,14 @@ import background from "../assets/background.svg";
 
   input?.addEventListener("change", async (e) => {
     if (!output) throw new Error("Output element missing");
-    const game = await loadFile(e);
 
+    const game = await loadFile(e);
     const gameboy = new Gameboy(game);
 
     console.log(gameboy.cartridge.getCartridgeHeaderRaw());
     console.log(gameboy.cartridge.inferCartridgeHeader());
+    gameboy.run();
+
     gameboy.cartridge.checkSum();
     output.innerText = "Game Loaded";
   });

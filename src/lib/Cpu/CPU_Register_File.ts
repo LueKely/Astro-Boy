@@ -30,8 +30,8 @@ export class Cpu_Register_File {
   };
 
   readonly pointers = {
-    PC: new Cpu_Pointer_Register<"SP">(0x0100),
-    SP: new Cpu_Pointer_Register<"PC">(0xffee),
+    PC: new Cpu_Pointer_Register<"PC">(0x0100),
+    SP: new Cpu_Pointer_Register<"SP">(0xffee),
   };
 
   readonly register16Bit = {
@@ -40,4 +40,23 @@ export class Cpu_Register_File {
     DE: new Cpu_Register_16Bit<"DE">(this.register.D, this.register.E),
     HL: new Cpu_Register_16Bit<"HL">(this.register.H, this.register.L),
   };
+
+  private lowByte = 0;
+  private highByte = 0;
+
+  setLowByte(value: number) {
+    this.lowByte = value & 0b0000_0011;
+  }
+
+  setHighByte(value: number) {
+    this.highByte = (value & 0b0000_1100) >> 2;
+  }
+
+  getLowByte() {
+    return this.lowByte;
+  }
+
+  getHighByte() {
+    return this.highByte;
+  }
 }

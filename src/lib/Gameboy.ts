@@ -12,4 +12,8 @@ export class Gameboy {
   constructor(game: ArrayBuffer) {
     this.cartridge = new GameBoyCatridge(game);
   }
+
+  run() {
+    this.scheduler.tick();
+  }
 }

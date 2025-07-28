@@ -2,44 +2,43 @@ import type { Gameboy } from "../Gameboy";
 import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
 import type { IOpCodeEntry } from "./types/Opcode";
 
-// dear viewer
-// i lue, made an attempt to make a working scheduler
-// for the machine cycle of this bad boy
-// tho due to nature of how my opcodes work
-// some of the machine cycles will be just logs i guess
-// hopefully it'll all be bebetter soon lol
-
 export class Cpu_Scheduler {
-  private queue = [];
-  private lowByte = 0;
-  private highByte = 0;
   private dmg: Gameboy;
+  private machineCycle: Array<() => void> = [];
   private opCodes: Record<number, IOpCodeEntry>;
+  currentOpcode!: IOpCodeEntry;
 
   constructor(gameboy: Gameboy) {
     this.dmg = gameboy;
     this.opCodes = CpuOpcodeRecord(this.dmg);
+    this.currentOpcode = this.opCodes[this.readByte()];
   }
 
-  private readByte(pointer: number) {
-    return this.dmg.cartridge.CartDataToBytes[pointer];
+  private readByte() {
+    // this will always point to 0x0100
+    return this.dmg.cartridge.CartDataToBytes[
+      this.dmg.registers.pointers.PC.getRegister()
+    ];
   }
 
-  setLowByte(value: number) {
-    this.lowByte = value & 0b0000_0011;
+  schedule() {
+    this.currentOpcode.jobs.forEach((entry, index) => {
+      // check if this is the last
+      if (this.currentOpcode.cycles == index + 1) {
+        this.machineCycle.push(entry);
+        this.currentOpcode = this.opCodes[this.readByte()];
+      } else {
+        this.machineCycle.push(entry);
+      }
+    });
   }
 
-  setHighByte(value: number) {
-    this.highByte = (value & 0b0000_1100) >> 2;
+  tick() {
+    if (this.machineCycle.length > 0) {
+      const job = this.machineCycle.shift();
+      if (job) {
+        job();
+      }
+    }
   }
-
-  getLowByte() {
-    return this.lowByte;
-  }
-
-  getHighByte() {
-    return this.highByte;
-  }
-
-  tick() {}
 }
