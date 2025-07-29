@@ -22,7 +22,10 @@ export function CpuOpcodeRecord(
       jobs: [
         // M1
         () => {
-          cpu.pointers.SP.setRegister(cpu.pointers.PC.getRegister() + 1);
+          console.log("NOP");
+
+          cpu.pointers.PC.setRegister(cpu.pointers.PC.getRegister() + 1);
+          console.log("after NOP", cpu.pointers.PC.getRegister());
         },
       ],
     },
@@ -33,7 +36,7 @@ export function CpuOpcodeRecord(
       jobs: [
         () => {
           INCR8(cpu.register.B, cpu.register.F);
-          cpu.pointers.SP.setRegister(cpu.pointers.PC.getRegister() + 1);
+          cpu.pointers.PC.setRegister(cpu.pointers.PC.getRegister() + 1);
         },
       ],
     },

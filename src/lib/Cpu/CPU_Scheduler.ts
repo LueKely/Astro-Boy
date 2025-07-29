@@ -21,12 +21,18 @@ export class Cpu_Scheduler {
     ];
   }
 
-  schedule() {
+  private schedule() {
+    console.log("current operation", this.opCodes[this.readByte()]);
+
     this.currentOpcode.jobs.forEach((entry, index) => {
       // check if this is the last
       if (this.currentOpcode.cycles == index + 1) {
         this.machineCycle.push(entry);
         this.currentOpcode = this.opCodes[this.readByte()];
+        console.log(
+          "next operation",
+          this.dmg.registers.pointers.PC.getRegister()
+        );
       } else {
         this.machineCycle.push(entry);
       }
@@ -34,11 +40,14 @@ export class Cpu_Scheduler {
   }
 
   tick() {
-    if (this.machineCycle.length > 0) {
-      const job = this.machineCycle.shift();
-      if (job) {
-        job();
-      }
+    if (this.machineCycle.length == 0) {
+      this.schedule();
+    }
+
+    const job = this.machineCycle.shift();
+    if (job) {
+      console.log("TICK!");
+      job();
     }
   }
 }
