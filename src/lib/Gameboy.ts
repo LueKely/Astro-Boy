@@ -18,6 +18,5 @@ export class Gameboy {
 
   run() {
     this.scheduler.tick();
-    this.scheduler.tick();
   }
 }

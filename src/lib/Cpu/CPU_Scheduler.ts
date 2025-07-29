@@ -2,6 +2,14 @@ import type { Gameboy } from "../Gameboy";
 import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
 import type { IOpCodeEntry } from "./types/Opcode";
 
+// TODO:
+// Interupt Handling
+// HALT Opcode Support
+// Memory bus?
+// OMA DMA
+// tracking
+// Error Handling
+
 export class Cpu_Scheduler {
   private dmg: Gameboy;
   private machineCycle: Array<(dmg: Gameboy) => void> = [];
@@ -40,7 +48,6 @@ export class Cpu_Scheduler {
 
     const job = this.machineCycle.shift();
     if (job) {
-      console.log("TICK!");
       job(this.dmg);
     }
   }
