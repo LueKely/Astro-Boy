@@ -23,3 +23,9 @@ export class Cpu_Pointer_Register<T extends PointerType> {
     return this.__brand;
   }
 }
+
+export class Program_Counter_Register extends Cpu_Pointer_Register<"PC"> {
+  increment() {
+    this.setRegister(this.getRegister() + 1);
+  }
+}

@@ -1,6 +1,4 @@
-import { Ram } from "../Ram/Ram";
 import type { Gameboy } from "../Gameboy";
-import type { Cpu_Register_File } from "./CPU_Register_File";
 import {
   DECR8,
   INCHL,
@@ -9,6 +7,12 @@ import {
 import type { IOpCodeEntry } from "./types/Opcode";
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
+  function incrementPC(dmg: Gameboy) {
+    dmg.registers.pointers.PC.setRegister(
+      dmg.registers.pointers.PC.getRegister() + 1
+    );
+  }
+
   return {
     // ALU STUFF
     0x0: {
@@ -18,10 +22,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         // M1
         (dmg: Gameboy) => {
-          console.log("NOP");
-          dmg.registers.pointers.PC.setRegister(
-            dmg.registers.pointers.PC.getRegister() + 1
-          );
+          dmg.registers.pointers.PC.increment();
         },
       ],
     },
@@ -32,9 +33,43 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           INCR8(dmg.registers.register.B, dmg.registers.register.F);
-          dmg.registers.pointers.PC.setRegister(
-            dmg.registers.pointers.PC.getRegister() + 1
-          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x5: {
+      name: "DEC B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.B, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+
+    0x14: {
+      name: "INC D",
+      cycles: 1,
+      length: 1,
+
+      jobs: [
+        (dmg: Gameboy) => {
+          INCR8(dmg.registers.register.D, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x15: {
+      name: "DEC D",
+      cycles: 1,
+      length: 1,
+
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.D, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
         },
       ],
     },
@@ -50,6 +85,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.ram,
             dmg.registers.register.F
           );
+          dmg.registers.pointers.PC.increment();
         },
         // M4/M1
         () => {},
@@ -58,39 +94,6 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
   };
 }
 
-//     0x5: {
-//       name: "DEC B",
-//       cycles: 1,
-//       length: 1,
-
-//       jobs: [
-//         () => {
-//           DECR8(cpu.register.B, cpu.register.F);
-//         },
-//       ],
-//     },
-//     0x14: {
-//       name: "INC D",
-//       cycles: 1,
-//       length: 1,
-
-//       jobs: [
-//         () => {
-//           INCR8(cpu.register.D, cpu.register.F);
-//         },
-//       ],
-//     },
-//     0x15: {
-//       name: "DEC D",
-//       cycles: 1,
-//       length: 1,
-
-//       jobs: [
-//         () => {
-//           DECR8(cpu.register.D, cpu.register.F);
-//         },
-//       ],
-//     },
 //     0x24: {
 //       name: "INC H",
 //       cycles: 1,

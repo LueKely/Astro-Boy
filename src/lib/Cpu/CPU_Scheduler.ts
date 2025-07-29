@@ -6,7 +6,7 @@ import type { IOpCodeEntry } from "./types/Opcode";
 // Interupt Handling
 // HALT Opcode Support
 // Memory bus?
-// OMA DMA
+// OMA DMA?
 // tracking
 // Error Handling
 
