@@ -4,15 +4,10 @@ import {
   INCHL,
   INCR8,
 } from "./instructions/8bit_Arithmetic_Instructions";
+import { CPL } from "./instructions/Bitwise_Logic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
-  function incrementPC(dmg: Gameboy) {
-    dmg.registers.pointers.PC.setRegister(
-      dmg.registers.pointers.PC.getRegister() + 1
-    );
-  }
-
   return {
     // ALU STUFF
     0x0: {
@@ -73,58 +68,116 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
         },
       ],
     },
-    0x34: {
-      name: "INC HL",
-      cycles: 3,
+
+    0x0c: {
+      name: "INC C",
+      cycles: 1,
       length: 1,
       jobs: [
-        // M3
         (dmg: Gameboy) => {
-          INCHL(
-            dmg.registers.register16Bit.HL,
-            dmg.ram,
-            dmg.registers.register.F
-          );
+          INCR8(dmg.registers.register.C, dmg.registers.register.F);
           dmg.registers.pointers.PC.increment();
         },
-        // M4/M1
-        () => {},
       ],
     },
+    0x0d: {
+      name: "DEC C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.C, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x1c: {
+      name: "INC E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          INCR8(dmg.registers.register.E, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x1d: {
+      name: "DEC E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.E, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x2c: {
+      name: "INC L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          INCR8(dmg.registers.register.L, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x2d: {
+      name: "DEC L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.L, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x3c: {
+      name: "INC A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          INCR8(dmg.registers.register.A, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x3d: {
+      name: "DEC A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          DECR8(dmg.registers.register.A, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x2f: {
+      name: "CPL",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          CPL(dmg.registers.register.A, dmg.registers.register.F);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    // 0x3f: {
+    //   name: "CCF",
+    //   cycles: 1,
+    //   length: 1,
+    //   jobs: [
+    //     (dmg: Gameboy) => {
+    //       CCF(dmg.registers.register.A, dmg.registers.register.F);
+    //       dmg.registers.pointers.PC.increment();
+    //     },
+    //   ],
+    // },
   };
 }
-
-//     0x24: {
-//       name: "INC H",
-//       cycles: 1,
-//       length: 1,
-
-//       jobs: [
-//         () => {
-//           INCR8(cpu.register.H, cpu.register.F);
-//         },
-//       ],
-//     },
-//     0x25: {
-//       name: "DEC H",
-//       cycles: 1,
-//       length: 1,
-
-//       jobs: [
-//         () => {
-//           DECR8(cpu.register.H, cpu.register.F);
-//         },
-//       ],
-//     },
-//     0x34: {
-//       name: "INC HL",
-//       cycles: 3,
-//       length: 1,
-//       jobs: [
-//         () => {
-//           INCHL(cpu.register16Bit.HL, ram, cpu.register.F);
-//         },
-//       ],
-//     },
-//   };
-// }
