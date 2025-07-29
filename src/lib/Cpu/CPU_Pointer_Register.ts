@@ -10,6 +10,8 @@ export class Cpu_Pointer_Register<T extends PointerType> {
   }
 
   getRegister() {
+    console.log(this.#value);
+
     return this.#value;
   }
 

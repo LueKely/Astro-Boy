@@ -8,11 +8,7 @@ import {
 } from "./instructions/8bit_Arithmetic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
-export function CpuOpcodeRecord(
-  gameboy: Gameboy
-): Record<number, IOpCodeEntry> {
-  const { registers: cpu, ram } = gameboy;
-
+export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
   return {
     // ALU STUFF
     0x0: {
@@ -21,11 +17,11 @@ export function CpuOpcodeRecord(
       length: 1,
       jobs: [
         // M1
-        () => {
+        (dmg: Gameboy) => {
           console.log("NOP");
-
-          cpu.pointers.PC.setRegister(cpu.pointers.PC.getRegister() + 1);
-          console.log("after NOP", cpu.pointers.PC.getRegister());
+          dmg.registers.pointers.PC.setRegister(
+            dmg.registers.pointers.PC.getRegister() + 1
+          );
         },
       ],
     },
@@ -34,9 +30,11 @@ export function CpuOpcodeRecord(
       cycles: 1,
       length: 1,
       jobs: [
-        () => {
-          INCR8(cpu.register.B, cpu.register.F);
-          cpu.pointers.PC.setRegister(cpu.pointers.PC.getRegister() + 1);
+        (dmg: Gameboy) => {
+          INCR8(dmg.registers.register.B, dmg.registers.register.F);
+          dmg.registers.pointers.PC.setRegister(
+            dmg.registers.pointers.PC.getRegister() + 1
+          );
         },
       ],
     },
@@ -46,8 +44,12 @@ export function CpuOpcodeRecord(
       length: 1,
       jobs: [
         // M3
-        () => {
-          INCHL(cpu.register16Bit.HL, ram, cpu.register.F);
+        (dmg: Gameboy) => {
+          INCHL(
+            dmg.registers.register16Bit.HL,
+            dmg.ram,
+            dmg.registers.register.F
+          );
         },
         // M4/M1
         () => {},
@@ -55,6 +57,7 @@ export function CpuOpcodeRecord(
     },
   };
 }
+
 //     0x5: {
 //       name: "DEC B",
 //       cycles: 1,

@@ -77,7 +77,7 @@ export class GameBoyCatridge {
       CartHeaderAdress.Adresses.newLicenseeCode[0],
       CartHeaderAdress.Adresses.newLicenseeCode[1] + 0x01
     );
-    // as pandev implies, the manufacturer code has no know purpose
+    // as pandev implies, the manufacturer code has no known purpose
     const manufactureCode = this.CartDataToBytes.subarray(
       CartHeaderAdress.Adresses.manufactureCode[0],
       CartHeaderAdress.Adresses.manufactureCode[1] + 0x01
@@ -145,16 +145,11 @@ export class GameBoyCatridge {
     };
   }
 
-  /**
-  @description
- * CheckSum is an operation inside the gameboy
- * to check if the checkSum Adress value is correct.
- * The gameboy will read the cartridge headers and see if the
- * checkSum is correct if not it will lock the game and will not run the rom
- *
- * AUTHOR'S NOTE: Ofcourse I will not implement a lock system
- * if the check sum failed
- **/
+  /*
+  DRM
+  AUTHOR'S NOTE: Ofcourse I will not implement a lock system
+  if the check sum failed
+  */
   checkSum() {
     const { checkSum } = this.getCartridgeHeaderRaw();
     let currentSum = 0;
