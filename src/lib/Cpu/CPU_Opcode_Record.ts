@@ -4,6 +4,8 @@ import {
 	ADCAR8,
 	ADDAHL,
 	ADDAR8,
+	CPAHL,
+	CPAR8,
 	DECHL,
 	DECR8,
 	INCHL,
@@ -1045,7 +1047,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			length: 1,
 			jobs: [
 				(dmg: Gameboy) => {
-					XORAR8(
+					ORAR8(
 						dmg.registers.register.A,
 						dmg.registers.register.D,
 						dmg.registers.register.F
@@ -1122,6 +1124,127 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			jobs: [
 				(dmg: Gameboy) => {
 					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb8: {
+			name: 'CP B',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.B,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb9: {
+			name: 'CP C',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.C,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xba: {
+			name: 'CP D',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.D,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xbb: {
+			name: 'CP E',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.E,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xbc: {
+			name: 'CP H',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.H,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xbd: {
+			name: 'CP L',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
+						dmg.registers.register.D,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xbe: {
+			name: 'CP [HL]',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAHL(
+						dmg.ram,
+						dmg.registers.register.A,
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xbf: {
+			name: 'CP A',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					CPAR8(
 						dmg.registers.register.A,
 						dmg.registers.register.A,
 						dmg.registers.register.F
