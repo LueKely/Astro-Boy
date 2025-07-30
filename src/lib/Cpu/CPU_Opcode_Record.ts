@@ -13,7 +13,7 @@ import {
   SUBAHL,
   SUBAR8,
 } from "./instructions/8bit_Arithmetic_Instructions";
-import { CPL } from "./instructions/Bitwise_Logic_Instructions";
+import { ANDAHL, ANDAR8, CPL } from "./instructions/Bitwise_Logic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
@@ -756,6 +756,119 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.A
           );
           dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0xa0: {
+      name: "AND B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.B,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa1: {
+      name: "AND C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.C,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa2: {
+      name: "AND D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.D,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa3: {
+      name: "AND E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.E,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa4: {
+      name: "AND H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.H,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa5: {
+      name: "AND L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.L,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa6: {
+      name: "AND L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAHL(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.HL,
+            dmg.registers.register.F,
+            dmg.ram
+          );
+        },
+      ],
+    },
+    0xa7: {
+      name: "AND A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.A,
+            dmg.registers.register.F
+          );
         },
       ],
     },
