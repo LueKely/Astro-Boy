@@ -17,6 +17,8 @@ import {
 	ANDAHL,
 	ANDAR8,
 	CPL,
+	ORAHL,
+	ORAR8,
 	XORAHL,
 	XORAR8,
 } from './instructions/Bitwise_Logic_Instructions';
@@ -999,6 +1001,127 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			jobs: [
 				(dmg: Gameboy) => {
 					XORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.A,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb0: {
+			name: 'OR B',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.B,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb1: {
+			name: 'OR C',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.C,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb2: {
+			name: 'OR D',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					XORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.D,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb3: {
+			name: 'OR E',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.E,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb4: {
+			name: 'OR H',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.H,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb5: {
+			name: 'OR L',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
+						dmg.registers.register.A,
+						dmg.registers.register.L,
+						dmg.registers.register.F
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb6: {
+			name: 'OR [HL]',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAHL(
+						dmg.registers.register.A,
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.F,
+						dmg.ram
+					);
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0xb7: {
+			name: 'OR A',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					ORAR8(
 						dmg.registers.register.A,
 						dmg.registers.register.A,
 						dmg.registers.register.F
