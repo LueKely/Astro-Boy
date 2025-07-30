@@ -13,8 +13,8 @@ import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
  * |   A   ||   F   |  => Acumulator & Flags
  * |   B   ||   C   |
  * |   D   ||   E   |
- * |   H   ||   L   |
  * 15---------------0
+ * |   H   ||   L   |
  * |       SP       |  => Stack Pointer
  * |       PC       |  => Program Counter/Pointer
  * |----------------|
@@ -46,13 +46,18 @@ export class Cpu_Register_File {
 
   private lowByte = 0;
   private highByte = 0;
+  private currentByte = 0;
 
   setLowByte(value: number) {
-    this.lowByte = value & 0b0000_0011;
+    this.lowByte = value & 0b0000_1100;
   }
 
   setHighByte(value: number) {
-    this.highByte = (value & 0b0000_1100) >> 2;
+    this.highByte = value & 0b0000_0011;
+  }
+
+  setCurrentByte(value: number) {
+    this.currentByte = value;
   }
 
   getLowByte() {
@@ -61,5 +66,9 @@ export class Cpu_Register_File {
 
   getHighByte() {
     return this.highByte;
+  }
+
+  getCurrentByte() {
+    return this.currentByte;
   }
 }
