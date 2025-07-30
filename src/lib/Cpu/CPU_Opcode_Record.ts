@@ -13,7 +13,13 @@ import {
   SUBAHL,
   SUBAR8,
 } from "./instructions/8bit_Arithmetic_Instructions";
-import { ANDAHL, ANDAR8, CPL } from "./instructions/Bitwise_Logic_Instructions";
+import {
+  ANDAHL,
+  ANDAR8,
+  CPL,
+  XORAHL,
+  XORAR8,
+} from "./instructions/Bitwise_Logic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
@@ -865,6 +871,119 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           ANDAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.A,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa8: {
+      name: "XOR B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.B,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xa9: {
+      name: "XOR C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.C,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xaa: {
+      name: "XOR D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.D,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xab: {
+      name: "XOR E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.E,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xac: {
+      name: "XOR H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.H,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xad: {
+      name: "XOR L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.L,
+            dmg.registers.register.F
+          );
+        },
+      ],
+    },
+    0xae: {
+      name: "XOR [HL]",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAHL(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.HL,
+            dmg.registers.register.F,
+            dmg.ram
+          );
+        },
+      ],
+    },
+    0xaf: {
+      name: "XOR A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          XORAR8(
             dmg.registers.register.A,
             dmg.registers.register.A,
             dmg.registers.register.F
