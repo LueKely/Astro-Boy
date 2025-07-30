@@ -643,7 +643,7 @@ describe("SBC A, R8 Functionalities", () => {
     C.setRegister(0b0000_1110);
     F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -661,7 +661,7 @@ describe("SBC A, R8 Functionalities", () => {
 
     // F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -677,7 +677,7 @@ describe("SBC A, R8 Functionalities", () => {
     C.setRegister(0b0000_0001);
     // F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -693,7 +693,7 @@ describe("SBC A, R8 Functionalities", () => {
     C.setRegister(0b0000_1111);
     F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(16);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -709,7 +709,7 @@ describe("SBC A, R8 Functionalities", () => {
     C.setRegister(0b0000_0001);
     // F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -732,7 +732,7 @@ describe("SBC A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SBCAHL(ram, A, HL, F);
+    SBCAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(14);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -753,7 +753,7 @@ describe("SBC A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SBCAHL(ram, A, HL, F);
+    SBCAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -772,7 +772,7 @@ describe("SBC A, [HL] functionalities", () => {
     HL.setRegister(0b0000_1111);
     ram.setMemoryAt(HL.getRegister(), HL.getRegister());
     F.setCYFlag();
-    SBCAHL(ram, A, HL, F);
+    SBCAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(16);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -792,7 +792,7 @@ describe("SBC A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SBCAHL(ram, A, HL, F);
+    SBCAHL(HL, ram, F, A);
 
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
@@ -813,8 +813,7 @@ describe("SBC A, [HL] functionalities", () => {
     ram.setMemoryAt(HL.getRegister(), HL.getRegister());
 
     // F.setCYFlag();
-
-    SBCAHL(ram, A, HL, F);
+    SBCAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -832,7 +831,7 @@ describe("SBC A, N8 Functionalities", () => {
     A.setRegister(0b0000_1111);
     F.setCYFlag();
 
-    SBCAN8(0b0000_1110, A, F);
+    SBCAN8(0b0000_1110, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -849,7 +848,7 @@ describe("SBC A, N8 Functionalities", () => {
 
     // F.setCYFlag();
 
-    SBCAN8(0b0000_1111, A, F);
+    SBCAN8(0b0000_1111, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -864,7 +863,7 @@ describe("SBC A, N8 Functionalities", () => {
     A.setRegister(0b0001_0000);
     // F.setCYFlag();
 
-    SBCAN8(0b0000_0001, A, F);
+    SBCAN8(0b0000_0001, F, A);
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -880,7 +879,7 @@ describe("SBC A, N8 Functionalities", () => {
     C.setRegister(0b0000_1111);
     F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(16);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -896,7 +895,7 @@ describe("SBC A, N8 Functionalities", () => {
     C.setRegister(0b0000_0001);
     // F.setCYFlag();
 
-    SBCAR8(C, A, F);
+    SBCAR8(C, F, A);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -914,7 +913,7 @@ describe("SUB A, R8 Functionalities", () => {
     A.setRegister(0b0000_1111);
     C.setRegister(0b0000_1110);
 
-    SUBAR8(C, A, F);
+    SUBAR8(C, F, A);
     expect(A.getRegister()).toBe(1);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -932,7 +931,8 @@ describe("SUB A, R8 Functionalities", () => {
 
     // F.setCYFlag();
 
-    SUBAR8(C, A, F);
+    SUBAR8(C, F, A);
+
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -948,7 +948,8 @@ describe("SUB A, R8 Functionalities", () => {
     C.setRegister(0b0000_0001);
     // F.setCYFlag();
 
-    SUBAR8(C, A, F);
+    SUBAR8(C, F, A);
+
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -964,7 +965,8 @@ describe("SUB A, R8 Functionalities", () => {
     C.setRegister(0b0000_0001);
     // F.setCYFlag();
 
-    SUBAR8(C, A, F);
+    SUBAR8(C, F, A);
+
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -987,7 +989,7 @@ describe("SUB A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SUBAHL(ram, A, HL, F);
+    SUBAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(14);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -1008,7 +1010,7 @@ describe("SUB A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SUBAHL(ram, A, HL, F);
+    SUBAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -1027,7 +1029,7 @@ describe("SUB A, [HL] functionalities", () => {
     HL.setRegister(0b0000_1111);
     ram.setMemoryAt(HL.getRegister(), HL.getRegister());
 
-    SUBAHL(ram, A, HL, F);
+    SUBAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(17);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -1045,7 +1047,7 @@ describe("SUB A, [HL] functionalities", () => {
     HL.setRegister(0b0000_0001);
     ram.setMemoryAt(HL.getRegister(), HL.getRegister());
 
-    SUBAHL(ram, A, HL, F);
+    SUBAHL(HL, ram, F, A);
 
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
@@ -1067,7 +1069,7 @@ describe("SUB A, [HL] functionalities", () => {
 
     // F.setCYFlag();
 
-    SUBAHL(ram, A, HL, F);
+    SUBAHL(HL, ram, F, A);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -1086,7 +1088,7 @@ describe("SUB A, N8 Functionalities", () => {
 
     // F.setCYFlag();
 
-    SUBAN8(0b0000_1111, A, F);
+    SUBAN8(0b0000_1111, F, A);
     expect(A.getRegister()).toBe(0);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(1);
@@ -1101,7 +1103,7 @@ describe("SUB A, N8 Functionalities", () => {
     A.setRegister(0b0001_0000);
     // F.setCYFlag();
 
-    SUBAN8(0b0000_0001, A, F);
+    SUBAN8(0b0000_0001, F, A);
     expect(A.getRegister()).toBe(15);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -1115,7 +1117,7 @@ describe("SUB A, N8 Functionalities", () => {
 
     A.setRegister(0b0010_0000);
 
-    SUBAN8(0b0000_1111, A, F);
+    SUBAN8(0b0000_1111, F, A);
     expect(A.getRegister()).toBe(17);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);
@@ -1130,7 +1132,7 @@ describe("SUB A, N8 Functionalities", () => {
     A.setRegister(0b0000_0000);
     // F.setCYFlag();
 
-    SUBAN8(0b0000_0001, A, F);
+    SUBAN8(0b0000_0001, F, A);
     expect(A.getRegister()).toBe(255);
     expect(F.getNFlag()).toBe(1);
     expect(F.getZFlag()).toBe(0);

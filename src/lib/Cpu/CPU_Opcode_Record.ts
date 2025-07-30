@@ -8,6 +8,10 @@ import {
   DECR8,
   INCHL,
   INCR8,
+  SBCAHL,
+  SBCAR8,
+  SUBAHL,
+  SUBAR8,
 } from "./instructions/8bit_Arithmetic_Instructions";
 import { CPL } from "./instructions/Bitwise_Logic_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
@@ -432,7 +436,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       ],
     },
     0x8c: {
-      name: "ADC D",
+      name: "ADC H",
       cycles: 1,
       length: 1,
       jobs: [
@@ -490,6 +494,263 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           ADCAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    // SUB
+
+    0x90: {
+      name: "SUB B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.B,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+
+    0x91: {
+      name: "SUB C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.C,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x92: {
+      name: "SUB D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.D,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x93: {
+      name: "SUB E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.E,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x94: {
+      name: "SUB H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.H,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x95: {
+      name: "SUB L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.L,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x96: {
+      name: "SUB [HL]",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+          );
+        },
+        (dmg: Gameboy) => {
+          SUBAHL(
+            dmg.registers.register16Bit.HL,
+            dmg.ram,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x97: {
+      name: "SUB A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SUBAR8(
+            dmg.registers.register.A,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x98: {
+      name: "SUBC B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.B,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x99: {
+      name: "SUBC C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.C,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9a: {
+      name: "SUBC D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.D,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9b: {
+      name: "SUBC E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.E,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9c: {
+      name: "SUBC H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.H,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9d: {
+      name: "SUBC D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
+            dmg.registers.register.L,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9e: {
+      name: "SUBC [HL]",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+          );
+        },
+        (dmg: Gameboy) => {
+          SBCAHL(
+            dmg.registers.register16Bit.HL,
+            dmg.ram,
+            dmg.registers.register.F,
+            dmg.registers.register.A
+          );
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x9f: {
+      name: "SUBC A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          SBCAR8(
             dmg.registers.register.A,
             dmg.registers.register.F,
             dmg.registers.register.A

@@ -226,8 +226,8 @@ function INCHL(
  **/
 function SBCAR8(
   r8: Cpu_Register<any>,
-  registerA: Cpu_Register<"A">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference =
     registerA.getRegister() - r8.getRegister() - registerF.getCYFlag();
@@ -247,19 +247,19 @@ function SBCAR8(
  * [HL] plus the carry and stores it in A
  **/
 function SBCAHL(
+  pointer: Cpu_Register_16Bit<"HL">,
   memory: Ram,
-  registerA: Cpu_Register<"A">,
-  registerHL: Cpu_Register_16Bit<"HL">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference =
     registerA.getRegister() -
-    (memory.getMemoryAt(registerHL.getRegister()) + registerF.getCYFlag());
+    (memory.getMemoryAt(pointer.getRegister()) + registerF.getCYFlag());
 
   validateR8Subtraction(
     registerF,
     registerA.getRegister(),
-    memory.getMemoryAt(registerHL.getRegister()),
+    memory.getMemoryAt(pointer.getRegister()),
     registerF.getCYFlag()
   );
 
@@ -272,8 +272,8 @@ function SBCAHL(
  **/
 function SBCAN8(
   n8: number,
-  registerA: Cpu_Register<"A">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference = registerA.getRegister() - n8 - registerF.getCYFlag();
 
@@ -294,8 +294,8 @@ function SBCAN8(
  **/
 function SUBAR8(
   r8: Cpu_Register<any>,
-  registerA: Cpu_Register<"A">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference = registerA.getRegister() - r8.getRegister();
 
@@ -314,18 +314,18 @@ function SUBAR8(
  *  and stores it in A
  **/
 function SUBAHL(
+  pointer: Cpu_Register_16Bit<"HL">,
   memory: Ram,
-  registerA: Cpu_Register<"A">,
-  registerHL: Cpu_Register_16Bit<"HL">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference =
-    registerA.getRegister() - memory.getMemoryAt(registerHL.getRegister());
+    registerA.getRegister() - memory.getMemoryAt(pointer.getRegister());
 
   validateR8Subtraction(
     registerF,
     registerA.getRegister(),
-    memory.getMemoryAt(registerHL.getRegister())
+    memory.getMemoryAt(pointer.getRegister())
   );
 
   registerA.setRegister(difference);
@@ -337,8 +337,8 @@ function SUBAHL(
  **/
 function SUBAN8(
   n8: number,
-  registerA: Cpu_Register<"A">,
-  registerF: Cpu_Flag_Register
+  registerF: Cpu_Flag_Register,
+  registerA: Cpu_Register<"A">
 ) {
   const difference = registerA.getRegister() - n8;
   validateR8Subtraction(
