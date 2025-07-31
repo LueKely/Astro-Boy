@@ -1,9 +1,6 @@
 import { Ram } from "../Ram/Ram";
 import { Cpu_Flag_Register } from "./CPU_Flag_Register";
-import {
-  Cpu_Pointer_Register,
-  Program_Counter_Register,
-} from "./CPU_Pointer_Register";
+import { Program_Counter_Register } from "./CPU_Pointer_Register";
 import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
 
 /*
@@ -30,11 +27,21 @@ export class Cpu_Register_File {
     F: new Cpu_Flag_Register(0),
     H: new Cpu_Register<"H">(0),
     L: new Cpu_Register<"L">(0),
+    // IGNORE THIS
   };
 
+  // i think i might've shoot myself on the foot
+  //this'll be a temporary solution for now (i hope)
+  private S = new Cpu_Register<"S">(0);
+  private P = new Cpu_Register<"S">(0);
+
+  // PC
+  private Z = new Cpu_Register<any>(0);
+  private N = new Cpu_Register<any>(0);
+
   readonly pointers = {
-    PC: new Program_Counter_Register(0x0100),
-    SP: new Cpu_Pointer_Register<"SP">(0xffee),
+    PC: new Program_Counter_Register(this.Z, this.N, 0x100),
+    SP: new Cpu_Register_16Bit<"SP">(this.S, this.P, 0xffee),
   };
 
   readonly register16Bit = {
@@ -44,28 +51,28 @@ export class Cpu_Register_File {
     HL: new Cpu_Register_16Bit<"HL">(this.register.H, this.register.L),
   };
 
-  private lowByte = 0;
-  private highByte = 0;
+  private lowerByte = 0;
+  private upperByte = 0;
   private currentByte = 0;
 
-  setLowByte(value: number) {
-    this.lowByte = value & 0b0000_1100;
+  setLowerByte(value: number) {
+    this.lowerByte = value;
   }
 
-  setHighByte(value: number) {
-    this.highByte = value & 0b0000_0011;
+  setUpperByte(value: number) {
+    this.upperByte = value;
   }
 
   setCurrentByte(value: number) {
     this.currentByte = value;
   }
 
-  getLowByte() {
-    return this.lowByte;
+  getLowerByte() {
+    return this.lowerByte;
   }
 
-  getHighByte() {
-    return this.highByte;
+  getUpperByte() {
+    return this.upperByte;
   }
 
   getCurrentByte() {

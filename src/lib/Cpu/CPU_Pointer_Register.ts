@@ -1,30 +1,7 @@
 // note not tested will test later
-type PointerType = "SP" | "PC";
 
-export class Cpu_Pointer_Register<T extends PointerType> {
-  #value: number;
-  private readonly __brand!: T;
-
-  constructor(value: number) {
-    this.#value = value;
-  }
-
-  getRegister() {
-    console.log(this.#value);
-
-    return this.#value;
-  }
-
-  setRegister(value: number) {
-    // sanitize value with and operand
-    this.#value = value & 0xffff;
-  }
-  getBrand() {
-    return this.__brand;
-  }
-}
-
-export class Program_Counter_Register extends Cpu_Pointer_Register<"PC"> {
+import { Cpu_Register_16Bit } from "./CPU_Register";
+export class Program_Counter_Register extends Cpu_Register_16Bit<"PC"> {
   increment() {
     this.setRegister(this.getRegister() + 1);
   }

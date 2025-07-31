@@ -32,10 +32,14 @@ import {
   XORAN8,
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
+import { LDR16N16 } from "./instructions/LD_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
 // AUTHOR'S NOTE:
 //  BEHOLD!!!!!!!!!!!
+
+// i havent implemented
+// CPL, CCF
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
   return {
@@ -1453,6 +1457,144 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
           );
           dmg.registers.pointers.PC.increment();
           dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+
+    // LOAD INSTRUCTIONS
+    0x01: {
+      name: "LD BC NN",
+      cycles: 3,
+      length: 3,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          const lb =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setLowerByte(lb);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          // get upper byte
+          const ub =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setUpperByte(ub);
+          // increment
+
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          const n =
+            (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
+          LDR16N16(dmg.registers.register16Bit.BC, n);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x11: {
+      name: "LD DE NN",
+      cycles: 3,
+      length: 3,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          const lb =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setLowerByte(lb);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          // get upper byte
+          const ub =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setUpperByte(ub);
+          // increment
+
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          const n =
+            (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
+          LDR16N16(dmg.registers.register16Bit.DE, n);
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x21: {
+      name: "LD HL NN",
+      cycles: 3,
+      length: 3,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          const lb =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setLowerByte(lb);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          // get upper byte
+          const ub =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setUpperByte(ub);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          const n =
+            (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
+          LDR16N16(dmg.registers.register16Bit.HL, n);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x31: {
+      name: "LD SP NN",
+      cycles: 3,
+      length: 3,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          const lb =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setLowerByte(lb);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          // get upper byte
+          const ub =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setUpperByte(ub);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          const n =
+            (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
+          LDR16N16(dmg.registers.pointers.SP, n);
+          // increment
+          dmg.registers.pointers.PC.increment();
         },
       ],
     },
