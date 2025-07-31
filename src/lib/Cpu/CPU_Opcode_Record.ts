@@ -32,14 +32,19 @@ import {
 	XORAN8,
 	XORAR8,
 } from './instructions/Bitwise_Logic_Instructions';
-import { LDR16N16, LDR8HL, LDR8R8 } from './instructions/LD_Instructions';
+import {
+	LDHLR8,
+	LDR16N16,
+	LDR8HL,
+	LDR8R8,
+} from './instructions/LD_Instructions';
 import type { IOpCodeEntry } from './types/Opcode';
 
 // AUTHOR'S NOTE:
 //  BEHOLD!!!!!!!!!!!
 
 // i havent implemented
-// CPL, CCF
+// CPL, CCF,HALT
 
 export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 	return {
@@ -875,10 +880,16 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			],
 		},
 		0xa6: {
-			name: 'AND HL',
-			cycles: 1,
+			name: 'AND [HL]',
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					ANDAHL(
 						dmg.registers.register.A,
@@ -997,9 +1008,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0xae: {
 			name: 'XOR [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					XORAHL(
 						dmg.registers.register.A,
@@ -1118,9 +1135,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0xb6: {
 			name: 'OR [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					ORAHL(
 						dmg.registers.register.A,
@@ -1239,9 +1262,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0xbe: {
 			name: 'CP [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					CPAHL(
 						dmg.ram,
@@ -1678,9 +1707,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0x46: {
 			name: 'LD B [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					// get lower byte
 					LDR8HL(
@@ -1786,9 +1821,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0x4e: {
 			name: 'LD C [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					// get lower byte
 					LDR8HL(
@@ -1894,9 +1935,15 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 		},
 		0x56: {
 			name: 'LD D [HL]',
-			cycles: 1,
+			cycles: 2,
 			length: 1,
 			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
 				(dmg: Gameboy) => {
 					// get lower byte
 					LDR8HL(
@@ -1949,7 +1996,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			],
 		},
 		0x5a: {
-			name: 'LD D D',
+			name: 'LD E D',
 			cycles: 1,
 			length: 1,
 			jobs: [
@@ -2025,6 +2072,372 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 				(dmg: Gameboy) => {
 					// get lower byte
 					LDR8R8(dmg.registers.register.E, dmg.registers.register.A);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x60: {
+			name: 'LD H B',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.B);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x61: {
+			name: 'LD H C',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.C);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x62: {
+			name: 'LD H D',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.D);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x63: {
+			name: 'LD H E',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.E);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x64: {
+			name: 'LD H H',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.H);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x65: {
+			name: 'LD H L',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.L);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x66: {
+			name: 'LD H [HL]',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8HL(
+						dmg.registers.register.H,
+						dmg.registers.register16Bit.HL,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x67: {
+			name: 'LD H A',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.H, dmg.registers.register.A);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x68: {
+			name: 'LD L B',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.B);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x69: {
+			name: 'LD L C',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.C);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6a: {
+			name: 'LD L D',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.D);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6b: {
+			name: 'LD L E',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.E);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6c: {
+			name: 'LD L H',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.H);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6d: {
+			name: 'LD L L',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.L);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6e: {
+			name: 'LD L [HL]',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8HL(
+						dmg.registers.register.L,
+						dmg.registers.register16Bit.HL,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x6f: {
+			name: 'LD L A',
+			cycles: 1,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDR8R8(dmg.registers.register.L, dmg.registers.register.A);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x70: {
+			name: 'LD [HL] B',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.B,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x71: {
+			name: 'LD [HL] C',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.C,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x72: {
+			name: 'LD [HL] D',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.D,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x73: {
+			name: 'LD [HL] E',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.E,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x74: {
+			name: 'LD [HL] H',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.H,
+						dmg.ram
+					);
+					// increment
+					dmg.registers.pointers.PC.increment();
+				},
+			],
+		},
+		0x75: {
+			name: 'LD [HL] L',
+			cycles: 2,
+			length: 1,
+			jobs: [
+				(dmg: Gameboy) => {
+					console.log(
+						'MemAdd Value:',
+						dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+					);
+				},
+				(dmg: Gameboy) => {
+					// get lower byte
+					LDHLR8(
+						dmg.registers.register16Bit.HL,
+						dmg.registers.register.L,
+						dmg.ram
+					);
 					// increment
 					dmg.registers.pointers.PC.increment();
 				},
