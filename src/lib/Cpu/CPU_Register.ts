@@ -1,4 +1,4 @@
-type T8BitRegisters = "A" | "B" | "C" | "D" | "E" | "F" | "H" | "L" | "S" | "P";
+type T8BitRegisters = "A" | "B" | "C" | "D" | "E" | "F" | "H" | "L";
 type T16BitRegisters = "AF" | "BC" | "DE" | "HL" | "SP" | "PC";
 
 export class Cpu_Register<T extends T8BitRegisters> {

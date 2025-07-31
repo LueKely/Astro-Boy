@@ -32,7 +32,7 @@ import {
   XORAN8,
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
-import { LDR16N16 } from "./instructions/LD_Instructions";
+import { LDR16N16, LDR8HL, LDR8R8 } from "./instructions/LD_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
 
 // AUTHOR'S NOTE:
@@ -1593,6 +1593,330 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
           const n =
             (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
           LDR16N16(dmg.registers.pointers.SP, n);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x40: {
+      name: "LD B B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.B);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x41: {
+      name: "LD B C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.C);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x42: {
+      name: "LD B D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.D);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x43: {
+      name: "LD B E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.E);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x44: {
+      name: "LD B H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.H);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x45: {
+      name: "LD B L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.L);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x46: {
+      name: "LD B [HL]",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8HL(
+            dmg.registers.register.B,
+            dmg.registers.register16Bit.HL,
+            dmg.ram
+          );
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x47: {
+      name: "LD B A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.A);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x48: {
+      name: "LD C B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.B);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x49: {
+      name: "LD C C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.C);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4a: {
+      name: "LD C D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.D);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4b: {
+      name: "LD C E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.E);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4c: {
+      name: "LD C H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.H);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4d: {
+      name: "LD C L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.L);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4e: {
+      name: "LD C [HL]",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8HL(
+            dmg.registers.register.C,
+            dmg.registers.register16Bit.HL,
+            dmg.ram
+          );
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x4f: {
+      name: "LD C A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.C, dmg.registers.register.A);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x50: {
+      name: "LD D B",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.D, dmg.registers.register.B);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x51: {
+      name: "LD D C",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.D, dmg.registers.register.C);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x52: {
+      name: "LD D D",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.D, dmg.registers.register.D);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x53: {
+      name: "LD D E",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.E);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x54: {
+      name: "LD D H",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.H);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x55: {
+      name: "LD D L",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.L);
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x56: {
+      name: "LD D [HL]",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8HL(
+            dmg.registers.register.B,
+            dmg.registers.register16Bit.HL,
+            dmg.ram
+          );
+          // increment
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x57: {
+      name: "LD D A",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          // get lower byte
+          LDR8R8(dmg.registers.register.B, dmg.registers.register.A);
           // increment
           dmg.registers.pointers.PC.increment();
         },

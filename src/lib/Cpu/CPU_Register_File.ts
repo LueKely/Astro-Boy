@@ -32,8 +32,8 @@ export class Cpu_Register_File {
 
   // i think i might've shoot myself on the foot
   //this'll be a temporary solution for now (i hope)
-  private S = new Cpu_Register<"S">(0);
-  private P = new Cpu_Register<"S">(0);
+  private S = new Cpu_Register<any>(0);
+  private P = new Cpu_Register<any>(0);
 
   // PC
   private Z = new Cpu_Register<any>(0);
