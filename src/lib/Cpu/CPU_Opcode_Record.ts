@@ -38,10 +38,12 @@ import {
   LDAR16,
   LDHLDA,
   LDHLIA,
+  LDHLN8,
   LDHLR8,
   LDR16A,
   LDR16N16,
   LDR8HL,
+  LDR8N8,
   LDR8R8,
 } from "./instructions/LD_Instructions";
 import type { IOpCodeEntry } from "./types/Opcode";
@@ -2648,7 +2650,6 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.H);
-
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2660,7 +2661,6 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.L);
-
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2696,6 +2696,173 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.A);
 
           dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    0x06: {
+      name: "LD B N",
+      cycles: 1,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.B, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x16: {
+      name: "LD C N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.C, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x26: {
+      name: "LD D N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.D, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x36: {
+      name: "LD [HL] N",
+      cycles: 3,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDHLN8(
+            dmg.registers.register16Bit.HL,
+            dmg.registers.getCurrentByte(),
+            dmg.ram
+          );
+          dmg.registers.setCurrentByte(0);
+        },
+        (dmg: Gameboy) => {
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+
+    0x0e: {
+      name: "LD C N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.C, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x1e: {
+      name: "LD E N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.E, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x2e: {
+      name: "LD L N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.L, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
+        },
+      ],
+    },
+    0x3e: {
+      name: "LD A N",
+      cycles: 2,
+      length: 2,
+      jobs: [
+        (dmg: Gameboy) => {
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister() + 1
+            ];
+          dmg.registers.setCurrentByte(n);
+          dmg.registers.pointers.PC.increment();
+        },
+        (dmg: Gameboy) => {
+          LDR8N8(dmg.registers.register.A, dmg.registers.getCurrentByte());
+          dmg.registers.pointers.PC.increment();
+          dmg.registers.setCurrentByte(0);
         },
       ],
     },
