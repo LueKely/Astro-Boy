@@ -2909,7 +2909,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			],
 		},
 		0xfa: {
-			name: 'LD (NN), A',
+			name: 'LD  A, (NN)',
 			cycles: 4,
 			length: 3,
 			jobs: [
@@ -3014,7 +3014,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
 			length: 1,
 			jobs: [
 				(dmg: Gameboy) => {
-					LDHAC(dmg.registers.register.C, dmg.registers.register.A,dmg.ram );
+					LDHAC(dmg.registers.register.C, dmg.registers.register.A, dmg.ram);
 				},
 				(dmg: Gameboy) => {
 					dmg.registers.pointers.PC.increment();
