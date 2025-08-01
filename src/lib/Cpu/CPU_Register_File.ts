@@ -53,6 +53,8 @@ export class Cpu_Register_File {
 
   private lowerByte = 0;
   private upperByte = 0;
+
+  // current Byte is used for storing n8 for insturctions
   private currentByte = 0;
 
   setLowerByte(value: number) {
