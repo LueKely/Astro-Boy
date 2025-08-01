@@ -1506,7 +1506,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setLowerByte(lb);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
@@ -1516,7 +1516,6 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setUpperByte(ub);
-          // increment
 
           dmg.registers.pointers.PC.increment();
         },
@@ -1540,7 +1539,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setLowerByte(lb);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
@@ -1550,7 +1549,6 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setUpperByte(ub);
-          // increment
 
           dmg.registers.pointers.PC.increment();
         },
@@ -1574,7 +1572,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setLowerByte(lb);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
@@ -1584,14 +1582,14 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setUpperByte(ub);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
           const n =
             (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
           LDR16N16(dmg.registers.register16Bit.HL, n);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1608,7 +1606,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setLowerByte(lb);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
@@ -1618,14 +1616,14 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
               dmg.registers.pointers.PC.getRegister() + 1
             ];
           dmg.registers.setUpperByte(ub);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
         (dmg: Gameboy) => {
           const n =
             (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
           LDR16N16(dmg.registers.pointers.SP, n);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1722,7 +1720,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1734,7 +1732,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1746,7 +1744,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1758,7 +1756,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1770,7 +1768,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1782,7 +1780,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1804,7 +1802,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1816,7 +1814,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.B, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1828,7 +1826,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1840,7 +1838,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1852,7 +1850,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1864,7 +1862,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1876,7 +1874,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1888,7 +1886,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1910,7 +1908,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1922,7 +1920,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.C, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1934,7 +1932,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1946,7 +1944,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1958,7 +1956,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1970,7 +1968,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1982,7 +1980,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -1994,7 +1992,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2016,7 +2014,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2028,7 +2026,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.D, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2040,7 +2038,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2052,7 +2050,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2064,7 +2062,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2076,7 +2074,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2088,7 +2086,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2100,7 +2098,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2116,7 +2114,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2128,7 +2126,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.E, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2140,7 +2138,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2152,7 +2150,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2164,7 +2162,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2176,7 +2174,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2188,7 +2186,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2200,7 +2198,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2222,7 +2220,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2234,7 +2232,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.H, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2246,7 +2244,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2258,7 +2256,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2270,7 +2268,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2282,7 +2280,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2294,7 +2292,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2306,7 +2304,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2328,7 +2326,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2340,7 +2338,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.L, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2362,7 +2360,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.B,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2384,7 +2382,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.C,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2406,7 +2404,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.D,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2428,7 +2426,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.E,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2450,7 +2448,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.H,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2472,7 +2470,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.L,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2494,7 +2492,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register.A,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2506,7 +2504,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.B);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2518,7 +2516,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.C);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2530,7 +2528,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.D);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2542,7 +2540,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.E);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2554,7 +2552,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.H);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2566,7 +2564,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.L);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2588,7 +2586,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
             dmg.registers.register16Bit.HL,
             dmg.ram
           );
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
@@ -2600,7 +2598,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       jobs: [
         (dmg: Gameboy) => {
           LDR8R8(dmg.registers.register.A, dmg.registers.register.A);
-          // increment
+
           dmg.registers.pointers.PC.increment();
         },
       ],
