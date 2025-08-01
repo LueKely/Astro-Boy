@@ -33,6 +33,9 @@ import {
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
 import {
+  LDAHLD,
+  LDAHLI,
+  LDAR16,
   LDHLR8,
   LDR16N16,
   LDR8HL,
@@ -1490,7 +1493,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
       ],
     },
 
-    // LOAD INSTRUCTIONS
+    // LOAD INSTRUCTIONS 16bit
     0x01: {
       name: "LD BC NN",
       cycles: 3,
@@ -1624,6 +1627,91 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
           LDR16N16(dmg.registers.pointers.SP, n);
           // increment
           dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
+    // Load instruction 8bit
+    0x02: {
+      name: "LD (BC), A",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(dmg.registers.register16Bit.BC.getRegister())
+          );
+        },
+        (dmg: Gameboy) => {
+          LDAR16(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.BC,
+            dmg.ram
+          );
+        },
+      ],
+    },
+    0x12: {
+      name: "LD (DE), A",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
+          );
+        },
+        (dmg: Gameboy) => {
+          LDAR16(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.DE,
+            dmg.ram
+          );
+        },
+      ],
+    },
+    0x22: {
+      name: "LD (HL+), A",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(
+              dmg.registers.register16Bit.HL.getRegister() + 1
+            )
+          );
+        },
+        (dmg: Gameboy) => {
+          LDAHLI(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.HL,
+            dmg.ram
+          );
+        },
+      ],
+    },
+    0x32: {
+      name: "LD (HL-), A",
+      cycles: 2,
+      length: 1,
+      jobs: [
+        (dmg: Gameboy) => {
+          console.log(
+            "MemAdd Value:",
+            dmg.ram.getMemoryAt(
+              dmg.registers.register16Bit.HL.getRegister() - 1
+            )
+          );
+        },
+        (dmg: Gameboy) => {
+          LDAHLD(
+            dmg.registers.register.A,
+            dmg.registers.register16Bit.HL,
+            dmg.ram
+          );
         },
       ],
     },
