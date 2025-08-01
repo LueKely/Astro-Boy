@@ -13,6 +13,7 @@ import {
   LDHLR8,
   LDHN16A,
   LDN16A,
+  LDR16A,
   LDR16N16,
   LDR8HL,
   LDR8N8,
@@ -429,5 +430,30 @@ describe("This will test the function LD A,[HLI]", () => {
     LDAHLI(A, HLI, dummyMemory);
 
     expect(HLI.getRegister()).toBe(testPointer + 1);
+  });
+});
+
+describe("LD [R16], A ", () => {
+  test("Expect [BC] to have the value of 0xff", () => {
+    const cpuCluster = new Cpu_Register_File();
+    const { A } = cpuCluster.register;
+    const { BC } = cpuCluster.register16Bit;
+    const dummyMemory = new Ram();
+    BC.setRegister(0xff);
+    A.setRegister(0xff);
+    LDR16A(BC, A, dummyMemory);
+
+    expect(dummyMemory.getMemoryAt(BC.getRegister())).toBe(A.getRegister());
+  });
+  test("Expect [DE] to have the value of 0xf", () => {
+    const cpuCluster = new Cpu_Register_File();
+    const { A } = cpuCluster.register;
+    const { DE } = cpuCluster.register16Bit;
+    const dummyMemory = new Ram();
+    DE.setRegister(0xff);
+    A.setRegister(0xf);
+    LDR16A(DE, A, dummyMemory);
+
+    expect(dummyMemory.getMemoryAt(DE.getRegister())).toBe(A.getRegister());
   });
 });
