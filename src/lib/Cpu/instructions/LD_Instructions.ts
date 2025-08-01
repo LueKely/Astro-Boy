@@ -47,7 +47,7 @@ function LDN16A(n16: number, a: Cpu_Register<"A">, memAdd: Ram) {
   memAdd.setMemoryAt(n16, a.getRegister());
 }
 
-// LDH [n16], A tested
+// LDH [n16], A wrong retest reimplement
 function LDHN16A(n16: number, a: Cpu_Register<"A">, memAdd: Ram) {
   if (n16 >= 0xff00 && n16 <= 0xffff) {
     memAdd.setMemoryAt(n16, a.getRegister());
