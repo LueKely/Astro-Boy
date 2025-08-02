@@ -3023,7 +3023,7 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
     },
     // untested
     0xcd: {
-      name: "Call nn",
+      name: "Call n16/nn",
       cycles: 6,
       length: 3,
       jobs: [
