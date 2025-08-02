@@ -1,6 +1,9 @@
 import { Ram } from "../Ram/Ram";
 import { Cpu_Flag_Register } from "./CPU_Flag_Register";
-import { Program_Counter_Register } from "./CPU_Pointer_Register";
+import {
+  Program_Counter_Register,
+  Stack_Pointer_Register,
+} from "./CPU_Pointer_Register";
 import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
 
 /*
@@ -41,7 +44,7 @@ export class Cpu_Register_File {
 
   readonly pointers = {
     PC: new Program_Counter_Register(this.Z, this.N, 0x100),
-    SP: new Cpu_Register_16Bit<"SP">(this.S, this.P, 0xffee),
+    SP: new Stack_Pointer_Register(this.S, this.P, 0xffee),
   };
 
   readonly register16Bit = {

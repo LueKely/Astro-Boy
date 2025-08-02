@@ -3021,5 +3021,61 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
         },
       ],
     },
+    // untested
+    0xcd: {
+      name: "Call nn",
+      cycles: 6,
+      length: 3,
+      jobs: [
+        // M2
+        (dmg: Gameboy) => {
+          dmg.registers.pointers.PC.increment();
+
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister()
+            ];
+
+          dmg.registers.setLowerByte(n);
+        },
+        // M3
+        (dmg: Gameboy) => {
+          dmg.registers.pointers.PC.increment();
+
+          const n =
+            dmg.cartridge.CartDataToBytes[
+              dmg.registers.pointers.PC.getRegister()
+            ];
+
+          dmg.registers.setUpperByte(n);
+        },
+        // M4
+        (dmg: Gameboy) => {
+          dmg.registers.pointers.SP.decrement();
+        }, // M5
+        (dmg: Gameboy) => {
+          dmg.ram.setMemoryAt(
+            dmg.registers.pointers.SP.getRegister(),
+            (dmg.registers.pointers.PC.getRegister() >> 8) & 0xff
+          );
+          dmg.registers.pointers.SP.decrement();
+        },
+        //M6
+        (dmg: Gameboy) => {
+          dmg.ram.setMemoryAt(
+            dmg.registers.pointers.SP.getRegister(),
+            dmg.registers.pointers.PC.getRegister() & 0xff
+          );
+          dmg.registers.pointers.PC.setRegister(
+            (dmg.registers.getUpperByte() << 8) |
+              (dmg.registers.getLowerByte() & 0xff)
+          );
+        },
+        // M7/1
+        (dmg: Gameboy) => {
+          dmg.registers.pointers.PC.increment();
+        },
+      ],
+    },
   };
 }

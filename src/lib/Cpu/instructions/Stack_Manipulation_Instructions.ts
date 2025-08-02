@@ -2,7 +2,7 @@
 
 import { validateR16Addition } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
-import type { Cpu_Pointer_Register } from "../CPU_Pointer_Register";
+import type { Program_Counter_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
 
 // untested
@@ -11,7 +11,7 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  **/
 function ADDHLSP(
   registerHL: Cpu_Register_16Bit<any>,
-  registerSP: Cpu_Pointer_Register<"SP">,
+  registerSP: Program_Counter_Register,
   registerF: Cpu_Flag_Register
 ) {
   const sum = registerHL.getRegister() + registerSP.getRegister();
@@ -23,7 +23,7 @@ function ADDHLSP(
 // not sure about this will gather information about this
 function ADDSPE8(
   e8: number,
-  SP: Cpu_Pointer_Register<"SP">,
+  SP: Program_Counter_Register,
   registerF: Cpu_Flag_Register
 ) {
   const sum = e8 + SP.getRegister();

@@ -6,3 +6,8 @@ export class Program_Counter_Register extends Cpu_Register_16Bit<"PC"> {
     this.setRegister(this.getRegister() + 1);
   }
 }
+export class Stack_Pointer_Register extends Cpu_Register_16Bit<"SP"> {
+  decrement() {
+    this.setRegister(this.getRegister() - 1);
+  }
+}
