@@ -18,30 +18,33 @@ export class Cpu_Scheduler {
 
   constructor(gameboy: Gameboy) {
     this.dmg = gameboy;
-    this.opCodes = CpuOpcodeRecord();
+    this.opCodes = CpuOpcodeRecord(this.dmg.registers.register.F);
     this.currentOpcode = this.opCodes[this.readByte()];
   }
 
-  private readByte() {
+  private readByte(increment: number = 0) {
     return this.dmg.cartridge.CartDataToBytes[
-      this.dmg.registers.pointers.PC.getRegister()
+      this.dmg.registers.pointers.PC.getRegister() + increment
     ];
   }
 
   private schedule() {
     this.currentOpcode.jobs.forEach((entry, index) => {
-      // check if this is the last
-      if (this.currentOpcode.cycles == index + 1) {
-        //TODO Add prefetching logic here
-        this.machineCycle.push(entry);
-        return;
-      }
+      // i can't really prefetch yet
+      //
+      // if (this.currentOpcode.cycles == index + 1) {
+      //   console.log("Next Instruction is:", this.readByte(1));
+      //   this.machineCycle.push(entry);
+      //   return;
+      // }
       this.machineCycle.push(entry);
     });
   }
 
   tick() {
     if (this.machineCycle.length == 0) {
+      // FIX ME: this might be very very slow since there are atleast 200 of these opcodes
+      this.opCodes = CpuOpcodeRecord(this.dmg.registers.register.F);
       this.currentOpcode = this.opCodes[this.readByte()];
       this.schedule();
     }

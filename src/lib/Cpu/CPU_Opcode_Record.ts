@@ -1,4 +1,5 @@
 import type { Gameboy } from "../Gameboy";
+import type { Cpu_Flag_Register } from "./CPU_Flag_Register";
 import {
   ADCAHL,
   ADCAN8,
@@ -33,6 +34,10 @@ import {
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
 import {
+  CALLCCN16,
+  CALLN16,
+} from "./instructions/Jumps_And _Subroutine_Instructions";
+import {
   LDAHLD,
   LDAHLI,
   LDAN16,
@@ -60,7 +65,9 @@ import type { IOpCodeEntry } from "./types/Opcode";
 // i havent implemented
 // CPL, CCF,HALT
 
-export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
+export function CpuOpcodeRecord(
+  flags: Cpu_Flag_Register
+): Record<number, IOpCodeEntry> {
   return {
     // ALU STUFF
     0x0: {
@@ -3021,61 +3028,37 @@ export function CpuOpcodeRecord(): Record<number, IOpCodeEntry> {
         },
       ],
     },
-    // untested
+
     0xcd: {
-      name: "Call n16/nn",
+      name: "Call nn",
       cycles: 6,
       length: 3,
-      jobs: [
-        // M2
-        (dmg: Gameboy) => {
-          dmg.registers.pointers.PC.increment();
+      jobs: CALLN16(),
+    },
 
-          const n =
-            dmg.cartridge.CartDataToBytes[
-              dmg.registers.pointers.PC.getRegister()
-            ];
-
-          dmg.registers.setLowerByte(n);
-        },
-        // M3
-        (dmg: Gameboy) => {
-          dmg.registers.pointers.PC.increment();
-
-          const n =
-            dmg.cartridge.CartDataToBytes[
-              dmg.registers.pointers.PC.getRegister()
-            ];
-
-          dmg.registers.setUpperByte(n);
-        },
-        // M4
-        (dmg: Gameboy) => {
-          dmg.registers.pointers.SP.decrement();
-        }, // M5
-        (dmg: Gameboy) => {
-          dmg.ram.setMemoryAt(
-            dmg.registers.pointers.SP.getRegister(),
-            (dmg.registers.pointers.PC.getRegister() >> 8) & 0xff
-          );
-          dmg.registers.pointers.SP.decrement();
-        },
-        //M6
-        (dmg: Gameboy) => {
-          dmg.ram.setMemoryAt(
-            dmg.registers.pointers.SP.getRegister(),
-            dmg.registers.pointers.PC.getRegister() & 0xff
-          );
-          dmg.registers.pointers.PC.setRegister(
-            (dmg.registers.getUpperByte() << 8) |
-              (dmg.registers.getLowerByte() & 0xff)
-          );
-        },
-        // M7/1
-        (dmg: Gameboy) => {
-          dmg.registers.pointers.PC.increment();
-        },
-      ],
+    0xc4: {
+      name: "Call NZ, nn",
+      cycles: "if CC is True: 6 else 3",
+      length: 3,
+      jobs: CALLCCN16(flags.getZFlag() ^ 1),
+    },
+    0xd4: {
+      name: "Call NC, nn",
+      cycles: "if CC is True: 6 else 3",
+      length: 3,
+      jobs: CALLCCN16(flags.getCYFlag() ^ 1),
+    },
+    0xcc: {
+      name: "Call Z, nn",
+      cycles: "if CC is True: 6 else 3",
+      length: 3,
+      jobs: CALLCCN16(flags.getZFlag() ^ 1),
+    },
+    0xdc: {
+      name: "Call C, nn",
+      cycles: "if CC is True: 6 else 3",
+      length: 3,
+      jobs: CALLCCN16(flags.getCYFlag() ^ 1),
     },
   };
 }
