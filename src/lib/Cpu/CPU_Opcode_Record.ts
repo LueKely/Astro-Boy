@@ -1336,17 +1336,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             ADDAN8(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1360,17 +1360,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             SUBAN8(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.F,
               dmg.registers.register.A
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1384,17 +1384,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             ANDAN8(
               dmg.registers.register.A,
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1408,17 +1408,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             ORAN8(
               dmg.registers.register.A,
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1432,17 +1432,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             ADCAN8(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1456,17 +1456,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             SBCAN8(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.F,
               dmg.registers.register.A
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1480,17 +1480,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             XORAN8(
               dmg.registers.register.A,
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -1504,17 +1504,17 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             CPAN8(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.registers.register.F
             );
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2669,7 +2669,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7c: {
-        name: "LD A H",
+        name: "LD A, H",
         cycles: 1,
         length: 1,
         jobs: [
@@ -2680,7 +2680,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7d: {
-        name: "LD A L",
+        name: "LD A, L",
         cycles: 1,
         length: 1,
         jobs: [
@@ -2691,7 +2691,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7e: {
-        name: "LD A [HL]",
+        name: "LD A, [HL]",
         cycles: 2,
         length: 1,
         jobs: [
@@ -2734,13 +2734,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.B, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.B, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2754,13 +2754,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.C, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.C, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2774,13 +2774,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.D, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.D, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2794,16 +2794,16 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             LDHLN8(
               dmg.registers.register16Bit.HL,
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.ram
             );
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
           (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
@@ -2821,13 +2821,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.C, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.C, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2841,13 +2841,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.E, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.E, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2861,13 +2861,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.L, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.L, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2881,13 +2881,13 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.A, dmg.registers.getCurrentByte());
+            LDR8N8(dmg.registers.register.A, dmg.registers.getTempByte());
             dmg.registers.pointers.PC.increment();
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
           },
         ],
       },
@@ -2974,18 +2974,18 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             LDHN16A(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.ram
             );
           },
           (dmg: Gameboy) => {
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
             dmg.registers.pointers.PC.increment();
           },
         ],
@@ -3000,18 +3000,18 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister() + 1
               ];
-            dmg.registers.setCurrentByte(n);
+            dmg.registers.setTempByte(n);
             dmg.registers.pointers.PC.increment();
           },
           (dmg: Gameboy) => {
             LDHAN16(
-              dmg.registers.getCurrentByte(),
+              dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.ram
             );
           },
           (dmg: Gameboy) => {
-            dmg.registers.setCurrentByte(0);
+            dmg.registers.setTempByte(0);
             dmg.registers.pointers.PC.increment();
           },
         ],

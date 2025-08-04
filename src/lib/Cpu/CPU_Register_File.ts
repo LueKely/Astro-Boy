@@ -57,8 +57,8 @@ export class Cpu_Register_File {
   private lowerByte = 0;
   private upperByte = 0;
 
-  // current Byte is used for storing n8 for insturctions
-  private currentByte = 0;
+  // current Byte is used for storing n8 for instructions
+  private tempByte = 0;
 
   setLowerByte(value: number) {
     this.lowerByte = value;
@@ -68,8 +68,8 @@ export class Cpu_Register_File {
     this.upperByte = value;
   }
 
-  setCurrentByte(value: number) {
-    this.currentByte = value;
+  setTempByte(value: number) {
+    this.tempByte = value;
   }
 
   getLowerByte() {
@@ -80,7 +80,7 @@ export class Cpu_Register_File {
     return this.upperByte;
   }
 
-  getCurrentByte() {
-    return this.currentByte;
+  getTempByte() {
+    return this.tempByte;
   }
 }
