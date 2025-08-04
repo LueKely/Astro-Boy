@@ -13,45 +13,43 @@ import type { IOpCodeEntry } from "./types/Opcode";
 export class Cpu_Scheduler {
   private dmg: Gameboy;
   private machineCycle: Array<(dmg: Gameboy) => void> = [];
-  private opCodes: Record<number, IOpCodeEntry>;
-  currentOpcode!: IOpCodeEntry;
+  private opCodes: CpuOpcodeRecord;
+  currentOpcode: IOpCodeEntry;
 
   constructor(gameboy: Gameboy) {
     this.dmg = gameboy;
-    this.opCodes = CpuOpcodeRecord(this.dmg.registers.register.F);
-    this.currentOpcode = this.opCodes[this.readByte()];
+    this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
+    this.currentOpcode = this.opCodes.get(this.readByte());
   }
 
-  private readByte(increment: number = 0) {
+  private readByte() {
     return this.dmg.cartridge.CartDataToBytes[
-      this.dmg.registers.pointers.PC.getRegister() + increment
+      this.dmg.registers.pointers.PC.getRegister()
     ];
   }
 
   private schedule() {
-    this.currentOpcode.jobs.forEach((entry, index) => {
-      // i can't really prefetch yet
-      //
-      // if (this.currentOpcode.cycles == index + 1) {
-      //   console.log("Next Instruction is:", this.readByte(1));
-      //   this.machineCycle.push(entry);
-      //   return;
-      // }
+    console.log("The Current Opcode is:", this.currentOpcode.name);
+    this.currentOpcode.jobs.forEach((entry) => {
       this.machineCycle.push(entry);
     });
   }
 
   tick() {
     if (this.machineCycle.length == 0) {
-      // FIX ME: this might be very very slow since there are atleast 200 of these opcodes
-      this.opCodes = CpuOpcodeRecord(this.dmg.registers.register.F);
-      this.currentOpcode = this.opCodes[this.readByte()];
+      this.currentOpcode = this.opCodes.get(this.readByte());
       this.schedule();
     }
 
     const job = this.machineCycle.shift();
     if (job) {
       job(this.dmg);
+      if (this.machineCycle.length == 1) {
+        console.log(
+          "The next Opcode is:",
+          this.opCodes.get(this.readByte()).name
+        );
+      }
     }
   }
 }
