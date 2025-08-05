@@ -157,6 +157,10 @@ function JPCCN16(CC: number) {
   }
 }
 
+function JPHL(HL: Cpu_Register_16Bit<"HL">, PC: Program_Counter_Register) {
+  PC.setRegister(HL.getRegister());
+}
+
 function RET() {
   return [
     (dmg: Gameboy) => {
@@ -180,8 +184,19 @@ function RET() {
   ];
 }
 
-function JPHL(HL: Cpu_Register_16Bit<"HL">, PC: Program_Counter_Register) {
-  PC.setRegister(HL.getRegister());
+function RETCC(cc: number) {
+  if (cc != 0) {
+    return RET();
+  }
+
+  return [
+    (dmg: Gameboy) => {
+      console.log("Current RET CC check is false moving to next opcode");
+    },
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+    },
+  ];
 }
 
-export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL };
+export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL, RETCC };
