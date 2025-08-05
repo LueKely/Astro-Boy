@@ -175,9 +175,13 @@ function RET() {
       dmg.registers.pointers.PC.setRegister(nn);
     },
     (dmg: Gameboy) => {
-      console.log("TODO: SOMEHTING SOMEHTING");
+      console.log("TODO: SOMETHING SOMETHING");
     },
   ];
 }
 
-export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET };
+function JPHL(HL: Cpu_Register_16Bit<"HL">, PC: Program_Counter_Register) {
+  PC.setRegister(HL.getRegister() + 1);
+}
+
+export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL };

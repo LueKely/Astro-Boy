@@ -37,6 +37,7 @@ import {
   CALLCCN16,
   CALLN16,
   JPCCN16,
+  JPHL,
   JPN16,
   RET,
 } from "./instructions/Jumps_And _Subroutine_Instructions";
@@ -3112,6 +3113,16 @@ export class CpuOpcodeRecord {
         cycles: 4,
         length: 1,
         jobs: RET(),
+      },
+      0xe9: {
+        name: "JP HL",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            JPHL(dmg.registers.register16Bit.HL, dmg.registers.pointers.PC);
+          },
+        ],
       },
     };
   }
