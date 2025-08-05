@@ -1,6 +1,6 @@
 import type { Gameboy } from "../Gameboy";
 import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
-import type { IOpCodeEntry } from "./types/Opcode";
+import type { IOpCodeEntry } from "./types/OpcodeTypes";
 
 // TODO:
 // Interupt Handling

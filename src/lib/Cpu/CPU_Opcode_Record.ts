@@ -36,6 +36,9 @@ import {
 import {
   CALLCCN16,
   CALLN16,
+  JPCCN16,
+  JPN16,
+  RET,
 } from "./instructions/Jumps_And _Subroutine_Instructions";
 import {
   LDAHLD,
@@ -57,7 +60,7 @@ import {
   LDR8N8,
   LDR8R8,
 } from "./instructions/LD_Instructions";
-import type { IOpCodeEntry } from "./types/Opcode";
+import type { IOpCodeEntry } from "./types/OpcodeTypes";
 
 // AUTHOR'S NOTE:
 //  BEHOLD!!!!!!!!!!!
@@ -3066,13 +3069,49 @@ export class CpuOpcodeRecord {
         name: "Call Z, nn",
         cycles: "if CC is True: 6 else 3",
         length: 3,
-        jobs: CALLCCN16(this.f.getZFlag() ^ 1),
+        jobs: CALLCCN16(this.f.getZFlag()),
       },
       0xdc: {
         name: "Call C, nn",
         cycles: "if CC is True: 6 else 3",
         length: 3,
-        jobs: CALLCCN16(this.f.getCYFlag() ^ 1),
+        jobs: CALLCCN16(this.f.getCYFlag()),
+      },
+      0xc3: {
+        name: "JP nn",
+        cycles: 4,
+        length: 3,
+        jobs: JPN16(),
+      },
+      0xc2: {
+        name: "JP NZ, nn",
+        cycles: "4 cycles if CC is true; 3",
+        length: 3,
+        jobs: JPCCN16(this.f.getZFlag() ^ 1),
+      },
+      0xd2: {
+        name: "JP NC, nn",
+        cycles: "4 cycles if CC is true; 3",
+        length: 3,
+        jobs: JPCCN16(this.f.getCYFlag() ^ 1),
+      },
+      0xca: {
+        name: "JP Z, nn",
+        cycles: "4 cycles if CC is true; 3",
+        length: 3,
+        jobs: JPCCN16(this.f.getZFlag()),
+      },
+      0xda: {
+        name: "JP C, nn",
+        cycles: "4 cycles if CC is true; 3",
+        length: 3,
+        jobs: JPCCN16(this.f.getCYFlag()),
+      },
+      0xc9: {
+        name: "RET",
+        cycles: 4,
+        length: 1,
+        jobs: RET(),
       },
     };
   }
