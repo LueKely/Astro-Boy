@@ -181,7 +181,7 @@ function RET() {
 }
 
 function JPHL(HL: Cpu_Register_16Bit<"HL">, PC: Program_Counter_Register) {
-  PC.setRegister(HL.getRegister() + 1);
+  PC.setRegister(HL.getRegister());
 }
 
 export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL };
