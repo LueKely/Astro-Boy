@@ -33,6 +33,7 @@ import {
   XORAN8,
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
+import { CCF, SCF } from "./instructions/Carry_Flag_Instructions";
 import {
   CALLCCN16,
   CALLN16,
@@ -3197,6 +3198,28 @@ export class CpuOpcodeRecord {
         cycles: 4,
         length: 1,
         jobs: RSTN(0x38),
+      },
+      0x3f: {
+        name: "CCF",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            CCF(dmg.registers.register.F);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x37: {
+        name: "SCF",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            SCF(dmg.registers.register.F);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
       },
     };
   }

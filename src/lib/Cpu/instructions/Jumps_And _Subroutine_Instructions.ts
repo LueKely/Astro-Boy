@@ -1,9 +1,8 @@
 import type { Gameboy } from "../../Gameboy";
 import type { Program_Counter_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
-// TODO THIS
-// least significant byte
-// most significant byte
+// TODO :THIS SHIT BROOOOOOOOOOOOOOO
+
 function CALLN16() {
   // author's notes: This shit is so scoffed
   return [
