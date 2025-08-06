@@ -4,7 +4,7 @@ function CCF(f: Cpu_Flag_Register) {
   // this is so stupid
   f.clearNFlag();
   f.clearHFlag();
-  const carryNot = ~f.getCYFlag();
+  const carryNot = f.getCYFlag() ^ 1;
   if (carryNot != 0) {
     f.setCYFlag();
   } else {
