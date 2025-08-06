@@ -1,5 +1,6 @@
 import type { Gameboy } from "../Gameboy";
 import type { Cpu_Flag_Register } from "./CPU_Flag_Register";
+import { INCR16 } from "./instructions/16bit_Arithmetic_Instructions";
 import {
   ADCAHL,
   ADCAN8,
@@ -3049,7 +3050,7 @@ export class CpuOpcodeRecord {
           },
         ],
       },
-
+      // ROUTINE INSTRUCTIONS
       0xcd: {
         name: "Call nn",
         cycles: 6,
@@ -3217,6 +3218,52 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             SCF(dmg.registers.register.F);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+
+      //16bit arithmetic
+      0x03: {
+        name: "INC BC",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            INCR16(dmg.registers.register16Bit.BC);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x13: {
+        name: "INC DE",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            INCR16(dmg.registers.register16Bit.DE);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x23: {
+        name: "INC HL",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            INCR16(dmg.registers.register16Bit.HL);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x33: {
+        name: "INC SP",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            INCR16(dmg.registers.pointers.SP);
             dmg.registers.pointers.PC.increment();
           },
         ],
