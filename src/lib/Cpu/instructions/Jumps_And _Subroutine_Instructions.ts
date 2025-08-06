@@ -50,7 +50,7 @@ function CALLN16() {
     // M7/1
     (dmg: Gameboy) => {
       // dmg.registers.pointers.PC.increment();
-      console.log("TODO: DO SOMETHING HERE");
+      console.log("CALL FINISHED");
     },
   ];
 }
@@ -114,7 +114,7 @@ function JPN16() {
     },
     // M1/M5
     (dmg: Gameboy) => {
-      console.log("TODO: DO SOMETHING HERE");
+      console.log("JUMPED FINISHED");
     },
   ];
 }
@@ -177,7 +177,7 @@ function RET() {
       dmg.registers.pointers.PC.setRegister(nn);
     },
     (dmg: Gameboy) => {
-      console.log("TODO: SOMETHING SOMETHING");
+      console.log("RET PROTOCOL FINISHED");
     },
   ];
 }
@@ -217,7 +217,7 @@ function RSTN(n: number) {
     },
     // M5
     (dmg: Gameboy) => {
-      console.log("TODO: SOMETHING SOMETHING");
+      console.log("RST Protocol Finished");
     },
   ];
 }
