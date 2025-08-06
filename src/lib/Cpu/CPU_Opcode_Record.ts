@@ -3317,13 +3317,70 @@ export class CpuOpcodeRecord {
         ],
       },
       0x09: {
-        name: "HL BC",
+        name: "ADD HL BC",
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
+            console.log("ADD HL BC");
+          },
+          (dmg: Gameboy) => {
             ADDHLR16(
               dmg.registers.register16Bit.BC,
+              dmg.registers.register16Bit.HL,
+              dmg.registers.register.F
+            );
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x19: {
+        name: "ADD HL DE",
+        cycles: 2,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            console.log("ADD HL DE");
+          },
+          (dmg: Gameboy) => {
+            ADDHLR16(
+              dmg.registers.register16Bit.DE,
+              dmg.registers.register16Bit.HL,
+              dmg.registers.register.F
+            );
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x29: {
+        name: "ADD HL HL",
+        cycles: 2,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            console.log("ADD HL HL");
+          },
+          (dmg: Gameboy) => {
+            ADDHLR16(
+              dmg.registers.register16Bit.HL,
+              dmg.registers.register16Bit.HL,
+              dmg.registers.register.F
+            );
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x39: {
+        name: "ADD HL SP",
+        cycles: 2,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            console.log("ADD HL SP");
+          },
+          (dmg: Gameboy) => {
+            ADDHLR16(
+              dmg.registers.register16Bit.DE,
               dmg.registers.register16Bit.HL,
               dmg.registers.register.F
             );
