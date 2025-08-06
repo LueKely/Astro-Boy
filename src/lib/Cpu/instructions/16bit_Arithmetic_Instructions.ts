@@ -7,11 +7,11 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  * @description Add the value in r16 to HL.
  **/
 function ADDHLR16(
-  r16: number,
+  r16: Cpu_Register_16Bit<any>,
   registerHL: Cpu_Register_16Bit<"HL">,
   flagRegister: Cpu_Flag_Register
 ) {
-  const sum = r16 + registerHL.getRegister();
+  const sum = r16.getRegister() + registerHL.getRegister();
 
   validateR16Addition(sum, flagRegister);
 

@@ -1,6 +1,10 @@
 import type { Gameboy } from "../Gameboy";
 import type { Cpu_Flag_Register } from "./CPU_Flag_Register";
-import { DECR16, INCR16 } from "./instructions/16bit_Arithmetic_Instructions";
+import {
+  ADDHLR16,
+  DECR16,
+  INCR16,
+} from "./instructions/16bit_Arithmetic_Instructions";
 import {
   ADCAHL,
   ADCAN8,
@@ -3308,6 +3312,21 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             DECR16(dmg.registers.pointers.SP);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0x09: {
+        name: "HL BC",
+        cycles: 2,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            ADDHLR16(
+              dmg.registers.register16Bit.BC,
+              dmg.registers.register16Bit.HL,
+              dmg.registers.register.F
+            );
             dmg.registers.pointers.PC.increment();
           },
         ],

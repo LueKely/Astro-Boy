@@ -9,8 +9,8 @@ import {
 describe("ADD HL, R16 Functionalities", () => {
   test("The sum of the opearation should be 2_082 and no flags should be raised", () => {
     const CPU = new Cpu_Register_File();
-    const r16 = 1_041;
-
+    const { BC: r16 } = CPU.register16Bit;
+    r16.setRegister(1_041);
     CPU.register16Bit.HL.setRegister(1_041);
 
     ADDHLR16(r16, CPU.register16Bit.HL, CPU.register.F);
@@ -23,7 +23,9 @@ describe("ADD HL, R16 Functionalities", () => {
 
   test("Sum should be 4_096 and should raise the HF Flag", () => {
     const CPU = new Cpu_Register_File();
-    const r16 = 0xfff;
+
+    const { DE: r16 } = CPU.register16Bit;
+    r16.setRegister(0xfff);
 
     CPU.register16Bit.HL.setRegister(1);
 
@@ -37,7 +39,8 @@ describe("ADD HL, R16 Functionalities", () => {
 
   test("Sum of the opperation should raise both the HF and CY flag", () => {
     const CPU = new Cpu_Register_File();
-    const r16 = 0xffff;
+    const { DE: r16 } = CPU.register16Bit;
+    r16.setRegister(0xffff);
 
     CPU.register16Bit.HL.setRegister(1);
 
