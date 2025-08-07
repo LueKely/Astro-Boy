@@ -135,4 +135,4 @@ function LDHLSPe() {
 	];
 }
 
-export { LDNNSP, ADDSPe };
+export { LDNNSP, ADDSPe, LDHLSPe };
