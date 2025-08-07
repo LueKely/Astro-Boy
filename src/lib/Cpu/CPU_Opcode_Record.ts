@@ -70,6 +70,7 @@ import {
   LDR8N8,
   LDR8R8,
 } from "./instructions/LD_Instructions";
+import { ADDSPe, LDNNSP } from "./instructions/Stack_Manipulation_Instructions";
 import type { IOpCodeEntry } from "./types/OpcodeTypes";
 
 // AUTHOR'S NOTE:
@@ -3394,90 +3395,14 @@ export class CpuOpcodeRecord {
         name: "ADD SP, e",
         cycles: 4,
         length: 2,
-        jobs: [
-          (dmg: Gameboy) => {
-            dmg.registers.pointers.PC.increment();
-            const e =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
-            dmg.registers.setLowerByte(e);
-          },
-          (dmg: Gameboy) => {
-            // settig up e
-            const e = dmg.registers.getLowerByte();
-            const lsbSP = dmg.registers.pointers.SP.getRegister() && 0xff;
-            const result = lsbSP + e;
-            validateADDSPe(lsbSP, e, dmg.registers.register.F);
-            dmg.registers.setLowerByte(result & 0xff);
-          },
-          (dmg: Gameboy) => {
-            const e = dmg.registers.getLowerByte();
-            const adj = e > 127 ? 0xff : 0x00;
-            const spHigh =
-              (dmg.registers.pointers.SP.getRegister() >> 8) & 0xff;
-            const carry = dmg.registers.register.F.getCYFlag();
-
-            const result = spHigh + adj + carry;
-            dmg.registers.setUpperByte(result & 0xff);
-          },
-          (dmg: Gameboy) => {
-            const newSP =
-              (dmg.registers.getUpperByte() << 8) |
-              dmg.registers.getLowerByte();
-            dmg.registers.pointers.SP.setRegister(newSP);
-            dmg.registers.pointers.PC.increment();
-          },
-        ],
+        jobs: ADDSPe(),
       },
 
       0x08: {
         name: "LD (nn), SP",
         cycles: 5,
         length: 3,
-        jobs: [
-          // M2
-          (dmg: Gameboy) => {
-            dmg.registers.pointers.PC.increment();
-            const lsb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
-            dmg.registers.setLowerByte(lsb);
-          },
-          // M3
-          (dmg: Gameboy) => {
-            dmg.registers.pointers.PC.increment();
-            const msb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
-            dmg.registers.setUpperByte(msb);
-          },
-          // M4
-          (dmg: Gameboy) => {
-            dmg.registers.setTempByte(
-              dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
-            );
-            dmg.ram.setMemoryAt(
-              dmg.registers.getTempByte(),
-              dmg.registers.pointers.SP.getRegister() & 0xff
-            );
-
-            dmg.registers.setTempByte(dmg.registers.getTempByte() + 1);
-          },
-          // M5
-          (dmg: Gameboy) => {
-            dmg.ram.setMemoryAt(
-              dmg.registers.getTempByte(),
-              dmg.registers.pointers.SP.getRegister() >> 8
-            );
-          },
-          // M1/M6
-          (dmg: Gameboy) => {
-            dmg.registers.pointers.PC.increment();
-          },
-        ],
+        jobs: LDNNSP(),
       },
     };
   }
