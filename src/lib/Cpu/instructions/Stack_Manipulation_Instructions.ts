@@ -1,25 +1,12 @@
 //  ADD HL, SP - untested
 
+import type { Ram } from "../../Ram/Ram";
 import { validateR16Addition } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Program_Counter_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
 
-// untested
-/**
- * @description Add the value in SP to HL.
- **/
-function ADDHLSP(
-  registerHL: Cpu_Register_16Bit<any>,
-  registerSP: Program_Counter_Register,
-  registerF: Cpu_Flag_Register
-) {
-  const sum = registerHL.getRegister() + registerSP.getRegister();
-
-  validateR16Addition(sum, registerF);
-  registerHL.setRegister(sum);
-}
-// untested
+// untested this shit is wrong
 // not sure about this will gather information about this
 function ADDSPE8(
   e8: number,
@@ -44,4 +31,8 @@ function ADDSPE8(
   SP.setRegister(sum);
 }
 
-export { ADDHLSP, ADDSPE8 };
+// DONE WITH INC SP And DEC SP
+// DONE LD SP NN (LD r16 nn)
+// WORKING ON LD NN SP
+
+export { ADDSPE8 };

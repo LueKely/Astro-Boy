@@ -202,6 +202,24 @@ function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
   F.clearNFlag();
 }
 
+function validateADDSPe(lsbSP: number, e: number, F: Cpu_Flag_Register) {
+  F.clearZFlag();
+  F.clearNFlag();
+
+  const result = lsbSP + e;
+
+  if ((lsbSP & 0xf) + (e & 0xf) > 0xf) {
+    F.setHFlag();
+  } else {
+    F.clearHFlag();
+  }
+  if (result > 0xff) {
+    F.setCYFlag();
+  } else {
+    F.clearCYFlag();
+  }
+}
+
 export {
   validateR8Addition,
   validateR16Addition,
@@ -214,4 +232,5 @@ export {
   validateBitShiftAccOperation,
   validateBitShiftOperation,
   validateSwapOperation,
+  validateADDSPe,
 };

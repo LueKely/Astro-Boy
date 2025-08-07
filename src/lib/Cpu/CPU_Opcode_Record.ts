@@ -1,4 +1,5 @@
 import type { Gameboy } from "../Gameboy";
+import { validateADDSPe } from "../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "./CPU_Flag_Register";
 import {
   ADDHLR16,
@@ -75,7 +76,7 @@ import type { IOpCodeEntry } from "./types/OpcodeTypes";
 //  BEHOLD!!!!!!!!!!!
 
 // i havent implemented
-// CPL, CCF, HALT, RETI
+//  HALT, RETI
 // TODO MAKE THIS INTO A CLASS
 export class CpuOpcodeRecord {
   private f: Cpu_Flag_Register;
@@ -1636,7 +1637,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x31: {
-        name: "LD SP NN",
+        name: "LD SP, NN",
         cycles: 3,
         length: 3,
         jobs: [
@@ -3322,7 +3323,7 @@ export class CpuOpcodeRecord {
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL BC");
+            console.log("ADD HL, BC");
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3335,7 +3336,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x19: {
-        name: "ADD HL DE",
+        name: "ADD HL, DE",
         cycles: 2,
         length: 1,
         jobs: [
@@ -3358,7 +3359,7 @@ export class CpuOpcodeRecord {
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL HL");
+            console.log("ADD HL, HL");
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3371,12 +3372,12 @@ export class CpuOpcodeRecord {
         ],
       },
       0x39: {
-        name: "ADD HL SP",
+        name: "ADD HL, SP",
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL SP");
+            console.log("ADD HL, SP");
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3384,6 +3385,47 @@ export class CpuOpcodeRecord {
               dmg.registers.register16Bit.HL,
               dmg.registers.register.F
             );
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+
+      0xe8: {
+        name: "ADD SP, e",
+        cycles: 4,
+        length: 2,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+            const e =
+              dmg.cartridge.CartDataToBytes[
+                dmg.registers.pointers.PC.getRegister()
+              ];
+            dmg.registers.setLowerByte(e); // Store e temporarily
+          },
+          (dmg: Gameboy) => {
+            // settig up e
+            const e = dmg.registers.getLowerByte();
+            const lsbSP = dmg.registers.pointers.SP.getRegister() && 0xff;
+            const result = lsbSP + e;
+            validateADDSPe(lsbSP, e, dmg.registers.register.F);
+            dmg.registers.setLowerByte(result & 0xff);
+          },
+          (dmg: Gameboy) => {
+            const e = dmg.registers.getLowerByte();
+            const adj = e > 127 ? 0xff : 0x00;
+            const spHigh =
+              (dmg.registers.pointers.SP.getRegister() >> 8) & 0xff;
+            const carry = dmg.registers.register.F.getCYFlag();
+
+            const result = spHigh + adj + carry;
+            dmg.registers.setUpperByte(result & 0xff);
+          },
+          (dmg: Gameboy) => {
+            const newSP =
+              (dmg.registers.getUpperByte() << 8) |
+              dmg.registers.getLowerByte();
+            dmg.registers.pointers.SP.setRegister(newSP);
             dmg.registers.pointers.PC.increment();
           },
         ],
