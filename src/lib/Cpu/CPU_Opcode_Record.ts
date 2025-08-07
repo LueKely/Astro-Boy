@@ -3401,7 +3401,7 @@ export class CpuOpcodeRecord {
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister()
               ];
-            dmg.registers.setLowerByte(e); // Store e temporarily
+            dmg.registers.setLowerByte(e);
           },
           (dmg: Gameboy) => {
             // settig up e
@@ -3426,6 +3426,53 @@ export class CpuOpcodeRecord {
               (dmg.registers.getUpperByte() << 8) |
               dmg.registers.getLowerByte();
             dmg.registers.pointers.SP.setRegister(newSP);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+
+      0x08: {
+        name: "LD (nn), SP",
+        cycles: 5,
+        length: 3,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+            const lsb =
+              dmg.cartridge.CartDataToBytes[
+                dmg.registers.pointers.PC.getRegister()
+              ];
+            dmg.registers.setLowerByte(lsb);
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+            const lsb =
+              dmg.cartridge.CartDataToBytes[
+                dmg.registers.pointers.PC.getRegister()
+              ];
+            dmg.registers.setUpperByte(lsb);
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.setTempByte(
+              dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
+            );
+            dmg.ram.setMemoryAt(
+              dmg.registers.getTempByte(),
+              dmg.registers.pointers.SP.getRegister() & 0xff00
+            );
+
+            dmg.registers.setTempByte(dmg.registers.getTempByte() + 1);
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.setTempByte(
+              dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
+            );
+            dmg.ram.setMemoryAt(
+              dmg.registers.getTempByte(),
+              dmg.registers.pointers.SP.getRegister() >> 8
+            );
+          },
+          (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
           },
         ],
