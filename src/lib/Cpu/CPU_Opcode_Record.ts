@@ -3436,6 +3436,7 @@ export class CpuOpcodeRecord {
         cycles: 5,
         length: 3,
         jobs: [
+          // M2
           (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
             const lsb =
@@ -3444,34 +3445,35 @@ export class CpuOpcodeRecord {
               ];
             dmg.registers.setLowerByte(lsb);
           },
+          // M3
           (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
-            const lsb =
+            const msb =
               dmg.cartridge.CartDataToBytes[
                 dmg.registers.pointers.PC.getRegister()
               ];
-            dmg.registers.setUpperByte(lsb);
+            dmg.registers.setUpperByte(msb);
           },
+          // M4
           (dmg: Gameboy) => {
             dmg.registers.setTempByte(
               dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
             );
             dmg.ram.setMemoryAt(
               dmg.registers.getTempByte(),
-              dmg.registers.pointers.SP.getRegister() & 0xff00
+              dmg.registers.pointers.SP.getRegister() & 0xff
             );
 
             dmg.registers.setTempByte(dmg.registers.getTempByte() + 1);
           },
+          // M5
           (dmg: Gameboy) => {
-            dmg.registers.setTempByte(
-              dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
-            );
             dmg.ram.setMemoryAt(
               dmg.registers.getTempByte(),
               dmg.registers.pointers.SP.getRegister() >> 8
             );
           },
+          // M1/M6
           (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
           },
