@@ -110,10 +110,11 @@ function JPN16() {
       const nn =
         dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8);
       dmg.registers.pointers.PC.setRegister(nn);
+      console.log("jumping to address: ", nn);
     },
     // M1/M5
     (dmg: Gameboy) => {
-      console.log("JUMPED FINISHED");
+      console.log("JPN16 finished");
     },
   ];
 }

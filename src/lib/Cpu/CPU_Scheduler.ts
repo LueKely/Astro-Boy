@@ -36,20 +36,32 @@ export class Cpu_Scheduler {
   }
 
   tick() {
-    if (this.machineCycle.length == 0) {
-      this.currentOpcode = this.opCodes.get(this.readByte());
-      this.schedule();
-    }
-
-    const job = this.machineCycle.shift();
-    if (job) {
-      job(this.dmg);
-      if (this.machineCycle.length == 1) {
-        console.log(
-          "The next Opcode is:",
-          this.opCodes.get(this.readByte()).name
-        );
+    try {
+      if (this.machineCycle.length == 0) {
+        this.currentOpcode = this.opCodes.get(this.readByte());
+        this.schedule();
+        this.dmg.log();
       }
+
+      const job = this.machineCycle.shift();
+      if (job) {
+        job(this.dmg);
+        if (this.machineCycle.length == 1) {
+          console.log(
+            "The next Opcode is:",
+            this.opCodes.get(this.readByte()).name
+          );
+        }
+      }
+    } catch {
+      const notImplemented =
+        this.dmg.cartridge.CartDataToBytes[
+          this.dmg.registers.pointers.PC.getRegister()
+        ];
+      this.dmg.log();
+      throw new Error(
+        "OP CODE NOT Implemented " + notImplemented + " Please Check LOGS"
+      );
     }
   }
 }

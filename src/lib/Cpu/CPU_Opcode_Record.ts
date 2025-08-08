@@ -1572,8 +1572,9 @@ export class CpuOpcodeRecord {
           },
         ],
       },
+
       0x11: {
-        name: "LD DE NN",
+        name: "LD DE, NN",
         cycles: 3,
         length: 3,
         jobs: [

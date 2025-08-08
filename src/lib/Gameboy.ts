@@ -13,10 +13,37 @@ export class Gameboy {
     this.registers = new Cpu_Register_File();
     this.ram = new Ram();
     this.cartridge = new GameBoyCatridge(game);
+    // console.log(this.cartridge.CartDataToBytes);
     this.scheduler = new Cpu_Scheduler(this);
   }
 
+  log() {
+    console.log("A: ", this.registers.register.A.getRegister());
+    console.log("B: ", this.registers.register.B.getRegister());
+    console.log("C: ", this.registers.register.C.getRegister());
+    console.log("D: ", this.registers.register.D.getRegister());
+    console.log("E: ", this.registers.register.E.getRegister());
+    console.log("H: ", this.registers.register.H.getRegister());
+    console.log("L: ", this.registers.register.L.getRegister());
+    console.log("F: ", this.registers.register.F.getRegister());
+    console.log("TempByte: ", this.registers.getTempByte());
+    console.log("Lowerbyte: ", this.registers.getLowerByte());
+    console.log("Upperbyte: ", this.registers.getUpperByte());
+    console.log("Program Counter: ", this.registers.pointers.PC.getRegister());
+    console.log("Stack Pointer: ", this.registers.pointers.SP.getRegister());
+  }
   run() {
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
+    this.scheduler.tick();
     this.scheduler.tick();
   }
 }
