@@ -70,7 +70,11 @@ import {
   LDR8N8,
   LDR8R8,
 } from "./instructions/LD_Instructions";
-import { ADDSPe, LDNNSP } from "./instructions/Stack_Manipulation_Instructions";
+import {
+  ADDSPe,
+  LDHLSPe,
+  LDNNSP,
+} from "./instructions/Stack_Manipulation_Instructions";
 import type { IOpCodeEntry } from "./types/OpcodeTypes";
 
 // AUTHOR'S NOTE:
@@ -3403,6 +3407,25 @@ export class CpuOpcodeRecord {
         cycles: 5,
         length: 3,
         jobs: LDNNSP(),
+      },
+      0xf8: {
+        name: "LD HL, SP+e",
+        cycles: 3,
+        length: 2,
+        jobs: LDHLSPe(),
+      },
+      0xf9: {
+        name: "LD SP, HL",
+        cycles: 1,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.SP.setRegister(
+              dmg.registers.register16Bit.HL.getRegister()
+            );
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
       },
     };
   }
