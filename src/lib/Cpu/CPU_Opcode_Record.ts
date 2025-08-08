@@ -3428,6 +3428,118 @@ export class CpuOpcodeRecord {
           },
         ],
       },
+      0xc1: {
+        name: "POP BC",
+        cycles: 3,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            const lsb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setLowerByte(lsb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const msb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setUpperByte(msb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const WZ =
+              dmg.registers.getLowerByte() |
+              (dmg.registers.getUpperByte() << 8);
+            dmg.registers.register16Bit.BC.setRegister(WZ);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xd1: {
+        name: "POP DE",
+        cycles: 3,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            const lsb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setLowerByte(lsb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const msb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setUpperByte(msb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const WZ =
+              dmg.registers.getLowerByte() |
+              (dmg.registers.getUpperByte() << 8);
+            dmg.registers.register16Bit.DE.setRegister(WZ);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xe1: {
+        name: "POP HL ",
+        cycles: 3,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            const lsb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setLowerByte(lsb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const msb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setUpperByte(msb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const WZ =
+              dmg.registers.getLowerByte() |
+              (dmg.registers.getUpperByte() << 8);
+            dmg.registers.register16Bit.HL.setRegister(WZ);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xf1: {
+        name: "POP AF ",
+        cycles: 3,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            const lsb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setLowerByte(lsb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const msb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.SP.getRegister()
+            );
+            dmg.registers.setUpperByte(msb);
+            dmg.registers.pointers.SP.increment();
+          },
+          (dmg: Gameboy) => {
+            const WZ =
+              dmg.registers.getLowerByte() |
+              (dmg.registers.getUpperByte() << 8);
+            dmg.registers.register16Bit.AF.setRegister(WZ);
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
     };
   }
 }

@@ -2,13 +2,11 @@
 
 import type { Gameboy } from "../../Gameboy";
 import type { Ram } from "../../Ram/Ram";
-import {
-  validateADDSPe,
-  validateR16Addition,
-} from "../../utils/instructions/instruction_utils";
+import { validateADDSPe } from "../../utils/instructions/instruction_utils";
 import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
 import type { Program_Counter_Register } from "../CPU_Pointer_Register";
 import type { Cpu_Register_16Bit } from "../CPU_Register";
+import type { Cpu_Register_File } from "../CPU_Register_File";
 
 // DONE WITH INC SP And DEC SP
 // DONE LD SP NN (LD r16 nn)
@@ -90,6 +88,7 @@ function LDNNSP() {
 }
 
 function LDHLSPe() {
+  // FIX ME: Validation is a bit scuffed
   return [
     // M2
     (dmg: Gameboy) => {
