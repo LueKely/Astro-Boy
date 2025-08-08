@@ -3512,30 +3512,106 @@ export class CpuOpcodeRecord {
           },
         ],
       },
-      0xf1: {
-        name: "POP AF ",
-        cycles: 3,
+      0xc5: {
+        name: "PUSH BC ",
+        cycles: 4,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            const lsb = dmg.ram.getMemoryAt(
-              dmg.registers.pointers.SP.getRegister()
-            );
-            dmg.registers.setLowerByte(lsb);
-            dmg.registers.pointers.SP.increment();
+            dmg.registers.pointers.SP.decrement();
           },
           (dmg: Gameboy) => {
-            const msb = dmg.ram.getMemoryAt(
-              dmg.registers.pointers.SP.getRegister()
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.B.getRegister()
             );
-            dmg.registers.setUpperByte(msb);
-            dmg.registers.pointers.SP.increment();
+            dmg.registers.pointers.SP.decrement();
           },
           (dmg: Gameboy) => {
-            const WZ =
-              dmg.registers.getLowerByte() |
-              (dmg.registers.getUpperByte() << 8);
-            dmg.registers.register16Bit.AF.setRegister(WZ);
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.C.getRegister()
+            );
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xd5: {
+        name: "PUSH DE ",
+        cycles: 4,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.D.getRegister()
+            );
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.E.getRegister()
+            );
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xe5: {
+        name: "PUSH HL ",
+        cycles: 4,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.H.getRegister()
+            );
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.L.getRegister()
+            );
+          },
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.PC.increment();
+          },
+        ],
+      },
+      0xf5: {
+        name: "PUSH AF ",
+        cycles: 4,
+        length: 1,
+        jobs: [
+          (dmg: Gameboy) => {
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.A.getRegister()
+            );
+            dmg.registers.pointers.SP.decrement();
+          },
+          (dmg: Gameboy) => {
+            dmg.ram.setMemoryAt(
+              dmg.registers.pointers.SP.getRegister(),
+              dmg.registers.register.F.getRegister()
+            );
+          },
+          (dmg: Gameboy) => {
             dmg.registers.pointers.PC.increment();
           },
         ],
