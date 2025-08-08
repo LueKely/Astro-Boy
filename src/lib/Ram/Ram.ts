@@ -9,6 +9,15 @@ export class Ram {
 		this.memory = new Uint8Array(0x10000);
 	}
 
+	setIE() {}
+	setIF() {}
+
+	getIE() {
+		return this.memory[0xffff];
+	}
+	getIF() {
+		return this.memory[0xff0f];
+	}
 	getMemory() {
 		return this.memory;
 	}
