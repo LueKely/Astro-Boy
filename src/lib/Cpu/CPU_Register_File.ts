@@ -58,6 +58,7 @@ export class Cpu_Register_File {
   private upperByte = 0;
 
   // current Byte is used for storing n8 for instructions
+  // future lue - not anymore it isn't lol
   private tempByte = 0;
 
   setLowerByte(value: number) {
