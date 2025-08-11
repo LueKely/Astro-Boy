@@ -19,9 +19,26 @@ export class Interrupt_Handler {
       (dmg: Gameboy) => {
         console.log("Interupt had started");
       },
-      (dmg: Gameboy) => {},
-      (dmg: Gameboy) => {},
-      (dmg: Gameboy) => {},
+      (dmg: Gameboy) => {
+        dmg.registers.pointers.SP.decrement();
+        dmg.ram.setMemoryAt(
+          dmg.registers.pointers.SP.getRegister(),
+          dmg.registers.pointers.PC.getRegister() >>> 8
+        );
+      },
+      (dmg: Gameboy) => {
+        dmg.registers.pointers.SP.decrement();
+        dmg.ram.setMemoryAt(
+          dmg.registers.pointers.SP.getRegister(),
+          dmg.registers.pointers.PC.getRegister() & 0xff
+        );
+      },
+      (dmg: Gameboy) => {
+        //  Clear interrupt flag
+        //  Disable interrupts
+        //  Jump to 0x40, 0x48, 0x50, 0x58, or 0x60
+        dmg.registers.pointers.PC.setRegister(priorityFlag);
+      },
     ];
   }
 }
