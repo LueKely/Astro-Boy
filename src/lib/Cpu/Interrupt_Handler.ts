@@ -13,8 +13,12 @@ export class Interrupt_Handler {
 
   createCycles(priorityFlag: number) {
     return [
-      (dmg: Gameboy) => {},
-      (dmg: Gameboy) => {},
+      (dmg: Gameboy) => {
+        console.log("Interupt had started");
+      },
+      (dmg: Gameboy) => {
+        console.log("Interupt had started");
+      },
       (dmg: Gameboy) => {},
       (dmg: Gameboy) => {},
       (dmg: Gameboy) => {},
