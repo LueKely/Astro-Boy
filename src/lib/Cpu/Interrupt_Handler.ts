@@ -22,15 +22,37 @@ export class Interrupt_Handler {
     // joypad Interrupt
     4: 0x60,
   };
+  private static bitTable: Record<number, number> = {
+    0b0_0001: 0,
+    0b0_0010: 1,
+    0b0_0100: 2,
+    0b0_1000: 3,
+    0b1_0000: 4,
+  };
 
   constructor(dmg: Gameboy) {
     this.dmg = dmg;
   }
-
+  // wrong logic
   // find a way to prioritize the serial codes
+  private prioritize() {
+    const IF = this.dmg.ram.getIF();
+    const value = [
+      IF & 0x0b0_0001,
+      IF & 0x0b0_0010,
+      IF & 0x0b0_0100,
+      IF & 0x0b0_1000,
+      IF & 0x0b1_0000,
+    ];
+
+    return value.reduce((accumulator, currentValue) => {
+      return currentValue < accumulator ? currentValue : accumulator;
+    }, 0);
+  }
 
   // todo create priority look up
-  createCycles(priorityFlag: number) {
+  createCycles() {
+    this.priorityBit = Interrupt_Handler.bitTable[this.prioritize()];
     return [
       (dmg: Gameboy) => {
         console.log("Interupt had started");
@@ -54,11 +76,15 @@ export class Interrupt_Handler {
       },
       (dmg: Gameboy) => {
         //  Clear interrupt flag
-        dmg.ram.getIF();
+        dmg.ram.setMemoryAt(
+          0xff0f,
+          dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit)
+        );
         //  Disable interrupts
+        dmg.registers.IME.clearFlag();
         //  Jump to 0x40, 0x48, 0x50, 0x58, or 0x60
         dmg.registers.pointers.PC.setRegister(
-          Interrupt_Handler.LookUpTable[priorityFlag]
+          Interrupt_Handler.LookUpTable[this.priorityBit]
         );
       },
     ];

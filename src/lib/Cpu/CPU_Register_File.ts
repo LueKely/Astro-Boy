@@ -4,7 +4,7 @@ import {
   Program_Counter_Register,
   Stack_Pointer_Register,
 } from "./CPU_Pointer_Register";
-import { Cpu_Register, Cpu_Register_16Bit } from "./CPU_Register";
+import { Cpu_Register, Cpu_Register_16Bit, IME } from "./CPU_Register";
 
 /*
  * The CPU REGISTER
@@ -33,6 +33,7 @@ export class Cpu_Register_File {
     // IGNORE THIS
   };
 
+  IME = new IME();
   // i think i might've shoot myself on the foot
   //this'll be a temporary solution for now (i hope)
   private S = new Cpu_Register<any>(0);
