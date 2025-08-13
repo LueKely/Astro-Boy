@@ -3,21 +3,33 @@
 // making some addresses readonly prolly make this some sort of hook
 
 export class Ram {
-	protected memory: Uint8Array;
+  protected memory: Uint8Array;
 
-	constructor() {
-		this.memory = new Uint8Array(0x10000);
-	}
+  constructor() {
+    this.memory = new Uint8Array(0x10000);
+  }
+  // is hardware controlled
+  setIE() {}
 
-	getMemory() {
-		return this.memory;
-	}
+  getIE() {
+    return this.memory[0xffff];
+  }
+  getIF() {
+    return this.memory[0xff0f];
+  }
 
-	getMemoryAt(index: number) {
-		return this.memory[index];
-	}
+  isAllowedToInterrupt() {
+    return (this.getIE() & this.getIF()) != 0;
+  }
+  getMemory() {
+    return this.memory;
+  }
 
-	setMemoryAt(pointer: number, value: number) {
-		this.memory[pointer] = value & 0xff;
-	}
+  getMemoryAt(index: number) {
+    return this.memory[index];
+  }
+
+  setMemoryAt(pointer: number, value: number) {
+    this.memory[pointer] = value & 0xff;
+  }
 }

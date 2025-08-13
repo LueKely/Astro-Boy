@@ -1,5 +1,6 @@
 import type { Gameboy } from "../Gameboy";
 import { CpuOpcodeRecord } from "./CPU_Opcode_Record";
+import { Interrupt_Handler } from "./Interrupt_Handler";
 import type { IOpCodeEntry } from "./types/OpcodeTypes";
 
 // TODO:
@@ -14,11 +15,13 @@ export class Cpu_Scheduler {
   private dmg: Gameboy;
   private machineCycle: Array<(dmg: Gameboy) => void> = [];
   private opCodes: CpuOpcodeRecord;
+  private interruptHandler: Interrupt_Handler;
   currentOpcode: IOpCodeEntry;
 
   constructor(gameboy: Gameboy) {
     this.dmg = gameboy;
     this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
+    this.interruptHandler = new Interrupt_Handler(this.dmg);
     this.currentOpcode = this.opCodes.get(this.readByte());
   }
 
@@ -29,10 +32,20 @@ export class Cpu_Scheduler {
   }
 
   private schedule() {
-    console.log("The Current Opcode is:", this.currentOpcode.name);
-    this.currentOpcode.jobs.forEach((entry) => {
-      this.machineCycle.push(entry);
-    });
+    if (
+      this.dmg.registers.IME.getValue() &&
+      this.dmg.ram.isAllowedToInterrupt()
+    ) {
+      const interruptCycles = this.interruptHandler.createCycles();
+      interruptCycles.forEach((entry) => {
+        this.machineCycle.push(entry);
+      });
+    } else {
+      console.log("The Current Opcode is:", this.currentOpcode.name);
+      this.currentOpcode.jobs.forEach((entry) => {
+        this.machineCycle.push(entry);
+      });
+    }
   }
 
   tick() {

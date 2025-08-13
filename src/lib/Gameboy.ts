@@ -18,6 +18,7 @@ export class Gameboy {
   }
 
   log() {
+    // this looks like ass i regret doing registers.register
     console.log("A: ", this.registers.register.A.getRegister());
     console.log("B: ", this.registers.register.B.getRegister());
     console.log("C: ", this.registers.register.C.getRegister());
@@ -31,6 +32,11 @@ export class Gameboy {
     console.log("Upperbyte: ", this.registers.getUpperByte());
     console.log("Program Counter: ", this.registers.pointers.PC.getRegister());
     console.log("Stack Pointer: ", this.registers.pointers.SP.getRegister());
+
+    // INTERRUPTS
+    console.log("IME: ", this.registers.IME.getValue());
+    console.log("IF: ", this.ram.getIF());
+    console.log("IE: ", this.ram.getIE());
   }
   run() {
     this.scheduler.tick();
