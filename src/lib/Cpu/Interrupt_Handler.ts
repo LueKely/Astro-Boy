@@ -1,7 +1,7 @@
 // Pre-conditions (must all be true):
 // Find highest priority interrupt
 // CPU executes interrupt service routine (5 M-cycles total):
-// Routine is based on the prioritized opcode to be cleared
+// Routine is ba  sed on the prioritized opcode to be cleared
 
 // todo handle timer inside gb
 import type { Gameboy } from "../Gameboy";
@@ -22,39 +22,26 @@ export class Interrupt_Handler {
     // joypad Interrupt
     4: 0x60,
   };
-  private static bitTable: Record<number, number> = {
-    0b0_0001: 0,
-    0b0_0010: 1,
-    0b0_0100: 2,
-    0b0_1000: 3,
-    0b1_0000: 4,
-  };
 
   constructor(dmg: Gameboy) {
     this.dmg = dmg;
   }
-  // wrong logic
-  // find a way to prioritize the serial codes
+
   private prioritize() {
     const IF = this.dmg.ram.getIF();
-    const value = [
-      IF & 0b0_0001,
-      IF & 0b0_0010,
-      IF & 0b0_0100,
-      IF & 0b0_1000,
-      IF & 0b1_0000,
-    ];
 
-    if (value[0]) return value[0];
-    if (value[1]) return value[1];
-    if (value[2]) return value[2];
-    if (value[3]) return value[3];
-    return value[4];
+    if (IF & 0b00001) return 0; // VBlank
+    if (IF & 0b00010) return 1; // LCD
+    if (IF & 0b00100) return 2; // Timer
+    if (IF & 0b01000) return 3; // Serial
+    if (IF & 0b10000) return 4; // Joypad
+
+    return 0;
   }
 
   // todo create priority look up
   createCycles() {
-    this.priorityBit = Interrupt_Handler.bitTable[this.prioritize()];
+    this.priorityBit = this.prioritize();
     return [
       (dmg: Gameboy) => {
         console.log("Interupt had started");
@@ -82,7 +69,7 @@ export class Interrupt_Handler {
           0xff0f,
           dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit)
         );
-        //  Disable interrupts
+
         dmg.registers.IME.clearFlag();
         //  Jump to 0x40, 0x48, 0x50, 0x58, or 0x60
         dmg.registers.pointers.PC.setRegister(
