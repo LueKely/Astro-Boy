@@ -50,6 +50,7 @@ export class Cpu_Scheduler {
 			});
 		}
 	}
+	// TODO: implement halt bug
 	private haltHandler() {
 		if (this.dmg.registers.HALT) {
 			// this the first cc on the schedule function
