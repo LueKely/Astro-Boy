@@ -83,7 +83,7 @@ import type { IOpCodeEntry } from "./types/OpcodeTypes";
 //  BEHOLD!!!!!!!!!!!
 
 // i havent implemented
-//  HALT, RETI, DAA, NOP, STOP, DI, EI,
+//  HALT, DAA, STOP,
 // TODO MAKE THIS INTO A CLASS
 export class CpuOpcodeRecord {
   private f: Cpu_Flag_Register;
