@@ -40,7 +40,12 @@ import {
 	XORAR8,
 } from './instructions/Bitwise_Logic_Instructions';
 import { CCF, SCF } from './instructions/Carry_Flag_Instructions';
-import { DI, EI, HALT } from './instructions/Interrupt-related_Instructions';
+import {
+	DI,
+	EI,
+	HALT,
+	STOP,
+} from './instructions/Interrupt-related_Instructions';
 import {
 	CALLCCN16,
 	CALLN16,
@@ -3638,15 +3643,15 @@ export class CpuOpcodeRecord {
 			},
 			0x76: {
 				name: 'HALT',
-				cycles: 5,
+				cycles: 1,
 				length: 1,
 				jobs: HALT(),
 			},
 			0x10: {
 				name: 'STOP',
-				cycles: 4,
+				cycles: 1,
 				length: 1,
-				jobs: HALT(),
+				jobs: STOP(),
 			},
 		};
 	}

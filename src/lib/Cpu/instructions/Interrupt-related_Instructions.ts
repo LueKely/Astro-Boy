@@ -25,10 +25,6 @@ function HALT() {
 				dmg.registers.HALT = true;
 			}
 		},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
 	];
 }
 
@@ -39,10 +35,6 @@ function STOP() {
 				dmg.registers.STOP = true;
 			}
 		},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
-		(dmg: Gameboy) => {},
 	];
 }
 

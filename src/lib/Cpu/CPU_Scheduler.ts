@@ -29,6 +29,10 @@ export class Cpu_Scheduler {
 	}
 
 	private schedule() {
+		// STOP - this should return afterwards the condition is true
+		// HALT - this should return afterwards the condition is true
+
+		// don't touch!
 		if (
 			this.dmg.registers.IME.getValue() &&
 			this.dmg.ram.isAllowedToInterrupt()
