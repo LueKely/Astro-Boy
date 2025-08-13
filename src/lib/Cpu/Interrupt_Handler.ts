@@ -38,16 +38,18 @@ export class Interrupt_Handler {
   private prioritize() {
     const IF = this.dmg.ram.getIF();
     const value = [
-      IF & 0x0b0_0001,
-      IF & 0x0b0_0010,
-      IF & 0x0b0_0100,
-      IF & 0x0b0_1000,
-      IF & 0x0b1_0000,
+      IF & 0b0_0001,
+      IF & 0b0_0010,
+      IF & 0b0_0100,
+      IF & 0b0_1000,
+      IF & 0b1_0000,
     ];
 
-    return value.reduce((accumulator, currentValue) => {
-      return currentValue < accumulator ? currentValue : accumulator;
-    }, 0);
+    if (value[0]) return value[0];
+    if (value[1]) return value[1];
+    if (value[2]) return value[2];
+    if (value[3]) return value[3];
+    return value[4];
   }
 
   // todo create priority look up
