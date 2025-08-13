@@ -53,7 +53,6 @@ export class Cpu_Scheduler {
       if (this.machineCycle.length == 0) {
         this.currentOpcode = this.opCodes.get(this.readByte());
         this.schedule();
-        this.dmg.log();
       }
 
       const job = this.machineCycle.shift();
@@ -71,10 +70,12 @@ export class Cpu_Scheduler {
         this.dmg.cartridge.CartDataToBytes[
           this.dmg.registers.pointers.PC.getRegister()
         ];
-      this.dmg.log();
+
       throw new Error(
         "OP CODE NOT Implemented " + notImplemented + " Please Check LOGS"
       );
+    } finally {
+      this.dmg.log();
     }
   }
 }

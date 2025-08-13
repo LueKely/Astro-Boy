@@ -182,6 +182,30 @@ function RET() {
   ];
 }
 
+function RETI() {
+  return [
+    (dmg: Gameboy) => {
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.SP.getRegister());
+      dmg.registers.setLowerByte(n);
+      dmg.registers.pointers.SP.increment();
+    },
+    (dmg: Gameboy) => {
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.SP.getRegister());
+      dmg.registers.setUpperByte(n);
+      dmg.registers.pointers.SP.increment();
+    },
+    (dmg: Gameboy) => {
+      const nn =
+        dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8);
+      dmg.registers.pointers.PC.setRegister(nn);
+      dmg.registers.IME.raiseFlag();
+    },
+    (dmg: Gameboy) => {
+      console.log("RET PROTOCOL FINISHED");
+    },
+  ];
+}
+
 function RETCC(cc: number) {
   if (cc != 0) {
     return RET();
@@ -222,4 +246,4 @@ function RSTN(n: number) {
   ];
 }
 
-export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL, RETCC, RSTN };
+export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL, RETCC, RSTN, RETI };
