@@ -40,6 +40,7 @@ import {
   XORAR8,
 } from "./instructions/Bitwise_Logic_Instructions";
 import { CCF, SCF } from "./instructions/Carry_Flag_Instructions";
+import { DI, EI } from "./instructions/Interrupt-related_Instructions";
 import {
   CALLCCN16,
   CALLN16,
@@ -48,6 +49,7 @@ import {
   JPN16,
   RET,
   RETCC,
+  RETI,
   RSTN,
 } from "./instructions/Jumps_And _Subroutine_Instructions";
 import {
@@ -3615,6 +3617,24 @@ export class CpuOpcodeRecord {
             dmg.registers.pointers.PC.increment();
           },
         ],
+      },
+      0xfb: {
+        name: "Enable Interrupt (EI)",
+        cycles: 1,
+        length: 1,
+        jobs: EI(),
+      },
+      0xf3: {
+        name: "Disable Interrupt (DI)",
+        cycles: 1,
+        length: 1,
+        jobs: DI(),
+      },
+      0xd9: {
+        name: "RETI",
+        cycles: 4,
+        length: 1,
+        jobs: RETI(),
       },
     };
   }
