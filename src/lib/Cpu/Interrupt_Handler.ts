@@ -39,7 +39,6 @@ export class Interrupt_Handler {
 		return 0;
 	}
 
-	// todo create priority look up
 	createCycles() {
 		this.priorityBit = this.prioritize();
 		return [

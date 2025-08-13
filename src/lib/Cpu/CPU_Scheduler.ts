@@ -28,11 +28,12 @@ export class Cpu_Scheduler {
 		];
 	}
 
+	// PROBLEMS: somethign about fetchign the currentOpcode and shit
 	private schedule() {
-		// STOP - this should return afterwards the condition is true
+		// STOP - this should return afterwards if the condition is true
 		this.stopHandler();
-		// HALT - this should return afterwards the condition is true
-
+		// HALT - this should return afterwards if the condition is true
+		this.haltHandler();
 		// don't touch!
 		if (
 			this.dmg.registers.IME.getValue() &&
@@ -49,7 +50,6 @@ export class Cpu_Scheduler {
 			});
 		}
 	}
-
 	private haltHandler() {
 		if (this.dmg.registers.HALT) {
 			// this the first cc on the schedule function
@@ -76,7 +76,6 @@ export class Cpu_Scheduler {
 	}
 	private stopHandler() {
 		if (this.dmg.registers.HALT) {
-			// TODO ONLY GET THE
 			if (this.dmg.registers.IME.getValue() && this.dmg.ram.stopValidation()) {
 				const interruptCycles = this.interruptHandler.createCycles();
 				interruptCycles.forEach((entry) => {
