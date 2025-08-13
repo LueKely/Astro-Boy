@@ -83,7 +83,7 @@ import type { IOpCodeEntry } from './types/OpcodeTypes';
 //  BEHOLD!!!!!!!!!!!
 
 // i havent implemented
-//  HALT, DAA, STOP,
+//  DAA
 // TODO MAKE THIS INTO A CLASS
 export class CpuOpcodeRecord {
 	private f: Cpu_Flag_Register;
@@ -3644,7 +3644,7 @@ export class CpuOpcodeRecord {
 			},
 			0x10: {
 				name: 'STOP',
-				cycles: 5,
+				cycles: 4,
 				length: 1,
 				jobs: HALT(),
 			},
