@@ -30,6 +30,7 @@ export class Cpu_Scheduler {
 
 	private schedule() {
 		// STOP - this should return afterwards the condition is true
+		this.stopHandler();
 		// HALT - this should return afterwards the condition is true
 
 		// don't touch!
@@ -47,6 +48,50 @@ export class Cpu_Scheduler {
 				this.machineCycle.push(entry);
 			});
 		}
+	}
+
+	private haltHandler() {
+		if (this.dmg.registers.HALT) {
+			// this the first cc on the schedule function
+			// if not increment pc and fetch the next opcode
+			// and read byte
+			if (
+				this.dmg.registers.IME.getValue() &&
+				this.dmg.ram.isAllowedToInterrupt()
+			) {
+				const interruptCycles = this.interruptHandler.createCycles();
+				interruptCycles.forEach((entry) => {
+					this.machineCycle.push(entry);
+				});
+			} else {
+				this.currentOpcode = this.opCodes.get(this.readByte());
+				console.log('The Current Opcode is:', this.currentOpcode.name);
+				this.currentOpcode.jobs.forEach((entry) => {
+					this.machineCycle.push(entry);
+				});
+			}
+		}
+
+		return;
+	}
+	private stopHandler() {
+		if (this.dmg.registers.HALT) {
+			// TODO ONLY GET THE
+			if (this.dmg.registers.IME.getValue() && this.dmg.ram.stopValidation()) {
+				const interruptCycles = this.interruptHandler.createCycles();
+				interruptCycles.forEach((entry) => {
+					this.machineCycle.push(entry);
+				});
+			} else {
+				this.currentOpcode = this.opCodes.get(this.readByte());
+				console.log('The Current Opcode is:', this.currentOpcode.name);
+				this.currentOpcode.jobs.forEach((entry) => {
+					this.machineCycle.push(entry);
+				});
+			}
+		}
+
+		return;
 	}
 
 	tick() {
