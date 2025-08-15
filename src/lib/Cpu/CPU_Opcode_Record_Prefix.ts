@@ -16,6 +16,10 @@ import {
 	SLAR8,
 	SRAHL,
 	SRAR8,
+	SRLHL,
+	SRLR8,
+	SWAPHL,
+	SWAPR8,
 } from './instructions/Bit_Shift_Logic_Instructions';
 import type { IOpCodeEntry } from './types/OpcodeTypes';
 
@@ -780,7 +784,260 @@ export class CpuPrefixOpCodeRecord {
 						console.log('CB PREFIX DETECTED');
 					},
 					(dmg: Gameboy) => {
-						RRA(dmg.registers.register.A, dmg.registers.register.F);
+						SRAR8(dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x30: {
+				name: 'SWAP B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x31: {
+				name: 'SWAP C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x32: {
+				name: 'SWAP D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x33: {
+				name: 'SWAP E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x34: {
+				name: 'SWAP H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x35: {
+				name: 'SWAP L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SLAR8(dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+
+			0x36: {
+				name: 'SLA (HL)',
+				length: 2,
+				cycles: 4,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						SWAPHL(
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x37: {
+				name: 'SWAP A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SWAPR8(dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x38: {
+				name: 'SRL B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x39: {
+				name: 'SRL C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3a: {
+				name: 'SRL D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3b: {
+				name: 'SRL E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRAR8(dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3c: {
+				name: 'SRL H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3d: {
+				name: 'SRL L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3e: {
+				name: 'SRL (HL)',
+				length: 2,
+				cycles: 4,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						SRLHL(
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x3f: {
+				name: 'SRL A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						SRLR8(dmg.registers.register.A, dmg.registers.register.F);
 						dmg.registers.pointers.PC.increment();
 					},
 				],
