@@ -1289,6 +1289,252 @@ export class CpuPrefixOpCodeRecord {
 					},
 				],
 			},
+			0x50: {
+				name: 'BIT 2, B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x51: {
+				name: 'BIT 2, C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x52: {
+				name: 'BIT 2, D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x53: {
+				name: 'BIT 2, E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x54: {
+				name: 'BIT 2, H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x55: {
+				name: 'BIT 2, L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x56: {
+				name: 'BIT 2, (HL)',
+				length: 2,
+				cycles: 3,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						BITU3HL(
+							2,
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x57: {
+				name: 'BIT 2, A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(2, dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x58: {
+				name: 'BIT 3, B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x59: {
+				name: 'BIT 3, C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5a: {
+				name: 'BIT 3, D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5b: {
+				name: 'BIT 3, E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5c: {
+				name: 'BIT 3, H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5d: {
+				name: 'BIT 3, L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5e: {
+				name: 'BIT 3, (HL)',
+				length: 2,
+				cycles: 3,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						BITU3HL(
+							3,
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x5f: {
+				name: 'BIT 3, A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						BITU3R8(3, dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
 		};
 	}
 }
