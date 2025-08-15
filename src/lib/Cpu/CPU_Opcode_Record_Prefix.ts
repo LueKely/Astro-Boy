@@ -1,11 +1,17 @@
 import type { Gameboy } from '../Gameboy';
 import {
+	RLA,
 	RLCA,
 	RLCHL,
 	RLCR8,
+	RLHL,
+	RLR8,
+	RRA,
 	RRCA,
 	RRCHL,
 	RRCR8,
+	RRHL,
+	RRR8,
 } from './instructions/Bit_Shift_Logic_Instructions';
 import type { IOpCodeEntry } from './types/OpcodeTypes';
 
@@ -265,6 +271,259 @@ export class CpuPrefixOpCodeRecord {
 					},
 					(dmg: Gameboy) => {
 						RRCA(dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x10: {
+				name: 'RL B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x11: {
+				name: 'RL C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x12: {
+				name: 'RL D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x13: {
+				name: 'RL E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x14: {
+				name: 'RL H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x15: {
+				name: 'RL L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLR8(dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+
+			0x16: {
+				name: 'RL (HL)',
+				length: 2,
+				cycles: 4,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						RLHL(
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x17: {
+				name: 'RL A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RLA(dmg.registers.register.A, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x18: {
+				name: 'RR B',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRR8(dmg.registers.register.B, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x19: {
+				name: 'RR C',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRR8(dmg.registers.register.C, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1a: {
+				name: 'RR D',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRR8(dmg.registers.register.D, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1b: {
+				name: 'RR E',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRR8(dmg.registers.register.E, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1c: {
+				name: 'RR H',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRCR8(dmg.registers.register.H, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1d: {
+				name: 'RR L',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRR8(dmg.registers.register.L, dmg.registers.register.F);
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1e: {
+				name: 'RR (HL)',
+				length: 2,
+				cycles: 4,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						console.log(
+							'Value at HL',
+							dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						RRHL(
+							dmg.registers.register16Bit.HL,
+							dmg.ram,
+							dmg.registers.register.F
+						);
+					},
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+						dmg.registers.pointers.PC.increment();
+					},
+				],
+			},
+			0x1f: {
+				name: 'RR A',
+				length: 2,
+				cycles: 2,
+				jobs: [
+					(dmg: Gameboy) => {
+						console.log('CB PREFIX DETECTED');
+					},
+					(dmg: Gameboy) => {
+						RRA(dmg.registers.register.A, dmg.registers.register.F);
 						dmg.registers.pointers.PC.increment();
 					},
 				],
