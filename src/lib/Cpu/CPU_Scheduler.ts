@@ -1,5 +1,6 @@
 import type { Gameboy } from '../Gameboy';
 import { CpuOpcodeRecord } from './CPU_Opcode_Record';
+import { CpuPrefixOpCodeRecord } from './CPU_Opcode_Record_Prefix';
 import { Interrupt_Handler } from './Interrupt_Handler';
 import type { IOpCodeEntry } from './types/OpcodeTypes';
 
@@ -12,6 +13,7 @@ export class Cpu_Scheduler {
 	private dmg: Gameboy;
 	private machineCycle: Array<(dmg: Gameboy) => void> = [];
 	private opCodes: CpuOpcodeRecord;
+	private opCodesPrefixed = new CpuPrefixOpCodeRecord();
 	private interruptHandler: Interrupt_Handler;
 	currentOpcode: IOpCodeEntry;
 
@@ -97,7 +99,7 @@ export class Cpu_Scheduler {
 	private fetchOpcode() {
 		if (this.readByte() == 0xcb) {
 			this.dmg.registers.pointers.PC.increment();
-			this.currentOpcode = this.opCodes.get(this.readByte());
+			this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
 			console.log('The Current Opcode is:', this.currentOpcode.name);
 		} else {
 			this.currentOpcode = this.opCodes.get(this.readByte());
