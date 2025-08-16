@@ -1,6 +1,6 @@
-import type { Gameboy } from "../../Gameboy";
-import type { Program_Counter_Register } from "../CPU_Pointer_Register";
-import type { Cpu_Register_16Bit } from "../CPU_Register";
+import type { Gameboy } from '../../Gameboy';
+import type { Program_Counter_Register } from '../CPU_Pointer_Register';
+import type { Cpu_Register_16Bit } from '../CPU_Register';
 // TODO :THIS SHIT BROOOOOOOOOOOOOOO
 
 function CALLN16() {
@@ -49,7 +49,7 @@ function CALLN16() {
     // M7/1
     (dmg: Gameboy) => {
       // dmg.registers.pointers.PC.increment();
-      console.log("CALL FINISHED");
+      console.log('CALL FINISHED');
     },
   ];
 }
@@ -110,11 +110,11 @@ function JPN16() {
       const nn =
         dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8);
       dmg.registers.pointers.PC.setRegister(nn);
-      console.log("jumping to address: ", nn);
+      console.log('jumping to address: ', nn);
     },
     // M1/M5
     (dmg: Gameboy) => {
-      console.log("JPN16 finished");
+      console.log('JPN16 finished');
     },
   ];
 }
@@ -155,7 +155,7 @@ function JPCCN16(CC: number) {
   }
 }
 
-function JPHL(HL: Cpu_Register_16Bit<"HL">, PC: Program_Counter_Register) {
+function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
   PC.setRegister(HL.getRegister());
 }
 
@@ -177,7 +177,7 @@ function RET() {
       dmg.registers.pointers.PC.setRegister(nn);
     },
     (dmg: Gameboy) => {
-      console.log("RET PROTOCOL FINISHED");
+      console.log('RET PROTOCOL FINISHED');
     },
   ];
 }
@@ -201,7 +201,7 @@ function RETI() {
       dmg.registers.IME.raiseFlag();
     },
     (dmg: Gameboy) => {
-      console.log("RET PROTOCOL FINISHED");
+      console.log('RET PROTOCOL FINISHED');
     },
   ];
 }
@@ -213,7 +213,7 @@ function RETCC(cc: number) {
 
   return [
     (dmg: Gameboy) => {
-      console.log("Current RET CC check is false moving to next opcode");
+      console.log('Current RET CC check is false moving to next opcode');
     },
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
@@ -241,9 +241,64 @@ function RSTN(n: number) {
     },
     // M5
     (dmg: Gameboy) => {
-      console.log("RST Protocol Finished");
+      console.log('RST Protocol Finished');
     },
   ];
 }
 
-export { CALLN16, CALLCCN16, JPN16, JPCCN16, RET, JPHL, RETCC, RSTN, RETI };
+function JRE() {
+  return [
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+      const z =
+        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      dmg.registers.setTempByte(z);
+    },
+    (dmg: Gameboy) => {
+      const z = dmg.registers.getTempByte();
+      const zSign = z >>> 7 != 0;
+      const lsb = dmg.registers.pointers.PC.getRegister() & 0xff;
+      const msb = dmg.registers.pointers.PC.getRegister() >>> 8;
+
+      const carryBit = z + lsb > 0xff;
+      const result = (z + lsb) & 0xff;
+      // this shit looks like ass
+      let adj =
+        carryBit && !zSign == true ? 1 : !carryBit && zSign == true ? -1 : 0;
+      dmg.registers.setLowerByte(result);
+      dmg.registers.setUpperByte(msb + adj);
+      dmg.registers.setTempByte(
+        (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte()
+      );
+    },
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
+    },
+  ];
+}
+
+function JRCCE(cc: number) {
+  if (cc == 1) {
+    return JRE();
+  } else {
+    return [
+      (dmg: Gameboy) => {
+        dmg.registers.pointers.PC.increment();
+      },
+    ];
+  }
+}
+
+export {
+  CALLN16,
+  CALLCCN16,
+  JPN16,
+  JPCCN16,
+  RET,
+  JPHL,
+  RETCC,
+  RSTN,
+  RETI,
+  JRCCE,
+  JRE,
+};

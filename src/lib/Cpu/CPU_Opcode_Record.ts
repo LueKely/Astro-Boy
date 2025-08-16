@@ -1,11 +1,11 @@
-import type { Gameboy } from "../Gameboy";
-import { validateADDSPe } from "../utils/instructions/instruction_utils";
-import type { Cpu_Flag_Register } from "./CPU_Flag_Register";
+import type { Gameboy } from '../Gameboy';
+import { validateADDSPe } from '../utils/instructions/instruction_utils';
+import type { Cpu_Flag_Register } from './CPU_Flag_Register';
 import {
   ADDHLR16,
   DECR16,
   INCR16,
-} from "./instructions/16bit_Arithmetic_Instructions";
+} from './instructions/16bit_Arithmetic_Instructions';
 import {
   ADCAHL,
   ADCAN8,
@@ -26,7 +26,7 @@ import {
   SUBAHL,
   SUBAN8,
   SUBAR8,
-} from "./instructions/8bit_Arithmetic_Instructions";
+} from './instructions/8bit_Arithmetic_Instructions';
 import {
   ANDAHL,
   ANDAN8,
@@ -38,25 +38,27 @@ import {
   XORAHL,
   XORAN8,
   XORAR8,
-} from "./instructions/Bitwise_Logic_Instructions";
-import { CCF, SCF } from "./instructions/Carry_Flag_Instructions";
+} from './instructions/Bitwise_Logic_Instructions';
+import { CCF, SCF } from './instructions/Carry_Flag_Instructions';
 import {
   DI,
   EI,
   HALT,
   STOP,
-} from "./instructions/Interrupt-related_Instructions";
+} from './instructions/Interrupt-related_Instructions';
 import {
   CALLCCN16,
   CALLN16,
   JPCCN16,
   JPHL,
   JPN16,
+  JRCCE,
+  JRE,
   RET,
   RETCC,
   RETI,
   RSTN,
-} from "./instructions/Jumps_And _Subroutine_Instructions";
+} from './instructions/Jumps_And _Subroutine_Instructions';
 import {
   LDAHLD,
   LDAHLI,
@@ -76,14 +78,14 @@ import {
   LDR8HL,
   LDR8N8,
   LDR8R8,
-} from "./instructions/LD_Instructions";
-import { DAA } from "./instructions/Miscellaneous_Instructions";
+} from './instructions/LD_Instructions';
+import { DAA } from './instructions/Miscellaneous_Instructions';
 import {
   ADDSPe,
   LDHLSPe,
   LDNNSP,
-} from "./instructions/Stack_Manipulation_Instructions";
-import type { IOpCodeEntry } from "./types/OpcodeTypes";
+} from './instructions/Stack_Manipulation_Instructions';
+import type { IOpCodeEntry } from './types/OpcodeTypes';
 
 // AUTHOR'S NOTE:
 //  BEHOLD!!!!!!!!!!!
@@ -105,7 +107,7 @@ export class CpuOpcodeRecord {
     return {
       // ALU STUFF
       0x0: {
-        name: "NOP",
+        name: 'NOP',
         cycles: 1,
         length: 1,
         jobs: [
@@ -116,7 +118,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4: {
-        name: "INC B",
+        name: 'INC B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -127,7 +129,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5: {
-        name: "DEC B",
+        name: 'DEC B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -139,7 +141,7 @@ export class CpuOpcodeRecord {
       },
 
       0x14: {
-        name: "INC D",
+        name: 'INC D',
         cycles: 1,
         length: 1,
 
@@ -151,7 +153,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x15: {
-        name: "DEC D",
+        name: 'DEC D',
         cycles: 1,
         length: 1,
 
@@ -164,7 +166,7 @@ export class CpuOpcodeRecord {
       },
 
       0x0c: {
-        name: "INC C",
+        name: 'INC C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -175,7 +177,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x0d: {
-        name: "DEC C",
+        name: 'DEC C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -186,7 +188,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x1c: {
-        name: "INC E",
+        name: 'INC E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -197,7 +199,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x1d: {
-        name: "DEC E",
+        name: 'DEC E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -208,7 +210,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x24: {
-        name: "INC H",
+        name: 'INC H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -219,7 +221,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x25: {
-        name: "DEC H",
+        name: 'DEC H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -230,7 +232,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x2c: {
-        name: "INC L",
+        name: 'INC L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -241,7 +243,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x2d: {
-        name: "DEC L",
+        name: 'DEC L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -252,13 +254,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x34: {
-        name: "INC [HL]",
+        name: 'INC [HL]',
         cycles: 3,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -276,13 +278,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x35: {
-        name: "DEC [HL]",
+        name: 'DEC [HL]',
         cycles: 3,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -299,7 +301,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x3c: {
-        name: "INC A",
+        name: 'INC A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -310,7 +312,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x3d: {
-        name: "DEC A",
+        name: 'DEC A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -322,7 +324,7 @@ export class CpuOpcodeRecord {
       },
 
       0x2f: {
-        name: "CPL",
+        name: 'CPL',
         cycles: 1,
         length: 1,
         jobs: [
@@ -334,7 +336,7 @@ export class CpuOpcodeRecord {
       },
 
       0x80: {
-        name: "ADD B",
+        name: 'ADD B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -349,7 +351,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x81: {
-        name: "ADD C",
+        name: 'ADD C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -364,7 +366,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x82: {
-        name: "ADD D",
+        name: 'ADD D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -379,7 +381,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x83: {
-        name: "ADD E",
+        name: 'ADD E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -394,7 +396,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x84: {
-        name: "ADD H",
+        name: 'ADD H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -409,7 +411,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x85: {
-        name: "ADD L",
+        name: 'ADD L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -424,13 +426,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x86: {
-        name: "ADD [HL]",
+        name: 'ADD [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -446,7 +448,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x87: {
-        name: "ADD A",
+        name: 'ADD A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -461,7 +463,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x88: {
-        name: "ADC B",
+        name: 'ADC B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -476,7 +478,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x89: {
-        name: "ADC C",
+        name: 'ADC C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -491,7 +493,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8a: {
-        name: "ADC D",
+        name: 'ADC D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -506,7 +508,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8b: {
-        name: "ADC E",
+        name: 'ADC E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -521,7 +523,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8c: {
-        name: "ADC H",
+        name: 'ADC H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -536,7 +538,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8d: {
-        name: "ADC D",
+        name: 'ADC D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -551,13 +553,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8e: {
-        name: "ADC [HL]",
+        name: 'ADC [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -573,7 +575,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x8f: {
-        name: "ADC A",
+        name: 'ADC A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -590,7 +592,7 @@ export class CpuOpcodeRecord {
       // SUB
 
       0x90: {
-        name: "SUB B",
+        name: 'SUB B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -606,7 +608,7 @@ export class CpuOpcodeRecord {
       },
 
       0x91: {
-        name: "SUB C",
+        name: 'SUB C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -621,7 +623,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x92: {
-        name: "SUB D",
+        name: 'SUB D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -636,7 +638,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x93: {
-        name: "SUB E",
+        name: 'SUB E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -651,7 +653,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x94: {
-        name: "SUB H",
+        name: 'SUB H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -666,7 +668,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x95: {
-        name: "SUB L",
+        name: 'SUB L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -681,13 +683,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x96: {
-        name: "SUB [HL]",
+        name: 'SUB [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -703,7 +705,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x97: {
-        name: "SUB A",
+        name: 'SUB A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -718,7 +720,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x98: {
-        name: "SUBC B",
+        name: 'SUBC B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -733,7 +735,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x99: {
-        name: "SUBC C",
+        name: 'SUBC C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -748,7 +750,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9a: {
-        name: "SUBC D",
+        name: 'SUBC D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -763,7 +765,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9b: {
-        name: "SUBC E",
+        name: 'SUBC E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -778,7 +780,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9c: {
-        name: "SUBC H",
+        name: 'SUBC H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -793,7 +795,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9d: {
-        name: "SUBC D",
+        name: 'SUBC D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -808,13 +810,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9e: {
-        name: "SUBC [HL]",
+        name: 'SUBC [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -830,7 +832,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x9f: {
-        name: "SUBC A",
+        name: 'SUBC A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -845,7 +847,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa0: {
-        name: "AND B",
+        name: 'AND B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -860,7 +862,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa1: {
-        name: "AND C",
+        name: 'AND C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -875,7 +877,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa2: {
-        name: "AND D",
+        name: 'AND D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -890,7 +892,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa3: {
-        name: "AND E",
+        name: 'AND E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -905,7 +907,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa4: {
-        name: "AND H",
+        name: 'AND H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -920,7 +922,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa5: {
-        name: "AND L",
+        name: 'AND L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -935,13 +937,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa6: {
-        name: "AND [HL]",
+        name: 'AND [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -957,7 +959,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa7: {
-        name: "AND A",
+        name: 'AND A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -972,7 +974,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa8: {
-        name: "XOR B",
+        name: 'XOR B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -987,7 +989,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xa9: {
-        name: "XOR C",
+        name: 'XOR C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1002,7 +1004,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xaa: {
-        name: "XOR D",
+        name: 'XOR D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1017,7 +1019,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xab: {
-        name: "XOR E",
+        name: 'XOR E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1032,7 +1034,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xac: {
-        name: "XOR H",
+        name: 'XOR H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1047,7 +1049,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xad: {
-        name: "XOR L",
+        name: 'XOR L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1062,13 +1064,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0xae: {
-        name: "XOR [HL]",
+        name: 'XOR [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -1084,7 +1086,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xaf: {
-        name: "XOR A",
+        name: 'XOR A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1099,7 +1101,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb0: {
-        name: "OR B",
+        name: 'OR B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1114,7 +1116,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb1: {
-        name: "OR C",
+        name: 'OR C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1129,7 +1131,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb2: {
-        name: "OR D",
+        name: 'OR D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1144,7 +1146,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb3: {
-        name: "OR E",
+        name: 'OR E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1159,7 +1161,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb4: {
-        name: "OR H",
+        name: 'OR H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1174,7 +1176,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb5: {
-        name: "OR L",
+        name: 'OR L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1189,13 +1191,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb6: {
-        name: "OR [HL]",
+        name: 'OR [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -1211,7 +1213,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb7: {
-        name: "OR A",
+        name: 'OR A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1226,7 +1228,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb8: {
-        name: "CP B",
+        name: 'CP B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1241,7 +1243,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xb9: {
-        name: "CP C",
+        name: 'CP C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1256,7 +1258,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xba: {
-        name: "CP D",
+        name: 'CP D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1271,7 +1273,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xbb: {
-        name: "CP E",
+        name: 'CP E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1286,7 +1288,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xbc: {
-        name: "CP H",
+        name: 'CP H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1301,7 +1303,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xbd: {
-        name: "CP L",
+        name: 'CP L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1316,13 +1318,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0xbe: {
-        name: "CP [HL]",
+        name: 'CP [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -1338,7 +1340,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xbf: {
-        name: "CP A",
+        name: 'CP A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1353,7 +1355,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xc6: {
-        name: "ADD N",
+        name: 'ADD N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1377,7 +1379,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xd6: {
-        name: "SUB N",
+        name: 'SUB N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1401,7 +1403,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xe6: {
-        name: "AND N",
+        name: 'AND N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1425,7 +1427,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xf6: {
-        name: "OR N",
+        name: 'OR N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1449,7 +1451,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xce: {
-        name: "ADC N",
+        name: 'ADC N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1473,7 +1475,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xde: {
-        name: "SBC N",
+        name: 'SBC N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1497,7 +1499,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xee: {
-        name: "XOR N",
+        name: 'XOR N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1521,7 +1523,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xfe: {
-        name: "CP N",
+        name: 'CP N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -1547,7 +1549,7 @@ export class CpuOpcodeRecord {
 
       // LOAD INSTRUCTIONS 16bit
       0x01: {
-        name: "LD BC NN",
+        name: 'LD BC NN',
         cycles: 3,
         length: 3,
         jobs: [
@@ -1582,7 +1584,7 @@ export class CpuOpcodeRecord {
       },
 
       0x11: {
-        name: "LD DE, NN",
+        name: 'LD DE, NN',
         cycles: 3,
         length: 3,
         jobs: [
@@ -1616,7 +1618,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x21: {
-        name: "LD HL NN",
+        name: 'LD HL NN',
         cycles: 3,
         length: 3,
         jobs: [
@@ -1651,7 +1653,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x31: {
-        name: "LD SP, NN",
+        name: 'LD SP, NN',
         cycles: 3,
         length: 3,
         jobs: [
@@ -1687,13 +1689,13 @@ export class CpuOpcodeRecord {
       },
       // Load instruction 8bit
       0x0a: {
-        name: "LD A, (BC)",
+        name: 'LD A, (BC)',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.BC.getRegister())
             );
           },
@@ -1708,13 +1710,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x1a: {
-        name: "LD A,(DE)",
+        name: 'LD A,(DE)',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
             );
           },
@@ -1729,13 +1731,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x2a: {
-        name: "LD A, (HL+)",
+        name: 'LD A, (HL+)',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(
                 dmg.registers.register16Bit.HL.getRegister() + 1
               )
@@ -1752,13 +1754,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x3a: {
-        name: "LD  A, (HL-)",
+        name: 'LD  A, (HL-)',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(
                 dmg.registers.register16Bit.HL.getRegister() - 1
               )
@@ -1776,13 +1778,13 @@ export class CpuOpcodeRecord {
       },
       // IMPLEMENT ME LD [r16], A
       0x02: {
-        name: "LD (BC),A",
+        name: 'LD (BC),A',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.BC.getRegister())
             );
           },
@@ -1797,13 +1799,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x12: {
-        name: "LD (DE),A",
+        name: 'LD (DE),A',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
             );
           },
@@ -1818,13 +1820,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x22: {
-        name: "LD (HL+), A",
+        name: 'LD (HL+), A',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(
                 dmg.registers.register16Bit.HL.getRegister() + 1
               )
@@ -1841,13 +1843,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x32: {
-        name: "LD (HL-), A ",
+        name: 'LD (HL-), A ',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(
                 dmg.registers.register16Bit.HL.getRegister() - 1
               )
@@ -1864,7 +1866,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x40: {
-        name: "LD B B",
+        name: 'LD B B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1876,7 +1878,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x41: {
-        name: "LD B C",
+        name: 'LD B C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1888,7 +1890,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x42: {
-        name: "LD B D",
+        name: 'LD B D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1900,7 +1902,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x43: {
-        name: "LD B E",
+        name: 'LD B E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1912,7 +1914,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x44: {
-        name: "LD B H",
+        name: 'LD B H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1924,7 +1926,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x45: {
-        name: "LD B L",
+        name: 'LD B L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1936,13 +1938,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x46: {
-        name: "LD B [HL]",
+        name: 'LD B [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -1958,7 +1960,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x47: {
-        name: "LD B A",
+        name: 'LD B A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1970,7 +1972,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x48: {
-        name: "LD C B",
+        name: 'LD C B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1982,7 +1984,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x49: {
-        name: "LD C C",
+        name: 'LD C C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -1994,7 +1996,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4a: {
-        name: "LD C D",
+        name: 'LD C D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2006,7 +2008,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4b: {
-        name: "LD C E",
+        name: 'LD C E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2018,7 +2020,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4c: {
-        name: "LD C H",
+        name: 'LD C H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2030,7 +2032,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4d: {
-        name: "LD C L",
+        name: 'LD C L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2042,13 +2044,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4e: {
-        name: "LD C [HL]",
+        name: 'LD C [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2064,7 +2066,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x4f: {
-        name: "LD C A",
+        name: 'LD C A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2076,7 +2078,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x50: {
-        name: "LD D B",
+        name: 'LD D B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2088,7 +2090,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x51: {
-        name: "LD D C",
+        name: 'LD D C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2100,7 +2102,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x52: {
-        name: "LD D D",
+        name: 'LD D D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2112,7 +2114,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x53: {
-        name: "LD D E",
+        name: 'LD D E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2124,7 +2126,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x54: {
-        name: "LD D H",
+        name: 'LD D H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2136,7 +2138,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x55: {
-        name: "LD D L",
+        name: 'LD D L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2148,13 +2150,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x56: {
-        name: "LD D [HL]",
+        name: 'LD D [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2170,7 +2172,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x57: {
-        name: "LD D A",
+        name: 'LD D A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2182,7 +2184,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x58: {
-        name: "LD E B",
+        name: 'LD E B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2194,7 +2196,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x59: {
-        name: "LD D C",
+        name: 'LD D C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2206,7 +2208,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5a: {
-        name: "LD E D",
+        name: 'LD E D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2218,7 +2220,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5b: {
-        name: "LD E E",
+        name: 'LD E E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2230,7 +2232,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5c: {
-        name: "LD E H",
+        name: 'LD E H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2242,7 +2244,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5d: {
-        name: "LD E L",
+        name: 'LD E L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2254,7 +2256,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5e: {
-        name: "LD E [HL]",
+        name: 'LD E [HL]',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2270,7 +2272,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x5f: {
-        name: "LD E A",
+        name: 'LD E A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2282,7 +2284,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x60: {
-        name: "LD H B",
+        name: 'LD H B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2294,7 +2296,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x61: {
-        name: "LD H C",
+        name: 'LD H C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2306,7 +2308,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x62: {
-        name: "LD H D",
+        name: 'LD H D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2318,7 +2320,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x63: {
-        name: "LD H E",
+        name: 'LD H E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2330,7 +2332,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x64: {
-        name: "LD H H",
+        name: 'LD H H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2342,7 +2344,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x65: {
-        name: "LD H L",
+        name: 'LD H L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2354,13 +2356,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x66: {
-        name: "LD H [HL]",
+        name: 'LD H [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2376,7 +2378,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x67: {
-        name: "LD H A",
+        name: 'LD H A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2388,7 +2390,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x68: {
-        name: "LD L B",
+        name: 'LD L B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2400,7 +2402,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x69: {
-        name: "LD L C",
+        name: 'LD L C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2412,7 +2414,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6a: {
-        name: "LD L D",
+        name: 'LD L D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2424,7 +2426,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6b: {
-        name: "LD L E",
+        name: 'LD L E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2436,7 +2438,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6c: {
-        name: "LD L H",
+        name: 'LD L H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2448,7 +2450,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6d: {
-        name: "LD L L",
+        name: 'LD L L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2460,13 +2462,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6e: {
-        name: "LD L [HL]",
+        name: 'LD L [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2482,7 +2484,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x6f: {
-        name: "LD L A",
+        name: 'LD L A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2494,13 +2496,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x70: {
-        name: "LD [HL] B",
+        name: 'LD [HL] B',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2516,13 +2518,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x71: {
-        name: "LD [HL] C",
+        name: 'LD [HL] C',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2538,13 +2540,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x72: {
-        name: "LD [HL] D",
+        name: 'LD [HL] D',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2560,13 +2562,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x73: {
-        name: "LD [HL] E",
+        name: 'LD [HL] E',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2582,13 +2584,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x74: {
-        name: "LD [HL] H",
+        name: 'LD [HL] H',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2604,13 +2606,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x75: {
-        name: "LD [HL] L",
+        name: 'LD [HL] L',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2626,13 +2628,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x77: {
-        name: "LD [HL] A",
+        name: 'LD [HL] A',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2648,7 +2650,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x78: {
-        name: "LD A B",
+        name: 'LD A B',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2660,7 +2662,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x79: {
-        name: "LD A C",
+        name: 'LD A C',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2672,7 +2674,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7a: {
-        name: "LD A D",
+        name: 'LD A D',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2684,7 +2686,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7b: {
-        name: "LD A E",
+        name: 'LD A E',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2696,7 +2698,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7c: {
-        name: "LD A, H",
+        name: 'LD A, H',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2707,7 +2709,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7d: {
-        name: "LD A, L",
+        name: 'LD A, L',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2718,13 +2720,13 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7e: {
-        name: "LD A, [HL]",
+        name: 'LD A, [HL]',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              "MemAdd Value:",
+              'MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
@@ -2740,7 +2742,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x7f: {
-        name: "LD A A",
+        name: 'LD A A',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2752,7 +2754,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x06: {
-        name: "LD B N",
+        name: 'LD B N',
         cycles: 1,
         length: 1,
         jobs: [
@@ -2772,7 +2774,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x16: {
-        name: "LD C N",
+        name: 'LD C N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2792,7 +2794,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x26: {
-        name: "LD D N",
+        name: 'LD D N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2812,7 +2814,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x36: {
-        name: "LD [HL] N",
+        name: 'LD [HL] N',
         cycles: 3,
         length: 2,
         jobs: [
@@ -2839,7 +2841,7 @@ export class CpuOpcodeRecord {
       },
 
       0x0e: {
-        name: "LD C N",
+        name: 'LD C N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2859,7 +2861,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x1e: {
-        name: "LD E N",
+        name: 'LD E N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2879,7 +2881,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x2e: {
-        name: "LD L N",
+        name: 'LD L N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2899,7 +2901,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x3e: {
-        name: "LD A N",
+        name: 'LD A N',
         cycles: 2,
         length: 2,
         jobs: [
@@ -2920,7 +2922,7 @@ export class CpuOpcodeRecord {
       },
 
       0xea: {
-        name: "LD (NN), A",
+        name: 'LD (NN), A',
         cycles: 4,
         length: 3,
         jobs: [
@@ -2956,7 +2958,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xfa: {
-        name: "LD  A, (NN)",
+        name: 'LD  A, (NN)',
         cycles: 4,
         length: 3,
         jobs: [
@@ -2992,7 +2994,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xe0: {
-        name: "LDH (n), A",
+        name: 'LDH (n), A',
         cycles: 3,
         length: 2,
         jobs: [
@@ -3018,7 +3020,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xf0: {
-        name: "LDH A, N",
+        name: 'LDH A, N',
         cycles: 3,
         length: 2,
         jobs: [
@@ -3044,7 +3046,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xe2: {
-        name: "LDH (C), A",
+        name: 'LDH (C), A',
         cycles: 2,
         length: 1,
         jobs: [
@@ -3057,7 +3059,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xf2: {
-        name: "LDH A, (C)",
+        name: 'LDH A, (C)',
         cycles: 2,
         length: 1,
         jobs: [
@@ -3071,74 +3073,74 @@ export class CpuOpcodeRecord {
       },
       // ROUTINE INSTRUCTIONS
       0xcd: {
-        name: "Call nn",
+        name: 'Call nn',
         cycles: 6,
         length: 3,
         jobs: CALLN16(),
       },
 
       0xc4: {
-        name: "Call NZ, nn",
-        cycles: "if CC is True: 6 else 3",
+        name: 'Call NZ, nn',
+        cycles: 'if CC is True: 6 else 3',
         length: 3,
         jobs: CALLCCN16(this.f.getZFlag() ^ 1),
       },
       0xd4: {
-        name: "Call NC, nn",
-        cycles: "if CC is True: 6 else 3",
+        name: 'Call NC, nn',
+        cycles: 'if CC is True: 6 else 3',
         length: 3,
         jobs: CALLCCN16(this.f.getCYFlag() ^ 1),
       },
       0xcc: {
-        name: "Call Z, nn",
-        cycles: "if CC is True: 6 else 3",
+        name: 'Call Z, nn',
+        cycles: 'if CC is True: 6 else 3',
         length: 3,
         jobs: CALLCCN16(this.f.getZFlag()),
       },
       0xdc: {
-        name: "Call C, nn",
-        cycles: "if CC is True: 6 else 3",
+        name: 'Call C, nn',
+        cycles: 'if CC is True: 6 else 3',
         length: 3,
         jobs: CALLCCN16(this.f.getCYFlag()),
       },
       0xc3: {
-        name: "JP nn",
+        name: 'JP nn',
         cycles: 4,
         length: 3,
         jobs: JPN16(),
       },
       0xc2: {
-        name: "JP NZ, nn",
-        cycles: "4 cycles if CC is true; 3",
+        name: 'JP NZ, nn',
+        cycles: '4 cycles if CC is true; 3',
         length: 3,
         jobs: JPCCN16(this.f.getZFlag() ^ 1),
       },
       0xd2: {
-        name: "JP NC, nn",
-        cycles: "4 cycles if CC is true; 3",
+        name: 'JP NC, nn',
+        cycles: '4 cycles if CC is true; 3',
         length: 3,
         jobs: JPCCN16(this.f.getCYFlag() ^ 1),
       },
       0xca: {
-        name: "JP Z, nn",
-        cycles: "4 cycles if CC is true; 3",
+        name: 'JP Z, nn',
+        cycles: '4 cycles if CC is true; 3',
         length: 3,
         jobs: JPCCN16(this.f.getZFlag()),
       },
       0xda: {
-        name: "JP C, nn",
-        cycles: "4 cycles if CC is true; 3",
+        name: 'JP C, nn',
+        cycles: '4 cycles if CC is true; 3',
         length: 3,
         jobs: JPCCN16(this.f.getCYFlag()),
       },
       0xc9: {
-        name: "RET",
+        name: 'RET',
         cycles: 4,
         length: 1,
         jobs: RET(),
       },
       0xe9: {
-        name: "JP HL",
+        name: 'JP HL',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3148,79 +3150,79 @@ export class CpuOpcodeRecord {
         ],
       },
       0xc0: {
-        name: "RET NZ",
-        cycles: "4 if CC is true; 2",
+        name: 'RET NZ',
+        cycles: '4 if CC is true; 2',
         length: 1,
         jobs: RETCC(this.f.getZFlag() ^ 1),
       },
       0xd0: {
-        name: "RET NC",
-        cycles: "4 if CC is true; 2",
+        name: 'RET NC',
+        cycles: '4 if CC is true; 2',
         length: 1,
         jobs: RETCC(this.f.getCYFlag() ^ 1),
       },
       0xc8: {
-        name: "RET Z",
-        cycles: "4 if CC is true; 2",
+        name: 'RET Z',
+        cycles: '4 if CC is true; 2',
         length: 1,
         jobs: RETCC(this.f.getZFlag()),
       },
       0xd8: {
-        name: "RET C",
-        cycles: "4 if CC is true; 2",
+        name: 'RET C',
+        cycles: '4 if CC is true; 2',
         length: 1,
         jobs: RETCC(this.f.getCYFlag()),
       },
       0xc7: {
-        name: "RST 0x00",
+        name: 'RST 0x00',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x00),
       },
       0xd7: {
-        name: "RST 0x10",
+        name: 'RST 0x10',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x10),
       },
       0xe7: {
-        name: "RST 0x20",
+        name: 'RST 0x20',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x20),
       },
       0xf7: {
-        name: "RST 0x30",
+        name: 'RST 0x30',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x30),
       },
       0xcf: {
-        name: "RST 0x08",
+        name: 'RST 0x08',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x08),
       },
       0xdf: {
-        name: "RST 0x18",
+        name: 'RST 0x18',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x18),
       },
       0xef: {
-        name: "RST 0x28",
+        name: 'RST 0x28',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x28),
       },
       0xff: {
-        name: "RST 0x38",
+        name: 'RST 0x38',
         cycles: 4,
         length: 1,
         jobs: RSTN(0x38),
       },
       0x3f: {
-        name: "CCF",
+        name: 'CCF',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3231,7 +3233,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x37: {
-        name: "SCF",
+        name: 'SCF',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3244,7 +3246,7 @@ export class CpuOpcodeRecord {
 
       //16bit arithmetic
       0x03: {
-        name: "INC BC",
+        name: 'INC BC',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3255,7 +3257,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x13: {
-        name: "INC DE",
+        name: 'INC DE',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3266,7 +3268,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x23: {
-        name: "INC HL",
+        name: 'INC HL',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3277,7 +3279,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x33: {
-        name: "INC SP",
+        name: 'INC SP',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3288,7 +3290,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x0b: {
-        name: "DEC BC",
+        name: 'DEC BC',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3299,7 +3301,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x1b: {
-        name: "DEC DE",
+        name: 'DEC DE',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3310,7 +3312,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x2b: {
-        name: "DEC HL",
+        name: 'DEC HL',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3321,7 +3323,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0x3b: {
-        name: "DEC SP",
+        name: 'DEC SP',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3332,12 +3334,12 @@ export class CpuOpcodeRecord {
         ],
       },
       0x09: {
-        name: "ADD HL BC",
+        name: 'ADD HL BC',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL, BC");
+            console.log('ADD HL, BC');
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3350,12 +3352,12 @@ export class CpuOpcodeRecord {
         ],
       },
       0x19: {
-        name: "ADD HL, DE",
+        name: 'ADD HL, DE',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL DE");
+            console.log('ADD HL DE');
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3368,12 +3370,12 @@ export class CpuOpcodeRecord {
         ],
       },
       0x29: {
-        name: "ADD HL HL",
+        name: 'ADD HL HL',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL, HL");
+            console.log('ADD HL, HL');
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3386,12 +3388,12 @@ export class CpuOpcodeRecord {
         ],
       },
       0x39: {
-        name: "ADD HL, SP",
+        name: 'ADD HL, SP',
         cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            console.log("ADD HL, SP");
+            console.log('ADD HL, SP');
           },
           (dmg: Gameboy) => {
             ADDHLR16(
@@ -3405,26 +3407,26 @@ export class CpuOpcodeRecord {
       },
 
       0xe8: {
-        name: "ADD SP, e",
+        name: 'ADD SP, e',
         cycles: 4,
         length: 2,
         jobs: ADDSPe(),
       },
 
       0x08: {
-        name: "LD (nn), SP",
+        name: 'LD (nn), SP',
         cycles: 5,
         length: 3,
         jobs: LDNNSP(),
       },
       0xf8: {
-        name: "LD HL, SP+e",
+        name: 'LD HL, SP+e',
         cycles: 3,
         length: 2,
         jobs: LDHLSPe(),
       },
       0xf9: {
-        name: "LD SP, HL",
+        name: 'LD SP, HL',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3437,7 +3439,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xc1: {
-        name: "POP BC",
+        name: 'POP BC',
         cycles: 3,
         length: 1,
         jobs: [
@@ -3465,7 +3467,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xd1: {
-        name: "POP DE",
+        name: 'POP DE',
         cycles: 3,
         length: 1,
         jobs: [
@@ -3493,7 +3495,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xe1: {
-        name: "POP HL ",
+        name: 'POP HL ',
         cycles: 3,
         length: 1,
         jobs: [
@@ -3521,7 +3523,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xc5: {
-        name: "PUSH BC ",
+        name: 'PUSH BC ',
         cycles: 4,
         length: 1,
         jobs: [
@@ -3547,7 +3549,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xd5: {
-        name: "PUSH DE ",
+        name: 'PUSH DE ',
         cycles: 4,
         length: 1,
         jobs: [
@@ -3573,7 +3575,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xe5: {
-        name: "PUSH HL ",
+        name: 'PUSH HL ',
         cycles: 4,
         length: 1,
         jobs: [
@@ -3599,7 +3601,7 @@ export class CpuOpcodeRecord {
         ],
       },
       0xf5: {
-        name: "PUSH AF ",
+        name: 'PUSH AF ',
         cycles: 4,
         length: 1,
         jobs: [
@@ -3625,37 +3627,37 @@ export class CpuOpcodeRecord {
         ],
       },
       0xfb: {
-        name: "Enable Interrupt (EI)",
+        name: 'Enable Interrupt (EI)',
         cycles: 1,
         length: 1,
         jobs: EI(),
       },
       0xf3: {
-        name: "Disable Interrupt (DI)",
+        name: 'Disable Interrupt (DI)',
         cycles: 1,
         length: 1,
         jobs: DI(),
       },
       0xd9: {
-        name: "RETI",
+        name: 'RETI',
         cycles: 4,
         length: 1,
         jobs: RETI(),
       },
       0x76: {
-        name: "HALT",
+        name: 'HALT',
         cycles: 1,
         length: 1,
         jobs: HALT(),
       },
       0x10: {
-        name: "STOP",
+        name: 'STOP',
         cycles: 1,
         length: 1,
         jobs: STOP(),
       },
       0x27: {
-        name: "DAA",
+        name: 'DAA',
         cycles: 1,
         length: 1,
         jobs: [
@@ -3664,6 +3666,39 @@ export class CpuOpcodeRecord {
             dmg.registers.pointers.PC.increment();
           },
         ],
+      },
+
+      0x18: {
+        name: 'JR, e',
+        length: 2,
+        cycles: 3,
+        jobs: JRE(),
+      },
+
+      0x20: {
+        name: 'JR NZ, e',
+        length: 2,
+        cycles: 3,
+        jobs: JRCCE(~this.f.getZFlag()),
+      },
+      0x30: {
+        name: 'JR NC, e',
+        length: 2,
+        cycles: 3,
+        jobs: JRCCE(~this.f.getCYFlag()),
+      },
+
+      0x28: {
+        name: 'JR NZ, e',
+        length: 2,
+        cycles: 3,
+        jobs: JRCCE(this.f.getZFlag()),
+      },
+      0x38: {
+        name: 'JR NC, e',
+        length: 2,
+        cycles: 3,
+        jobs: JRCCE(this.f.getCYFlag()),
       },
     };
   }
