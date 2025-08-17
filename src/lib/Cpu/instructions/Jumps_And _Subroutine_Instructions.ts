@@ -83,7 +83,11 @@ function CALLCCN16(CC: number) {
       },
       //   M4/1
       (dmg: Gameboy) => {
-        dmg.registers.pointers.PC.increment();
+        if (dmg.registers.HALT_BUG) {
+          dmg.registers.HALT_BUG = false;
+        } else {
+          dmg.registers.pointers.PC.increment();
+        }
       },
     ];
   }
@@ -149,7 +153,11 @@ function JPCCN16(CC: number) {
       },
       //   M4/1
       (dmg: Gameboy) => {
-        dmg.registers.pointers.PC.increment();
+        if (dmg.registers.HALT_BUG) {
+          dmg.registers.HALT_BUG = false;
+        } else {
+          dmg.registers.pointers.PC.increment();
+        }
       },
     ];
   }
@@ -216,7 +224,11 @@ function RETCC(cc: number) {
       console.log('Current RET CC check is false moving to next opcode');
     },
     (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
+      if (dmg.registers.HALT_BUG) {
+        dmg.registers.HALT_BUG = false;
+      } else {
+        dmg.registers.pointers.PC.increment();
+      }
     },
   ];
 }
@@ -283,7 +295,11 @@ function JRCCE(cc: number) {
   } else {
     return [
       (dmg: Gameboy) => {
-        dmg.registers.pointers.PC.increment();
+        if (dmg.registers.HALT_BUG) {
+          dmg.registers.HALT_BUG = false;
+        } else {
+          dmg.registers.pointers.PC.increment();
+        }
       },
     ];
   }

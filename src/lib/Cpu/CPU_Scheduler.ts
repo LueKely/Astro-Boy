@@ -98,6 +98,9 @@ export class Cpu_Scheduler {
   }
 
   private fetchOpcode() {
+    if (this.dmg.registers.HALT_BUG) {
+      console.log('HALT BUG WAS TRIGGERD');
+    }
     if (this.readByte() == 0xcb) {
       this.dmg.registers.pointers.PC.increment();
       this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
