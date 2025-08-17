@@ -98,11 +98,10 @@ export class Cpu_Scheduler {
 	}
 
 	private fetchOpcode() {
-		if (this.dmg.registers.HALT_BUG) {
-			console.log('HALT BUG WAS TRIGGERD');
-		}
 		if (this.readByte() == 0xcb) {
 			if (this.dmg.registers.HALT_BUG) {
+				console.log('BUG triggered');
+
 				this.dmg.registers.HALT_BUG = false;
 			} else {
 				this.dmg.registers.pointers.PC.increment();
@@ -110,6 +109,7 @@ export class Cpu_Scheduler {
 			this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
 			console.log('The Current Opcode is:', this.currentOpcode.name);
 		} else {
+			console.log('FETCHED');
 			this.currentOpcode = this.opCodes.get(this.readByte());
 		}
 	}
@@ -123,19 +123,20 @@ export class Cpu_Scheduler {
 			const job = this.machineCycle.shift();
 			if (job) {
 				job(this.dmg);
-				if (this.machineCycle.length == 1) {
-					console.log(
-						'The next Opcode is:',
-						this.opCodes.get(this.readByte()).name
-					);
-				}
+				// DEBUGGER
+				// if (this.machineCycle.length == 1) {
+				// 	console.log(
+				// 		'The next Opcode is:',
+				// 		this.opCodes.get(this.readByte()).name
+				// 	);
+				// }
 			}
 		} catch {
 			const notImplemented =
 				this.dmg.cartridge.CartDataToBytes[
 					this.dmg.registers.pointers.PC.getRegister()
 				];
-
+			this.dmg.log();
 			throw new Error(
 				'OP CODE NOT Implemented ' + notImplemented + ' Please Check LOGS'
 			);

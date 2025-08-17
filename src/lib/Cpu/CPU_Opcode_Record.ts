@@ -27,7 +27,12 @@ import {
 	SUBAN8,
 	SUBAR8,
 } from './instructions/8bit_Arithmetic_Instructions';
-import { RLA, RLCA } from './instructions/Bit_Shift_Logic_Instructions';
+import {
+	RLA,
+	RLCA,
+	RRA,
+	RRCA,
+} from './instructions/Bit_Shift_Logic_Instructions';
 import {
 	ANDAHL,
 	ANDAN8,
@@ -4430,6 +4435,38 @@ export class CpuOpcodeRecord {
 					},
 				],
 			},
+			0xf1: {
+				name: 'POP AF ',
+				cycles: 3,
+				length: 1,
+				jobs: [
+					(dmg: Gameboy) => {
+						const lsb = dmg.ram.getMemoryAt(
+							dmg.registers.pointers.SP.getRegister()
+						);
+						dmg.registers.setLowerByte(lsb);
+						dmg.registers.pointers.SP.increment();
+					},
+					(dmg: Gameboy) => {
+						const msb = dmg.ram.getMemoryAt(
+							dmg.registers.pointers.SP.getRegister()
+						);
+						dmg.registers.setUpperByte(msb);
+						dmg.registers.pointers.SP.increment();
+					},
+					(dmg: Gameboy) => {
+						const WZ =
+							dmg.registers.getLowerByte() |
+							(dmg.registers.getUpperByte() << 8);
+						dmg.registers.register16Bit.AF.setRegister(WZ);
+						if (dmg.registers.HALT_BUG) {
+							dmg.registers.HALT_BUG = false;
+						} else {
+							dmg.registers.pointers.PC.increment();
+						}
+					},
+				],
+			},
 			0xc5: {
 				name: 'PUSH BC ',
 				cycles: 4,
@@ -4658,6 +4695,37 @@ export class CpuOpcodeRecord {
 					},
 				],
 			},
+			0x0f: {
+				name: 'RRCA',
+				length: 1,
+				cycles: 1,
+				jobs: [
+					(dmg: Gameboy) => {
+						RRCA(dmg.registers.register.A, dmg.registers.register.F);
+						if (dmg.registers.HALT_BUG) {
+							dmg.registers.HALT_BUG = false;
+						} else {
+							dmg.registers.pointers.PC.increment();
+						}
+					},
+				],
+			},
+			0x1f: {
+				name: 'RRA',
+				length: 1,
+				cycles: 1,
+				jobs: [
+					(dmg: Gameboy) => {
+						RRA(dmg.registers.register.A, dmg.registers.register.F);
+						if (dmg.registers.HALT_BUG) {
+							dmg.registers.HALT_BUG = false;
+						} else {
+							dmg.registers.pointers.PC.increment();
+						}
+					},
+				],
+			},
+			// not implemented - 0xd3, 0xe3, 0xe4, 0xf4, 0xdb, 0xeb, 0xec, 0xfc, 0xdd, 0xed, 0xfd
 		};
 	}
 }

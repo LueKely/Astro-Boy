@@ -54,7 +54,10 @@ function LDN16A(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
 function LDHN16A(n8: number, a: Cpu_Register<'A'>, memAdd: Ram) {
 	if (n8 + 0xff0 == 0xff02) {
 		console.log('SOMETHING HAS BEEN WRITTEN');
+	} else {
+		console.log(n8);
 	}
+
 	memAdd.setMemoryAt(0xff00 + n8, a.getRegister());
 }
 
