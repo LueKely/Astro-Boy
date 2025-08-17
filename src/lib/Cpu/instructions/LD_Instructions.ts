@@ -50,7 +50,7 @@ function LDN16A(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
 	memAdd.setMemoryAt(n16, a.getRegister());
 }
 
-// LDH [n16], A untested
+// LDH [n16], tested
 function LDHN16A(n8: number, a: Cpu_Register<'A'>, memAdd: Ram) {
 	if (n8 + 0xff0 == 0xff02) {
 		console.log('SOMETHING HAS BEEN WRITTEN');
@@ -79,7 +79,7 @@ function LDAR16(
 	a.setRegister(memAdd.getMemoryAt(r16.getRegister()));
 }
 
-// LD [R16], A - untested
+// LD [R16], A - tested
 function LDR16A(
 	r16: Cpu_Register_16Bit<any>,
 	a: Cpu_Register<'A'>,
