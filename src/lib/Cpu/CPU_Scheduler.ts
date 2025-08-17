@@ -102,7 +102,11 @@ export class Cpu_Scheduler {
       console.log('HALT BUG WAS TRIGGERD');
     }
     if (this.readByte() == 0xcb) {
-      this.dmg.registers.pointers.PC.increment();
+      if (this.dmg.registers.HALT_BUG) {
+        this.dmg.registers.HALT_BUG = false;
+      } else {
+        this.dmg.registers.pointers.PC.increment();
+      }
       this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
       console.log('The Current Opcode is:', this.currentOpcode.name);
     } else {

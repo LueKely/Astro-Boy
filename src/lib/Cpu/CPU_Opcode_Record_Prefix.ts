@@ -48,7 +48,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -62,7 +66,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -76,7 +84,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -90,7 +102,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -104,7 +120,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -118,7 +138,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -147,7 +171,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -161,7 +189,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLCA(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -175,7 +207,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -189,7 +225,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -203,7 +243,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -217,7 +261,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -231,7 +279,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -245,7 +297,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -273,7 +329,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -287,7 +347,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCA(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -301,7 +365,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -315,7 +383,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -329,7 +401,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -343,7 +419,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -357,7 +437,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -371,7 +455,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -400,7 +488,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -414,7 +506,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RLA(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -428,7 +524,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -442,7 +542,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -456,7 +560,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -470,7 +578,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -484,7 +596,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -498,7 +614,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -526,7 +646,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -540,7 +664,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRA(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -554,7 +682,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -568,7 +700,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -582,7 +718,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -596,7 +736,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -610,7 +754,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -624,7 +772,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -653,7 +805,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -667,7 +823,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -681,7 +841,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -695,7 +859,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -709,7 +877,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -723,7 +895,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -737,7 +913,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -751,7 +931,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -779,7 +963,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -793,7 +981,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -807,7 +999,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -821,7 +1017,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -835,7 +1035,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -849,7 +1053,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -863,7 +1071,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -877,7 +1089,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -906,7 +1122,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -920,7 +1140,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -934,7 +1158,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -948,7 +1176,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -962,7 +1194,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -976,7 +1212,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -990,7 +1230,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1004,7 +1248,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1032,7 +1280,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             console.log('CB PREFIX DETECTED');
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1046,7 +1298,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1060,7 +1316,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1074,7 +1334,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1088,7 +1352,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1102,7 +1370,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1116,7 +1388,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1130,7 +1406,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1155,7 +1435,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1169,7 +1453,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1183,7 +1471,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1197,7 +1489,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1211,7 +1507,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1225,7 +1525,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1239,7 +1543,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1253,7 +1561,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1278,7 +1590,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1292,7 +1608,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1306,7 +1626,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1320,7 +1644,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1334,7 +1662,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1348,7 +1680,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1362,7 +1698,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1376,7 +1716,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1401,7 +1745,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1415,7 +1763,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1429,7 +1781,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1443,7 +1799,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1457,7 +1817,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1471,7 +1835,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1485,7 +1853,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1499,7 +1871,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1524,7 +1900,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1538,7 +1918,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1553,7 +1937,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1567,7 +1955,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1581,7 +1973,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1595,7 +1991,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1609,7 +2009,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1623,7 +2027,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1648,7 +2056,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1662,7 +2074,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1676,7 +2092,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1690,7 +2110,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1704,7 +2128,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1718,7 +2146,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1732,7 +2164,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1746,7 +2182,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1771,7 +2211,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1785,7 +2229,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1799,7 +2247,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1813,7 +2265,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1827,7 +2283,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.D, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1841,7 +2301,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1855,7 +2319,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1869,7 +2337,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1894,7 +2366,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1908,7 +2384,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1922,7 +2402,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.B, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1936,7 +2420,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.C, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1951,7 +2439,11 @@ export class CpuPrefixOpCodeRecord {
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.D, dmg.registers.register.F);
 
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1965,7 +2457,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.E, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1979,7 +2475,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.H, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -1993,7 +2493,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.L, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2018,7 +2522,11 @@ export class CpuPrefixOpCodeRecord {
               dmg.ram,
               dmg.registers.register.F
             );
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2032,7 +2540,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.A, dmg.registers.register.F);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2046,7 +2558,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2060,7 +2576,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2074,7 +2594,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2088,7 +2612,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2102,7 +2630,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2116,7 +2648,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2136,7 +2672,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2150,7 +2690,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2164,7 +2708,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2178,7 +2726,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2192,7 +2744,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2206,7 +2762,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2220,7 +2780,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2234,7 +2798,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2254,7 +2822,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2268,7 +2840,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2282,7 +2858,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2296,7 +2876,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2310,7 +2894,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2324,7 +2912,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2338,7 +2930,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2352,7 +2948,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2372,7 +2972,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2386,7 +2990,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2400,7 +3008,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2414,7 +3026,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2428,7 +3044,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2442,7 +3062,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2456,7 +3080,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2470,7 +3098,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2490,7 +3122,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2504,7 +3140,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2519,7 +3159,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2533,7 +3177,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2547,7 +3195,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2561,7 +3213,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2575,7 +3231,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2589,7 +3249,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2609,7 +3273,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2623,7 +3291,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2637,7 +3309,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2651,7 +3327,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2665,7 +3345,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2679,7 +3363,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2693,7 +3381,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2707,7 +3399,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2727,7 +3423,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2741,7 +3441,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2755,7 +3459,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2769,7 +3477,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2783,7 +3495,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2797,7 +3513,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2811,7 +3531,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2825,7 +3549,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2845,7 +3573,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2859,7 +3591,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2873,7 +3609,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2887,7 +3627,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2901,7 +3645,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2915,7 +3663,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2929,7 +3681,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2943,7 +3699,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2963,7 +3723,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2977,7 +3741,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -2992,7 +3760,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3006,7 +3778,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3020,7 +3796,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3034,7 +3814,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3048,7 +3832,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3062,7 +3850,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3082,7 +3874,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3096,7 +3892,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3110,7 +3910,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3124,7 +3928,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3138,7 +3946,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3152,7 +3964,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3166,7 +3982,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3180,7 +4000,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3200,7 +4024,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3214,7 +4042,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3228,7 +4060,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3242,7 +4078,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3256,7 +4096,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3270,7 +4114,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3284,7 +4132,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3298,7 +4150,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3318,7 +4174,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3332,7 +4192,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3346,7 +4210,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3360,7 +4228,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3374,7 +4246,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3388,7 +4264,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3402,7 +4282,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3416,7 +4300,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3436,7 +4324,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3450,7 +4342,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3465,7 +4361,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3479,7 +4379,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3493,7 +4397,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3507,7 +4415,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3521,7 +4433,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3535,7 +4451,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3555,7 +4475,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3569,7 +4493,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3583,7 +4511,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3597,7 +4529,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3611,7 +4547,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3625,7 +4565,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3639,7 +4583,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3653,7 +4601,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3673,7 +4625,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3687,7 +4643,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3701,7 +4661,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3715,7 +4679,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3729,7 +4697,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3743,7 +4715,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3757,7 +4733,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3771,7 +4751,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3791,7 +4775,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3805,7 +4793,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3819,7 +4811,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.B);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3833,7 +4829,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.C);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3847,7 +4847,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.D);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3861,7 +4865,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.E);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3875,7 +4883,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.H);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3889,7 +4901,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.L);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3909,7 +4925,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
@@ -3923,7 +4943,11 @@ export class CpuPrefixOpCodeRecord {
           },
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.A);
-            dmg.registers.pointers.PC.increment();
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
           },
         ],
       },
