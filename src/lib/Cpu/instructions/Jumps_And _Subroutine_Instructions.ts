@@ -229,7 +229,7 @@ function RSTN(n: number) {
     },
     // M3
     (dmg: Gameboy) => {
-      const msb = dmg.registers.pointers.PC.getRegister() >> 8;
+      const msb = dmg.registers.pointers.PC.getRegister() >>> 8;
       dmg.ram.setMemoryAt(dmg.registers.pointers.SP.getRegister(), msb);
       dmg.registers.pointers.SP.decrement();
     },
