@@ -44,23 +44,8 @@ export class Gameboy {
 		console.log('STOP: ', this.registers.STOP);
 	}
 	run() {
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
-		this.scheduler.tick();
+		for (let index = 0; index < 1000; index++) {
+			this.scheduler.tick();
+		}
 	}
 }

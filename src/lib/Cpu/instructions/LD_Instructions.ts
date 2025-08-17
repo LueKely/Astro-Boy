@@ -44,16 +44,25 @@ function LDR8HL(
 
 // LD[n16],A tested
 function LDN16A(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
+	if (n16 == 0xff02) {
+		console.log('SOMETHING HAS BEEN WRITTEN');
+	}
 	memAdd.setMemoryAt(n16, a.getRegister());
 }
 
-// LDH [n16], untested
+// LDH [n16], A untested
 function LDHN16A(n8: number, a: Cpu_Register<'A'>, memAdd: Ram) {
+	if (n8 + 0xff0 == 0xff02) {
+		console.log('SOMETHING HAS BEEN WRITTEN');
+	}
 	memAdd.setMemoryAt(0xff00 + n8, a.getRegister());
 }
 
 // LDH [C], A tested
 function LDHCA(memAdd: Ram, a: Cpu_Register<'A'>, c: Cpu_Register<'C'>) {
+	if (c.getRegister() + 0xff0 == 0xff02) {
+		console.log('SOMETHING HAS BEEN WRITTEN');
+	}
 	memAdd.setMemoryAt(0xff00 + c.getRegister(), a.getRegister());
 }
 
