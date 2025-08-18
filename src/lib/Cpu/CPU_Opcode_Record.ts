@@ -2191,9 +2191,7 @@ export class CpuOpcodeRecord {
           (dmg: Gameboy) => {
             console.log(
               'MemAdd Value:',
-              dmg.ram.getMemoryAt(
-                dmg.registers.register16Bit.HL.getRegister() + 1
-              )
+              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
           (dmg: Gameboy) => {
@@ -2218,9 +2216,7 @@ export class CpuOpcodeRecord {
           (dmg: Gameboy) => {
             console.log(
               'MemAdd Value:',
-              dmg.ram.getMemoryAt(
-                dmg.registers.register16Bit.HL.getRegister() - 1
-              )
+              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
             );
           },
           (dmg: Gameboy) => {

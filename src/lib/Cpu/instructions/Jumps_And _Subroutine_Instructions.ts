@@ -238,6 +238,7 @@ function RSTN(n: number) {
     // M2
     (dmg: Gameboy) => {
       dmg.registers.pointers.SP.decrement();
+      console.log('N IN RSTN', n);
     },
     // M3
     (dmg: Gameboy) => {
@@ -291,6 +292,8 @@ function JRE() {
 
 function JRCCE(cc: number) {
   if (cc == 1) {
+    console.log('CC IS TRUE JRE WILL BE EXECUTED ');
+
     return JRE();
   } else {
     return [
