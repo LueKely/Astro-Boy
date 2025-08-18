@@ -13,7 +13,7 @@ export class Gameboy {
     this.registers = new Cpu_Register_File();
     this.ram = new Ram();
     this.cartridge = new GameBoyCatridge(game);
-    // console.log(this.cartridge.CartDataToBytes);
+    console.log(this.cartridge.CartDataToBytes);
     this.scheduler = new Cpu_Scheduler(this);
   }
 
@@ -44,11 +44,7 @@ export class Gameboy {
     console.log('STOP: ', this.registers.STOP);
   }
   run() {
-    for (
-      let index = 0;
-      index < this.cartridge.CartDataToBytes.length;
-      index++
-    ) {
+    for (let index = 0; index < 1000; index++) {
       this.scheduler.tick();
     }
   }

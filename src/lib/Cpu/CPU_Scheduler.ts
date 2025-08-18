@@ -52,7 +52,7 @@ export class Cpu_Scheduler {
         this.machineCycle.push(entry);
       });
     } else {
-      //   console.log('The Current Opcode is:', this.currentOpcode.name);
+      console.log('The Current Opcode is:', this.currentOpcode.name);
       this.currentOpcode.jobs.forEach((entry) => {
         this.machineCycle.push(entry);
       });
@@ -112,13 +112,15 @@ export class Cpu_Scheduler {
   }
 
   tick() {
+    console.log('PC: ', this.dmg.registers.pointers.PC.getRegister());
+
     try {
       if (this.machineCycle.length == 0) {
         this.fetchOpcode();
         this.schedule();
 
-        console.log('PC: ', this.dmg.registers.pointers.PC.getRegister());
-        console.log('SP: ', this.dmg.registers.pointers.SP.getRegister());
+        // console.log('PC: ', this.dmg.registers.pointers.PC.getRegister());
+        // console.log('SP: ', this.dmg.registers.pointers.SP.getRegister());
       }
       const job = this.machineCycle.shift();
       if (job) {
@@ -138,9 +140,8 @@ export class Cpu_Scheduler {
       // this.dmg.log();
       //   console.log('PC: ', this.dmg.registers.pointers.PC.getRegister());
       //   console.log('SP: ', this.dmg.registers.pointers.SP.getRegister());
-
-      console.log(this.dmg.ram.getMemoryAt(0xff01));
-      console.log(this.dmg.ram.getMemoryAt(0xff02));
+      //   console.log(this.dmg.ram.getMemoryAt(0xff01));
+      //   console.log(this.dmg.ram.getMemoryAt(0xff02));
     }
   }
 }
