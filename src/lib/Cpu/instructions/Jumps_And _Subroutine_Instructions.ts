@@ -239,8 +239,7 @@ function RSTN(n: number) {
 		},
 	];
 }
-
-// CORRECT
+// CORRECT - finally
 function JRE() {
 	return [
 		(dmg: Gameboy) => {
@@ -255,9 +254,10 @@ function JRE() {
 			// Convert to signed 8-bit and add to PC+1
 			if (e > 127) e -= 256;
 			const newPC = (dmg.registers.pointers.PC.getRegister() + e) & 0xffff;
+			dmg.registers.pointers.PC.increment();
 
-			dmg.registers.pointers.PC.setRegister(newPC);
-			console.log('Jumping at address: ', newPC);
+			dmg.registers.pointers.PC.setRegister(newPC + 1);
+			console.log('Jumping at address: ', newPC + 1);
 		},
 		(dmg: Gameboy) => {
 			// dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
