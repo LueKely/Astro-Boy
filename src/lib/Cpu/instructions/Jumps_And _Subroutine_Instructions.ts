@@ -238,41 +238,63 @@ function RSTN(n: number) {
 }
 
 function JRE() {
+  // return [
+  //   (dmg: Gameboy) => {
+  //     console.log('CC IS TRUE JRE WILL BE EXECUTED ');
+  //     dmg.registers.pointers.PC.increment();
+  //     const z =
+  //       dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+  //     dmg.registers.setTempByte(z);
+  //   },
+  //   (dmg: Gameboy) => {
+  //     const z = dmg.registers.getTempByte();
+  //     const zSign = z >>> 7 != 0;
+  //     const lsb = dmg.registers.pointers.PC.getRegister() & 0xff;
+  //     const msb = dmg.registers.pointers.PC.getRegister() >>> 8;
+
+  //     const carryBit = z + lsb > 0xff;
+  //     const result = (z + lsb) & 0xff;
+  //     // this shit looks like ass
+  //     let adj =
+  //       carryBit && !zSign == true ? 1 : !carryBit && zSign == true ? -1 : 0;
+  //     dmg.registers.setLowerByte(result);
+  //     dmg.registers.setUpperByte(msb + adj);
+  //     dmg.registers.setTempByte(
+  //       (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte()
+  //     );
+  //   },
+  //   (dmg: Gameboy) => {
+  //     dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
+  //   },
+  // ];
   return [
     (dmg: Gameboy) => {
       console.log('CC IS TRUE JRE WILL BE EXECUTED ');
       dmg.registers.pointers.PC.increment();
-      const z =
+    },
+    (dmg: Gameboy) => {
+      // Get current PC and increment to operand
+      let e =
         dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
-      dmg.registers.setTempByte(z);
-    },
-    (dmg: Gameboy) => {
-      const z = dmg.registers.getTempByte();
-      const zSign = z >>> 7 != 0;
-      const lsb = dmg.registers.pointers.PC.getRegister() & 0xff;
-      const msb = dmg.registers.pointers.PC.getRegister() >>> 8;
 
-      const carryBit = z + lsb > 0xff;
-      const result = (z + lsb) & 0xff;
-      // this shit looks like ass
-      let adj =
-        carryBit && !zSign == true ? 1 : !carryBit && zSign == true ? -1 : 0;
-      dmg.registers.setLowerByte(result);
-      dmg.registers.setUpperByte(msb + adj);
-      dmg.registers.setTempByte(
-        (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte()
-      );
+      // Convert to signed 8-bit and add to PC+1
+      if (e > 127) e -= 256;
+      const newPC = (dmg.registers.pointers.PC.getRegister() + 1 + e) & 0xffff;
+
+      dmg.registers.pointers.PC.setRegister(newPC);
     },
     (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
+      // dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
     },
   ];
 }
 
 function JREFALSE() {
   return [
-    (dmg: Gameboy) => {
+    () => {
       console.log('CC IS FALSE JRE WILL NOT BE EXECUTED ');
+    },
+    (dmg: Gameboy) => {
       if (dmg.registers.HALT_BUG) {
         dmg.registers.HALT_BUG = false;
       } else {

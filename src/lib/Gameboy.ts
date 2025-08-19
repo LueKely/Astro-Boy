@@ -44,8 +44,20 @@ export class Gameboy {
     console.table(systemState);
   }
   run() {
-    for (let index = 0; index < 1000; index++) {
+    requestAnimationFrame(() => {
+      const result = this.ram.getMemoryAt(0xa001);
+
+      if (result == 0x80) {
+        console.log('TEST FINISHED!', result);
+
+        return;
+      }
       this.scheduler.tick();
-    }
+      this.run();
+    });
+
+    // for (let index = 0; index < 1000; index++) {
+    //   this.scheduler.tick();
+    // }
   }
 }

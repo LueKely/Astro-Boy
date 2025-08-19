@@ -1604,6 +1604,7 @@ export class CpuOpcodeRecord {
           },
         ],
       },
+
       0xbc: {
         name: 'CP H',
         cycles: 1,
