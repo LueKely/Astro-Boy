@@ -1,21 +1,21 @@
-import { describe, expect, test } from "vitest";
-import { Cpu_Register_File } from "../CPU_Register_File";
+import { describe, expect, test } from 'vitest';
+import { Cpu_Register_File } from '../CPU_Register_File';
 
 const Register = new Cpu_Register_File();
 
-describe("Read and Write inside the registers", () => {
+describe('Read and Write inside the registers', () => {
   test.each([
     Register.register.B,
     Register.register.C,
     Register.register.D,
     Register.register.E,
-  ])("Each Register should read and write", (address) => {
+  ])('Each Register should read and write', (address) => {
     address.setRegister(5);
     expect(address.getRegister()).equal(5);
   });
 });
 
-describe("Read And Write in the 16bit Registers", () => {
+describe('Read And Write in the 16bit Registers', () => {
   const testCase = [
     {
       r16: Register.register16Bit.AF,
@@ -39,13 +39,13 @@ describe("Read And Write in the 16bit Registers", () => {
     },
   ];
 
-  test.each(testCase)("Should Get r16", (registers) => {
+  test.each(testCase)('Should Get r16', (registers) => {
     registers.r8a.setRegister(0b0001);
     registers.r8b.setRegister(0b0001);
     expect(registers.r16.getRegister()).toBe(0b000100000001);
   });
 
-  test.each(testCase)("Should Set r16", (registers) => {
+  test.each(testCase)('Should Set r16', (registers) => {
     registers.r16.setRegister(4369);
     expect(registers.r16.getRegister()).toBe(4369);
     expect(registers.r8a.getRegister()).toBe(0b00010001);
@@ -53,7 +53,7 @@ describe("Read And Write in the 16bit Registers", () => {
   });
 
   test.each(testCase)(
-    "Set r16 value to 69 Excpect r8a to be 0 & r8b to be 69",
+    'Set r16 value to 69 Excpect r8a to be 0 & r8b to be 69',
     (registers) => {
       registers.r16.setRegister(69);
       expect(registers.r16.getRegister()).toBe(69);
@@ -63,7 +63,7 @@ describe("Read And Write in the 16bit Registers", () => {
   );
 
   test.each(testCase)(
-    "Set r8a to 0 and r8b to 69 Expect r16 to be 69",
+    'Set r8a to 0 and r8b to 69 Expect r16 to be 69',
     (registers) => {
       registers.r8a.setRegister(0);
       registers.r8b.setRegister(69);
@@ -72,8 +72,8 @@ describe("Read And Write in the 16bit Registers", () => {
   );
 });
 
-describe("Flag Register", () => {
-  test("Individual Flags", () => {
+describe('Flag Register', () => {
+  test('Individual Flags', () => {
     // clear the register
     Register.register.F.setRegister(0);
 
@@ -99,7 +99,7 @@ describe("Flag Register", () => {
     expect(Register.register.F.getRegister()).toBe(0b0);
   });
 
-  test("Combined Flags", () => {
+  test('Combined Flags', () => {
     // clear the register
     Register.register.F.setRegister(0);
 

@@ -1,12 +1,12 @@
-import type { Ram } from "../../Ram/Ram";
+import type { Ram } from '../../Ram/Ram';
 import {
   validateR8Subtraction,
   validateR8Addition,
   validateR8Decrement,
   validateR8Increment,
-} from "../../utils/instructions/instruction_utils";
-import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
-import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
+} from '../../utils/instructions/instruction_utils';
+import type { Cpu_Flag_Register } from '../CPU_Flag_Register';
+import type { Cpu_Register, Cpu_Register_16Bit } from '../CPU_Register';
 
 // ADC A, r8  - tested
 /**
@@ -16,7 +16,7 @@ import type { Cpu_Register, Cpu_Register_16Bit } from "../CPU_Register";
 function ADCAR8(
   register8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const sum =
     register8.getRegister() + registerF.getCYFlag() + registerA.getRegister();
@@ -35,10 +35,10 @@ function ADCAR8(
  *  plus the carry flag to A.
  **/
 function ADCAHL(
-  pointer: Cpu_Register_16Bit<"HL">,
+  pointer: Cpu_Register_16Bit<'HL'>,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const sum =
     (memory.getMemoryAt(pointer.getRegister()) +
@@ -62,7 +62,7 @@ function ADCAHL(
  **/
 function ADCAN8(
   value: number,
-  registerA: Cpu_Register<"A">,
+  registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
@@ -82,7 +82,7 @@ function ADCAN8(
 function ADDAR8(
   register8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
   const hflagSum =
@@ -99,10 +99,10 @@ function ADDAR8(
  * @description Add the byte pointed to by HL to A.
  **/
 function ADDAHL(
-  pointer: Cpu_Register_16Bit<"HL">,
+  pointer: Cpu_Register_16Bit<'HL'>,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const sum =
     (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
@@ -122,7 +122,7 @@ function ADDAHL(
  **/
 function ADDAN8(
   value: number,
-  registerA: Cpu_Register<"A">,
+  registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
   const sum = (value + registerA.getRegister()) & 0xff;
@@ -139,7 +139,7 @@ function ADDAN8(
  **/
 function CPAR8(
   r8: Cpu_Register<any>,
-  registerA: Cpu_Register<"A">,
+  registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
   validateR8Subtraction(registerF, registerA.getRegister(), r8.getRegister());
@@ -150,8 +150,8 @@ function CPAR8(
  **/
 function CPAHL(
   memory: Ram,
-  registerA: Cpu_Register<"A">,
-  registerHL: Cpu_Register_16Bit<"HL">,
+  registerA: Cpu_Register<'A'>,
+  registerHL: Cpu_Register_16Bit<'HL'>,
   registerF: Cpu_Flag_Register
 ) {
   validateR8Subtraction(
@@ -166,7 +166,7 @@ function CPAHL(
  **/
 function CPAN8(
   n8: number,
-  registerA: Cpu_Register<"A">,
+  registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
   validateR8Subtraction(registerF, registerA.getRegister(), n8);
@@ -186,7 +186,7 @@ function DECR8(r8: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
  * @description Decrement the value in pointed by HL  by 1
  **/
 function DECHL(
-  registerHL: Cpu_Register_16Bit<"HL">,
+  registerHL: Cpu_Register_16Bit<'HL'>,
   ram: Ram,
   flagRegister: Cpu_Flag_Register
 ) {
@@ -210,7 +210,7 @@ function INCR8(register: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
  * @description Increment the value in pointed by HL  by 1
  **/
 function INCHL(
-  registerHL: Cpu_Register_16Bit<"HL">,
+  registerHL: Cpu_Register_16Bit<'HL'>,
   ram: Ram,
   flagRegister: Cpu_Flag_Register
 ) {
@@ -227,7 +227,7 @@ function INCHL(
 function SBCAR8(
   r8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference =
     registerA.getRegister() - r8.getRegister() - registerF.getCYFlag();
@@ -247,10 +247,10 @@ function SBCAR8(
  * [HL] plus the carry and stores it in A
  **/
 function SBCAHL(
-  pointer: Cpu_Register_16Bit<"HL">,
+  pointer: Cpu_Register_16Bit<'HL'>,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference =
     registerA.getRegister() -
@@ -273,7 +273,7 @@ function SBCAHL(
 function SBCAN8(
   n8: number,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference = registerA.getRegister() - n8 - registerF.getCYFlag();
 
@@ -295,7 +295,7 @@ function SBCAN8(
 function SUBAR8(
   r8: Cpu_Register<any>,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference = registerA.getRegister() - r8.getRegister();
 
@@ -314,10 +314,10 @@ function SUBAR8(
  *  and stores it in A
  **/
 function SUBAHL(
-  pointer: Cpu_Register_16Bit<"HL">,
+  pointer: Cpu_Register_16Bit<'HL'>,
   memory: Ram,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference =
     registerA.getRegister() - memory.getMemoryAt(pointer.getRegister());
@@ -338,7 +338,7 @@ function SUBAHL(
 function SUBAN8(
   n8: number,
   registerF: Cpu_Flag_Register,
-  registerA: Cpu_Register<"A">
+  registerA: Cpu_Register<'A'>
 ) {
   const difference = registerA.getRegister() - n8;
   validateR8Subtraction(

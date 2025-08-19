@@ -18,30 +18,30 @@ export class Gameboy {
   }
 
   log() {
-    // this looks like ass i regret doing registers.register
-    console.log('A: ', this.registers.register.A.getRegister());
-    console.log('B: ', this.registers.register.B.getRegister());
-    console.log('C: ', this.registers.register.C.getRegister());
-    console.log('D: ', this.registers.register.D.getRegister());
-    console.log('E: ', this.registers.register.E.getRegister());
-    console.log('H: ', this.registers.register.H.getRegister());
-    console.log('L: ', this.registers.register.L.getRegister());
-    console.log('F: ', this.registers.register.F.getRegister());
-    console.log('TempByte: ', this.registers.getTempByte());
-    console.log('Lowerbyte: ', this.registers.getLowerByte());
-    console.log('Upperbyte: ', this.registers.getUpperByte());
-    console.log('Program Counter: ', this.registers.pointers.PC.getRegister());
-    console.log('Stack Pointer: ', this.registers.pointers.SP.getRegister());
-
-    // INTERRUPTS
-    console.log('IME: ', this.registers.IME.getValue());
-    console.log('IF: ', this.ram.getIF());
-    console.log('IE: ', this.ram.getIE());
-
-    // HALTS
-    console.log('HALT_BUG: ', this.registers.HALT_BUG);
-    console.log('HALT: ', this.registers.HALT);
-    console.log('STOP: ', this.registers.STOP);
+    const systemState = {
+      'Register A': this.registers.register.A.getRegister(),
+      'Register B': this.registers.register.B.getRegister(),
+      'Register C': this.registers.register.C.getRegister(),
+      'Register D': this.registers.register.D.getRegister(),
+      'Register E': this.registers.register.E.getRegister(),
+      'Register H': this.registers.register.H.getRegister(),
+      'Register L': this.registers.register.L.getRegister(),
+      'Register F': this.registers.register.F.getRegister().toString(2),
+      TempByte: this.registers.getTempByte(),
+      LowerByte: this.registers.getLowerByte(),
+      UpperByte: this.registers.getUpperByte(),
+      'Program Counter': this.registers.pointers.PC.getRegister(),
+      'Stack Pointer': this.registers.pointers.SP.getRegister(),
+      IME: this.registers.IME.getValue(),
+      IF: this.ram.getIF(),
+      IE: this.ram.getIE(),
+      HALT_BUG: this.registers.HALT_BUG,
+      HALT: this.registers.HALT,
+      STOP: this.registers.STOP,
+      'Memory 0xFF01': this.ram.getMemoryAt(0xff01),
+      'Memory 0xFF02': this.ram.getMemoryAt(0xff02),
+    };
+    console.table(systemState);
   }
   run() {
     for (let index = 0; index < 1000; index++) {

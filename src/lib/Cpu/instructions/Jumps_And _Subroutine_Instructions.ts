@@ -53,44 +53,35 @@ function CALLN16() {
     },
   ];
 }
-function CALLCCN16(CC: number) {
-  // author's notes: This shit is so scuffed
-  if (CC != 0) {
-    return CALLN16();
-  } else {
-    return [
-      // M2
-      (dmg: Gameboy) => {
+function CALLCCN16() {
+  return [
+    // M2
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+
+      const n =
+        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+
+      dmg.registers.setLowerByte(n);
+    },
+    // M3
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+
+      const n =
+        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+
+      dmg.registers.setUpperByte(n);
+    },
+    //   M4/1
+    (dmg: Gameboy) => {
+      if (dmg.registers.HALT_BUG) {
+        dmg.registers.HALT_BUG = false;
+      } else {
         dmg.registers.pointers.PC.increment();
-
-        const n =
-          dmg.cartridge.CartDataToBytes[
-            dmg.registers.pointers.PC.getRegister()
-          ];
-
-        dmg.registers.setLowerByte(n);
-      },
-      // M3
-      (dmg: Gameboy) => {
-        dmg.registers.pointers.PC.increment();
-
-        const n =
-          dmg.cartridge.CartDataToBytes[
-            dmg.registers.pointers.PC.getRegister()
-          ];
-
-        dmg.registers.setUpperByte(n);
-      },
-      //   M4/1
-      (dmg: Gameboy) => {
-        if (dmg.registers.HALT_BUG) {
-          dmg.registers.HALT_BUG = false;
-        } else {
-          dmg.registers.pointers.PC.increment();
-        }
-      },
-    ];
-  }
+      }
+    },
+  ];
 }
 
 function JPN16() {
@@ -123,44 +114,35 @@ function JPN16() {
   ];
 }
 
-function JPCCN16(CC: number) {
-  // author's notes: This shit is so scuffed
-  if (CC != 0) {
-    return JPN16();
-  } else {
-    return [
-      // M2
-      (dmg: Gameboy) => {
+function JPCCN16() {
+  return [
+    // M2
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+
+      const n =
+        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+
+      dmg.registers.setLowerByte(n);
+    },
+    // M3
+    (dmg: Gameboy) => {
+      dmg.registers.pointers.PC.increment();
+
+      const n =
+        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+
+      dmg.registers.setUpperByte(n);
+    },
+    //   M4/1
+    (dmg: Gameboy) => {
+      if (dmg.registers.HALT_BUG) {
+        dmg.registers.HALT_BUG = false;
+      } else {
         dmg.registers.pointers.PC.increment();
-
-        const n =
-          dmg.cartridge.CartDataToBytes[
-            dmg.registers.pointers.PC.getRegister()
-          ];
-
-        dmg.registers.setLowerByte(n);
-      },
-      // M3
-      (dmg: Gameboy) => {
-        dmg.registers.pointers.PC.increment();
-
-        const n =
-          dmg.cartridge.CartDataToBytes[
-            dmg.registers.pointers.PC.getRegister()
-          ];
-
-        dmg.registers.setUpperByte(n);
-      },
-      //   M4/1
-      (dmg: Gameboy) => {
-        if (dmg.registers.HALT_BUG) {
-          dmg.registers.HALT_BUG = false;
-        } else {
-          dmg.registers.pointers.PC.increment();
-        }
-      },
-    ];
-  }
+      }
+    },
+  ];
 }
 
 function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
@@ -214,11 +196,7 @@ function RETI() {
   ];
 }
 
-function RETCC(cc: number) {
-  if (cc != 0) {
-    return RET();
-  }
-
+function RETCC() {
   return [
     (dmg: Gameboy) => {
       console.log('Current RET CC check is false moving to next opcode');
@@ -262,6 +240,7 @@ function RSTN(n: number) {
 function JRE() {
   return [
     (dmg: Gameboy) => {
+      console.log('CC IS TRUE JRE WILL BE EXECUTED ');
       dmg.registers.pointers.PC.increment();
       const z =
         dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
@@ -290,22 +269,17 @@ function JRE() {
   ];
 }
 
-function JRCCE(cc: number) {
-  if (cc == 1) {
-    console.log('CC IS TRUE JRE WILL BE EXECUTED ');
-
-    return JRE();
-  } else {
-    return [
-      (dmg: Gameboy) => {
-        if (dmg.registers.HALT_BUG) {
-          dmg.registers.HALT_BUG = false;
-        } else {
-          dmg.registers.pointers.PC.increment();
-        }
-      },
-    ];
-  }
+function JREFALSE() {
+  return [
+    (dmg: Gameboy) => {
+      console.log('CC IS FALSE JRE WILL NOT BE EXECUTED ');
+      if (dmg.registers.HALT_BUG) {
+        dmg.registers.HALT_BUG = false;
+      } else {
+        dmg.registers.pointers.PC.increment();
+      }
+    },
+  ];
 }
 
 export {
@@ -318,6 +292,6 @@ export {
   RETCC,
   RSTN,
   RETI,
-  JRCCE,
+  JREFALSE,
   JRE,
 };
