@@ -103,14 +103,17 @@ function JPN16() {
 		// M4
 		(dmg: Gameboy) => {
 			const nn =
-				dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8);
+				(dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
 			dmg.registers.pointers.PC.setRegister(nn);
-			console.log('jumping to address: ', nn);
+
+			console.log(19 | (2 << 8));
+
+			console.log('lowerbyte: ', dmg.registers.getLowerByte());
+			console.log('upperbyte: ', dmg.registers.getUpperByte());
+
+			console.log('jumping to address: ', nn & 0xffff);
 		},
-		// M1/M5
-		(dmg: Gameboy) => {
-			console.log('JPN16 finished');
-		},
+		(dmg: Gameboy) => {},
 	];
 }
 
@@ -148,7 +151,6 @@ function JPCCN16() {
 function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
 	PC.setRegister(HL.getRegister());
 }
-
 // CORRECT
 function RET() {
 	return [
@@ -252,7 +254,7 @@ function JRE() {
 
 			// Convert to signed 8-bit and add to PC+1
 			if (e > 127) e -= 256;
-			const newPC = (dmg.registers.pointers.PC.getRegister() + 1 + e) & 0xffff;
+			const newPC = (dmg.registers.pointers.PC.getRegister() + e) & 0xffff;
 
 			dmg.registers.pointers.PC.setRegister(newPC);
 			console.log('Jumping at address: ', newPC);
