@@ -242,7 +242,7 @@ function RSTN(n: number) {
 function JRE() {
 	return [
 		(dmg: Gameboy) => {
-			console.log('CC IS TRUE JRE WILL BE EXECUTED ');
+			console.log('CC IS TRUE JRE WILL BE EXECUTED  POOP');
 			dmg.registers.pointers.PC.increment();
 		},
 		(dmg: Gameboy) => {
@@ -255,6 +255,7 @@ function JRE() {
 			const newPC = (dmg.registers.pointers.PC.getRegister() + 1 + e) & 0xffff;
 
 			dmg.registers.pointers.PC.setRegister(newPC);
+			console.log('Jumping at address: ', newPC);
 		},
 		(dmg: Gameboy) => {
 			// dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
