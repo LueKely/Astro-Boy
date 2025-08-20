@@ -52,6 +52,8 @@ export class Gameboy {
 	}
 
 	run() {
+		// this.ratboDebugger();
+
 		// const now = performance.now();
 		// const elapsedMs = now - this.lastTime;
 		// this.lastTime = now;
@@ -70,6 +72,55 @@ export class Gameboy {
 
 		for (let index = 0; index < 3000; index++) {
 			this.scheduler.tick();
+		}
+		this.ratboDebugger();
+	}
+	ratboDebugger() {
+		console.log('RATBO');
+
+		const A = document.querySelector('#A');
+		const B = document.querySelector('#B');
+		const C = document.querySelector('#C');
+		const D = document.querySelector('#D');
+		const E = document.querySelector('#E');
+		const F = document.querySelector('#F');
+		const H = document.querySelector('#H');
+		const L = document.querySelector('#L');
+		const SP = document.querySelector('#SP');
+		const PC = document.querySelector('#PC');
+		const Instruction = document.querySelector('#ins');
+
+		if (A)
+			A.textContent = this.registers.register.A.getRegister().toLocaleString();
+
+		if (B)
+			B.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (C)
+			C.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (D)
+			D.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (E)
+			E.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (F)
+			F.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (H)
+			H.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (L)
+			L.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (H)
+			H.textContent = this.registers.register.A.getRegister().toLocaleString();
+		if (PC)
+			PC.textContent =
+				this.registers.pointers.PC.getRegister().toLocaleString();
+		if (SP)
+			SP.textContent =
+				this.registers.pointers.PC.getRegister().toLocaleString();
+
+		if (Instruction) {
+			Instruction.textContent =
+				this.cartridge.CartDataToBytes[
+					this.registers.pointers.PC.getRegister()
+				].toLocaleString();
 		}
 	}
 }

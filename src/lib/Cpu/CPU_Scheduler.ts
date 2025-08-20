@@ -123,6 +123,10 @@ export class Cpu_Scheduler {
 	tick() {
 		try {
 			if (this.machineCycle.length == 0) {
+				// reset temp bytes
+				// this.dmg.registers.setLowerByte(0);
+				// this.dmg.registers.setUpperByte(0);
+				// this.dmg.registers.setTempByte(0);
 				this.fetchOpcode();
 				this.schedule();
 			}
