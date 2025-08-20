@@ -105,32 +105,6 @@ export class CpuOpcodeRecord {
     this.f = f;
   }
 
-  // 0x20: {
-  // 				name: 'JR NZ, e',
-  // 				length: 2,
-  // 				cycles: 3,
-  // 				jobs: (this.f.getZFlag() ^ 1) != 0 ? JRE() : JREFALSE(),
-  // 			},
-  // 			0x30: {
-  // 				name: 'JR NC, e',
-  // 				length: 2,
-  // 				cycles: 3,
-  // 				jobs: (this.f.getCYFlag() ^ 1) != 0 ? JRE() : JREFALSE(),
-  // 			},
-
-  // 			0x28: {
-  // 				name: 'JR Z, e',
-  // 				length: 2,
-  // 				cycles: 3,
-  // 				jobs: this.f.getZFlag() != 0 ? JRE() : JREFALSE(),
-  // 			},
-  // 			0x38: {
-  // 				name: 'JR C, e',
-  // 				length: 2,
-  // 				cycles: 3,
-  // 				jobs: this.f.getCYFlag() != 0 ? JRE() : JREFALSE(),
-  // 			},
-
   get(index: number): IOpCodeEntry {
     switch (index) {
       case 0x20:
@@ -197,8 +171,197 @@ export class CpuOpcodeRecord {
             jobs: JREFALSE(),
           };
         }
-        break;
 
+      case 0xc0:
+        if (this.f.getZFlag() ^ 1) {
+          return {
+            name: 'RET NZ',
+            cycles: '4 if CC is true; 2',
+            length: 1,
+            jobs: RET(),
+          };
+        }
+        return {
+          name: 'RET NZ',
+          cycles: '4 if CC is true; 2',
+          length: 1,
+          jobs: RETCC(),
+        };
+
+      case 0xd0:
+        if (this.f.getCYFlag() ^ 1) {
+          return {
+            name: 'RET NC',
+            cycles: 4,
+            length: 1,
+            jobs: RET(),
+          };
+        }
+        return {
+          name: 'RET NC',
+          cycles: 2,
+          length: 1,
+          jobs: RETCC(),
+        };
+      case 0xc8:
+        if (this.f.getZFlag()) {
+          return {
+            name: 'RET Z',
+            cycles: '4 if CC is true; 2',
+            length: 1,
+            jobs: RET(),
+          };
+        }
+        return {
+          name: 'RET Z',
+          cycles: '4 if CC is true; 2',
+          length: 1,
+          jobs: RETCC(),
+        };
+      case 0xd8:
+        if (this.f.getCYFlag()) {
+          return {
+            name: 'RET C',
+            cycles: 4,
+            length: 1,
+            jobs: RET(),
+          };
+        }
+        return {
+          name: 'RET C',
+          cycles: 2,
+          length: 1,
+          jobs: RETCC(),
+        };
+
+      case 0xc2:
+        if ((this.f.getZFlag() ^ 1) != 0) {
+          return {
+            name: 'JP NZ, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPN16(),
+          };
+        } else {
+          return {
+            name: 'JP NZ, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPCCN16(),
+          };
+        }
+      case 0xd2:
+        if ((this.f.getCYFlag() ^ 1) != 0) {
+          return {
+            name: 'JP NC, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPN16(),
+          };
+        } else {
+          return {
+            name: 'JP NC, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPCCN16(),
+          };
+        }
+      case 0xca:
+        if (this.f.getZFlag() != 0) {
+          return {
+            name: 'JP Z, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPN16(),
+          };
+        } else {
+          return {
+            name: 'JP NZ, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPCCN16(),
+          };
+        }
+      case 0xda:
+        if (this.f.getCYFlag() != 0) {
+          return {
+            name: 'JP CY, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPN16(),
+          };
+        } else {
+          return {
+            name: 'JP CY, nn',
+            cycles: '4 cycles if CC is true; 3',
+            length: 3,
+            jobs: JPCCN16(),
+          };
+        }
+      case 0xc4:
+        if ((this.f.getZFlag() ^ 1) != 0) {
+          return {
+            name: 'Call NZ, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLN16(),
+          };
+        } else {
+          return {
+            name: 'Call NZ, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLCCN16(),
+          };
+        }
+      case 0xd4:
+        if ((this.f.getCYFlag() ^ 1) != 0) {
+          return {
+            name: 'Call NC, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLN16(),
+          };
+        } else {
+          return {
+            name: 'Call NC, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLCCN16(),
+          };
+        }
+      case 0xcc:
+        if (this.f.getZFlag() != 0) {
+          return {
+            name: 'Call Z, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLN16(),
+          };
+        } else {
+          return {
+            name: 'Call Z, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLCCN16(),
+          };
+        }
+      case 0xdc:
+        if (this.f.getCYFlag() != 0) {
+          return {
+            name: 'Call C, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLN16(),
+          };
+        } else {
+          return {
+            name: 'Call C, nn',
+            cycles: 'if CC is True: 6 else 3',
+            length: 3,
+            jobs: CALLCCN16(),
+          };
+        }
       default:
         return this.record()[index];
     }
@@ -4014,60 +4177,13 @@ export class CpuOpcodeRecord {
         jobs: CALLN16(),
       },
 
-      0xc4: {
-        name: 'Call NZ, nn',
-        cycles: 'if CC is True: 6 else 3',
-        length: 3,
-        jobs: (this.f.getZFlag() ^ 1) != 0 ? CALLN16() : CALLCCN16(),
-      },
-      0xd4: {
-        name: 'Call NC, nn',
-        cycles: 'if CC is True: 6 else 3',
-        length: 3,
-        jobs: (this.f.getCYFlag() ^ 1) != 0 ? CALLN16() : CALLCCN16(),
-      },
-      0xcc: {
-        name: 'Call Z, nn',
-        cycles: 'if CC is True: 6 else 3',
-        length: 3,
-        jobs: this.f.getZFlag() != 0 ? CALLN16() : CALLCCN16(),
-      },
-      0xdc: {
-        name: 'Call C, nn',
-        cycles: 'if CC is True: 6 else 3',
-        length: 3,
-        jobs: this.f.getCYFlag() != 0 ? CALLN16() : CALLCCN16(),
-      },
       0xc3: {
         name: 'JP nn',
         cycles: 4,
         length: 3,
         jobs: JPN16(),
       },
-      0xc2: {
-        name: 'JP NZ, nn',
-        cycles: '4 cycles if CC is true; 3',
-        length: 3,
-        jobs: (this.f.getZFlag() ^ 1) != 0 ? JPN16() : JPCCN16(),
-      },
-      0xd2: {
-        name: 'JP NC, nn',
-        cycles: '4 cycles if CC is true; 3',
-        length: 3,
-        jobs: (this.f.getCYFlag() ^ 1) != 0 ? JPN16() : JPCCN16(),
-      },
-      0xca: {
-        name: 'JP Z, nn',
-        cycles: '4 cycles if CC is true; 3',
-        length: 3,
-        jobs: this.f.getZFlag() != 0 ? JPN16() : JPCCN16(),
-      },
-      0xda: {
-        name: 'JP C, nn',
-        cycles: '4 cycles if CC is true; 3',
-        length: 3,
-        jobs: this.f.getCYFlag() != 0 ? JPN16() : JPCCN16(),
-      },
+
       0xc9: {
         name: 'RET',
         cycles: 4,
@@ -4084,30 +4200,7 @@ export class CpuOpcodeRecord {
           },
         ],
       },
-      0xc0: {
-        name: 'RET NZ',
-        cycles: '4 if CC is true; 2',
-        length: 1,
-        jobs: (this.f.getZFlag() ^ 1) != 0 ? RET() : RETCC(),
-      },
-      0xd0: {
-        name: 'RET NC',
-        cycles: '4 if CC is true; 2',
-        length: 1,
-        jobs: (this.f.getCYFlag() ^ 1) != 0 ? RET() : RETCC(),
-      },
-      0xc8: {
-        name: 'RET Z',
-        cycles: '4 if CC is true; 2',
-        length: 1,
-        jobs: this.f.getZFlag() != 0 ? RET() : RETCC(),
-      },
-      0xd8: {
-        name: 'RET C',
-        cycles: '4 if CC is true; 2',
-        length: 1,
-        jobs: this.f.getCYFlag() != 0 ? RET() : RETCC(),
-      },
+
       0xc7: {
         name: 'RST 0x00',
         cycles: 4,
