@@ -9,12 +9,19 @@ export class Gameboy {
   readonly cartridge: GameBoyCatridge;
   readonly scheduler: Cpu_Scheduler;
 
+  // TODO create a class for timer
+  cycleBudget = 0;
+  lastTime = 0;
+
   constructor(game: ArrayBuffer) {
     this.registers = new Cpu_Register_File();
     this.ram = new Ram();
     this.cartridge = new GameBoyCatridge(game);
     console.log(this.cartridge.CartDataToBytes);
     this.scheduler = new Cpu_Scheduler(this);
+    // timer
+    this.cycleBudget = 0;
+    this.lastTime = performance.now();
   }
 
   log() {
@@ -43,16 +50,26 @@ export class Gameboy {
     };
     console.table(systemState);
   }
+
   run() {
+    // this.ratboDebugger();
+
+    // const now = performance.now();
+    // const elapsedMs = now - this.lastTime;
+    // this.lastTime = now;
+
+    // const M_CYCLES_PER_SEC = 4194304 / 4; // 1,048,576
+    // this.cycleBudget += elapsedMs * (M_CYCLES_PER_SEC / 1000);
+
+    // while (this.cycleBudget >= 1) {
+    // 	this.scheduler.tick();
+    // 	this.cycleBudget -= 1;
+    // }
+
     // requestAnimationFrame(() => {
-    //   const result = this.ram.getMemoryAt(0xa001);
-    //   if (result == 0x80) {
-    //     console.log('TEST FINISHED!', result);
-    //     return;
-    //   }
-    //   this.scheduler.tick();
-    //   this.run();
+    // 	this.run();
     // });
+
     for (let index = 0; index < 3000; index++) {
       this.scheduler.tick();
     }
