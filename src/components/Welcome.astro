@@ -6,6 +6,7 @@ import background from '../assets/background.svg';
 <div id="container">
   <input type="file" id="fileInput" />
   <output id="output">No Games Loaded</output>
+  <button class="button">STOP</button>
 </div>
 
 <script>
@@ -13,13 +14,16 @@ import background from '../assets/background.svg';
   import { loadFile } from '../lib/utils/File_Utils';
 
   const input = document.getElementById('fileInput');
+  const button = document.querySelector('.button');
   const output = document.getElementById('output');
+
+  let gameboy: Gameboy | null = null;
 
   input?.addEventListener('change', async (e) => {
     if (!output) throw new Error('Output element missing');
 
     const game = await loadFile(e);
-    const gameboy = new Gameboy(game);
+    gameboy = new Gameboy(game);
 
     console.log(gameboy.cartridge.getCartridgeHeaderRaw());
     console.log(gameboy.cartridge.inferCartridgeHeader());
@@ -27,6 +31,11 @@ import background from '../assets/background.svg';
 
     gameboy.cartridge.checkSum();
     output.innerText = 'Game Loaded';
+  });
+
+  button?.addEventListener('click', () => {
+    gameboy?.stop();
+    if (button) button!.textContent = 'Unpause';
   });
 </script>
 

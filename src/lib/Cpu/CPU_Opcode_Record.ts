@@ -3983,10 +3983,9 @@ export class CpuOpcodeRecord {
               dmg.registers.pointers.PC.increment();
             }
 
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister()
+            );
             dmg.registers.setLowerByte(lb);
           },
           (dmg: Gameboy) => {
@@ -4032,10 +4031,9 @@ export class CpuOpcodeRecord {
             } else {
               dmg.registers.pointers.PC.increment();
             }
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister()
+            );
             dmg.registers.setLowerByte(lb);
           },
           (dmg: Gameboy) => {
@@ -4046,10 +4044,9 @@ export class CpuOpcodeRecord {
             } else {
               dmg.registers.pointers.PC.increment();
             }
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister()
+            );
             dmg.registers.setUpperByte(ub);
           },
           (dmg: Gameboy) => {
@@ -4078,10 +4075,9 @@ export class CpuOpcodeRecord {
             } else {
               dmg.registers.pointers.PC.increment();
             }
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister()
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister()
+            );
             dmg.registers.setTempByte(n);
           },
           (dmg: Gameboy) => {

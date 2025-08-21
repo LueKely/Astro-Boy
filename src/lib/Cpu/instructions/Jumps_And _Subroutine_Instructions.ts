@@ -10,8 +10,7 @@ function CALLN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setLowerByte(n);
     },
@@ -19,8 +18,7 @@ function CALLN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setUpperByte(n);
     },
@@ -58,8 +56,7 @@ function CALLCCN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setLowerByte(n);
     },
@@ -67,8 +64,7 @@ function CALLCCN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setUpperByte(n);
     },
@@ -89,15 +85,15 @@ function JPN16() {
     // M2
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+
       dmg.registers.setLowerByte(n);
     },
     // M3
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+
       dmg.registers.setUpperByte(n);
     },
     // M4
@@ -121,8 +117,7 @@ function JPCCN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setLowerByte(n);
     },
@@ -130,8 +125,7 @@ function JPCCN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
 
-      const n =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       dmg.registers.setUpperByte(n);
     },
@@ -246,8 +240,7 @@ function JRE() {
     },
     (dmg: Gameboy) => {
       // Get current PC and increment to operand
-      let e =
-        dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+      let e = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
 
       // Convert to signed 8-bit and add to PC+1
       if (e > 127) e -= 256;
@@ -267,7 +260,8 @@ function JRE() {
   //       console.log('CC IS TRUE JRE WILL BE EXECUTED ');
   //       dmg.registers.pointers.PC.increment();
   //       const z =
-  //         dmg.cartridge.CartDataToBytes[dmg.registers.pointers.PC.getRegister()];
+  //         dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+
   //       dmg.registers.setTempByte(z);
   //     },
   //     (dmg: Gameboy) => {

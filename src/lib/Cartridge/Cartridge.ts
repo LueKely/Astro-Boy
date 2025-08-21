@@ -1,4 +1,4 @@
-import { CartHeaderAdress } from "./types/Catridge_Address_Reader";
+import { CartHeaderAdress } from './types/Catridge_Address_Reader';
 
 export class GameBoyCatridge {
   #rawGame: ArrayBuffer;
@@ -128,7 +128,7 @@ export class GameBoyCatridge {
       ),
       title: GameBoyCatridge.#ReadSubArray(header.title),
       oldLicenseeCode: CartHeaderAdress.OldLicenseeCode.get(
-        Number("0x" + header.oldLicenseeCode)
+        Number('0x' + header.oldLicenseeCode)
       ),
       newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
         GameBoyCatridge.#CipherAscii(header.newLicenseeCode)
