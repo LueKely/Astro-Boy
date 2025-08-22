@@ -35,7 +35,10 @@ import background from '../assets/background.svg';
 
   button?.addEventListener('click', () => {
     gameboy?.stop();
-    if (button) button!.textContent = 'Unpause';
+    if (button && gameboy) {
+      button.textContent = gameboy.pause ? 'unpause' : 'pause';
+    }
+    if (!gameboy?.pause) gameboy?.run();
   });
 </script>
 

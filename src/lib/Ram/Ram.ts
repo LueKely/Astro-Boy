@@ -7,6 +7,7 @@ export class Ram {
 
   constructor() {
     this.memory = new Uint8Array(0x10000);
+    this.memory.fill(0);
   }
   // is hardware controlled
   setIE() {}
@@ -31,6 +32,8 @@ export class Ram {
   }
 
   getMemoryAt(index: number) {
+    if (this.memory[index] == undefined) throw new Error('INVALID VALUE');
+
     return this.memory[index];
   }
 

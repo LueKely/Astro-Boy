@@ -8,7 +8,7 @@ export class Gameboy {
   readonly ram: Ram;
   readonly cartridge: GameBoyCatridge;
   readonly scheduler: Cpu_Scheduler;
-  private pause = false;
+  pause = false;
   // TODO create a class for timer
   cycleBudget = 0;
   lastTime = 0;
@@ -57,29 +57,19 @@ export class Gameboy {
   }
 
   run() {
-    const now = performance.now();
-    const elapsedMs = now - this.lastTime;
-    this.lastTime = now;
-    const M_CYCLES_PER_SEC = 4194304 / 4; // 1,048,576
-    this.cycleBudget += elapsedMs * (M_CYCLES_PER_SEC / 1000);
+    // if (this.pause) return;
 
-    while (this.cycleBudget >= 1) {
-      this.scheduler.tick();
-      this.cycleBudget -= 1;
-    }
-
-    const timeout = setTimeout(() => {
-      this.run();
-    }, 16); // ~60fps (16ms delay)
-
-    if (this.pause) {
-      console.log('PAUSED');
-      clearTimeout(timeout);
-      return;
-    }
-
-    // for (let index = 0; index < 3000; index++) {
-    // this.scheduler.tick();
+    // for (let i = 0; i < 10000; i++) {
+    //   this.scheduler.tick();
     // }
+
+    // requestAnimationFrame(() => this.run());
+
+    for (let i = 0; i < 34000; i++) {
+      this.scheduler.tick();
+    }
+    console.log(this.ram.getMemory()[49700]);
+    console.log(this.ram.getMemory()[49701]);
+    console.log(this.ram.getMemory()[49702]);
   }
 }

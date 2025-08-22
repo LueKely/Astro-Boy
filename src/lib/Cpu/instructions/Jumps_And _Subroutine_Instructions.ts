@@ -86,6 +86,7 @@ function JPN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
       const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+      console.log('GUMANA KA: ', n);
 
       dmg.registers.setLowerByte(n);
     },
@@ -93,6 +94,7 @@ function JPN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
       const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+      console.log('GUMANA KA: ', n);
 
       dmg.registers.setUpperByte(n);
     },

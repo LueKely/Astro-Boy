@@ -1952,10 +1952,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -1984,10 +1983,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2016,10 +2014,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2048,10 +2045,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2080,10 +2076,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2112,10 +2107,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2144,10 +2138,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2176,10 +2169,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -2211,10 +2203,9 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             // get lower byte
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setLowerByte(lb);
 
             if (dmg.registers.HALT_BUG) {
@@ -2225,10 +2216,9 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             // get upper byte
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setUpperByte(ub);
 
             if (dmg.registers.HALT_BUG) {
@@ -2258,10 +2248,9 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             // get lower byte
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setLowerByte(lb);
 
             if (dmg.registers.HALT_BUG) {
@@ -2272,10 +2261,9 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             // get upper byte
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setUpperByte(ub);
 
             if (dmg.registers.HALT_BUG) {
@@ -2304,10 +2292,9 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             // get lower byte
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setLowerByte(lb);
 
             if (dmg.registers.HALT_BUG) {
@@ -2318,10 +2305,9 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             // get upper byte
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setUpperByte(ub);
 
             if (dmg.registers.HALT_BUG) {
@@ -2351,10 +2337,9 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             // get lower byte
-            const lb =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const lb = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setLowerByte(lb);
 
             if (dmg.registers.HALT_BUG) {
@@ -2365,10 +2350,10 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             // get upper byte
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
+
             dmg.registers.setUpperByte(ub);
 
             if (dmg.registers.HALT_BUG) {
@@ -3743,10 +3728,9 @@ export class CpuOpcodeRecord {
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3771,10 +3755,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3799,10 +3782,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3827,10 +3809,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3862,10 +3843,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3890,10 +3870,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3918,10 +3897,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3946,10 +3924,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
@@ -3997,10 +3974,9 @@ export class CpuOpcodeRecord {
               dmg.registers.pointers.PC.increment();
             }
 
-            const ub =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const ub = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setUpperByte(ub);
           },
           (dmg: Gameboy) => {
@@ -4103,10 +4079,9 @@ export class CpuOpcodeRecord {
         length: 2,
         jobs: [
           (dmg: Gameboy) => {
-            const n =
-              dmg.cartridge.CartDataToBytes[
-                dmg.registers.pointers.PC.getRegister() + 1
-              ];
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
             dmg.registers.setTempByte(n);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;

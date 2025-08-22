@@ -59,6 +59,10 @@ export class Cpu_Scheduler {
           ' key: 0x' +
           this.readByte().toString(16)
       );
+      // console.log('E', this.dmg.registers.register.E.getRegister());
+
+      // console.log('HL', this.dmg.registers.register16Bit.HL.getRegister());
+
       this.currentOpcode.jobs.forEach((entry) => {
         this.machineCycle.push(entry);
       });
@@ -123,10 +127,6 @@ export class Cpu_Scheduler {
   tick() {
     try {
       if (this.machineCycle.length == 0) {
-        // reset temp bytes
-        // this.dmg.registers.setLowerByte(0);
-        // this.dmg.registers.setUpperByte(0);
-        // this.dmg.registers.setTempByte(0);
         this.fetchOpcode();
         this.schedule();
       }
@@ -138,6 +138,7 @@ export class Cpu_Scheduler {
       const notImplemented = this.dmg.ram.getMemoryAt(
         this.dmg.registers.pointers.PC.getRegister()
       );
+      this.dmg.log();
 
       console.log('Not Implemented: ', notImplemented);
 
