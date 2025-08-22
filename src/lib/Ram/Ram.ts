@@ -7,6 +7,7 @@ export class Ram {
 
 	constructor() {
 		this.memory = new Uint8Array(0x10000);
+		this.memory.fill(0);
 	}
 	// is hardware controlled
 	setIE() {}
@@ -31,10 +32,20 @@ export class Ram {
 	}
 
 	getMemoryAt(index: number) {
+		if (this.memory[index] == undefined) throw new Error('INVALID VALUE');
+
 		return this.memory[index];
 	}
 
 	setMemoryAt(pointer: number, value: number) {
+		console.log('Wrote at address: ' + pointer + ' wit the value of: ' + value);
+
 		this.memory[pointer] = value & 0xff;
+	}
+
+	copyROM(raw: Uint8Array) {
+		raw.forEach((value, index) => {
+			this.setMemoryAt(index, value);
+		});
 	}
 }

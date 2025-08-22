@@ -91,7 +91,9 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   // flag conditions below
   registerF.setNFlag();
 
-  if (difference == 0) {
+  if ((difference & 0xff) == 0) {
+    console.log('RAISED');
+
     registerF.setZFlag();
   } else {
     registerF.clearZFlag();

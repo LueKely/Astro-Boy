@@ -1,4 +1,4 @@
-import type { Gameboy } from "../../Gameboy";
+import type { Gameboy } from '../../Gameboy';
 
 export interface IOpCodeEntry {
   name: string;
