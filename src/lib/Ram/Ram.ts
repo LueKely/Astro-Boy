@@ -38,7 +38,7 @@ export class Ram {
 	}
 
 	setMemoryAt(pointer: number, value: number) {
-		console.log('Wrote at address: ' + pointer + ' wit the value of: ' + value);
+		// console.log('Wrote at address: ' + pointer + ' wit the value of: ' + value);
 
 		this.memory[pointer] = value & 0xff;
 	}

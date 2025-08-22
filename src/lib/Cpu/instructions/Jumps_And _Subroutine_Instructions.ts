@@ -25,6 +25,7 @@ function CALLN16() {
 		// M4
 		(dmg: Gameboy) => {
 			dmg.registers.pointers.SP.decrement();
+			dmg.registers.pointers.PC.increment();
 		}, // M5
 		(dmg: Gameboy) => {
 			dmg.ram.setMemoryAt(
