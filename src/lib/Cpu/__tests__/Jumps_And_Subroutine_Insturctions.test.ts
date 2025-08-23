@@ -445,13 +445,13 @@ describe('JR e', () => {
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1ffd);
   });
 
-  test('E is 0xFB & PC is 0x2000', () => {
+  test('E is 0x0A & PC is 0x3000', () => {
     const dummyRom = new ArrayBuffer(1024);
 
     // init gameboy
     const gameboy = new Gameboy(dummyRom);
-    gameboy.registers.pointers.PC.setRegister(0x2000);
-    gameboy.ram.setMemoryAt(0x2001, 0xfb);
+    gameboy.registers.pointers.PC.setRegister(0x3000);
+    gameboy.ram.setMemoryAt(0x3001, 0x0a);
 
     const job = JRE();
 
@@ -459,6 +459,6 @@ describe('JR e', () => {
       callback(gameboy);
     });
 
-    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1ffd);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x300c);
   });
 });
