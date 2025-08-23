@@ -5,6 +5,7 @@ import {
   CALLN16,
   JPHL,
   JPN16,
+  JRE,
   RET,
   RETI,
   RSTN,
@@ -406,5 +407,58 @@ describe('Tests for RST N', () => {
       expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x01);
       expect(gameboy.ram.getMemoryAt(0x0000)).toBe(0x01);
     });
+  });
+});
+
+describe('JR e', () => {
+  test('E is 0x05 & PC is 0x1000', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x1000);
+    gameboy.ram.setMemoryAt(0x1001, 0x05);
+
+    const job = JRE();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1007);
+  });
+
+  test('E is 0xFB & PC is 0x2000', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x2000);
+    gameboy.ram.setMemoryAt(0x2001, 0xfb);
+
+    const job = JRE();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1ffd);
+  });
+
+  test('E is 0xFB & PC is 0x2000', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x2000);
+    gameboy.ram.setMemoryAt(0x2001, 0xfb);
+
+    const job = JRE();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1ffd);
   });
 });

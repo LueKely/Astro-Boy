@@ -212,7 +212,7 @@ function RETCC() {
     },
   ];
 }
-// NEEDS TEST
+//TESTED
 function RSTN(n: number) {
   return [
     // M2
@@ -238,7 +238,7 @@ function RSTN(n: number) {
     },
   ];
 }
-// CORRECT - finally
+// TESTED
 function JRE() {
   return [
     (dmg: Gameboy) => {
