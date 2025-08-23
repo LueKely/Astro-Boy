@@ -7,6 +7,7 @@ import {
   JPN16,
   RET,
   RETI,
+  RSTN,
 } from '../instructions/Jumps_And _Subroutine_Instructions';
 
 describe('Tests for CALL NN', () => {
@@ -326,5 +327,68 @@ describe('Tests for RETI', () => {
     expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x0001);
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x7856);
     expect(gameboy.registers.IME.getValue()).toBe(1);
+  });
+});
+
+describe('Tests for RST N', () => {
+  const cases = [
+    { n: 0x00 },
+    { n: 0x08 },
+    { n: 0x10 },
+    { n: 0x20 },
+    { n: 0x30 },
+    { n: 0x18 },
+    { n: 0x28 },
+    { n: 0x38 },
+  ];
+
+  cases.forEach((value) => {
+    test(`RST 0x${value.n.toString(
+      16
+    )} where PC is 0x1000 and SP is 0x0000`, () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+
+      gameboy.registers.pointers.PC.setRegister(0x0100);
+      gameboy.registers.pointers.SP.setRegister(0x0000);
+
+      const job = RSTN(value.n);
+
+      job.forEach((callback) => {
+        callback(gameboy);
+      });
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value.n);
+      expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffe);
+      expect(gameboy.ram.getMemoryAt(0xfffe)).toBe(0x01);
+      expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x01);
+    });
+  });
+
+  cases.forEach((value) => {
+    test(`RST 0x${value.n.toString(
+      16
+    )}  where PC is 0x1234 and SP is 0xfffe`, () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+
+      gameboy.registers.pointers.PC.setRegister(0x1234);
+      gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+      const job = RSTN(value.n);
+
+      job.forEach((callback) => {
+        callback(gameboy);
+      });
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value.n);
+      expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffc);
+      expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x12);
+      expect(gameboy.ram.getMemoryAt(0xfffc)).toBe(0x35);
+    });
   });
 });

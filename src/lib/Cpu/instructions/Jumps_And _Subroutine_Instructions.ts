@@ -212,13 +212,13 @@ function RETCC() {
     },
   ];
 }
-// CORRECT
+// NEEDS TEST
 function RSTN(n: number) {
   return [
     // M2
     (dmg: Gameboy) => {
       dmg.registers.pointers.SP.decrement();
-      console.log('N IN RSTN', n);
+      dmg.registers.pointers.PC.increment();
     },
     // M3
     (dmg: Gameboy) => {
