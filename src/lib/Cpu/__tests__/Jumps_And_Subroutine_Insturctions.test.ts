@@ -3,6 +3,7 @@ import { Gameboy } from '../../Gameboy';
 import {
   CALLCCN16,
   CALLN16,
+  JPHL,
   JPN16,
 } from '../instructions/Jumps_And _Subroutine_Instructions';
 
@@ -159,5 +160,28 @@ describe('Tests for JUMP N16', () => {
     });
 
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0xc000);
+  });
+});
+describe('Tests for JP [HL]', () => {
+  test('Set HL to 0x200, PC should be 0x200 as well', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+
+    gameboy.registers.pointers.PC.setRegister(0x0150);
+    gameboy.registers.register16Bit.HL.setRegister(0x200);
+
+    const jobs = [
+      (dmg: Gameboy) => {
+        JPHL(dmg.registers.register16Bit.HL, dmg.registers.pointers.PC);
+      },
+    ];
+
+    jobs.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x200);
   });
 });
