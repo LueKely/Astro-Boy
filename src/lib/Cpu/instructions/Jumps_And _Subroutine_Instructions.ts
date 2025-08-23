@@ -173,6 +173,7 @@ function RET() {
   ];
 }
 
+// added tests for RETI
 function RETI() {
   return [
     (dmg: Gameboy) => {
