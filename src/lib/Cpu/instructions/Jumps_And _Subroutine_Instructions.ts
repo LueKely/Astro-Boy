@@ -145,11 +145,11 @@ function JPCCN16() {
   ];
 }
 
-// need test
+// TESTED
 function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
   PC.setRegister(HL.getRegister());
 }
-// need test
+// TESTED
 function RET() {
   return [
     (dmg: Gameboy) => {
