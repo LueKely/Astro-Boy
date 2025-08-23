@@ -331,19 +331,10 @@ describe('Tests for RETI', () => {
 });
 
 describe('Tests for RST N', () => {
-  const cases = [
-    { n: 0x00 },
-    { n: 0x08 },
-    { n: 0x10 },
-    { n: 0x20 },
-    { n: 0x30 },
-    { n: 0x18 },
-    { n: 0x28 },
-    { n: 0x38 },
-  ];
+  const cases = [0x00, 0x08, 0x10, 0x20, 0x30, 0x18, 0x28, 0x38];
 
   cases.forEach((value) => {
-    test(`RST 0x${value.n.toString(
+    test(`RST 0x${value.toString(
       16
     )} where PC is 0x1000 and SP is 0x0000`, () => {
       const dummyRom = new ArrayBuffer(1024);
@@ -354,13 +345,13 @@ describe('Tests for RST N', () => {
       gameboy.registers.pointers.PC.setRegister(0x0100);
       gameboy.registers.pointers.SP.setRegister(0x0000);
 
-      const job = RSTN(value.n);
+      const job = RSTN(value);
 
       job.forEach((callback) => {
         callback(gameboy);
       });
 
-      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value.n);
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value);
       expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffe);
       expect(gameboy.ram.getMemoryAt(0xfffe)).toBe(0x01);
       expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x01);
@@ -368,7 +359,7 @@ describe('Tests for RST N', () => {
   });
 
   cases.forEach((value) => {
-    test(`RST 0x${value.n.toString(
+    test(`RST 0x${value.toString(
       16
     )}  where PC is 0x1234 and SP is 0xfffe`, () => {
       const dummyRom = new ArrayBuffer(1024);
@@ -379,16 +370,41 @@ describe('Tests for RST N', () => {
       gameboy.registers.pointers.PC.setRegister(0x1234);
       gameboy.registers.pointers.SP.setRegister(0xfffe);
 
-      const job = RSTN(value.n);
+      const job = RSTN(value);
 
       job.forEach((callback) => {
         callback(gameboy);
       });
 
-      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value.n);
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value);
       expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffc);
       expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x12);
       expect(gameboy.ram.getMemoryAt(0xfffc)).toBe(0x35);
+    });
+  });
+
+  cases.forEach((value) => {
+    test(`RST 0x${value.toString(
+      16
+    )}  where PC is 0x100 and SP is 0x0001`, () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+
+      gameboy.registers.pointers.PC.setRegister(0x100);
+      gameboy.registers.pointers.SP.setRegister(0x0001);
+
+      const job = RSTN(value);
+
+      job.forEach((callback) => {
+        callback(gameboy);
+      });
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(value);
+      expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xffff);
+      expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x01);
+      expect(gameboy.ram.getMemoryAt(0x0000)).toBe(0x01);
     });
   });
 });
