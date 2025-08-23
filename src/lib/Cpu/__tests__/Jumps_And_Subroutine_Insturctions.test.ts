@@ -5,6 +5,7 @@ import {
   CALLN16,
   JPHL,
   JPN16,
+  RET,
 } from '../instructions/Jumps_And _Subroutine_Instructions';
 
 describe('Tests for CALL NN', () => {
@@ -183,5 +184,73 @@ describe('Tests for JP [HL]', () => {
     });
 
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x200);
+  });
+});
+
+describe('Tests for RET', () => {
+  test(' PC should be 0x1234 and SP 0x0 ', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+
+    gameboy.registers.pointers.PC.setRegister(0x200);
+    gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+    gameboy.ram.setMemoryAt(0xfffe, 0x34);
+    gameboy.ram.setMemoryAt(0xffff, 0x12);
+
+    const job = RET();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x0000);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1234);
+  });
+
+  test(' PC should be 0x0000 and SP 0xFFF2 ', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+
+    gameboy.registers.pointers.PC.setRegister(0x300);
+    gameboy.registers.pointers.SP.setRegister(0xfff0);
+
+    gameboy.ram.setMemoryAt(0xfff0, 0x00);
+    gameboy.ram.setMemoryAt(0xfff1, 0x00);
+
+    const job = RET();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfff2);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x0000);
+  });
+
+  test(' Wrap Around ', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+
+    gameboy.registers.pointers.PC.setRegister(0x100);
+    gameboy.registers.pointers.SP.setRegister(0xffff);
+
+    gameboy.ram.setMemoryAt(0xffff, 0x56);
+    gameboy.ram.setMemoryAt(0x0000, 0x78);
+
+    const job = RET();
+
+    job.forEach((callback) => {
+      callback(gameboy);
+    });
+
+    expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x0001);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x7856);
   });
 });
