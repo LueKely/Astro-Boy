@@ -1,9 +1,10 @@
 import type { Gameboy } from '../../Gameboy';
+import type { Ram } from '../../Ram/Ram';
 import type { Program_Counter_Register } from '../CPU_Pointer_Register';
 import type { Cpu_Register_16Bit } from '../CPU_Register';
 // TODO :TEST ALL
 
-// CORRECT
+// TESTED
 function CALLN16() {
 	return [
 		// M2
@@ -25,6 +26,7 @@ function CALLN16() {
 		// M4
 		(dmg: Gameboy) => {
 			dmg.registers.pointers.SP.decrement();
+			dmg.registers.pointers.PC.increment();
 		}, // M5
 		(dmg: Gameboy) => {
 			dmg.ram.setMemoryAt(
@@ -50,7 +52,7 @@ function CALLN16() {
 		},
 	];
 }
-// needs test
+// TESTED
 function CALLCCN16() {
 	return [
 		// M2
@@ -80,7 +82,7 @@ function CALLCCN16() {
 	];
 }
 
-// CORRECT LOGIC
+//TESTED
 function JPN16() {
 	return [
 		// M2
@@ -113,7 +115,7 @@ function JPN16() {
 		(dmg: Gameboy) => {},
 	];
 }
-
+// TESTED
 function JPCCN16() {
 	return [
 		// M2
@@ -143,11 +145,11 @@ function JPCCN16() {
 	];
 }
 
-// need test
+// TESTED
 function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
 	PC.setRegister(HL.getRegister());
 }
-// need test
+// TESTED
 function RET() {
 	return [
 		(dmg: Gameboy) => {
@@ -171,6 +173,7 @@ function RET() {
 	];
 }
 
+// TESTED
 function RETI() {
 	return [
 		(dmg: Gameboy) => {
@@ -195,6 +198,7 @@ function RETI() {
 	];
 }
 
+// TESTED
 function RETCC() {
 	return [
 		(dmg: Gameboy) => {
@@ -209,13 +213,13 @@ function RETCC() {
 		},
 	];
 }
-// CORRECT
+//TESTED
 function RSTN(n: number) {
 	return [
 		// M2
 		(dmg: Gameboy) => {
 			dmg.registers.pointers.SP.decrement();
-			console.log('N IN RSTN', n);
+			dmg.registers.pointers.PC.increment();
 		},
 		// M3
 		(dmg: Gameboy) => {
@@ -235,7 +239,7 @@ function RSTN(n: number) {
 		},
 	];
 }
-// CORRECT - finally
+// TESTED
 function JRE() {
 	return [
 		(dmg: Gameboy) => {
@@ -291,6 +295,7 @@ function JRE() {
 	//   ];
 }
 
+// TESTED
 function JREFALSE() {
 	return [
 		() => {

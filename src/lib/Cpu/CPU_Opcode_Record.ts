@@ -276,7 +276,7 @@ export class CpuOpcodeRecord {
 					};
 				} else {
 					return {
-						name: 'JP NZ, nn',
+						name: 'JP Z, nn',
 						cycles: '4 cycles if CC is true; 3',
 						length: 3,
 						jobs: JPCCN16(),
@@ -4165,7 +4165,7 @@ export class CpuOpcodeRecord {
 				jobs: RET(),
 			},
 			0xe9: {
-				name: 'JP HL',
+				name: 'JP [HL]',
 				cycles: 1,
 				length: 1,
 				jobs: [
