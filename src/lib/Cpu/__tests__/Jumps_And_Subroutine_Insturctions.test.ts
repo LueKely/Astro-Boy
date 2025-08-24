@@ -832,3 +832,107 @@ describe('Tests for JP CC NN', () => {
 		);
 	});
 });
+
+describe('Tests for CALL NN', () => {
+	const cases = [
+		{
+			name: 'CALL NZ NN',
+			opcode: 0xc4,
+			ccIsFalse: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.setZFlag();
+			},
+			ccIsTrue: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.clearZFlag();
+			},
+		},
+		{
+			name: 'CALL NC NN',
+			opcode: 0xd4,
+			ccIsFalse: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.setCYFlag();
+			},
+			ccIsTrue: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.clearCYFlag();
+			},
+		},
+		{
+			name: 'CALL Z, nn',
+			opcode: 0xcc,
+			ccIsFalse: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.clearZFlag();
+			},
+			ccIsTrue: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.setZFlag();
+			},
+		},
+		{
+			name: 'CALL C, nn',
+			opcode: 0xdc,
+			ccIsFalse: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.clearCYFlag();
+			},
+			ccIsTrue: (Gameboy: Gameboy) => {
+				Gameboy.registers.register.F.setCYFlag();
+			},
+		},
+	];
+
+	cases.forEach((value) => {
+		test(value.name + ' CC IS TRUE', () => {
+			const dummyRom = new ArrayBuffer(1024);
+
+			// init gameboy
+			const gameboy = new Gameboy(dummyRom);
+
+			gameboy.registers.pointers.PC.setRegister(0x0150);
+			gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+			gameboy.ram.setMemoryAt(0x0150, value.opcode);
+
+			gameboy.ram.setMemoryAt(0x0151, 0x34);
+			gameboy.ram.setMemoryAt(0x0152, 0x12);
+
+			value.ccIsTrue(gameboy);
+
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+
+			expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffc);
+			expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1234);
+			expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x01);
+			expect(gameboy.ram.getMemoryAt(0xfffc)).toBe(0x53);
+		});
+	});
+
+	cases.forEach((value) => {
+		test(value.name + ' CC IS FALSE', () => {
+			const dummyRom = new ArrayBuffer(1024);
+
+			// init gameboy
+			const gameboy = new Gameboy(dummyRom);
+
+			gameboy.registers.pointers.PC.setRegister(0x0150);
+			gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+			gameboy.ram.setMemoryAt(0x0150, value.opcode);
+
+			gameboy.ram.setMemoryAt(0x0151, 0x34);
+			gameboy.ram.setMemoryAt(0x0152, 0x12);
+
+			value.ccIsFalse(gameboy);
+
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+			gameboy.scheduler.tick();
+
+			expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffe);
+			expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x153);
+			expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x00);
+			expect(gameboy.ram.getMemoryAt(0xfffc)).toBe(0x00);
+		});
+	});
+});
