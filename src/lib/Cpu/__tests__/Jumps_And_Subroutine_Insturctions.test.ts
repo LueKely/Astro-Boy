@@ -462,3 +462,103 @@ describe('JR e', () => {
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x300c);
   });
 });
+
+describe('Tests for CALLCCN16', () => {
+  const casesNZFalse = [
+    {
+      name: 'Call NZ',
+      opcode: 0xc4,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+    },
+    {
+      name: 'Call NC',
+      opcode: 0xd4,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setCYFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+    },
+    {
+      name: 'Call Z',
+      opcode: 0xcc,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setZFlag();
+      },
+    },
+    {
+      name: 'Call C',
+      opcode: 0xdc,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setCYFlag();
+      },
+    },
+  ];
+
+  casesNZFalse.forEach((value) => {
+    test(value.name + ', nn where CC is false', () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+
+      value.flagRaised(gameboy);
+
+      gameboy.registers.pointers.PC.setRegister(0x0150);
+      gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+      gameboy.ram.setMemoryAt(0x0150, value.opcode);
+      gameboy.ram.setMemoryAt(0x0151, 0x34);
+      gameboy.ram.setMemoryAt(0x0152, 0x12);
+
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x0153);
+      expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffe);
+    });
+  });
+
+  casesNZFalse.forEach((value) => {
+    test(' Call NZ, nn where CC is true', () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+
+      value.flagCleared(gameboy);
+
+      gameboy.registers.pointers.PC.setRegister(0x0150);
+      gameboy.registers.pointers.SP.setRegister(0xfffe);
+
+      gameboy.ram.setMemoryAt(0x0150, value.opcode);
+      gameboy.ram.setMemoryAt(0x0151, 0x34);
+      gameboy.ram.setMemoryAt(0x0152, 0x12);
+
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+
+      expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfffc);
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1234);
+      expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x01);
+      expect(gameboy.ram.getMemoryAt(0xfffc)).toBe(0x53);
+    });
+  });
+});
