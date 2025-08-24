@@ -562,3 +562,85 @@ describe('Tests for CALLCCN16', () => {
     });
   });
 });
+
+describe('JR CC e', () => {
+  const cases = [
+    {
+      name: 'JR NZ',
+      opcode: 0x20,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+    },
+    {
+      name: 'JR NC',
+      opcode: 0x30,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setCYFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+    },
+    {
+      name: 'JR Z',
+      opcode: 0x28,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setZFlag();
+      },
+    },
+    {
+      name: 'JR C',
+      opcode: 0x38,
+      flagRaised: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.clearZFlag();
+      },
+      flagCleared: (Gameboy: Gameboy) => {
+        Gameboy.registers.register.F.setCYFlag();
+      },
+    },
+  ];
+
+  cases.forEach((value) => {
+    test(value.name + ' CC is true', () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+      value.flagCleared(gameboy);
+      gameboy.registers.pointers.PC.setRegister(0x1000);
+      gameboy.ram.setMemoryAt(0x1000, value.opcode);
+      gameboy.ram.setMemoryAt(0x1001, 0x05);
+
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1007);
+    });
+  });
+
+  cases.forEach((value) => {
+    test(value.name + ' CC is false', () => {
+      const dummyRom = new ArrayBuffer(1024);
+
+      // init gameboy
+      const gameboy = new Gameboy(dummyRom);
+      value.flagRaised(gameboy);
+      gameboy.registers.pointers.PC.setRegister(0x1000);
+      gameboy.ram.setMemoryAt(0x1000, value.opcode);
+      gameboy.ram.setMemoryAt(0x1001, 0x05);
+
+      gameboy.scheduler.tick();
+      gameboy.scheduler.tick();
+
+      expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x1002);
+    });
+  });
+});
