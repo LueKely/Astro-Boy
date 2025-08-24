@@ -227,3 +227,123 @@ describe('POP R16', () => {
 		expect(F.getRegister()).toBe(0xab);
 	});
 });
+
+describe('LDNNSP', () => {
+	test('regular', () => {
+		const dummyRom = new ArrayBuffer(1024);
+
+		// init gameboy
+		const gameboy = new Gameboy(dummyRom);
+		gameboy.registers.pointers.PC.setRegister(0x0150);
+		gameboy.registers.pointers.SP.setRegister(0xabcd);
+
+		gameboy.ram.setMemoryAt(0x150, 0x08);
+		gameboy.ram.setMemoryAt(0x151, 0x34);
+		gameboy.ram.setMemoryAt(0x152, 0x12);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.ram.getMemoryAt(0x1234)).toBe(0xcd);
+		expect(gameboy.ram.getMemoryAt(0x1235)).toBe(0xab);
+		expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xabcd);
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x153);
+	});
+});
+
+describe('LD HL, SP+e', () => {
+	test('Postive Offset', () => {
+		const dummyRom = new ArrayBuffer(1024);
+
+		// init gameboy
+		const gameboy = new Gameboy(dummyRom);
+		const { F } = gameboy.registers.register;
+		gameboy.registers.pointers.PC.setRegister(0x0150);
+		gameboy.registers.pointers.SP.setRegister(0xfff0);
+
+		gameboy.ram.setMemoryAt(0x150, 0xf8);
+		gameboy.ram.setMemoryAt(0x151, 0x10);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x000);
+		expect(gameboy.registers.pointers.SP.getRegister()).toBe(0xfff0);
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x152);
+		expect(F.getCYFlag()).toBe(1);
+		expect(F.getHFlag()).toBe(0);
+	});
+
+	test('Negative Offset', () => {
+		const dummyRom = new ArrayBuffer(1024);
+
+		// init gameboy
+		const gameboy = new Gameboy(dummyRom);
+		const { F } = gameboy.registers.register;
+		gameboy.registers.pointers.PC.setRegister(0x2000);
+		gameboy.registers.pointers.SP.setRegister(0x0100);
+
+		gameboy.ram.setMemoryAt(0x2000, 0xf8);
+		gameboy.ram.setMemoryAt(0x2001, 0xf0);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x00f0);
+		expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x0100);
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x2002);
+		expect(F.getCYFlag()).toBe(0);
+		expect(F.getHFlag()).toBe(0);
+	});
+
+	test('Zero Offset', () => {
+		const dummyRom = new ArrayBuffer(1024);
+
+		// init gameboy
+		const gameboy = new Gameboy(dummyRom);
+		const { F } = gameboy.registers.register;
+		gameboy.registers.pointers.PC.setRegister(0x3000);
+		gameboy.registers.pointers.SP.setRegister(0x1234);
+
+		gameboy.ram.setMemoryAt(0x3000, 0xf8);
+		gameboy.ram.setMemoryAt(0x3001, 0x00);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x1234);
+		expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x01234);
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x3002);
+		expect(F.getCYFlag()).toBe(0);
+		expect(F.getHFlag()).toBe(0);
+	});
+
+	test('BOTH FLAGS ARE RAISED', () => {
+		const dummyRom = new ArrayBuffer(1024);
+
+		// init gameboy
+		const gameboy = new Gameboy(dummyRom);
+		const { F } = gameboy.registers.register;
+		gameboy.registers.pointers.PC.setRegister(0x3000);
+		gameboy.registers.pointers.SP.setRegister(0x00ff);
+
+		gameboy.ram.setMemoryAt(0x3000, 0xf8);
+		gameboy.ram.setMemoryAt(0x3001, 0x01);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x100);
+		expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x00ff);
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x3002);
+		expect(F.getCYFlag()).toBe(1);
+		expect(F.getHFlag()).toBe(1);
+	});
+});
