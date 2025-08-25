@@ -6,6 +6,7 @@ import { validateADDSPe } from '../../utils/instructions/instruction_utils';
 // DONE WITH INC SP And DEC SP
 // DONE LD SP NN (LD r16 nn)
 
+// Tested
 function ADDSPe() {
   return [
     (dmg: Gameboy) => {
@@ -16,29 +17,23 @@ function ADDSPe() {
     (dmg: Gameboy) => {
       // settig up e
       const e = dmg.registers.getLowerByte();
-      const lsbSP = dmg.registers.pointers.SP.getRegister() && 0xff;
-      const result = lsbSP + e;
-      validateADDSPe(lsbSP, e, dmg.registers.register.F);
-      dmg.registers.setLowerByte(result & 0xff);
-    },
-    (dmg: Gameboy) => {
-      const e = dmg.registers.getLowerByte();
-      const adj = e > 127 ? 0xff : 0x00;
-      const spHigh = (dmg.registers.pointers.SP.getRegister() >> 8) & 0xff;
-      const carry = dmg.registers.register.F.getCYFlag();
+      const eSigned = e > 127 ? e - 256 : e;
+      const SP = dmg.registers.pointers.SP.getRegister();
+      validateADDSPe(SP, e, dmg.registers.register.F);
+      const result = SP + eSigned;
 
-      const result = spHigh + adj + carry;
-      dmg.registers.setUpperByte(result & 0xff);
+      dmg.registers.setTempByte(result);
     },
     (dmg: Gameboy) => {
-      const newSP =
-        (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
-      dmg.registers.pointers.SP.setRegister(newSP);
+      const result = dmg.registers.getTempByte();
+      dmg.registers.pointers.SP.setRegister(result);
+    },
+    (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
     },
   ];
 }
-
+// TESTED
 function LDNNSP() {
   return [
     // M2
@@ -78,49 +73,45 @@ function LDNNSP() {
     },
   ];
 }
-
+// TESTED
 function LDHLSPe() {
-  // FIX ME: Validation is a bit scuffed
   return [
     // M2
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
       const pc = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      const lowerPC = dmg.registers.pointers.PC.getRegister() & 0xff;
 
-      dmg.registers.setLowerByte(pc + lowerPC);
-      dmg.registers.setUpperByte(pc >> 8);
+      dmg.registers.setLowerByte(pc);
     },
     // M3
     (dmg: Gameboy) => {
-      const targetValue = dmg.registers.getLowerByte();
-      dmg.registers.register.L.setRegister(targetValue);
+      const SP = dmg.registers.pointers.SP.getRegister();
 
+      // this is the e
+      let e = dmg.registers.getLowerByte();
+
+      const targetValue = e > 127 ? e - 256 : e;
+      const result = targetValue + SP;
+      const halfCarry = (SP & 0xf) + (e & 0xf) > 0xf;
+      const carry = (SP & 0xff) + (e & 0xff) > 0xff;
       // validate flags for target value
       dmg.registers.register.F.clearZFlag();
       dmg.registers.register.F.clearNFlag();
-      // testing
-      if (targetValue > 0xf) {
+      if (halfCarry) {
         dmg.registers.register.F.setHFlag();
       } else {
         dmg.registers.register.F.clearHFlag();
       }
-      if (targetValue > 0xff) {
+      if (carry) {
         dmg.registers.register.F.setCYFlag();
       } else {
         dmg.registers.register.F.clearCYFlag();
       }
 
-      dmg.registers.setTempByte(targetValue >> 7);
+      dmg.registers.register16Bit.HL.setRegister(result);
     },
     // M4
     (dmg: Gameboy) => {
-      const adj = dmg.registers.getTempByte() != 0 ? 0xff : 0x00;
-      const result =
-        dmg.registers.getUpperByte() +
-        adj +
-        dmg.registers.register.F.getCYFlag();
-      dmg.registers.register.H.setRegister(result);
       dmg.registers.pointers.PC.increment();
     },
   ];

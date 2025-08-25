@@ -205,18 +205,18 @@ function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
 }
 
 // todo make it use for LD HL SP+e as well
-function validateADDSPe(lsbSP: number, e: number, F: Cpu_Flag_Register) {
+function validateADDSPe(SP: number, e: number, F: Cpu_Flag_Register) {
   F.clearZFlag();
   F.clearNFlag();
 
-  const result = lsbSP + e;
+  const result = SP + e;
 
-  if ((lsbSP & 0xf) + (e & 0xf) > 0xf) {
+  if ((SP & 0xf) + (e & 0xf) > 0xf) {
     F.setHFlag();
   } else {
     F.clearHFlag();
   }
-  if (result > 0xff) {
+  if ((SP & 0xff) + (e & 0xff) > 0xff) {
     F.setCYFlag();
   } else {
     F.clearCYFlag();
