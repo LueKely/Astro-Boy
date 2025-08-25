@@ -417,3 +417,29 @@ describe('ADD SP, e', () => {
     expect(F.getHFlag()).toBe(1);
   });
 });
+
+// added INC SP and DEC SP
+describe('INC and DEC SP', () => {
+  test('simple inc and dec', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+
+    gameboy.registers.pointers.PC.setRegister(0x3000);
+    gameboy.registers.pointers.SP.setRegister(0x0005);
+
+    gameboy.ram.setMemoryAt(0x3000, 0x33);
+    gameboy.ram.setMemoryAt(0x3001, 0x3b);
+    gameboy.ram.setMemoryAt(0x3002, 0x3b);
+    gameboy.ram.setMemoryAt(0x3003, 0x33);
+
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.SP.getRegister()).toBe(0x0005);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x3004);
+  });
+});
