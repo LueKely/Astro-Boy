@@ -10,7 +10,7 @@ function validateR8Addition(
   flagRegister: Cpu_Flag_Register
 ) {
   // Raise z flag if result is zero.
-  if (sum == 0) {
+  if ((sum & 0xff) == 0) {
     flagRegister.setZFlag();
   } else {
     flagRegister.clearZFlag();
@@ -66,7 +66,7 @@ function validateR8Subtraction(
   const difference = minuend - subtrahend - carry;
 
   // flag conditions below
-  if (difference == 0) {
+  if ((difference & 0xff) == 0) {
     registerF.setZFlag();
   } else {
     registerF.clearZFlag();
@@ -92,8 +92,6 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   registerF.setNFlag();
 
   if ((difference & 0xff) == 0) {
-    console.log('RAISED');
-
     registerF.setZFlag();
   } else {
     registerF.clearZFlag();
