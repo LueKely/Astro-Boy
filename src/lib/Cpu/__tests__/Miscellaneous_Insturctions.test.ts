@@ -163,3 +163,33 @@ describe('DAA', () => {
     );
   });
 });
+
+describe('NOP', () => {
+  test('Increment PC by 1', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x0100);
+    gameboy.ram.setMemoryAt(0x100, 0x0);
+    gameboy.scheduler.tick();
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+  });
+});
+
+describe('Stop', () => {
+  test('Increment PC by 1', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x0100);
+
+    gameboy.ram.setMemoryAt(0x100, 0x10);
+
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.STOP).toBe(true);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+  });
+});
