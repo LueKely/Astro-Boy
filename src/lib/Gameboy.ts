@@ -46,8 +46,8 @@ export class Gameboy {
 			// HALT_BUG: this.registers.HALT_BUG,
 			// HALT: this.registers.HALT,
 			// STOP: this.registers.STOP,
-			// 'Memory 0xFF01': this.ram.getMemoryAt(0xff01),
-			// 'Memory 0xFF02': this.ram.getMemoryAt(0xff02),
+			'Memory 0xFF01': this.ram.getMemoryAt(0xff01),
+			'Memory 0xFF02': this.ram.getMemoryAt(0xff02),
 		};
 		console.table(systemState);
 	}
@@ -57,19 +57,19 @@ export class Gameboy {
 	}
 
 	run() {
-		// if (this.pause) return;
+		if (this.pause) return;
 
-		// for (let i = 0; i < 10000; i++) {
-		//   this.scheduler.tick();
-		// }
-
-		// requestAnimationFrame(() => this.run());
-
-		for (let i = 0; i < 34000; i++) {
+		for (let i = 0; i < 10000; i++) {
 			this.scheduler.tick();
 		}
-		console.log(this.ram.getMemory()[49700]);
-		console.log(this.ram.getMemory()[49701]);
-		console.log(this.ram.getMemory()[49702]);
+
+		requestAnimationFrame(() => this.run());
+
+		// for (let i = 0; i < 34000; i++) {
+		// 	this.scheduler.tick();
+		// }
+		// console.log(this.ram.getMemory()[49700]);
+		// console.log(this.ram.getMemory()[49701]);
+		// console.log(this.ram.getMemory()[49702]);
 	}
 }

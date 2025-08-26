@@ -3016,7 +3016,7 @@ export class CpuOpcodeRecord {
 				],
 			},
 			0x59: {
-				name: 'LD D C',
+				name: 'LD E C',
 				cycles: 1,
 				length: 1,
 				jobs: [

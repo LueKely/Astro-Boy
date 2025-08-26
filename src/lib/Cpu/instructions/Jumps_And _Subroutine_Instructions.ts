@@ -213,13 +213,13 @@ function RETCC() {
 		},
 	];
 }
-//TESTED
+//TESTED - questionable
 function RSTN(n: number) {
 	return [
 		// M2
 		(dmg: Gameboy) => {
 			dmg.registers.pointers.SP.decrement();
-			dmg.registers.pointers.PC.increment();
+			// dmg.registers.pointers.PC.increment();
 		},
 		// M3
 		(dmg: Gameboy) => {
@@ -262,37 +262,6 @@ function JRE() {
 			// dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
 		},
 	];
-
-	//   return [
-	//     (dmg: Gameboy) => {
-	//       console.log('CC IS TRUE JRE WILL BE EXECUTED ');
-	//       dmg.registers.pointers.PC.increment();
-	//       const z =
-	//         dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-
-	//       dmg.registers.setTempByte(z);
-	//     },
-	//     (dmg: Gameboy) => {
-	//       const z = dmg.registers.getTempByte();
-	//       const zSign = z >>> 7 != 0;
-	//       const lsb = dmg.registers.pointers.PC.getRegister() & 0xff;
-	//       const msb = dmg.registers.pointers.PC.getRegister() >>> 8;
-
-	//       const carryBit = z + lsb > 0xff;
-	//       const result = (z + lsb) & 0xff;
-	//       // this shit looks like ass
-	//       let adj =
-	//         carryBit && !zSign == true ? 1 : !carryBit && zSign == true ? -1 : 0;
-	//       dmg.registers.setLowerByte(result);
-	//       dmg.registers.setUpperByte(msb + adj);
-	//       dmg.registers.setTempByte(
-	//         (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte()
-	//       );
-	//     },
-	//     (dmg: Gameboy) => {
-	//       dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
-	//     },
-	//   ];
 }
 
 // TESTED
