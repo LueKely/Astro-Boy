@@ -57,17 +57,17 @@ export class Gameboy {
 	}
 
 	run() {
-		if (this.pause) return;
+		// if (this.pause) return;
 
-		for (let i = 0; i < 10000; i++) {
-			this.scheduler.tick();
-		}
-
-		requestAnimationFrame(() => this.run());
-
-		// for (let i = 0; i < 34000; i++) {
+		// for (let i = 0; i < 10000; i++) {
 		// 	this.scheduler.tick();
 		// }
+
+		// requestAnimationFrame(() => this.run());
+
+		for (let i = 0; i < 34000; i++) {
+			this.scheduler.tick();
+		}
 		// console.log(this.ram.getMemory()[49700]);
 		// console.log(this.ram.getMemory()[49701]);
 		// console.log(this.ram.getMemory()[49702]);
