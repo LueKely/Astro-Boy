@@ -39,12 +39,18 @@ function validateR8Addition(
  * during R16 operations
  **/
 
-function validateR16Addition(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR16Addition(
+  addA: number,
+  addB: number,
+  flagRegister: Cpu_Flag_Register
+) {
   // Clear N flag to during this operation.
   flagRegister.clearNFlag();
 
+  const sum = addA + addB;
+
   // Raise Half Carry flag if overlow from bit 11.
-  if (sum > 0xfff) {
+  if ((addA & 0x0fff) + (addB & 0x0fff) > 0xfff) {
     flagRegister.setHFlag();
   } else {
     flagRegister.clearHFlag();
