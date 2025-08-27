@@ -57,10 +57,10 @@ describe('ADD HL, R16 Functionalities', () => {
     const { SP: r16 } = CPU.pointers;
     r16.setRegister(0xffff);
 
-    CPU.register16Bit.HL.setRegister(1);
+    CPU.register16Bit.HL.setRegister(0xffff);
 
     ADDHLR16(r16, CPU.register16Bit.HL, CPU.register.F);
-    expect(CPU.register16Bit.HL.getRegister()).toBe(0);
+    expect(CPU.register16Bit.HL.getRegister()).toBe(0xfffe);
 
     expect(CPU.register.F.getNFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
