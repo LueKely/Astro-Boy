@@ -65,7 +65,7 @@ export class Gameboy {
 
     // requestAnimationFrame(() => this.run());
 
-    for (let i = 0; i < 5_0000; i++) {
+    for (let i = 0; i < 10_0000; i++) {
       this.scheduler.tick();
     }
     // console.log(this.ram.getMemory()[49700]);

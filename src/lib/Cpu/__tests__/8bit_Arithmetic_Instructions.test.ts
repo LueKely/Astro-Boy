@@ -542,6 +542,47 @@ describe('DEC R8 Functionalities', () => {
     expect(CPU.register.F.getNFlag()).toBe(1);
     expect(CPU.register.F.getZFlag()).toBe(1);
   });
+
+  test('EDGE CASE #1', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.A.setRegister(0x10);
+
+    DECR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(0x0f);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+
+  test('EDGE CASE #2', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.A.setRegister(0x00);
+
+    DECR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(0xff);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+  });
+
+  test('EDGE CASE #2', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.A.setRegister(0x00);
+
+    DECR8(CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(0xff);
+    expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(CPU.register.F.getZFlag()).toBe(0);
+  });
 });
 
 describe('DEC HL Functionalities', () => {
@@ -656,6 +697,20 @@ describe('INC R8 Functionalities', () => {
 });
 
 describe('INC HL Functionalities', () => {
+  test('EDGE CASE #1', () => {
+    const CPU = new Cpu_Register_File();
+    const ram = new Ram();
+    CPU.register16Bit.HL.setRegister(0b1111_1110);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x7f);
+
+    INCHL(CPU.register16Bit.HL, ram, CPU.register.F);
+
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0x80);
+  });
+
   test('When incrementing the value of 254, the value of A should be 255', () => {
     const CPU = new Cpu_Register_File();
     const ram = new Ram();
