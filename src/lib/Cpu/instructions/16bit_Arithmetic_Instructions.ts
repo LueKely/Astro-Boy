@@ -1,6 +1,6 @@
-import { validateR16Addition } from "../../utils/instructions/instruction_utils";
-import type { Cpu_Flag_Register } from "../CPU_Flag_Register";
-import type { Cpu_Register_16Bit } from "../CPU_Register";
+import { validateR16Addition } from '../../utils/instructions/instruction_utils';
+import type { Cpu_Flag_Register } from '../CPU_Flag_Register';
+import type { Cpu_Register_16Bit } from '../CPU_Register';
 
 //  ADD HL, R16
 /**
@@ -8,12 +8,16 @@ import type { Cpu_Register_16Bit } from "../CPU_Register";
  **/
 function ADDHLR16(
   r16: Cpu_Register_16Bit<any>,
-  registerHL: Cpu_Register_16Bit<"HL">,
+  registerHL: Cpu_Register_16Bit<'HL'>,
   flagRegister: Cpu_Flag_Register
 ) {
   const sum = r16.getRegister() + registerHL.getRegister();
 
-  validateR16Addition(sum, flagRegister);
+  validateR16Addition(
+    r16.getRegister(),
+    registerHL.getRegister(),
+    flagRegister
+  );
 
   registerHL.setRegister(sum);
 }

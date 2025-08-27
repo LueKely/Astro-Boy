@@ -38,19 +38,23 @@ function validateR8Addition(
  * @description this will validate the sum and raise the appropriate flags
  * during R16 operations
  **/
-function validateR16Addition(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR16Addition(
+  addendsA: number,
+  addendsB: number,
+  flagRegister: Cpu_Flag_Register
+) {
   // Clear N flag to during this operation.
   flagRegister.clearNFlag();
 
   // Raise Half Carry flag if overlow from bit 11.
-  if (sum > 0xfff) {
+  if ((addendsA & 0xfff) + (addendsB & 0xfff) > 0xfff) {
     flagRegister.setHFlag();
   } else {
     flagRegister.clearHFlag();
   }
 
   // Raise Carry flag if overlow from bit 15.
-  if (sum > 0xffff) {
+  if (((addendsA + addendsB) & 0xffff) > 0xffff) {
     flagRegister.setCYFlag();
   } else {
     flagRegister.clearCYFlag();
@@ -63,7 +67,7 @@ function validateR8Subtraction(
   subtrahend: number,
   carry: number = 0
 ) {
-  const difference = minuend - subtrahend - carry;
+  const difference = minuend - subtrahend;
 
   // flag conditions below
   if ((difference & 0xff) == 0) {

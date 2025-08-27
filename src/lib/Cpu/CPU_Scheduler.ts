@@ -119,7 +119,7 @@ export class Cpu_Scheduler {
       this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
     } else {
       // this might be redundant
-      this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
+      // this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
       this.currentOpcode = this.opCodes.get(this.readByte());
     }
   }
