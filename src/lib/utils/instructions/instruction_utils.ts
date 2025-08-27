@@ -110,8 +110,13 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   }
 }
 
-function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR8Increment(
+  addA: number,
+  addB: number,
+  flagRegister: Cpu_Flag_Register
+) {
   // Raise z flag if result is zero.
+  const sum = addA + addB;
   if ((sum & 0xff) == 0) {
     flagRegister.setZFlag();
   } else {
@@ -122,7 +127,7 @@ function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
   flagRegister.clearNFlag();
 
   // Raise Half Carry flag if overlow from bit 3.
-  if (sum > 0xf) {
+  if ((addA & 0xf) + (addB & 0xf) > 0xf) {
     flagRegister.setHFlag();
   } else {
     flagRegister.clearHFlag();

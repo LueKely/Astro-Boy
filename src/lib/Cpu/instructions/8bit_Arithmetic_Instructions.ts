@@ -201,7 +201,7 @@ function DECHL(
  **/
 function INCR8(register: Cpu_Register<any>, flagRegister: Cpu_Flag_Register) {
   const sum = register.getRegister() + 1;
-  validateR8Increment(sum, flagRegister);
+  validateR8Increment(register.getRegister(), 1, flagRegister);
   register.setRegister(sum);
 }
 
@@ -215,7 +215,11 @@ function INCHL(
   flagRegister: Cpu_Flag_Register
 ) {
   const sum = ram.getMemoryAt(registerHL.getRegister()) + 1;
-  validateR8Increment(sum, flagRegister);
+  validateR8Increment(
+    ram.getMemoryAt(registerHL.getRegister()),
+    1,
+    flagRegister
+  );
   ram.setMemoryAt(registerHL.getRegister(), sum);
 }
 

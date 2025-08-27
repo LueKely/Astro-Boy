@@ -584,6 +584,54 @@ describe('DEC HL Functionalities', () => {
 });
 
 describe('INC R8 Functionalities', () => {
+  test('EDGE CASES', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.A.setRegister(0b1111_1111);
+
+    INCR8(CPU.register.A, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(CPU.register.A.getRegister()).toBe(0);
+  });
+
+  test('EDGE CASES #2', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.B.setRegister(0x0f);
+
+    INCR8(CPU.register.B, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(CPU.register.B.getRegister()).toBe(0x10);
+  });
+
+  test('EDGE CASES #3', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.B.setRegister(0xfe);
+
+    INCR8(CPU.register.B, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+
+    expect(CPU.register.B.getRegister()).toBe(0xff);
+  });
+
+  test('EDGE CASES #4', () => {
+    const CPU = new Cpu_Register_File();
+
+    CPU.register.E.setRegister(0x7f);
+
+    INCR8(CPU.register.E, CPU.register.F);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+
+    expect(CPU.register.E.getRegister()).toBe(0x80);
+  });
+
   test('When incrementing the value of 254, the value of A should be 255', () => {
     const CPU = new Cpu_Register_File();
 
