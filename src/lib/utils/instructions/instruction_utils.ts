@@ -67,7 +67,7 @@ function validateR8Subtraction(
   subtrahend: number,
   carry: number = 0
 ) {
-  const difference = minuend - subtrahend;
+  const difference = minuend - subtrahend - carry;
 
   // flag conditions below
   if ((difference & 0xff) == 0) {
