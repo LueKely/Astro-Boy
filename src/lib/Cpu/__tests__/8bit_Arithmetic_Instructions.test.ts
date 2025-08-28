@@ -1651,7 +1651,7 @@ describe('ADC R8', () => {
     });
   });
 });
-
+// DONE
 describe('ADC A', () => {
   test('ADC A with carry', () => {
     const dummyRom = new ArrayBuffer(1024);
