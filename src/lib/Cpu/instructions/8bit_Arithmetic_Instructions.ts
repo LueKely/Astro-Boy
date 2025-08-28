@@ -84,7 +84,7 @@ function ADDAR8(
   registerF: Cpu_Flag_Register,
   registerA: Cpu_Register<'A'>
 ) {
-  const sum = (register8.getRegister() + registerA.getRegister()) & 0xff;
+  const sum = register8.getRegister() + registerA.getRegister();
   const hflagSum =
     (register8.getRegister() & 0x0f) + (registerA.getRegister() & 0x0f);
 
@@ -105,8 +105,7 @@ function ADDAHL(
   registerA: Cpu_Register<'A'>
 ) {
   const sum =
-    (memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister()) &
-    0xff;
+    memory.getMemoryAt(pointer.getRegister()) + registerA.getRegister();
   const hflagSum =
     (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
     (registerA.getRegister() & 0x0f);
@@ -125,7 +124,7 @@ function ADDAN8(
   registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
-  const sum = (value + registerA.getRegister()) & 0xff;
+  const sum = value + registerA.getRegister();
   const hflagSum = (value & 0x0f) + (registerA.getRegister() & 0x0f);
 
   //  validate sum with the flag registers
@@ -191,6 +190,14 @@ function DECHL(
   flagRegister: Cpu_Flag_Register
 ) {
   const difference = ram.getMemoryAt(registerHL.getRegister()) - 1;
+  console.log(
+    'Address at ' +
+      registerHL.getRegister() +
+      ' is ' +
+      ram.getMemoryAt(registerHL.getRegister()) +
+      ' - 1 '
+  );
+
   validateR8Decrement(flagRegister, ram.getMemoryAt(registerHL.getRegister()));
   ram.setMemoryAt(registerHL.getRegister(), difference);
 }
@@ -303,12 +310,7 @@ function SUBAR8(
 ) {
   const difference = registerA.getRegister() - r8.getRegister();
 
-  validateR8Subtraction(
-    registerF,
-    registerA.getRegister(),
-    r8.getRegister(),
-    registerF.getCYFlag()
-  );
+  validateR8Subtraction(registerF, registerA.getRegister(), r8.getRegister());
 
   registerA.setRegister(difference);
 }
@@ -345,11 +347,7 @@ function SUBAN8(
   registerA: Cpu_Register<'A'>
 ) {
   const difference = registerA.getRegister() - n8;
-  validateR8Subtraction(
-    registerF,
-    registerA.getRegister(),
-    n8 + registerF.getCYFlag()
-  );
+  validateR8Subtraction(registerF, registerA.getRegister(), n8);
   registerA.setRegister(difference);
 }
 

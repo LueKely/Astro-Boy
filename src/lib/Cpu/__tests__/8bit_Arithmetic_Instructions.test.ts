@@ -23,7 +23,7 @@ import {
 } from '../instructions/8bit_Arithmetic_Instructions';
 import { Ram } from '../../Ram/Ram';
 import { Gameboy } from '../../Gameboy';
-
+// DONE
 describe('ADC A, R8 Functionalitys', () => {
   test('The result of adding the value of register B to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
@@ -85,7 +85,7 @@ describe('ADC A, R8 Functionalitys', () => {
     expect(CPU.register.F.getCYFlag()).toBe(0);
   });
 });
-
+// DONE
 describe('ADC A, HL Functionalitys', () => {
   test('The result of adding the value of [HL] to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
@@ -139,7 +139,7 @@ describe('ADC A, HL Functionalitys', () => {
     expect(CPU.register.F.getCYFlag()).toBe(0);
   });
 });
-
+// DONE
 describe('ADC A, N8 Functionalitys', () => {
   test('The result of adding the value of N8(0) to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
@@ -184,8 +184,22 @@ describe('ADC A, N8 Functionalitys', () => {
 });
 
 // ADD functions
-
+// DONE
 describe('ADD A, R8 Functionalitys', () => {
+  test('EDGE CASE: SUM IS ZERO', () => {
+    const CPU = new Cpu_Register_File();
+    CPU.register.A.setRegister(0xff);
+    CPU.register.B.setRegister(0x1);
+    ADDAR8(CPU.register.B, CPU.register.F, CPU.register.A);
+
+    expect(CPU.register.A.getRegister()).toBe(0x0);
+
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+  });
+
   test('The result of adding the value of register B to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
     CPU.register.A.setRegister(0x0);
@@ -232,7 +246,40 @@ describe('ADD A, R8 Functionalitys', () => {
   });
 });
 
-describe('ADD AH, L Functionalitys', () => {
+// DONE
+describe('ADD A, HL Functionalitys', () => {
+  test('EDGE ', () => {
+    const CPU = new Cpu_Register_File();
+    const dummyMemory = new Ram();
+    CPU.register16Bit.HL.setRegister(0xff);
+    dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0xff);
+    CPU.register.A.setRegister(0x1);
+
+    ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
+
+    expect(CPU.register.A.getRegister()).toBe(0);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test('EDGE 2 ', () => {
+    const CPU = new Cpu_Register_File();
+    const dummyMemory = new Ram();
+    CPU.register16Bit.HL.setRegister(0xff);
+    dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x01);
+    CPU.register.A.setRegister(0x1e);
+
+    ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.register.F, CPU.register.A);
+
+    expect(CPU.register.A.getRegister()).toBe(0x1f);
+    expect(CPU.register.F.getZFlag()).toBe(0);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+
   test('The result of adding the value of [HL] to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
     const dummyMemory = new Ram();
@@ -286,7 +333,20 @@ describe('ADD AH, L Functionalitys', () => {
   });
 });
 
+// DONE
 describe('ADDAN8 Functionalitys', () => {
+  test('TEDGE # 1', () => {
+    const CPU = new Cpu_Register_File();
+    CPU.register.A.setRegister(0xff);
+    ADDAN8(1, CPU.register.A, CPU.register.F);
+
+    expect(CPU.register.A.getRegister()).toBe(0);
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
   test('The result of adding the value of N8(0) to A is 1 — flags should all be 0', () => {
     const CPU = new Cpu_Register_File();
     CPU.register.A.setRegister(0x0);
@@ -328,14 +388,14 @@ describe('ADDAN8 Functionalitys', () => {
     expect(CPU.register.F.getCYFlag()).toBe(0);
   });
 });
-
+// DONE
 describe('CP A, R8 Functionalities', () => {
   test('Expect the Zero flag should raise', () => {
     const CPU = new Cpu_Register_File();
 
     CPU.register.A.setRegister(5);
     CPU.register.C.setRegister(5);
-
+    CPU.register.F.setCYFlag();
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
 
     expect(CPU.register.F.getZFlag()).toBe(1);
@@ -349,6 +409,7 @@ describe('CP A, R8 Functionalities', () => {
 
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
 
+    expect(CPU.register.F.getNFlag()).toBe(1);
     expect(CPU.register.F.getHFlag()).toBe(1);
     expect(CPU.register.F.getCYFlag()).toBe(1);
   });
@@ -357,6 +418,7 @@ describe('CP A, R8 Functionalities', () => {
     const CPU = new Cpu_Register_File();
     CPU.register.A.setRegister(0x78);
     CPU.register.C.setRegister(0x9c);
+    CPU.register.F.setCYFlag();
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getNFlag()).toBe(1);
@@ -367,6 +429,7 @@ describe('CP A, R8 Functionalities', () => {
     const CPU = new Cpu_Register_File();
     CPU.register.A.setRegister(66);
     CPU.register.C.setRegister(55);
+    CPU.register.F.setCYFlag();
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(1);
@@ -376,13 +439,14 @@ describe('CP A, R8 Functionalities', () => {
     const CPU = new Cpu_Register_File();
     CPU.register.A.setRegister(32);
     CPU.register.C.setRegister(48);
+    CPU.register.F.setCYFlag();
     CPAR8(CPU.register.C, CPU.register.A, CPU.register.F);
     expect(CPU.register.F.getZFlag()).toBe(0);
     expect(CPU.register.F.getHFlag()).toBe(0);
     expect(CPU.register.F.getCYFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('CP A, [HL] Functionalities', () => {
   test('Expect the Zero flag should raise', () => {
     const CPU = new Cpu_Register_File();
@@ -460,7 +524,7 @@ describe('CP A, [HL] Functionalities', () => {
     expect(CPU.register.F.getCYFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('CP A, N8 Functionalities', () => {
   test('Expect the Zero flag should raise', () => {
     const CPU = new Cpu_Register_File();
@@ -509,6 +573,7 @@ describe('CP A, N8 Functionalities', () => {
   });
 });
 
+// DONE
 describe('DEC R8 Functionalities', () => {
   test('When decrementing the value of 255, the value of A should be 254', () => {
     const CPU = new Cpu_Register_File();
@@ -584,19 +649,20 @@ describe('DEC R8 Functionalities', () => {
     expect(CPU.register.F.getZFlag()).toBe(0);
   });
 });
-
+// DONE
 describe('DEC HL Functionalities', () => {
   test('When decrementing the value of 255, the value of A should be 254', () => {
     const CPU = new Cpu_Register_File();
     const ram = new Ram();
     CPU.register16Bit.HL.setRegister(0b1111_1111);
-    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 255);
+    ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x00);
 
     DECHL(CPU.register16Bit.HL, ram, CPU.register.F);
 
     expect(CPU.register.F.getNFlag()).toBe(1);
+    expect(CPU.register.F.getHFlag()).toBe(1);
 
-    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(254);
+    expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0xff);
   });
   test('When decrementing the value 16, H flag should raise', () => {
     const CPU = new Cpu_Register_File();
@@ -623,7 +689,7 @@ describe('DEC HL Functionalities', () => {
     expect(CPU.register.F.getZFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('INC R8 Functionalities', () => {
   test('EDGE CASES', () => {
     const CPU = new Cpu_Register_File();
@@ -695,7 +761,7 @@ describe('INC R8 Functionalities', () => {
     expect(CPU.register.F.getHFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('INC HL Functionalities', () => {
   test('EDGE CASE #1', () => {
     const CPU = new Cpu_Register_File();
@@ -737,7 +803,76 @@ describe('INC HL Functionalities', () => {
   });
 });
 
+// DONE
 describe('SBC A, R8 Functionalities', () => {
+  test('EDGE 1', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0x10);
+    C.setRegister(0x01);
+    // F.setCYFlag();
+
+    SBCAR8(C, F, A);
+    expect(A.getRegister()).toBe(0x0f);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test('EDGE 2', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0x10);
+    C.setRegister(0x0f);
+    F.setCYFlag();
+
+    SBCAR8(C, F, A);
+    expect(A.getRegister()).toBe(0x00);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(1);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(0);
+  });
+
+  test('EDGE 3', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0x01);
+    C.setRegister(0x02);
+    // F.setCYFlag();
+
+    SBCAR8(C, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
+  test('EDGE 4', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0x10);
+    C.setRegister(0x10);
+    F.setCYFlag();
+
+    SBCAR8(C, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
   test(' Let A be 15 and r8 be 14 and carry be 1 it should return 0, raising the zero flag', () => {
     const CPU = new Cpu_Register_File();
 
@@ -821,7 +956,7 @@ describe('SBC A, R8 Functionalities', () => {
     expect(F.getCYFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('SBC A, [HL] functionalities', () => {
   test('let A be 15, and [HL] be 1 and carry be 0, the difference should be 14; only N should raise ', () => {
     const CPU = new Cpu_Register_File();
@@ -925,7 +1060,7 @@ describe('SBC A, [HL] functionalities', () => {
     expect(F.getCYFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('SBC A, N8 Functionalities', () => {
   test(' Let A be 15 and N8 be 14 and carry be 1 it should return 0, raising the zero flag', () => {
     const CPU = new Cpu_Register_File();
@@ -1025,6 +1160,54 @@ describe('SUB A, R8 Functionalities', () => {
     expect(F.getCYFlag()).toBe(0);
   });
 
+  test(' EDGE', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0b0000_0000);
+    C.setRegister(0b0000_0001);
+
+    SUBAR8(C, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
+  test(' EDGE', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0b0000_0000);
+    C.setRegister(0b0000_0001);
+
+    SUBAR8(C, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
+  test(' EDGE #2', () => {
+    const CPU = new Cpu_Register_File();
+
+    const { A, C, F } = CPU.register;
+
+    A.setRegister(0b0000_0000);
+    C.setRegister(0b0000_0001);
+
+    SUBAR8(C, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
   test(' Let A be 15 and r8 be 15 and carry be 0 it should return 0, raising the zero flag', () => {
     const CPU = new Cpu_Register_File();
 
@@ -1078,9 +1261,30 @@ describe('SUB A, R8 Functionalities', () => {
     expect(F.getCYFlag()).toBe(1);
   });
 });
-
+// DONE
 describe('SUB A, [HL] functionalities', () => {
-  test('let A be 15, and [HL] be 1 and carry be 0, the difference should be 14; only N should raise ', () => {
+  test('EDGE 1', () => {
+    const CPU = new Cpu_Register_File();
+    const { A, F } = CPU.register;
+    const { HL } = CPU.register16Bit;
+    const ram = new Ram();
+
+    A.setRegister(0b0000_0000);
+
+    HL.setRegister(0b0000_0001);
+    ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+
+    F.setCYFlag();
+
+    SUBAHL(HL, ram, F, A);
+    expect(A.getRegister()).toBe(0xff);
+    expect(F.getNFlag()).toBe(1);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
+    expect(F.getCYFlag()).toBe(1);
+  });
+
+  test('EDGE 2', () => {
     const CPU = new Cpu_Register_File();
     const { A, F } = CPU.register;
     const { HL } = CPU.register16Bit;
@@ -1101,24 +1305,24 @@ describe('SUB A, [HL] functionalities', () => {
     expect(F.getCYFlag()).toBe(0);
   });
 
-  test('let A be 15, and [HL] be 15 and carry be 0, the difference should be 0; only N & Z should raise ', () => {
+  test('EDGE 3', () => {
     const CPU = new Cpu_Register_File();
     const { A, F } = CPU.register;
     const { HL } = CPU.register16Bit;
     const ram = new Ram();
 
-    A.setRegister(0b0000_1111);
+    A.setRegister(0x10);
 
-    HL.setRegister(0b0000_1111);
+    HL.setRegister(0x01);
     ram.setMemoryAt(HL.getRegister(), HL.getRegister());
 
     // F.setCYFlag();
 
     SUBAHL(HL, ram, F, A);
-    expect(A.getRegister()).toBe(0);
+    expect(A.getRegister()).toBe(0xf);
     expect(F.getNFlag()).toBe(1);
-    expect(F.getZFlag()).toBe(1);
-    expect(F.getHFlag()).toBe(0);
+    expect(F.getZFlag()).toBe(0);
+    expect(F.getHFlag()).toBe(1);
     expect(F.getCYFlag()).toBe(0);
   });
 
@@ -1182,6 +1386,7 @@ describe('SUB A, [HL] functionalities', () => {
   });
 });
 
+// DONE
 describe('SUB A, N8 Functionalities', () => {
   test(' Let A be 15 and n8 be 15 and carry be 0 it should return 0, raising the zero flag', () => {
     const CPU = new Cpu_Register_File();
@@ -1245,6 +1450,7 @@ describe('SUB A, N8 Functionalities', () => {
   });
 });
 
+// DONE
 describe('ADC R8', () => {
   type registerLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'H' | 'L';
   const case1: { opcode: number; register: registerLetter }[] = [
