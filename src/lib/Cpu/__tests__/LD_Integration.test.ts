@@ -69,10 +69,34 @@ describe('LD R8, R8', () => {
 
     L.setRegister(targetValue);
 
-    gameboy.ram.setMemoryAt(0x100, 0x46);
+    gameboy.ram.setMemoryAt(0x100, 0x45);
     gameboy.scheduler.tick();
 
     expect(B.getRegister()).toBe(targetValue);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+  });
+});
+
+describe('LD R8, [HL]', () => {
+  test('', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x0100);
+
+    const { B, C, D, E, F, H, L } = gameboy.registers.register;
+    const { HL } = gameboy.registers.register16Bit;
+    const targetValue = 0x10;
+    HL.setRegister(0xff);
+
+    gameboy.ram.setMemoryAt(0xff, targetValue);
+
+    gameboy.ram.setMemoryAt(0x100, 0x56);
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(D.getRegister()).toBe(targetValue);
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
   });
 });
