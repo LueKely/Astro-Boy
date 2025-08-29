@@ -65,6 +65,11 @@ describe('This will test the LD R16, N16 function', () => {
       LDR16N16(value, 0xff00);
       expect(value.getRegister()).toBe(0xff00);
     });
+
+    test(`Tests register  ${key} to get the value 0xff00 `, () => {
+      LDR16N16(value, 0x2 | (0x03 << 8));
+      expect(value.getRegister()).toBe(0x2 | (0x03 << 8));
+    });
   }
 });
 
@@ -257,9 +262,9 @@ describe('This will test the function LDH A, [N16]', () => {
   const dummyMemory = new Ram();
 
   test('Load the value of [0xff] into register A', () => {
-    const testPointer = 0xff;
+    const testPointer = 0x1;
     const testValue = 0xb;
-    dummyMemory.setMemoryAt(testPointer + 0xff, testValue);
+    dummyMemory.setMemoryAt(testPointer + 0xff00, testValue);
     LDHAN16(testPointer, A, dummyMemory);
     expect(A.getRegister()).toBe(testValue);
   });
