@@ -5,7 +5,7 @@ import {
   LDAN16,
   LDAR16,
   LDHAC,
-  LDHAN16,
+  LDHAN8,
   LDHCA,
   LDHLDA,
   LDHLIA,
@@ -265,7 +265,7 @@ describe('This will test the function LDH A, [N16]', () => {
     const testPointer = 0x1;
     const testValue = 0xb;
     dummyMemory.setMemoryAt(testPointer + 0xff00, testValue);
-    LDHAN16(testPointer, A, dummyMemory);
+    LDHAN8(testPointer, A, dummyMemory);
     expect(A.getRegister()).toBe(testValue);
   });
 });

@@ -71,7 +71,7 @@ import {
   LDAN16,
   LDAR16,
   LDHAC,
-  LDHAN16,
+  LDHAN8,
   LDHCA,
   LDHLDA,
   LDHLIA,
@@ -2412,7 +2412,7 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              'MemAdd Value:',
+              'LD A, (DE) MemAdd Value:',
               dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
             );
           },
@@ -3466,8 +3466,8 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
+              'MemAdd ',
+              dmg.registers.register16Bit.HL.getRegister()
             );
           },
           (dmg: Gameboy) => {
@@ -4090,7 +4090,7 @@ export class CpuOpcodeRecord {
             }
           },
           (dmg: Gameboy) => {
-            LDHAN16(
+            LDHAN8(
               dmg.registers.getTempByte(),
               dmg.registers.register.A,
               dmg.ram

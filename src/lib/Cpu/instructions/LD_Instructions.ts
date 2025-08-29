@@ -91,8 +91,8 @@ function LDAN16(a: Cpu_Register<'A'>, n16: number, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(n16));
 }
 
-// LDH A, [N16] retested
-function LDHAN16(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
+// LDH A, [N8] retested
+function LDHAN8(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
   console.log(
     'LOADED AT Address 0x' +
       (n16 + 0xff00).toString(16) +
@@ -166,6 +166,6 @@ export {
   LDHAC,
   LDHN16A,
   LDAN16,
-  LDHAN16,
+  LDHAN8,
   LDHLR8,
 };

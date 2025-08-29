@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { Gameboy } from '../../Gameboy';
 
+// DONE
 describe('lD R16', () => {
   test('LD BC, NN', () => {
     const dummyRom = new ArrayBuffer(1024);
@@ -25,5 +26,53 @@ describe('lD R16', () => {
     expect(SP.getRegister()).toBe(targetValue);
     expect(SP.getRegister() >>> 8).toBe(0x03);
     expect(SP.getRegister() & 0xff).toBe(0x02);
+  });
+});
+
+// DONE
+describe('lD R16', () => {
+  test('LD (HL+), A', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x0100);
+
+    const { HL } = gameboy.registers.register16Bit;
+    const { A } = gameboy.registers.register;
+
+    const targetValue = 0x10;
+    const targetPointer = 0xff;
+    HL.setRegister(targetPointer);
+    A.setRegister(targetValue);
+
+    gameboy.ram.setMemoryAt(0x100, 0x22);
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(gameboy.ram.getMemoryAt(HL.getRegister() - 1)).toBe(targetValue);
+  });
+});
+
+describe('LD R8, R8', () => {
+  test('', () => {
+    const dummyRom = new ArrayBuffer(1024);
+
+    // init gameboy
+    const gameboy = new Gameboy(dummyRom);
+    gameboy.registers.pointers.PC.setRegister(0x0100);
+
+    const { B, C, D, E, F, H, L } = gameboy.registers.register;
+
+    const targetValue = 0x10;
+
+    L.setRegister(targetValue);
+
+    gameboy.ram.setMemoryAt(0x100, 0x46);
+    gameboy.scheduler.tick();
+
+    expect(B.getRegister()).toBe(targetValue);
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
   });
 });
