@@ -3724,7 +3724,7 @@ export class CpuOpcodeRecord {
       },
       0x06: {
         name: 'LD B N',
-        cycles: 1,
+        cycles: 2,
         length: 1,
         jobs: [
           (dmg: Gameboy) => {
