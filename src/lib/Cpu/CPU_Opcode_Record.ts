@@ -119,7 +119,7 @@ export class CpuOpcodeRecord {
           return {
             name: 'JR NZ, e',
             length: 2,
-            cycles: 3,
+            cycles: 2,
             jobs: JREFALSE(),
           };
         }
@@ -3750,33 +3750,6 @@ export class CpuOpcodeRecord {
         ],
       },
       0x16: {
-        name: 'LD C N',
-        cycles: 2,
-        length: 2,
-        jobs: [
-          (dmg: Gameboy) => {
-            const n = dmg.ram.getMemoryAt(
-              dmg.registers.pointers.PC.getRegister() + 1
-            );
-            dmg.registers.setTempByte(n);
-            if (dmg.registers.HALT_BUG) {
-              dmg.registers.HALT_BUG = false;
-            } else {
-              dmg.registers.pointers.PC.increment();
-            }
-          },
-          (dmg: Gameboy) => {
-            LDR8N8(dmg.registers.register.C, dmg.registers.getTempByte());
-            if (dmg.registers.HALT_BUG) {
-              dmg.registers.HALT_BUG = false;
-            } else {
-              dmg.registers.pointers.PC.increment();
-            }
-            dmg.registers.setTempByte(0);
-          },
-        ],
-      },
-      0x26: {
         name: 'LD D N',
         cycles: 2,
         length: 2,
@@ -3794,6 +3767,33 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             LDR8N8(dmg.registers.register.D, dmg.registers.getTempByte());
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
+            dmg.registers.setTempByte(0);
+          },
+        ],
+      },
+      0x26: {
+        name: 'LD H, N',
+        cycles: 2,
+        length: 2,
+        jobs: [
+          (dmg: Gameboy) => {
+            const n = dmg.ram.getMemoryAt(
+              dmg.registers.pointers.PC.getRegister() + 1
+            );
+            dmg.registers.setTempByte(n);
+            if (dmg.registers.HALT_BUG) {
+              dmg.registers.HALT_BUG = false;
+            } else {
+              dmg.registers.pointers.PC.increment();
+            }
+          },
+          (dmg: Gameboy) => {
+            LDR8N8(dmg.registers.register.H, dmg.registers.getTempByte());
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
