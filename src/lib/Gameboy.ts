@@ -56,6 +56,15 @@ export class Gameboy {
 		this.pause = !this.pause;
 	}
 
+	list: string[] = [];
+
+	addToList(opcode: string) {
+		if (this.list.includes(opcode)) {
+			return;
+		}
+		this.list.push(opcode);
+	}
+
 	run() {
 		if (this.pause) return;
 
@@ -68,8 +77,13 @@ export class Gameboy {
 		for (let i = 0; i < 41_000; i++) {
 			this.scheduler.tick();
 		}
+		this.listALL();
 		// console.log(this.ram.getMemory()[49700]);
 		// console.log(this.ram.getMemory()[49701]);
 		// console.log(this.ram.getMemory()[49702]);
+	}
+	listALL() {
+		console.log('ALL THE OPCODES');
+		console.log(this.list);
 	}
 }
