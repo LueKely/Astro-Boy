@@ -849,4 +849,24 @@ describe('Opcodes non prefix', () => {
 		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
 		expect(gameboy.registers.pointers.SP.getRegister()).toBe(1);
 	});
+
+	test('0x34 - INC (HL)', () => {
+		const dummyRom = new ArrayBuffer(1024);
+		const gameboy = new Gameboy(dummyRom);
+
+		gameboy.registers.register16Bit.HL.setRegister(0xffff);
+		gameboy.ram.setMemoryAt(0x100, 0x34);
+		gameboy.ram.setMemoryAt(0xffff, 0xff);
+
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+		gameboy.scheduler.tick();
+
+		expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+		expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x0);
+		expect(gameboy.registers.register.A.getRegister()).toBe(0x00);
+		expect(gameboy.registers.register.B.getRegister()).toBe(0x00);
+		expect(gameboy.registers.register.C.getRegister()).toBe(0x00);
+		expect(gameboy.registers.register.D.getRegister()).toBe(0x00);
+	});
 });
