@@ -75,7 +75,7 @@
 "LD [HL] C 0x71",
 "LD [HL] B 0x70",
 "POP DE 0xd1",
-"ADD HL, SP 0x39",
+"ADD HL, SP 0x39 - done FOUND A STUPID BUG",
 "ADC N 0xce",
 "LD H B 0x60"
 ]
