@@ -1161,7 +1161,7 @@ describe('Opcodes non prefix', () => {
     expect(B.getRegister()).toBe(0b0010_0000);
   });
 
-  test('0x46 - LD B, (HL)', () => {
+  test('0x56 - LD B, (HL)', () => {
     const dummyRom = new ArrayBuffer(1024);
     const gameboy = new Gameboy(dummyRom);
     const { B } = gameboy.registers.register;
@@ -1312,5 +1312,125 @@ describe('Opcodes non prefix', () => {
 
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
     expect(C.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x50 - LD D, B', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, D } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    B.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x50);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x51 - LD D, C', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D, C } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    C.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x51);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x52 - LD D, D', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    D.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x52);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+  test('0x53 - LD D, E', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D, E } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    E.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x53);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+  test('0x54 - LD D, H', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D, H } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    H.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x54);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x55 - LD D, L', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D, L } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    L.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x55);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x56 - LD D, (HL)', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D } = gameboy.registers.register;
+    const { HL } = gameboy.registers.register16Bit;
+    const { ram } = gameboy;
+
+    HL.setRegister(0xffff);
+    ram.setMemoryAt(0x100, 0x56);
+    ram.setMemoryAt(0xffff, 0xff);
+
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0xff);
+  });
+  test('0x57 - LD D, A', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { D, A } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    A.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x57);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(D.getRegister()).toBe(0b0010_0000);
   });
 });
