@@ -1072,4 +1072,34 @@ describe('Opcodes non prefix', () => {
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
     expect(F.getRegister()).toBe(0b0001_0000);
   });
+
+  test('0x40 - LD B, B', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    B.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x40);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x40 - LD B, C', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, C } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    C.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x41);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
 });
