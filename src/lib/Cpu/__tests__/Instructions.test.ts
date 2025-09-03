@@ -1088,7 +1088,7 @@ describe('Opcodes non prefix', () => {
     expect(B.getRegister()).toBe(0b0010_0000);
   });
 
-  test('0x40 - LD B, C', () => {
+  test('0x41 - LD B, C', () => {
     const dummyRom = new ArrayBuffer(1024);
     const gameboy = new Gameboy(dummyRom);
     const { B, C } = gameboy.registers.register;
@@ -1097,6 +1097,96 @@ describe('Opcodes non prefix', () => {
     C.setRegister(0b0010_0000);
 
     ram.setMemoryAt(0x100, 0x41);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x42 - LD B, D', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, D } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    D.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x42);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+  test('0x43 - LD B, E', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, E } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    E.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x43);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+  test('0x44 - LD B, H', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, H } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    H.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x44);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x45 - LD B, L', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, L } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    L.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x45);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0b0010_0000);
+  });
+
+  test('0x46 - LD B, (HL)', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B } = gameboy.registers.register;
+    const { HL } = gameboy.registers.register16Bit;
+    const { ram } = gameboy;
+
+    HL.setRegister(0xffff);
+    ram.setMemoryAt(0x100, 0x46);
+    ram.setMemoryAt(0xffff, 0xff);
+
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(B.getRegister()).toBe(0xff);
+  });
+  test('0x47 - LD B, A', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { B, A } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    A.setRegister(0b0010_0000);
+
+    ram.setMemoryAt(0x100, 0x47);
     gameboy.scheduler.tick();
 
     expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
