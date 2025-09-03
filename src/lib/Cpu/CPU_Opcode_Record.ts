@@ -4448,7 +4448,7 @@ export class CpuOpcodeRecord {
           },
           (dmg: Gameboy) => {
             ADDHLR16(
-              dmg.registers.register16Bit.DE,
+              dmg.registers.pointers.SP,
               dmg.registers.register16Bit.HL,
               dmg.registers.register.F
             );
