@@ -772,7 +772,7 @@ export class CpuOpcodeRecord {
         jobs: [
           (dmg: Gameboy) => {
             ADDAR8(
-              dmg.registers.register.D,
+              dmg.registers.register.L,
               dmg.registers.register.F,
               dmg.registers.register.A
             );
