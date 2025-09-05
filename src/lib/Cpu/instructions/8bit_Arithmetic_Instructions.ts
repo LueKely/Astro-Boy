@@ -41,10 +41,9 @@ function ADCAHL(
   registerA: Cpu_Register<'A'>
 ) {
   const sum =
-    (memory.getMemoryAt(pointer.getRegister()) +
-      registerF.getCYFlag() +
-      registerA.getRegister()) &
-    0xff;
+    memory.getMemoryAt(pointer.getRegister()) +
+    registerF.getCYFlag() +
+    registerA.getRegister();
 
   const hflagSum =
     (memory.getMemoryAt(pointer.getRegister()) & 0x0f) +
