@@ -2560,4 +2560,20 @@ describe('Opcodes non prefix', () => {
     expect(A.getRegister()).toBe(0xff);
     expect(F.getRegister()).toBe(0b0111_0000);
   });
+
+  test('0xa0 - AND B', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { A, B, F } = gameboy.registers.register;
+    const { ram } = gameboy;
+    A.setRegister(0xf0);
+    B.setRegister(0xff);
+
+    ram.setMemoryAt(0x100, 0xa0);
+    gameboy.scheduler.tick();
+
+    expect(gameboy.registers.pointers.PC.getRegister()).toBe(0x101);
+    expect(A.getRegister()).toBe(0xf0);
+    expect(F.getRegister()).toBe(0x20);
+  });
 });
