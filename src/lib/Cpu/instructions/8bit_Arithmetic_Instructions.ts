@@ -64,7 +64,7 @@ function ADCAN8(
   registerA: Cpu_Register<'A'>,
   registerF: Cpu_Flag_Register
 ) {
-  const sum = (value + registerA.getRegister() + registerF.getCYFlag()) & 0xff;
+  const sum = value + registerA.getRegister() + registerF.getCYFlag();
   const hflagSum =
     (value & 0x0f) + (registerA.getRegister() & 0x0f) + registerF.getCYFlag();
 
