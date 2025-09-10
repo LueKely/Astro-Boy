@@ -76,6 +76,6 @@
 "LD [HL] B 0x70 - done",
 "POP DE 0xd1",
 "ADD HL, SP 0x39 - done FOUND A STUPID BUG",
-"ADC N 0xce",
+"ADC N 0xce" - found edge case bug,
 "LD H B 0x60 - done"
 ]

@@ -3546,4 +3546,29 @@ describe('Opcodes non prefix', () => {
     expect(A.getRegister()).toBe(0x0f);
     expect(F.getRegister()).toBe(0x30);
   });
+
+  test('0xcf - RST 0x80', () => {
+    const dummyRom = new ArrayBuffer(1024);
+    const gameboy = new Gameboy(dummyRom);
+    const { F } = gameboy.registers.register;
+    const { ram } = gameboy;
+
+    const { PC, SP } = gameboy.registers.pointers;
+
+    F.setZFlag();
+
+    PC.setRegister(0x1234);
+    SP.setRegister(0xfffe);
+    ram.setMemoryAt(0x1234, 0xcf);
+
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+    gameboy.scheduler.tick();
+
+    expect(SP.getRegister()).toBe(0xfffc);
+    expect(PC.getRegister()).toBe(0x0008);
+    expect(ram.getMemoryAt(0xfffd)).toBe(0x012);
+    expect(ram.getMemoryAt(0xfffc)).toBe(0x035);
+  });
 });
