@@ -3978,7 +3978,7 @@ export class CpuOpcodeRecord {
             }
 
             const ub = dmg.ram.getMemoryAt(
-              dmg.registers.pointers.PC.getRegister() + 1
+              dmg.registers.pointers.PC.getRegister()
             );
             dmg.registers.setUpperByte(ub);
           },

@@ -19,7 +19,7 @@ function ADDSPe() {
       const e = dmg.registers.getLowerByte();
       const eSigned = e > 127 ? e - 256 : e;
       const SP = dmg.registers.pointers.SP.getRegister();
-      validateADDSPe(SP, e, dmg.registers.register.F);
+      validateADDSPe(SP, eSigned, dmg.registers.register.F);
       const result = SP + eSigned;
 
       dmg.registers.setTempByte(result);

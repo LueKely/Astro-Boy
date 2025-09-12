@@ -218,15 +218,15 @@ function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
 function validateADDSPe(SP: number, e: number, F: Cpu_Flag_Register) {
   F.clearZFlag();
   F.clearNFlag();
+  const mask = SP ^ e ^ (SP + e);
 
-  const result = SP + e;
-
-  if ((SP & 0xf) + (e & 0xf) > 0xf) {
+  if ((mask & 0x10) == 0x10) {
     F.setHFlag();
   } else {
     F.clearHFlag();
   }
-  if ((SP & 0xff) + (e & 0xff) > 0xff) {
+  // carry
+  if ((mask & 0x100) == 0x100) {
     F.setCYFlag();
   } else {
     F.clearCYFlag();

@@ -14,7 +14,7 @@
 "LD A B 0x78" - done,
 "Disable Interrupt (DI) 0xf3",
 "LD SP, NN 0x31 - done",
-"LD (NN), A 0xea",
+"LD (NN), A 0xea - BUG FOUND",
 "LD A N 0x3e done",
 "LDH (n), A 0xe0",
 "Call nn 0xcd",
