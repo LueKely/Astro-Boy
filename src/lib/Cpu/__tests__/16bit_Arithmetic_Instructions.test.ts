@@ -7,6 +7,57 @@ import {
 } from '../instructions/16bit_Arithmetic_Instructions';
 
 describe('ADD HL, R16 Functionalities', () => {
+  test('EDGE CASE #1', () => {
+    const CPU = new Cpu_Register_File();
+    const { BC: r16, HL } = CPU.register16Bit;
+    const { F } = CPU.register;
+    r16.setRegister(0x1);
+    HL.setRegister(0x0fff);
+    F.setZFlag();
+
+    ADDHLR16(r16, CPU.register16Bit.HL, CPU.register.F);
+    expect(CPU.register16Bit.HL.getRegister()).toBe(0x1000);
+
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(1);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+
+  test('EDGE CASE #2', () => {
+    const CPU = new Cpu_Register_File();
+    const { BC: r16, HL } = CPU.register16Bit;
+    const { F } = CPU.register;
+    r16.setRegister(0x8000);
+    HL.setRegister(0x8000);
+    F.setZFlag();
+
+    ADDHLR16(r16, CPU.register16Bit.HL, CPU.register.F);
+    expect(CPU.register16Bit.HL.getRegister()).toBe(0x0000);
+
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(1);
+  });
+
+  test('EDGE CASE #3', () => {
+    const CPU = new Cpu_Register_File();
+    const { BC: r16, HL } = CPU.register16Bit;
+    const { F } = CPU.register;
+    r16.setRegister(0x0ffe);
+    HL.setRegister(0x0001);
+    F.setZFlag();
+
+    ADDHLR16(r16, CPU.register16Bit.HL, CPU.register.F);
+    expect(CPU.register16Bit.HL.getRegister()).toBe(0x0fff);
+
+    expect(CPU.register.F.getZFlag()).toBe(1);
+    expect(CPU.register.F.getNFlag()).toBe(0);
+    expect(CPU.register.F.getHFlag()).toBe(0);
+    expect(CPU.register.F.getCYFlag()).toBe(0);
+  });
+
   test('The sum of the opearation should be 2_082 and no flags should be raised', () => {
     const CPU = new Cpu_Register_File();
     const { BC: r16 } = CPU.register16Bit;

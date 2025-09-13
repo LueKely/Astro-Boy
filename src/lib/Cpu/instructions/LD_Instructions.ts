@@ -52,14 +52,18 @@ function LDN16A(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
 
 // LDH [n16], tested
 function LDHN16A(n8: number, a: Cpu_Register<'A'>, memAdd: Ram) {
-  memAdd.setMemoryAt(n8 | 0xff00, a.getRegister());
+  console.log(
+    'LOADED ' +
+      a.getRegister() +
+      ' into address ' +
+      memAdd.getMemoryAt(n8 | 0xff00)
+  );
+
+  memAdd.setMemoryAt(n8 + 0xff00, a.getRegister());
 }
 
 // LDH [C], A tested
 function LDHCA(memAdd: Ram, a: Cpu_Register<'A'>, c: Cpu_Register<'C'>) {
-  if (c.getRegister() + 0xff0 == 0xff02) {
-    console.log('SOMETHING HAS BEEN WRITTEN');
-  }
   memAdd.setMemoryAt(0xff00 + c.getRegister(), a.getRegister());
 }
 
@@ -87,9 +91,17 @@ function LDAN16(a: Cpu_Register<'A'>, n16: number, memAdd: Ram) {
   a.setRegister(memAdd.getMemoryAt(n16));
 }
 
-// LDH A, [N16] retested
-function LDHAN16(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
-  a.setRegister(memAdd.getMemoryAt(n16 + 0xff));
+// LDH A, [N8] retested
+function LDHAN8(n16: number, a: Cpu_Register<'A'>, memAdd: Ram) {
+  console.log(
+    'LOADED AT Address 0x' +
+      (n16 + 0xff00).toString(16) +
+      ' with a value of ' +
+      memAdd.getMemoryAt(n16 + 0xff00) +
+      ' into A '
+  );
+
+  a.setRegister(memAdd.getMemoryAt(n16 + 0xff00));
 }
 
 // LDH A, [C] tested
@@ -154,6 +166,6 @@ export {
   LDHAC,
   LDHN16A,
   LDAN16,
-  LDHAN16,
+  LDHAN8,
   LDHLR8,
 };

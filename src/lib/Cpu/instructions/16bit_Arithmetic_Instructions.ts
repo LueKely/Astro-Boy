@@ -13,7 +13,11 @@ function ADDHLR16(
 ) {
   const sum = r16.getRegister() + registerHL.getRegister();
 
-  validateR16Addition(sum, flagRegister);
+  validateR16Addition(
+    r16.getRegister(),
+    registerHL.getRegister(),
+    flagRegister
+  );
 
   registerHL.setRegister(sum);
 }

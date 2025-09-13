@@ -6,7 +6,7 @@ import background from '../assets/background.svg';
 <div id="container">
   <input type="file" id="fileInput" />
   <output id="output">No Games Loaded</output>
-  <button class="button">STOP</button>
+  <button class="button">RUN</button>
 </div>
 
 <script>
@@ -34,11 +34,12 @@ import background from '../assets/background.svg';
   });
 
   button?.addEventListener('click', () => {
-    gameboy?.stop();
-    if (button && gameboy) {
-      button.textContent = gameboy.pause ? 'unpause' : 'pause';
-    }
-    if (!gameboy?.pause) gameboy?.run();
+    // gameboy?.stop();
+    // if (button && gameboy) {
+    // 	button.textContent = gameboy.pause ? 'unpause' : 'pause';
+    // }
+    // if (!gameboy?.pause) gameboy?.run();
+    gameboy?.run();
   });
 </script>
 

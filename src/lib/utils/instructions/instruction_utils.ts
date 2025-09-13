@@ -39,12 +39,18 @@ function validateR8Addition(
  * during R16 operations
  **/
 
-function validateR16Addition(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR16Addition(
+  addA: number,
+  addB: number,
+  flagRegister: Cpu_Flag_Register
+) {
   // Clear N flag to during this operation.
   flagRegister.clearNFlag();
 
+  const sum = addA + addB;
+
   // Raise Half Carry flag if overlow from bit 11.
-  if (sum > 0xfff) {
+  if ((addA & 0x0fff) + (addB & 0x0fff) > 0xfff) {
     flagRegister.setHFlag();
   } else {
     flagRegister.clearHFlag();
@@ -104,8 +110,13 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   }
 }
 
-function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
+function validateR8Increment(
+  addA: number,
+  addB: number,
+  flagRegister: Cpu_Flag_Register
+) {
   // Raise z flag if result is zero.
+  const sum = addA + addB;
   if ((sum & 0xff) == 0) {
     flagRegister.setZFlag();
   } else {
@@ -116,7 +127,7 @@ function validateR8Increment(sum: number, flagRegister: Cpu_Flag_Register) {
   flagRegister.clearNFlag();
 
   // Raise Half Carry flag if overlow from bit 3.
-  if (sum > 0xf) {
+  if ((addA & 0xf) + (addB & 0xf) > 0xf) {
     flagRegister.setHFlag();
   } else {
     flagRegister.clearHFlag();
@@ -206,15 +217,15 @@ function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
 function validateADDSPe(SP: number, e: number, F: Cpu_Flag_Register) {
   F.clearZFlag();
   F.clearNFlag();
+  const mask = SP ^ e ^ (SP + e);
 
-  const result = SP + e;
-
-  if ((SP & 0xf) + (e & 0xf) > 0xf) {
+  if ((mask & 0x10) == 0x10) {
     F.setHFlag();
   } else {
     F.clearHFlag();
   }
-  if ((SP & 0xff) + (e & 0xff) > 0xff) {
+  // carry
+  if ((mask & 0x100) == 0x100) {
     F.setCYFlag();
   } else {
     F.clearCYFlag();
