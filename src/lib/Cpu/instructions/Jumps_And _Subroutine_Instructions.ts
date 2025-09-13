@@ -47,9 +47,7 @@ function CALLN16() {
       );
     },
     // M7/1
-    (dmg: Gameboy) => {
-      console.log('CALL FINISHED');
-    },
+    (dmg: Gameboy) => {},
   ];
 }
 // TESTED
@@ -89,7 +87,6 @@ function JPN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
       const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      console.log('GUMANA KA: ', n);
 
       dmg.registers.setLowerByte(n);
     },
@@ -97,7 +94,6 @@ function JPN16() {
     (dmg: Gameboy) => {
       dmg.registers.pointers.PC.increment();
       const n = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      console.log('GUMANA KA: ', n);
 
       dmg.registers.setUpperByte(n);
     },
@@ -106,11 +102,6 @@ function JPN16() {
       const nn =
         (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte();
       dmg.registers.pointers.PC.setRegister(nn);
-
-      console.log(
-        'Jumping to  address',
-        (dmg.registers.getUpperByte() << 8) | dmg.registers.getLowerByte()
-      );
     },
     (dmg: Gameboy) => {},
   ];
@@ -167,9 +158,7 @@ function RET() {
         dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8);
       dmg.registers.pointers.PC.setRegister(nn);
     },
-    (dmg: Gameboy) => {
-      console.log('RET PROTOCOL FINISHED');
-    },
+    (dmg: Gameboy) => {},
   ];
 }
 
@@ -192,18 +181,14 @@ function RETI() {
       dmg.registers.pointers.PC.setRegister(nn);
       dmg.registers.IME.raiseFlag();
     },
-    (dmg: Gameboy) => {
-      console.log('RET PROTOCOL FINISHED');
-    },
+    (dmg: Gameboy) => {},
   ];
 }
 
 // TESTED
 function RETCC() {
   return [
-    (dmg: Gameboy) => {
-      console.log('Current RET CC check is false moving to next opcode');
-    },
+    (dmg: Gameboy) => {},
     (dmg: Gameboy) => {
       if (dmg.registers.HALT_BUG) {
         dmg.registers.HALT_BUG = false;
