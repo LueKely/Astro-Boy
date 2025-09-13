@@ -80,7 +80,6 @@ function validateR8Subtraction(
 
   registerF.setNFlag();
 
-  // if ((minuend & 0x0f) < (((subtrahend & 0x0f) + carry) & 0x0f)) {
   if ((minuend & 0x0f) < (subtrahend & 0x0f) + carry) {
     registerF.setHFlag();
   } else {

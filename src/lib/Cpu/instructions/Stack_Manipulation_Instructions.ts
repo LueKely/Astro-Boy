@@ -90,24 +90,10 @@ function LDHLSPe() {
       // this is the e
       let e = dmg.registers.getLowerByte();
 
-      const targetValue = e > 127 ? e - 256 : e;
-      const result = targetValue + SP;
-      const halfCarry = (SP & 0xf) + (e & 0xf) > 0xf;
-      const carry = (SP & 0xff) + (e & 0xff) > 0xff;
-      // validate flags for target value
-      dmg.registers.register.F.clearZFlag();
-      dmg.registers.register.F.clearNFlag();
-      if (halfCarry) {
-        dmg.registers.register.F.setHFlag();
-      } else {
-        dmg.registers.register.F.clearHFlag();
-      }
-      if (carry) {
-        dmg.registers.register.F.setCYFlag();
-      } else {
-        dmg.registers.register.F.clearCYFlag();
-      }
+      const eSigned = e > 127 ? e - 256 : e;
+      const result = eSigned + SP;
 
+      validateADDSPe(SP, eSigned, dmg.registers.register.F);
       dmg.registers.register16Bit.HL.setRegister(result);
     },
     // M4
