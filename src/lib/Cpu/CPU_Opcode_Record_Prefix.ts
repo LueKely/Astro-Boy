@@ -43,9 +43,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -61,9 +59,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -79,9 +75,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -97,9 +91,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -115,9 +107,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -133,9 +123,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -152,9 +140,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -162,7 +148,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             RLCHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -170,7 +155,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -184,9 +168,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCA(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -202,9 +184,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -220,9 +200,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -238,9 +216,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -256,9 +232,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -274,9 +248,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -292,9 +264,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -310,9 +280,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -320,7 +288,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             RRCHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -328,7 +295,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -342,9 +308,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCA(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -360,9 +324,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -378,9 +340,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -396,9 +356,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -414,9 +372,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -432,9 +388,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -450,9 +404,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -469,9 +421,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -479,7 +429,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             RLHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -487,7 +436,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -501,9 +449,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLA(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -519,9 +465,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -537,9 +481,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -555,9 +497,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -573,9 +513,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -591,9 +529,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -609,9 +545,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -627,9 +561,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -637,7 +569,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             RRHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -645,7 +576,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -659,9 +589,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRA(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -677,9 +605,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -695,9 +621,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -713,9 +637,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -731,9 +653,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -749,9 +669,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -767,9 +685,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -786,9 +702,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -796,7 +710,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             SLAHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -804,7 +717,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -818,9 +730,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -836,9 +746,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -854,9 +762,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -872,9 +778,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -890,9 +794,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -908,9 +810,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -926,9 +826,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -944,9 +842,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -954,7 +850,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             SRAHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -962,7 +857,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -976,9 +870,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -994,9 +886,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1012,9 +902,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1030,9 +918,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1048,9 +934,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1066,9 +950,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1084,9 +966,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1103,9 +983,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1113,7 +991,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             SWAPHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -1121,7 +998,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -1135,9 +1011,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPR8(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1153,9 +1027,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1171,9 +1043,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1189,9 +1059,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1207,9 +1075,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1225,9 +1091,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1243,9 +1107,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1261,9 +1123,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 4,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1271,7 +1131,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             SRLHL(
               dmg.registers.register16Bit.HL,
               dmg.ram,
@@ -1279,7 +1138,6 @@ export class CpuPrefixOpCodeRecord {
             );
           },
           (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
@@ -1293,9 +1151,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLR8(dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1311,9 +1167,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1329,9 +1183,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1347,9 +1199,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1365,9 +1215,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1383,9 +1231,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1401,9 +1247,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1419,9 +1263,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1448,9 +1290,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(0, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1466,9 +1306,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1484,9 +1322,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1502,9 +1338,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1520,9 +1354,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1538,9 +1370,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1556,9 +1386,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1574,9 +1402,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1603,9 +1429,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(1, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1621,9 +1445,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1639,9 +1461,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1657,9 +1477,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1675,9 +1493,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1693,9 +1509,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1711,9 +1525,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1729,9 +1541,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1758,9 +1568,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(2, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1776,9 +1584,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1794,9 +1600,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1812,9 +1616,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1830,9 +1632,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1848,9 +1648,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1866,9 +1664,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1884,9 +1680,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -1913,9 +1707,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(3, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1932,9 +1724,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1950,9 +1740,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1968,9 +1756,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -1986,9 +1772,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2004,9 +1788,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2022,9 +1804,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2040,9 +1820,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2069,9 +1847,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(4, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2087,9 +1863,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2105,9 +1879,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2123,9 +1895,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2141,9 +1911,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2159,9 +1927,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2177,9 +1943,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2195,9 +1959,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2224,9 +1986,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(5, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2242,9 +2002,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2260,9 +2018,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2278,9 +2034,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.D, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2296,9 +2050,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2314,9 +2066,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2332,9 +2082,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2350,9 +2098,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2379,9 +2125,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(6, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2397,9 +2141,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.B, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2415,9 +2157,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.C, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2433,9 +2173,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.D, dmg.registers.register.F);
 
@@ -2452,9 +2190,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2470,9 +2206,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.H, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2488,9 +2222,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2506,9 +2238,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2535,9 +2265,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3R8(7, dmg.registers.register.A, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
@@ -2553,9 +2281,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -2571,9 +2297,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -2589,9 +2313,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -2607,9 +2329,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -2625,9 +2345,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -2643,9 +2361,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -2661,9 +2377,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2685,9 +2399,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(0, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -2703,9 +2415,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -2721,9 +2431,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -2739,9 +2447,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -2757,9 +2463,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -2775,9 +2479,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -2793,9 +2495,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -2811,9 +2511,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2835,9 +2533,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(1, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -2853,9 +2549,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -2871,9 +2565,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -2889,9 +2581,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -2907,9 +2597,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -2925,9 +2613,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -2943,9 +2629,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -2961,9 +2645,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -2985,9 +2667,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(2, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3003,9 +2683,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3021,9 +2699,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3039,9 +2715,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3057,9 +2731,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3075,9 +2747,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3093,9 +2763,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3111,9 +2779,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3135,9 +2801,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(3, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3154,9 +2818,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3172,9 +2834,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3190,9 +2850,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3208,9 +2866,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3226,9 +2882,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3244,9 +2898,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3262,9 +2914,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3286,9 +2936,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(4, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3304,9 +2952,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3322,9 +2968,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3340,9 +2984,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3358,9 +3000,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3376,9 +3016,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3394,9 +3032,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3412,9 +3048,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3436,9 +3070,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(5, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3454,9 +3086,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3472,9 +3102,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3490,9 +3118,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3508,9 +3134,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3526,9 +3150,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3544,9 +3166,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3562,9 +3182,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3586,9 +3204,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(6, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3604,9 +3220,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3622,9 +3236,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3640,9 +3252,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3658,9 +3268,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3676,9 +3284,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3694,9 +3300,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3712,9 +3316,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3736,9 +3338,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3R8(7, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3755,9 +3355,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3773,9 +3371,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3791,9 +3387,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3809,9 +3403,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3827,9 +3419,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3845,9 +3435,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -3863,9 +3451,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -3887,9 +3473,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(0, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -3905,9 +3489,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -3923,9 +3505,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -3941,9 +3521,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -3959,9 +3537,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -3977,9 +3553,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -3995,9 +3569,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4013,9 +3585,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4037,9 +3607,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(1, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4055,9 +3623,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4073,9 +3639,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4091,9 +3655,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4109,9 +3671,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4127,9 +3687,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4145,9 +3703,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4163,9 +3719,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4187,9 +3741,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(2, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4205,9 +3757,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4223,9 +3773,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4241,9 +3789,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4259,9 +3805,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4277,9 +3821,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4295,9 +3837,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4313,9 +3853,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4337,9 +3875,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(3, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4356,9 +3892,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4374,9 +3908,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4392,9 +3924,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4410,9 +3940,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4428,9 +3956,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4446,9 +3972,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4464,9 +3988,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4488,9 +4010,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(4, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4506,9 +4026,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4524,9 +4042,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4542,9 +4058,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4560,9 +4074,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4578,9 +4090,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4596,9 +4106,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4614,9 +4122,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4638,9 +4144,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(5, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4656,9 +4160,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4674,9 +4176,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4692,9 +4192,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4710,9 +4208,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4728,9 +4224,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4746,9 +4240,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4764,9 +4256,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4788,9 +4278,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(6, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {
@@ -4806,9 +4294,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.B);
             if (dmg.registers.HALT_BUG) {
@@ -4824,9 +4310,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.C);
             if (dmg.registers.HALT_BUG) {
@@ -4842,9 +4326,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.D);
             if (dmg.registers.HALT_BUG) {
@@ -4860,9 +4342,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.E);
             if (dmg.registers.HALT_BUG) {
@@ -4878,9 +4358,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.H);
             if (dmg.registers.HALT_BUG) {
@@ -4896,9 +4374,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.L);
             if (dmg.registers.HALT_BUG) {
@@ -4914,9 +4390,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 3,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             console.log(
               'Value at HL',
@@ -4938,9 +4412,7 @@ export class CpuPrefixOpCodeRecord {
         length: 2,
         cycles: 2,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('CB PREFIX DETECTED');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3R8(7, dmg.registers.register.A);
             if (dmg.registers.HALT_BUG) {

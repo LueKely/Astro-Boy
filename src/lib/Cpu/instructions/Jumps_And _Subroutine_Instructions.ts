@@ -234,16 +234,13 @@ function RSTN(n: number) {
       dmg.registers.pointers.PC.setRegister(n);
     },
     // M5
-    (dmg: Gameboy) => {
-      console.log('RST Protocol Finished');
-    },
+    (dmg: Gameboy) => {},
   ];
 }
 // TESTED
 function JRE() {
   return [
     (dmg: Gameboy) => {
-      console.log('CC IS TRUE JRE WILL BE EXECUTED');
       dmg.registers.pointers.PC.increment();
     },
     (dmg: Gameboy) => {
@@ -256,7 +253,6 @@ function JRE() {
       dmg.registers.pointers.PC.increment();
 
       dmg.registers.pointers.PC.setRegister(newPC + 1);
-      console.log('Jumping at address: ', newPC + 1);
     },
     (dmg: Gameboy) => {
       // dmg.registers.pointers.PC.setRegister(dmg.registers.getTempByte());
@@ -267,9 +263,7 @@ function JRE() {
 // TESTED
 function JREFALSE() {
   return [
-    () => {
-      console.log('CC IS FALSE JRE WILL NOT BE EXECUTED ');
-    },
+    () => {},
     (dmg: Gameboy) => {
       if (dmg.registers.HALT_BUG) {
         dmg.registers.HALT_BUG = false;

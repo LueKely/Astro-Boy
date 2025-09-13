@@ -189,13 +189,6 @@ function DECHL(
   flagRegister: Cpu_Flag_Register
 ) {
   const difference = ram.getMemoryAt(registerHL.getRegister()) - 1;
-  console.log(
-    'Address at ' +
-      registerHL.getRegister() +
-      ' is ' +
-      ram.getMemoryAt(registerHL.getRegister()) +
-      ' - 1 '
-  );
 
   validateR8Decrement(flagRegister, ram.getMemoryAt(registerHL.getRegister()));
   ram.setMemoryAt(registerHL.getRegister(), difference);

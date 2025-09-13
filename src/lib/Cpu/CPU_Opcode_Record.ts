@@ -574,12 +574,7 @@ export class CpuOpcodeRecord {
         cycles: 3,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             INCHL(
               dmg.registers.register16Bit.HL,
@@ -601,12 +596,7 @@ export class CpuOpcodeRecord {
         cycles: 3,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             DECHL(
               dmg.registers.register16Bit.HL,
@@ -789,12 +779,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADDAHL(
               dmg.registers.register16Bit.HL,
@@ -948,12 +933,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADCAHL(
               dmg.registers.register16Bit.HL,
@@ -1110,12 +1090,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SUBAHL(
               dmg.registers.register16Bit.HL,
@@ -1269,12 +1244,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SBCAHL(
               dmg.registers.register16Bit.HL,
@@ -1428,12 +1398,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ANDAHL(
               dmg.registers.register.A,
@@ -1587,12 +1552,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             XORAHL(
               dmg.registers.register.A,
@@ -1746,12 +1706,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ORAHL(
               dmg.registers.register.A,
@@ -1906,12 +1861,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             CPAHL(
               dmg.ram,
@@ -2367,8 +2317,6 @@ export class CpuOpcodeRecord {
               (dmg.registers.getUpperByte() << 8) |
               dmg.registers.getLowerByte();
 
-            console.log('NN IS: ', n);
-
             LDR16N16(dmg.registers.pointers.SP, n);
 
             if (dmg.registers.HALT_BUG) {
@@ -2385,12 +2333,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.BC.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDAR16(
               dmg.registers.register.A,
@@ -2410,12 +2353,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'LD A, (DE) MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDAR16(
               dmg.registers.register.A,
@@ -2435,12 +2373,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDAHLI(
               dmg.registers.register.A,
@@ -2460,12 +2393,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDAHLD(
               dmg.registers.register.A,
@@ -2486,12 +2414,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.BC.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR16A(
               dmg.registers.register16Bit.BC,
@@ -2511,12 +2434,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.DE.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR16A(
               dmg.registers.register16Bit.DE,
@@ -2536,14 +2454,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(
-                dmg.registers.register16Bit.HL.getRegister() + 1
-              )
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLIA(
               dmg.ram,
@@ -2563,14 +2474,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(
-                dmg.registers.register16Bit.HL.getRegister() - 1
-              )
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLDA(
               dmg.ram,
@@ -2686,12 +2590,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.B,
@@ -2824,12 +2723,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.C,
@@ -2962,12 +2856,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.D,
@@ -3100,9 +2989,7 @@ export class CpuOpcodeRecord {
         cycles: 1,
         length: 1,
         jobs: [
-          () => {
-            console.log('LD E HL');
-          },
+          () => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.E,
@@ -3235,12 +3122,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.H,
@@ -3373,12 +3255,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.L,
@@ -3415,12 +3292,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3441,12 +3313,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3467,12 +3334,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd ',
-              dmg.registers.register16Bit.HL.getRegister()
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3493,9 +3355,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('MemAdd', dmg.registers.register16Bit.HL.getRegister());
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3516,12 +3376,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3542,12 +3397,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3568,12 +3418,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDHLR8(
               dmg.registers.register16Bit.HL,
@@ -3688,12 +3533,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log(
-              'MemAdd Value:',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             LDR8HL(
               dmg.registers.register.A,
@@ -4380,9 +4220,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('ADD HL, BC');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADDHLR16(
               dmg.registers.register16Bit.BC,
@@ -4402,9 +4240,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('ADD HL DE');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADDHLR16(
               dmg.registers.register16Bit.DE,
@@ -4424,9 +4260,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('ADD HL, HL');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADDHLR16(
               dmg.registers.register16Bit.HL,
@@ -4446,9 +4280,7 @@ export class CpuOpcodeRecord {
         cycles: 2,
         length: 1,
         jobs: [
-          (dmg: Gameboy) => {
-            console.log('ADD HL, SP');
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             ADDHLR16(
               dmg.registers.pointers.SP,
