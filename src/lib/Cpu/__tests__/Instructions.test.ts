@@ -4396,7 +4396,7 @@ describe('Opcodes non prefix', () => {
     expect(F.getRegister()).toBe(0b0011_0000);
   });
 
-  test('0xf9 LD SP, HL', () => {
+  test('0xf9 - LD SP, HL', () => {
     const dummyRom = new ArrayBuffer(1024);
     const gameboy = new Gameboy(dummyRom);
     const { ram, scheduler } = gameboy;
