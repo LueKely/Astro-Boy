@@ -39,7 +39,7 @@ export class CpuPrefixOpCodeRecord {
   private record(): Record<number, IOpCodeEntry> {
     return {
       0x0: {
-        name: 'RLC B',
+        name: 'Prefix: RLC B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -55,7 +55,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1: {
-        name: 'RLC C',
+        name: 'Prefix: RLC C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -71,7 +71,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2: {
-        name: 'RLC D',
+        name: 'Prefix: RLC D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -87,7 +87,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3: {
-        name: 'RLC E',
+        name: 'Prefix: RLC E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -103,7 +103,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4: {
-        name: 'RLC H',
+        name: 'Prefix: RLC H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -119,7 +119,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5: {
-        name: 'RLC L',
+        name: 'Prefix: RLC L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -136,7 +136,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0x6: {
-        name: 'RLC (HL)',
+        name: 'Prefix: RLC (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -164,7 +164,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7: {
-        name: 'RLC A',
+        name: 'Prefix: RLC A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -180,7 +180,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8: {
-        name: 'RRC B',
+        name: 'Prefix: RRC B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -196,7 +196,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9: {
-        name: 'RRC C',
+        name: 'Prefix: RRC C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -212,7 +212,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa: {
-        name: 'RRC D',
+        name: 'Prefix: RRC D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -228,7 +228,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb: {
-        name: 'RRC E',
+        name: 'Prefix: RRC E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -244,7 +244,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc: {
-        name: 'RRC H',
+        name: 'Prefix: RRC H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -260,7 +260,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd: {
-        name: 'RRC L',
+        name: 'Prefix: RRC L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -276,7 +276,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe: {
-        name: 'RRC (HL)',
+        name: 'Prefix: RRC (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -304,7 +304,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf: {
-        name: 'RRC A',
+        name: 'Prefix: RRC A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -320,7 +320,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x10: {
-        name: 'RL B',
+        name: 'Prefix: RL B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -336,7 +336,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x11: {
-        name: 'RL C',
+        name: 'Prefix: RL C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -352,7 +352,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x12: {
-        name: 'RL D',
+        name: 'Prefix: RL D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -368,7 +368,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x13: {
-        name: 'RL E',
+        name: 'Prefix: RL E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -384,7 +384,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x14: {
-        name: 'RL H',
+        name: 'Prefix: RL H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -400,7 +400,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x15: {
-        name: 'RL L',
+        name: 'Prefix: RL L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -417,7 +417,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0x16: {
-        name: 'RL (HL)',
+        name: 'Prefix: RL (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -445,7 +445,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x17: {
-        name: 'RL A',
+        name: 'Prefix: RL A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -461,7 +461,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x18: {
-        name: 'RR B',
+        name: 'Prefix: RR B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -477,7 +477,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x19: {
-        name: 'RR C',
+        name: 'Prefix: RR C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -493,7 +493,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1a: {
-        name: 'RR D',
+        name: 'Prefix: RR D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -509,7 +509,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1b: {
-        name: 'RR E',
+        name: 'Prefix: RR E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -525,7 +525,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1c: {
-        name: 'RR H',
+        name: 'Prefix: RR H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -541,7 +541,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1d: {
-        name: 'RR L',
+        name: 'Prefix: RR L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -557,7 +557,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1e: {
-        name: 'RR (HL)',
+        name: 'Prefix: RR (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -585,7 +585,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x1f: {
-        name: 'RR A',
+        name: 'Prefix: RR A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -601,7 +601,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x20: {
-        name: 'SLA B',
+        name: 'Prefix: SLA B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -617,7 +617,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x21: {
-        name: 'SLA C',
+        name: 'Prefix: SLA C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -633,7 +633,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x22: {
-        name: 'SLA D',
+        name: 'Prefix: SLA D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -649,7 +649,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x23: {
-        name: 'SLA E',
+        name: 'Prefix: SLA E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -665,7 +665,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x24: {
-        name: 'SLA H',
+        name: 'Prefix: SLA H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -681,7 +681,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x25: {
-        name: 'SLA L',
+        name: 'Prefix: SLA L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -698,7 +698,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0x26: {
-        name: 'SLA (HL)',
+        name: 'Prefix: SLA (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -726,7 +726,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x27: {
-        name: 'SLA A',
+        name: 'Prefix: SLA A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -742,7 +742,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x28: {
-        name: 'SRA B',
+        name: 'Prefix: SRA B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -758,7 +758,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x29: {
-        name: 'SRA C',
+        name: 'Prefix: SRA C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -774,7 +774,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2a: {
-        name: 'SRA D',
+        name: 'Prefix: SRA D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -790,7 +790,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2b: {
-        name: 'SRA E',
+        name: 'Prefix: SRA E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -806,7 +806,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2c: {
-        name: 'SRA H',
+        name: 'Prefix: SRA H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -822,7 +822,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2d: {
-        name: 'SRA L',
+        name: 'Prefix: SRA L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -838,7 +838,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2e: {
-        name: 'SRA (HL)',
+        name: 'Prefix: SRA (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -866,7 +866,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x2f: {
-        name: 'SRA A',
+        name: 'Prefix: SRA A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -882,7 +882,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x30: {
-        name: 'SWAP B',
+        name: 'Prefix: SWAP B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -898,7 +898,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x31: {
-        name: 'SWAP C',
+        name: 'Prefix: SWAP C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -914,7 +914,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x32: {
-        name: 'SWAP D',
+        name: 'Prefix: SWAP D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -930,7 +930,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x33: {
-        name: 'SWAP E',
+        name: 'Prefix: SWAP E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -946,7 +946,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x34: {
-        name: 'SWAP H',
+        name: 'Prefix: SWAP H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -962,7 +962,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x35: {
-        name: 'SWAP L',
+        name: 'Prefix: SWAP L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -979,7 +979,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0x36: {
-        name: 'SLA (HL)',
+        name: 'Prefix: SLA (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -1007,7 +1007,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x37: {
-        name: 'SWAP A',
+        name: 'Prefix: SWAP A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1023,7 +1023,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x38: {
-        name: 'SRL B',
+        name: 'Prefix: SRL B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1039,7 +1039,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x39: {
-        name: 'SRL C',
+        name: 'Prefix: SRL C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1055,7 +1055,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3a: {
-        name: 'SRL D',
+        name: 'Prefix: SRL D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1071,7 +1071,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3b: {
-        name: 'SRL E',
+        name: 'Prefix: SRL E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1087,7 +1087,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3c: {
-        name: 'SRL H',
+        name: 'Prefix: SRL H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1103,7 +1103,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3d: {
-        name: 'SRL L',
+        name: 'Prefix: SRL L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1119,7 +1119,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3e: {
-        name: 'SRL (HL)',
+        name: 'Prefix: SRL (HL)',
         length: 2,
         cycles: 4,
         jobs: [
@@ -1147,7 +1147,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x3f: {
-        name: 'SRL A',
+        name: 'Prefix: SRL A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1163,7 +1163,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x40: {
-        name: 'BIT 0, B',
+        name: 'Prefix: BIT 0, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1179,7 +1179,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x41: {
-        name: 'BIT 0, C',
+        name: 'Prefix: BIT 0, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1195,7 +1195,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x42: {
-        name: 'BIT 0, D',
+        name: 'Prefix: BIT 0, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1211,7 +1211,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x43: {
-        name: 'BIT 0, E',
+        name: 'Prefix: BIT 0, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1227,7 +1227,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x44: {
-        name: 'BIT 0, H',
+        name: 'Prefix: BIT 0, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1243,7 +1243,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x45: {
-        name: 'BIT 0, L',
+        name: 'Prefix: BIT 0, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1259,7 +1259,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x46: {
-        name: 'BIT 0, (HL)',
+        name: 'Prefix: BIT 0, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1286,7 +1286,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x47: {
-        name: 'BIT 0, A',
+        name: 'Prefix: BIT 0, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1302,7 +1302,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x48: {
-        name: 'BIT 1, B',
+        name: 'Prefix: BIT 1, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1318,7 +1318,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x49: {
-        name: 'BIT 1, C',
+        name: 'Prefix: BIT 1, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1334,7 +1334,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4a: {
-        name: 'BIT 1, D',
+        name: 'Prefix: BIT 1, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1350,7 +1350,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4b: {
-        name: 'BIT 1, E',
+        name: 'Prefix: BIT 1, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1366,7 +1366,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4c: {
-        name: 'BIT 1, H',
+        name: 'Prefix: BIT 1, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1382,7 +1382,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4d: {
-        name: 'BIT 1, L',
+        name: 'Prefix: BIT 1, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1398,7 +1398,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4e: {
-        name: 'BIT 1, (HL)',
+        name: 'Prefix: BIT 1, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1425,7 +1425,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x4f: {
-        name: 'BIT 1, A',
+        name: 'Prefix: BIT 1, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1441,7 +1441,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x50: {
-        name: 'BIT 2, B',
+        name: 'Prefix: BIT 2, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1457,7 +1457,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x51: {
-        name: 'BIT 2, C',
+        name: 'Prefix: BIT 2, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1473,7 +1473,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x52: {
-        name: 'BIT 2, D',
+        name: 'Prefix: BIT 2, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1489,7 +1489,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x53: {
-        name: 'BIT 2, E',
+        name: 'Prefix: BIT 2, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1505,7 +1505,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x54: {
-        name: 'BIT 2, H',
+        name: 'Prefix: BIT 2, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1521,7 +1521,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x55: {
-        name: 'BIT 2, L',
+        name: 'Prefix: BIT 2, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1537,7 +1537,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x56: {
-        name: 'BIT 2, (HL)',
+        name: 'Prefix: BIT 2, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1564,7 +1564,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x57: {
-        name: 'BIT 2, A',
+        name: 'Prefix: BIT 2, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1580,7 +1580,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x58: {
-        name: 'BIT 3, B',
+        name: 'Prefix: BIT 3, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1596,7 +1596,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x59: {
-        name: 'BIT 3, C',
+        name: 'Prefix: BIT 3, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1612,7 +1612,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5a: {
-        name: 'BIT 3, D',
+        name: 'Prefix: BIT 3, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1628,7 +1628,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5b: {
-        name: 'BIT 3, E',
+        name: 'Prefix: BIT 3, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1644,7 +1644,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5c: {
-        name: 'BIT 3, H',
+        name: 'Prefix: BIT 3, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1660,7 +1660,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5d: {
-        name: 'BIT 3, L',
+        name: 'Prefix: BIT 3, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1676,7 +1676,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5e: {
-        name: 'BIT 3, (HL)',
+        name: 'Prefix: BIT 3, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1703,7 +1703,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x5f: {
-        name: 'BIT 3, A',
+        name: 'Prefix: BIT 3, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1720,7 +1720,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0x60: {
-        name: 'BIT 4, B',
+        name: 'Prefix: BIT 4, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1736,7 +1736,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x61: {
-        name: 'BIT 4, C',
+        name: 'Prefix: BIT 4, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1752,7 +1752,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x62: {
-        name: 'BIT 4, D',
+        name: 'Prefix: BIT 4, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1768,7 +1768,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x63: {
-        name: 'BIT 4, E',
+        name: 'Prefix: BIT 4, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1784,7 +1784,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x64: {
-        name: 'BIT 4, H',
+        name: 'Prefix: BIT 4, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1800,7 +1800,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x65: {
-        name: 'BIT 4, L',
+        name: 'Prefix: BIT 4, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1816,7 +1816,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x66: {
-        name: 'BIT 4, (HL)',
+        name: 'Prefix: BIT 4, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1843,7 +1843,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x67: {
-        name: 'BIT 4, A',
+        name: 'Prefix: BIT 4, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1859,7 +1859,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x68: {
-        name: 'BIT 5, B',
+        name: 'Prefix: BIT 5, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1875,7 +1875,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x69: {
-        name: 'BIT 5, C',
+        name: 'Prefix: BIT 5, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1891,7 +1891,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6a: {
-        name: 'BIT 5, D',
+        name: 'Prefix: BIT 5, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1907,7 +1907,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6b: {
-        name: 'BIT 5, E',
+        name: 'Prefix: BIT 5, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1923,7 +1923,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6c: {
-        name: 'BIT 5, H',
+        name: 'Prefix: BIT 5, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1939,7 +1939,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6d: {
-        name: 'BIT 5, L',
+        name: 'Prefix: BIT 5, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1955,7 +1955,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6e: {
-        name: 'BIT 5, (HL)',
+        name: 'Prefix: BIT 5, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -1982,7 +1982,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x6f: {
-        name: 'BIT 5, A',
+        name: 'Prefix: BIT 5, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -1998,7 +1998,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x70: {
-        name: 'BIT 6, B',
+        name: 'Prefix: BIT 6, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2014,7 +2014,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x71: {
-        name: 'BIT 6, C',
+        name: 'Prefix: BIT 6, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2030,7 +2030,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x72: {
-        name: 'BIT 6, D',
+        name: 'Prefix: BIT 6, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2046,7 +2046,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x73: {
-        name: 'BIT 6, E',
+        name: 'Prefix: BIT 6, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2062,7 +2062,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x74: {
-        name: 'BIT 6, H',
+        name: 'Prefix: BIT 6, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2078,7 +2078,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x75: {
-        name: 'BIT 6, L',
+        name: 'Prefix: BIT 6, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2094,7 +2094,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x76: {
-        name: 'BIT 6, (HL)',
+        name: 'Prefix: BIT 6, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2121,7 +2121,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x77: {
-        name: 'BIT 6, A',
+        name: 'Prefix: BIT 6, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2137,7 +2137,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x78: {
-        name: 'BIT 7, B',
+        name: 'Prefix: BIT 7, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2153,7 +2153,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x79: {
-        name: 'BIT 7, C',
+        name: 'Prefix: BIT 7, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2169,7 +2169,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7a: {
-        name: 'BIT 7, D',
+        name: 'Prefix: BIT 7, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2186,7 +2186,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7b: {
-        name: 'BIT 7, E',
+        name: 'Prefix: BIT 7, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2202,7 +2202,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7c: {
-        name: 'BIT 7, H',
+        name: 'Prefix: BIT 7, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2218,7 +2218,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7d: {
-        name: 'BIT 7, L',
+        name: 'Prefix: BIT 7, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2234,7 +2234,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7e: {
-        name: 'BIT 7, (HL)',
+        name: 'Prefix: BIT 7, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2261,7 +2261,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x7f: {
-        name: 'BIT 7, A',
+        name: 'Prefix: BIT 7, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2277,7 +2277,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x80: {
-        name: 'RES 0, B',
+        name: 'Prefix: RES 0, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2293,7 +2293,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x81: {
-        name: 'RES 0, C',
+        name: 'Prefix: RES 0, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2309,7 +2309,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x82: {
-        name: 'RES 0, D',
+        name: 'Prefix: RES 0, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2325,7 +2325,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x83: {
-        name: 'RES 0, E',
+        name: 'Prefix: RES 0, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2341,7 +2341,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x84: {
-        name: 'RES 0, H',
+        name: 'Prefix: RES 0, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2357,7 +2357,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x85: {
-        name: 'RES 0, L',
+        name: 'Prefix: RES 0, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2373,7 +2373,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x86: {
-        name: 'RES 0, (HL)',
+        name: 'Prefix: RES 0, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2395,7 +2395,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x87: {
-        name: 'RES 0, A',
+        name: 'Prefix: RES 0, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2411,7 +2411,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x88: {
-        name: 'RES 1, B',
+        name: 'Prefix: RES 1, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2427,7 +2427,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x89: {
-        name: 'RES 1, C',
+        name: 'Prefix: RES 1, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2443,7 +2443,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8a: {
-        name: 'RES 1, D',
+        name: 'Prefix: RES 1, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2459,7 +2459,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8b: {
-        name: 'RES 1, E',
+        name: 'Prefix: RES 1, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2475,7 +2475,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8c: {
-        name: 'RES 1, H',
+        name: 'Prefix: RES 1, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2491,7 +2491,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8d: {
-        name: 'RES 1, L',
+        name: 'Prefix: RES 1, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2507,7 +2507,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8e: {
-        name: 'RES 1, (HL)',
+        name: 'Prefix: RES 1, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2529,7 +2529,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x8f: {
-        name: 'RES 1, A',
+        name: 'Prefix: RES 1, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2545,7 +2545,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x90: {
-        name: 'RES 2, B',
+        name: 'Prefix: RES 2, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2561,7 +2561,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x91: {
-        name: 'RES 2, C',
+        name: 'Prefix: RES 2, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2577,7 +2577,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x92: {
-        name: 'RES 2, D',
+        name: 'Prefix: RES 2, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2593,7 +2593,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x93: {
-        name: 'RES 2, E',
+        name: 'Prefix: RES 2, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2609,7 +2609,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x94: {
-        name: 'RES 2, H',
+        name: 'Prefix: RES 2, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2625,7 +2625,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x95: {
-        name: 'RES 2, L',
+        name: 'Prefix: RES 2, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2641,7 +2641,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x96: {
-        name: 'RES 2, (HL)',
+        name: 'Prefix: RES 2, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2663,7 +2663,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x97: {
-        name: 'RES 2, A',
+        name: 'Prefix: RES 2, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2679,7 +2679,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x98: {
-        name: 'RES 3, B',
+        name: 'Prefix: RES 3, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2695,7 +2695,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x99: {
-        name: 'RES 3, C',
+        name: 'Prefix: RES 3, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2711,7 +2711,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9a: {
-        name: 'RES 3, D',
+        name: 'Prefix: RES 3, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2727,7 +2727,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9b: {
-        name: 'RES 3, E',
+        name: 'Prefix: RES 3, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2743,7 +2743,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9c: {
-        name: 'RES 3, H',
+        name: 'Prefix: RES 3, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2759,7 +2759,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9d: {
-        name: 'RES 3, L',
+        name: 'Prefix: RES 3, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2775,7 +2775,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9e: {
-        name: 'RES 3, (HL)',
+        name: 'Prefix: RES 3, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2797,7 +2797,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0x9f: {
-        name: 'RES 3, A',
+        name: 'Prefix: RES 3, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2814,7 +2814,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0xa0: {
-        name: 'RES 4, B',
+        name: 'Prefix: RES 4, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2830,7 +2830,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa1: {
-        name: 'RES 4, C',
+        name: 'Prefix: RES 4, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2846,7 +2846,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa2: {
-        name: 'RES 4, D',
+        name: 'Prefix: RES 4, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2862,7 +2862,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa3: {
-        name: 'RES 4, E',
+        name: 'Prefix: RES 4, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2878,7 +2878,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa4: {
-        name: 'RES 4, H',
+        name: 'Prefix: RES 4, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2894,7 +2894,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa5: {
-        name: 'RES 4, L',
+        name: 'Prefix: RES 4, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2910,7 +2910,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa6: {
-        name: 'RES 4, (HL)',
+        name: 'Prefix: RES 4, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -2932,7 +2932,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa7: {
-        name: 'RES 4, A',
+        name: 'Prefix: RES 4, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2948,7 +2948,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa8: {
-        name: 'RES 5, B',
+        name: 'Prefix: RES 5, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2964,7 +2964,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xa9: {
-        name: 'RES 5, C',
+        name: 'Prefix: RES 5, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2980,7 +2980,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xaa: {
-        name: 'RES 5, D',
+        name: 'Prefix: RES 5, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -2996,7 +2996,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xab: {
-        name: 'RES 5, E',
+        name: 'Prefix: RES 5, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3012,7 +3012,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xac: {
-        name: 'RES 5, H',
+        name: 'Prefix: RES 5, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3028,7 +3028,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xad: {
-        name: 'RES 5, L',
+        name: 'Prefix: RES 5, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3044,7 +3044,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xae: {
-        name: 'RES 5, (HL)',
+        name: 'Prefix: RES 5, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3066,7 +3066,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xaf: {
-        name: 'RES 5, A',
+        name: 'Prefix: RES 5, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3082,7 +3082,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb0: {
-        name: 'RES 6, B',
+        name: 'Prefix: RES 6, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3098,7 +3098,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb1: {
-        name: 'RES 6, C',
+        name: 'Prefix: RES 6, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3114,7 +3114,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb2: {
-        name: 'RES 6, D',
+        name: 'Prefix: RES 6, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3130,7 +3130,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb3: {
-        name: 'RES 6, E',
+        name: 'Prefix: RES 6, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3146,7 +3146,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb4: {
-        name: 'RES 6, H',
+        name: 'Prefix: RES 6, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3162,7 +3162,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb5: {
-        name: 'RES 6, L',
+        name: 'Prefix: RES 6, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3178,7 +3178,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb6: {
-        name: 'RES 6, (HL)',
+        name: 'Prefix: RES 6, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3200,7 +3200,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb7: {
-        name: 'RES 6, A',
+        name: 'Prefix: RES 6, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3216,7 +3216,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb8: {
-        name: 'RES 7, B',
+        name: 'Prefix: RES 7, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3232,7 +3232,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xb9: {
-        name: 'RES 7, C',
+        name: 'Prefix: RES 7, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3248,7 +3248,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xba: {
-        name: 'RES 7, D',
+        name: 'Prefix: RES 7, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3264,7 +3264,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xbb: {
-        name: 'RES 7, E',
+        name: 'Prefix: RES 7, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3280,7 +3280,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xbc: {
-        name: 'RES 7, H',
+        name: 'Prefix: RES 7, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3296,7 +3296,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xbd: {
-        name: 'RES 7, L',
+        name: 'Prefix: RES 7, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3312,7 +3312,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xbe: {
-        name: 'RES 7, (HL)',
+        name: 'Prefix: RES 7, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3334,7 +3334,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xbf: {
-        name: 'RES 7, A',
+        name: 'Prefix: RES 7, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3351,7 +3351,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0xc0: {
-        name: 'SET 0, B',
+        name: 'Prefix: SET 0, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3367,7 +3367,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc1: {
-        name: 'SET 0, C',
+        name: 'Prefix: SET 0, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3383,7 +3383,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc2: {
-        name: 'SET 0, D',
+        name: 'Prefix: SET 0, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3399,7 +3399,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc3: {
-        name: 'SET 0, E',
+        name: 'Prefix: SET 0, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3415,7 +3415,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc4: {
-        name: 'SET 0, H',
+        name: 'Prefix: SET 0, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3431,7 +3431,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc5: {
-        name: 'SET 0, L',
+        name: 'Prefix: SET 0, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3447,7 +3447,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc6: {
-        name: 'SET 0, (HL)',
+        name: 'Prefix: SET 0, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3469,7 +3469,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc7: {
-        name: 'SET 0, A',
+        name: 'Prefix: SET 0, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3485,7 +3485,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc8: {
-        name: 'SET 1, B',
+        name: 'Prefix: SET 1, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3501,7 +3501,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xc9: {
-        name: 'SET 1, C',
+        name: 'Prefix: SET 1, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3517,7 +3517,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xca: {
-        name: 'SET 1, D',
+        name: 'Prefix: SET 1, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3533,7 +3533,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xcb: {
-        name: 'SET 1, E',
+        name: 'Prefix: SET 1, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3549,7 +3549,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xcc: {
-        name: 'SET 1, H',
+        name: 'Prefix: SET 1, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3565,7 +3565,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xcd: {
-        name: 'SET 1, L',
+        name: 'Prefix: SET 1, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3581,7 +3581,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xce: {
-        name: 'SET 1, (HL)',
+        name: 'Prefix: SET 1, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3603,7 +3603,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xcf: {
-        name: 'SET 1, A',
+        name: 'Prefix: SET 1, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3619,7 +3619,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd0: {
-        name: 'SET 2, B',
+        name: 'Prefix: SET 2, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3635,7 +3635,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd1: {
-        name: 'SET 2, C',
+        name: 'Prefix: SET 2, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3651,7 +3651,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd2: {
-        name: 'SET 2, D',
+        name: 'Prefix: SET 2, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3667,7 +3667,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd3: {
-        name: 'SET 2, E',
+        name: 'Prefix: SET 2, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3683,7 +3683,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd4: {
-        name: 'SET 2, H',
+        name: 'Prefix: SET 2, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3699,7 +3699,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd5: {
-        name: 'SET 2, L',
+        name: 'Prefix: SET 2, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3715,7 +3715,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd6: {
-        name: 'SET 2, (HL)',
+        name: 'Prefix: SET 2, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3737,7 +3737,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd7: {
-        name: 'SET 2, A',
+        name: 'Prefix: SET 2, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3753,7 +3753,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd8: {
-        name: 'SET 3, B',
+        name: 'Prefix: SET 3, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3769,7 +3769,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xd9: {
-        name: 'SET 3, C',
+        name: 'Prefix: SET 3, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3785,7 +3785,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xda: {
-        name: 'SET 3, D',
+        name: 'Prefix: SET 3, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3801,7 +3801,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xdb: {
-        name: 'SET 3, E',
+        name: 'Prefix: SET 3, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3817,7 +3817,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xdc: {
-        name: 'SET 3, H',
+        name: 'Prefix: SET 3, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3833,7 +3833,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xdd: {
-        name: 'SET 3, L',
+        name: 'Prefix: SET 3, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3849,7 +3849,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xde: {
-        name: 'SET 3, (HL)',
+        name: 'Prefix: SET 3, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -3871,7 +3871,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xdf: {
-        name: 'SET 3, A',
+        name: 'Prefix: SET 3, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3888,7 +3888,7 @@ export class CpuPrefixOpCodeRecord {
       },
 
       0xe0: {
-        name: 'SET 4, B',
+        name: 'Prefix: SET 4, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3904,7 +3904,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe1: {
-        name: 'SET 4, C',
+        name: 'Prefix: SET 4, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3920,7 +3920,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe2: {
-        name: 'SET 4, D',
+        name: 'Prefix: SET 4, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3936,7 +3936,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe3: {
-        name: 'SET 4, E',
+        name: 'Prefix: SET 4, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3952,7 +3952,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe4: {
-        name: 'SET 4, H',
+        name: 'Prefix: SET 4, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3968,7 +3968,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe5: {
-        name: 'SET 4, L',
+        name: 'Prefix: SET 4, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -3984,7 +3984,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe6: {
-        name: 'SET 4, (HL)',
+        name: 'Prefix: SET 4, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -4006,7 +4006,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe7: {
-        name: 'SET 4, A',
+        name: 'Prefix: SET 4, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4022,7 +4022,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe8: {
-        name: 'SET 5, B',
+        name: 'Prefix: SET 5, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4038,7 +4038,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xe9: {
-        name: 'SET 5, C',
+        name: 'Prefix: SET 5, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4054,7 +4054,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xea: {
-        name: 'SET 5, D',
+        name: 'Prefix: SET 5, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4070,7 +4070,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xeb: {
-        name: 'SET 5, E',
+        name: 'Prefix: SET 5, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4086,7 +4086,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xec: {
-        name: 'SET 5, H',
+        name: 'Prefix: SET 5, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4102,7 +4102,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xed: {
-        name: 'SET 5, L',
+        name: 'Prefix: SET 5, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4118,7 +4118,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xee: {
-        name: 'SET 5, (HL)',
+        name: 'Prefix: SET 5, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -4140,7 +4140,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xef: {
-        name: 'SET 5, A',
+        name: 'Prefix: SET 5, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4156,7 +4156,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf0: {
-        name: 'SET 6, B',
+        name: 'Prefix: SET 6, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4172,7 +4172,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf1: {
-        name: 'SET 6, C',
+        name: 'Prefix: SET 6, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4188,7 +4188,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf2: {
-        name: 'SET 6, D',
+        name: 'Prefix: SET 6, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4204,7 +4204,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf3: {
-        name: 'SET 6, E',
+        name: 'Prefix: SET 6, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4220,7 +4220,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf4: {
-        name: 'SET 6, H',
+        name: 'Prefix: SET 6, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4236,7 +4236,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf5: {
-        name: 'SET 6, L',
+        name: 'Prefix: SET 6, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4252,7 +4252,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf6: {
-        name: 'SET 6, (HL)',
+        name: 'Prefix: SET 6, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -4274,7 +4274,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf7: {
-        name: 'SET 6, A',
+        name: 'Prefix: SET 6, A',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4290,7 +4290,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf8: {
-        name: 'SET 7, B',
+        name: 'Prefix: SET 7, B',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4306,7 +4306,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xf9: {
-        name: 'SET 7, C',
+        name: 'Prefix: SET 7, C',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4322,7 +4322,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xfa: {
-        name: 'SET 7, D',
+        name: 'Prefix: SET 7, D',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4338,7 +4338,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xfb: {
-        name: 'SET 7, E',
+        name: 'Prefix: SET 7, E',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4354,7 +4354,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xfc: {
-        name: 'SET 7, H',
+        name: 'Prefix: SET 7, H',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4370,7 +4370,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xfd: {
-        name: 'SET 7, L',
+        name: 'Prefix: SET 7, L',
         length: 2,
         cycles: 2,
         jobs: [
@@ -4386,7 +4386,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xfe: {
-        name: 'SET 7, (HL)',
+        name: 'Prefix: SET 7, (HL)',
         length: 2,
         cycles: 3,
         jobs: [
@@ -4408,7 +4408,7 @@ export class CpuPrefixOpCodeRecord {
         ],
       },
       0xff: {
-        name: 'SET 7, A',
+        name: 'Prefix: SET 7, A',
         length: 2,
         cycles: 2,
         jobs: [

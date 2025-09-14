@@ -85,7 +85,9 @@ export class Gameboy {
   listALL() {
     console.log('ALL THE OPCODES');
     console.log(this.list);
-    console.log('0XFF01: ' + this.ram.getMemoryAt(0xff01));
-    console.log('0XFF02: ' + this.ram.getMemoryAt(0xff02));
+    // console.log('0XFF01: ' + String.fromCharCode(this.ram.getMemoryAt(0xff01)));
+    // console.log('0XFF02: ' + String.fromCharCode(this.ram.getMemoryAt(0xff02)));
+    console.log('0XFF01: 0x' + this.ram.getMemoryAt(0xff01).toString(16));
+    console.log('0XFF02: 0x' + this.ram.getMemoryAt(0xff02).toString(16));
   }
 }
