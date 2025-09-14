@@ -141,12 +141,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLCHL(
               dmg.registers.register16Bit.HL,
@@ -281,12 +276,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRCHL(
               dmg.registers.register16Bit.HL,
@@ -422,12 +412,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RLHL(
               dmg.registers.register16Bit.HL,
@@ -562,12 +547,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RRHL(
               dmg.registers.register16Bit.HL,
@@ -703,12 +683,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SLAHL(
               dmg.registers.register16Bit.HL,
@@ -843,12 +818,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRAHL(
               dmg.registers.register16Bit.HL,
@@ -984,12 +954,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SWAPHL(
               dmg.registers.register16Bit.HL,
@@ -1124,12 +1089,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SRLHL(
               dmg.registers.register16Bit.HL,
@@ -1264,12 +1224,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               0,
@@ -1403,12 +1358,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               1,
@@ -1542,12 +1492,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               2,
@@ -1681,12 +1626,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               3,
@@ -1821,12 +1761,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               4,
@@ -1960,12 +1895,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               5,
@@ -2099,12 +2029,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               6,
@@ -2239,12 +2164,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             BITU3HL(
               7,
@@ -2378,12 +2298,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -2512,12 +2427,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -2646,12 +2556,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -2780,12 +2685,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -2915,12 +2815,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3049,12 +2944,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3183,12 +3073,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3317,12 +3202,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3452,12 +3332,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3586,12 +3461,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3720,12 +3590,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3854,12 +3719,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3989,12 +3849,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -4123,12 +3978,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -4257,12 +4107,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -4391,12 +4236,7 @@ export class CpuPrefixOpCodeRecord {
         cycles: 3,
         jobs: [
           (dmg: Gameboy) => {},
-          (dmg: Gameboy) => {
-            console.log(
-              'Value at HL',
-              dmg.ram.getMemoryAt(dmg.registers.register16Bit.HL.getRegister())
-            );
-          },
+          (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             SETU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
