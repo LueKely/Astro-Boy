@@ -938,7 +938,7 @@ export class CpuPrefixOpCodeRecord {
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
-            SLAR8(dmg.registers.register.L, dmg.registers.register.F);
+            SWAPR8(dmg.registers.register.L, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
