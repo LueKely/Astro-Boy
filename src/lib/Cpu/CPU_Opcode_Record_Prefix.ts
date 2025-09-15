@@ -1042,7 +1042,7 @@ export class CpuPrefixOpCodeRecord {
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
-            SRAR8(dmg.registers.register.E, dmg.registers.register.F);
+            SRLR8(dmg.registers.register.E, dmg.registers.register.F);
             if (dmg.registers.HALT_BUG) {
               dmg.registers.HALT_BUG = false;
             } else {
