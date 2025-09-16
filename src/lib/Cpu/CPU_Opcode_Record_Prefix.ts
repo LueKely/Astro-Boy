@@ -3345,10 +3345,12 @@ export class CpuPrefixOpCodeRecord {
       0xc6: {
         name: 'Prefix: SET 0, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3474,10 +3476,12 @@ export class CpuPrefixOpCodeRecord {
       0xce: {
         name: 'Prefix: SET 1, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3603,10 +3607,12 @@ export class CpuPrefixOpCodeRecord {
       0xd6: {
         name: 'Prefix: SET 2, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3732,10 +3738,12 @@ export class CpuPrefixOpCodeRecord {
       0xde: {
         name: 'Prefix: SET 3, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3862,10 +3870,12 @@ export class CpuPrefixOpCodeRecord {
       0xe6: {
         name: 'Prefix: SET 4, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -3995,6 +4005,8 @@ export class CpuPrefixOpCodeRecord {
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -4124,6 +4136,8 @@ export class CpuPrefixOpCodeRecord {
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -4253,6 +4267,8 @@ export class CpuPrefixOpCodeRecord {
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             SETU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
