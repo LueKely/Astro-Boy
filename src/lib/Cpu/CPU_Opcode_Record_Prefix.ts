@@ -2295,10 +2295,12 @@ export class CpuPrefixOpCodeRecord {
       0x86: {
         name: 'Prefix: RES 0, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             RESU3HL(0, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
@@ -2424,9 +2426,11 @@ export class CpuPrefixOpCodeRecord {
       0x8e: {
         name: 'Prefix: RES 1, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(1, dmg.registers.register16Bit.HL, dmg.ram);
@@ -2553,9 +2557,11 @@ export class CpuPrefixOpCodeRecord {
       0x96: {
         name: 'Prefix: RES 2, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(2, dmg.registers.register16Bit.HL, dmg.ram);
@@ -2682,9 +2688,11 @@ export class CpuPrefixOpCodeRecord {
       0x9e: {
         name: 'Prefix: RES 3, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(3, dmg.registers.register16Bit.HL, dmg.ram);
@@ -2812,9 +2820,11 @@ export class CpuPrefixOpCodeRecord {
       0xa6: {
         name: 'Prefix: RES 4, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(4, dmg.registers.register16Bit.HL, dmg.ram);
@@ -2941,9 +2951,11 @@ export class CpuPrefixOpCodeRecord {
       0xae: {
         name: 'Prefix: RES 5, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(5, dmg.registers.register16Bit.HL, dmg.ram);
@@ -3070,9 +3082,11 @@ export class CpuPrefixOpCodeRecord {
       0xb6: {
         name: 'Prefix: RES 6, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {
             RESU3HL(6, dmg.registers.register16Bit.HL, dmg.ram);
@@ -3199,10 +3213,12 @@ export class CpuPrefixOpCodeRecord {
       0xbe: {
         name: 'Prefix: RES 7, (HL)',
         length: 2,
-        cycles: 3,
+        cycles: 4,
         jobs: [
           (dmg: Gameboy) => {},
           (dmg: Gameboy) => {},
+          (dmg: Gameboy) => {},
+
           (dmg: Gameboy) => {
             RESU3HL(7, dmg.registers.register16Bit.HL, dmg.ram);
             if (dmg.registers.HALT_BUG) {
