@@ -23,21 +23,19 @@ export class Cpu_Scheduler {
     this.interruptHandler = new Interrupt_Handler(this.dmg);
     this.currentOpcode = this.opCodes.get(this.readByte());
   }
-  // 0xcb
+
   private readByte() {
     return this.dmg.ram.getMemoryAt(
       this.dmg.registers.pointers.PC.getRegister()
     );
   }
 
-  // PROBLEMS: somethign about fetchign the currentOpcode and shit
+  // PROBLEMS: something about fetching the currentOpcode and shit
   private schedule() {
-    // STOP - this should return afterwards if the condition is true
     if (this.dmg.registers.STOP) {
       this.stopHandler();
       return;
     }
-    // HALT - this should return afterwards if the condition is true
     if (this.dmg.registers.HALT) {
       this.haltHandler();
       return;
@@ -73,9 +71,6 @@ export class Cpu_Scheduler {
     }
   }
   private haltHandler() {
-    // this the first cc on the schedule function
-    // if not increment pc and fetch the next opcode
-    // and read byte
     if (
       this.dmg.registers.IME.getValue() &&
       this.dmg.ram.isAllowedToInterrupt()
@@ -150,7 +145,6 @@ export class Cpu_Scheduler {
       );
     } finally {
       // this.dmg.log();
-      //49152
     }
   }
 }

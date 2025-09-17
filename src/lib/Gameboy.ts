@@ -89,5 +89,7 @@ export class Gameboy {
     // console.log('0XFF02: ' + String.fromCharCode(this.ram.getMemoryAt(0xff02)));
     console.log('0XFF01: 0x' + this.ram.getMemoryAt(0xff01).toString(16));
     console.log('0XFF02: 0x' + this.ram.getMemoryAt(0xff02).toString(16));
+    console.log('TILE DATA');
+    console.log(this.ram.getMemory().slice(0x8000, 0x97ff));
   }
 }
