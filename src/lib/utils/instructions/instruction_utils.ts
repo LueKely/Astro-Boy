@@ -4,6 +4,7 @@ import type { Cpu_Flag_Register } from '../../Cpu/CPU_Flag_Register';
  * @description this will validate the sum and raise the appropriate flags during R8
  * operations
  **/
+// done
 function validateR8Addition(
   sum: number,
   hflagSum: number,
@@ -39,6 +40,7 @@ function validateR8Addition(
  * during R16 operations
  **/
 
+// done
 function validateR16Addition(
   addA: number,
   addB: number,
@@ -63,6 +65,8 @@ function validateR16Addition(
     flagRegister.clearCYFlag();
   }
 }
+
+// done
 function validateR8Subtraction(
   registerF: Cpu_Flag_Register,
   minuend: number,
@@ -71,7 +75,6 @@ function validateR8Subtraction(
 ) {
   const difference = minuend - subtrahend - carry;
 
-  // flag conditions below
   if ((difference & 0xff) == 0) {
     registerF.setZFlag();
   } else {
@@ -85,16 +88,15 @@ function validateR8Subtraction(
   } else {
     registerF.clearHFlag();
   }
-  if (subtrahend + carry > minuend) {
+  if (difference < 0) {
     registerF.setCYFlag();
   } else {
     registerF.clearCYFlag();
   }
 }
-
+// done
 function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   const difference = value - 1;
-  // flag conditions below
   registerF.setNFlag();
 
   if ((difference & 0xff) == 0) {
@@ -110,6 +112,7 @@ function validateR8Decrement(registerF: Cpu_Flag_Register, value: number) {
   }
 }
 
+// done
 function validateR8Increment(
   addA: number,
   addB: number,
@@ -133,7 +136,7 @@ function validateR8Increment(
     flagRegister.clearHFlag();
   }
 }
-
+// done
 function validateAndOperation(result: number, flagRegister: Cpu_Flag_Register) {
   if (result == 0) {
     flagRegister.setZFlag();
@@ -144,7 +147,7 @@ function validateAndOperation(result: number, flagRegister: Cpu_Flag_Register) {
   flagRegister.setHFlag();
   flagRegister.clearCYFlag();
 }
-
+// done
 // used both by XOR and OR operations
 function validateOrOperation(result: number, F: Cpu_Flag_Register) {
   if (result == 0) {
@@ -156,7 +159,7 @@ function validateOrOperation(result: number, F: Cpu_Flag_Register) {
   F.clearHFlag();
   F.clearCYFlag();
 }
-
+// done
 function validateBitFlagOperation(testBit: number, F: Cpu_Flag_Register) {
   if (testBit == 0) {
     F.setZFlag();
@@ -167,7 +170,7 @@ function validateBitFlagOperation(testBit: number, F: Cpu_Flag_Register) {
   F.clearNFlag();
   F.setHFlag();
 }
-
+// done
 function validateBitShiftAccOperation(carryBit: number, F: Cpu_Flag_Register) {
   if (carryBit == 1) {
     F.setCYFlag();
@@ -179,7 +182,7 @@ function validateBitShiftAccOperation(carryBit: number, F: Cpu_Flag_Register) {
   F.clearNFlag();
   F.clearZFlag();
 }
-
+// done
 function validateBitShiftOperation(
   carryBit: number,
   result: number,
@@ -191,7 +194,7 @@ function validateBitShiftOperation(
     F.clearCYFlag();
   }
 
-  if ((result & 0b1111_1111) == 0) {
+  if ((result & 0xff) == 0) {
     F.setZFlag();
   } else {
     F.clearZFlag();
@@ -200,9 +203,9 @@ function validateBitShiftOperation(
   F.clearHFlag();
   F.clearNFlag();
 }
-
+// done
 function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
-  if ((result & 0b1111_1111) == 0) {
+  if ((result & 0xff) == 0) {
     F.setZFlag();
   } else {
     F.clearZFlag();
@@ -213,7 +216,7 @@ function validateSwapOperation(result: number, F: Cpu_Flag_Register) {
   F.clearNFlag();
 }
 
-// todo make it use for LD HL SP+e as well
+// done
 function validateADDSPe(SP: number, e: number, F: Cpu_Flag_Register) {
   F.clearZFlag();
   F.clearNFlag();
