@@ -1,8 +1,8 @@
 export class PPU {
-  tileCache: number[] = [];
+  // this should store 384 tiles
+  tileCache: number[][][] = [];
 
-  // i have to make 384 tiles of this dawg and this just renders a row lol
-  twoBitPixelProcessing(lsb: number, msb: number): number[] {
+  static twoBitPixelProcessing(lsb: number, msb: number): number[] {
     const result = [];
     for (let index = 7; index >= 0; index--) {
       const mask = 0b0000_0001 << index;
@@ -24,6 +24,25 @@ export class PPU {
 
     return result;
   }
+  // this should take 16 items from an array to crate the 8by8 tile
+  static renderATile(vramSlice: Uint8Array) {
+    const tile: number[][] = [];
+    for (let index = 0; index < vramSlice.length; index += 2) {
+      const lsb = vramSlice[index];
+      const msb = vramSlice[index + 1];
 
-  renderATile() {}
+      const tileRow = PPU.twoBitPixelProcessing(lsb, msb);
+      tile.push(tileRow);
+    }
+    return tile;
+  }
+
+  static renderTileData(vram: Uint8Array): number[][][] {
+    const cached: number[][][] = [];
+    for (let index = 0; index < vram.length; index += 16) {
+      const tile = PPU.renderATile(vram.slice(0, 15));
+      cached.push(tile);
+    }
+    return cached;
+  }
 }
