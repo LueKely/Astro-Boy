@@ -45,4 +45,9 @@ export class PPU {
     }
     return cached;
   }
+  // TILE MAP
+  //Todo:
+  // Canvas Rendering
+  // Canvas should have a 2d grid
+  // Tile map has 3 layers
 }
