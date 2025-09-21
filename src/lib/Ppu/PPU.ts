@@ -2,7 +2,7 @@ export class PPU {
     // this should store 384 tiles
     tileCache: number[][][] = [];
 
-    static twoBitPixelProcessing(lsb: number, msb: number): number[] {
+    static decodeTo2bpp(lsb: number, msb: number): number[] {
         const result = [];
 
         for (let index = 7; index >= 0; index--) {
@@ -27,25 +27,25 @@ export class PPU {
     }
 
     // this should take 16 items from an array to crate the 8x8 tile
-    static renderATile(vramSlice: Uint8Array) {
+    static decodeATile(vramSlice: Uint8Array) {
         const tile: number[][] = [];
 
         for (let index = 0; index < vramSlice.length; index += 2) {
             const lsb = vramSlice[index];
             const msb = vramSlice[index + 1];
 
-            const tileRow = PPU.twoBitPixelProcessing(lsb, msb);
+            const tileRow = PPU.decodeTo2bpp(lsb, msb);
             tile.push(tileRow);
         }
 
         return tile;
     }
 
-    static renderTileData(vram: Uint8Array): number[][][] {
+    static decodeTileData(vram: Uint8Array): number[][][] {
         const cached: number[][][] = [];
 
         for (let index = 0; index < vram.length; index += 16) {
-            const tile = PPU.renderATile(vram.slice(0, 15));
+            const tile = PPU.decodeATile(vram.slice(0, 15));
             cached.push(tile);
         }
         return cached;
