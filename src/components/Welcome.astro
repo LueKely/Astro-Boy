@@ -7,6 +7,7 @@ import background from '../assets/background.svg';
   <input type="file" id="fileInput" />
   <output id="output">No Games Loaded</output>
   <button class="button">RUN</button>
+  <canvas width="160" height="144" id="canvas"></canvas>
 </div>
 
 <script>
@@ -53,7 +54,9 @@ import background from '../assets/background.svg';
     z-index: -1;
     filter: blur(100px);
   }
-
+  #canvas {
+    border: 5px solid black;
+  }
   #container {
     font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans',
       Arial, sans-serif;
