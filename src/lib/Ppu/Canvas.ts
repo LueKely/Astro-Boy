@@ -30,9 +30,11 @@ export class GameboyCanvas {
         if (canvas && canvas instanceof HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-            // you have to bind this into this function such that it won't forget the variable it depends on
+            // you have to bind this into this function such that -
+            // it won't forget the variable it depends on -
             // if you want to destruct that is you can totally not destruct
             this.renderTile = this.renderTile.bind(this);
+            this.renderTileData = this.renderTileData.bind(this);
         } else {
             throw Error('Canvas Does Not Exist M8');
         }
@@ -45,8 +47,8 @@ export class GameboyCanvas {
         // i want to test this - sept 21
         // may mali dito - sept 22
         // fixed bitch!
-        for (let col = 0; col < 8; col++) {
-            for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < tileSource.length; col++) {
+            for (let row = 0; row < tileSource[col].length; row++) {
                 const pixelValue = tileSource[row][col];
 
                 const [r, g, b, a] = this.paletteContext[pixelValue];
