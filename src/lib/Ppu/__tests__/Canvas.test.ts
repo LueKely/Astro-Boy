@@ -18,14 +18,14 @@ describe('Gameboy Canvas Functions', () => {
         ];
 
         renderTile(gbCanvas.ctx, tileDecoded);
-        expect(gbCanvas.tileDataBuffer.length).toBeGreaterThan(0);
-        expect(gbCanvas.tileDataBuffer[0].data[4]).toBe(0);
+        expect(tileDataBuffer.length).toBeGreaterThan(0);
+        expect(tileDataBuffer[0].data[4]).toBe(0);
     });
 
     test('Render TileData', () => {
         const canvas = document.createElement('canvas');
         const gbCanvas = new GameboyCanvas(canvas);
-        const { renderTile, tileDataBuffer, renderTileData } = gbCanvas;
+        const { renderTileData } = gbCanvas;
         const tileDataDecoded = [
             [
                 [0, 3, 3, 3, 3, 3, 0, 0],

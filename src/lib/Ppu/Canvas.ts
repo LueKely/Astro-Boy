@@ -5,7 +5,8 @@ interface ICoordinates {
     y: number;
 }
 // TODO:
-//  add test for tileDataBuffer if it works or not
+//  add test for tileDataBuffer if it works or not - done
+// coordinates for the map
 // LATER:
 // later on i need to research on ways to clear things in the canvas
 // many solutions but all have different purposes
