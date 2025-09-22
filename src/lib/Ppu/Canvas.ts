@@ -4,10 +4,15 @@ interface ICoordinates {
     x: number;
     y: number;
 }
+// TODO:
+//  add test for tileDataBuffer if it works or not
+// LATER:
+// later on i need to research on ways to clear things in the canvas
+// many solutions but all have different purposes
 
 export class GameboyCanvas {
     canvas: HTMLCanvasElement;
-    ctx: CanvasRenderingContext2D | null;
+    ctx: CanvasRenderingContext2D;
     tileDataBuffer: ImageData[] = [];
 
     static Scale = 1.5;
@@ -21,12 +26,13 @@ export class GameboyCanvas {
         [0, 0, 0, 255], // color3
     ];
 
-    //   seems like drawing this canvas is a bit weird
-    //   and pixels for 144x160 is tad small i need to scale this bigger!
     constructor(canvas: HTMLElement | null) {
         if (canvas && canvas instanceof HTMLCanvasElement) {
             this.canvas = canvas;
-            this.ctx = this.canvas.getContext('2d');
+            this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
+            // you have to bind this into this function such that it won't forget the variable it depends on
+            // if you want to destruct that is you can totally not destruct
+            this.renderTile = this.renderTile.bind(this);
         } else {
             throw Error('Canvas Does Not Exist M8');
         }
@@ -35,18 +41,21 @@ export class GameboyCanvas {
     renderTile(ctx: CanvasRenderingContext2D, tileSource: number[][]) {
         const tileSize = 8;
         const tile = ctx.createImageData(tileSize, tileSize);
+        const offset = 4;
+        // i want to test this - sept 21
+        // may mali dito - sept 22
+        // fixed bitch!
+        for (let col = 0; col < 8; col++) {
+            for (let row = 0; row < 8; row++) {
+                const pixelValue = tileSource[row][col];
 
-        // i want to test this
-        for (let col = 0; col < tileSource.length; col++) {
-            for (let row = 0; row < tileSource[col].length; row++) {
-                for (let imagePixel = 0; imagePixel < tile.data.length; imagePixel += 4) {
-                    const pixelValue = tileSource[col][row];
-                    const [r, g, b, a] = this.paletteContext[pixelValue];
-                    tile.data[imagePixel] = r;
-                    tile.data[imagePixel + 1] = g;
-                    tile.data[imagePixel + 2] = b;
-                    tile.data[imagePixel + 3] = a;
-                }
+                const [r, g, b, a] = this.paletteContext[pixelValue];
+                const flatIndex = row * 8 + col;
+                const index = flatIndex * offset;
+                tile.data[index] = r;
+                tile.data[index + 1] = g;
+                tile.data[index + 2] = b;
+                tile.data[index + 3] = a;
             }
         }
 
@@ -73,9 +82,6 @@ export class GameboyCanvas {
         });
     }
 
-    // i need an option to enlarge the thing i am rendering
-    // solution ^ : i need this context to be temporary
-    //
     draw() {
         if (this.ctx == null) {
             throw Error('context not defined');
