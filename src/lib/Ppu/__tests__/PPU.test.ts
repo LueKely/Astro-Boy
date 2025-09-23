@@ -68,6 +68,35 @@ describe('renderTileData', () => {
         expect(tileData).toStrictEqual(expectedResult2);
     });
 
+    test('Test #2', () => {
+        const vram: Uint8Array = new Uint8Array([
+            0x3c, 0x7e, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x7e, 0x5e, 0x7e, 0x0a, 0x7c, 0x56,
+            0x38, 0x7c,
+        ]);
+
+        const expectedResult = [
+            [0, 2, 3, 3, 3, 3, 2, 0],
+
+            [0, 3, 0, 0, 0, 0, 3, 0],
+
+            [0, 3, 0, 0, 0, 0, 3, 0],
+
+            [0, 3, 0, 0, 0, 0, 3, 0],
+
+            [0, 3, 1, 3, 3, 3, 3, 0],
+
+            [0, 1, 1, 1, 3, 1, 3, 0],
+
+            [0, 3, 1, 3, 1, 3, 2, 0],
+
+            [0, 2, 3, 3, 3, 2, 0, 0],
+        ];
+
+        const cache = PPU.decodeATile(vram);
+
+        expect(cache).toStrictEqual(expectedResult);
+    });
+
     test('Should decode the Tile Data', () => {
         const vram: Uint8Array = new Uint8Array([
             0x7c, 0x7c, 0x0, 0xc6, 0xc6, 0x00, 0x00, 0xfe, 0xc6, 0xc6, 0x0, 0xc6, 0xc6, 0x0, 0x0,

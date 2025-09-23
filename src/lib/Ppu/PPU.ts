@@ -5,24 +5,14 @@ export class PPU {
     static decodeTo2bpp(lsb: number, msb: number): number[] {
         const result = [];
 
-        for (let index = 7; index >= 0; index--) {
-            const mask = 0b0000_0001 << index;
-            const maskLsb = (mask & lsb) >> index;
-            const maskMsb = (mask & msb) >> index;
+        for (let i = 7; i >= 0; i--) {
+            const bit0 = (lsb >> i) & 1; // low bit
+            const bit1 = (msb >> i) & 1; // high bit
+            console.log('BIT 0 is 0x', lsb.toString(16));
+            console.log('BIT 1 is 0x', msb.toString(16));
 
-            if (maskMsb === maskLsb) {
-                if (maskMsb != 0) {
-                    result.push(3);
-                } else {
-                    result.push(0);
-                }
-            } else if (maskMsb > maskLsb) {
-                result.push(2);
-            } else if (maskMsb < maskLsb) {
-                result.push(1);
-            }
+            result.push((bit1 << 1) | bit0);
         }
-
         return result;
     }
 
@@ -37,6 +27,7 @@ export class PPU {
             const tileRow = PPU.decodeTo2bpp(lsb, msb);
             tile.push(tileRow);
         }
+        console.log(tile);
 
         return tile;
     }

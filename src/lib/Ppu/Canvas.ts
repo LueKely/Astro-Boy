@@ -1,4 +1,5 @@
-import type { PPU } from './PPU';
+import { PPU } from './PPU';
+import { Tile_Mapper } from './Tile_Mapper';
 
 interface ICoordinates {
     x: number;
@@ -15,11 +16,7 @@ export class GameboyCanvas {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D;
     tileDataBuffer: ImageData[] = [];
-
-    static Scale = 1.5;
-
-    // add option to change palette
-    paletteContext = [
+    private static defaultPalette = [
         // vro.. i miss vec4
         [255, 255, 255, 255], // color0
         [192, 192, 192, 255], // color1
@@ -27,7 +24,10 @@ export class GameboyCanvas {
         [0, 0, 0, 255], // color3
     ];
 
-    constructor(canvas: HTMLElement | null) {
+    paletteContext;
+
+    constructor(canvas: HTMLElement | null, palette?: number[][]) {
+        this.paletteContext = palette != undefined ? palette : GameboyCanvas.defaultPalette;
         if (canvas && canvas instanceof HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
@@ -48,13 +48,14 @@ export class GameboyCanvas {
         // i want to test this - sept 21
         // may mali dito - sept 22
         // fixed bitch!
-        for (let col = 0; col < tileSource.length; col++) {
-            for (let row = 0; row < tileSource[col].length; row++) {
+        for (let row = 0; row < tileSource.length; row++) {
+            for (let col = 0; col < tileSource[row].length; col++) {
                 const pixelValue = tileSource[row][col];
 
                 const [r, g, b, a] = this.paletteContext[pixelValue];
                 const flatIndex = row * 8 + col;
                 const index = flatIndex * offset;
+
                 tile.data[index] = r;
                 tile.data[index + 1] = g;
                 tile.data[index + 2] = b;
@@ -74,6 +75,7 @@ export class GameboyCanvas {
         });
     }
 
+    // placement is wrong
     placeTile(
         ctx: CanvasRenderingContext2D,
         coordinates: ICoordinates[],
@@ -81,27 +83,19 @@ export class GameboyCanvas {
     ) {
         tileDataBuffer.forEach((tileBuffer, index) => {
             const { x, y } = coordinates[index];
-            ctx.putImageData(tileBuffer, x, y);
+            ctx.putImageData(tileDataBuffer[0], x, y);
         });
     }
+
+    // i just need to map the tiles first
 
     draw() {
         if (this.ctx == null) {
             throw Error('context not defined');
         }
 
-        // this.placeTile(this.ctx, [{ x: 5, y: 5 }], this.tileDataBuffer);
-        // this.ctx.scale(GameboyCanvas.Scale, GameboyCanvas.Scale);
-        // this.ctx.drawImage(this.canvas, 0, 0);
-
-        const imgData = this.ctx.createImageData(8, 8);
-
-        for (let i = 0; i < imgData.data.length; i += 4) {
-            imgData.data[i + 0] = 255;
-            imgData.data[i + 1] = 0;
-            imgData.data[i + 2] = 0;
-            imgData.data[i + 3] = 255;
-        }
-        this.ctx.putImageData(imgData, 10, 10);
+        const map = new Tile_Mapper();
+        this.ctx.imageSmoothingEnabled = false;
+        this.placeTile(this.ctx, map.create(), this.tileDataBuffer);
     }
 }

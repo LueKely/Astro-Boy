@@ -10,22 +10,38 @@ import background from '../assets/background.svg';
         <button class="button">RUN</button>
     </div>
     <!-- the original canvas lenght is 144x160 -->
-    <canvas width="144" height="160" id="canvas"></canvas>
+    <canvas width="256" height="256" id="canvas"></canvas>
 </div>
 
 <script>
     import { Gameboy } from '../lib/Gameboy';
     import { GameboyCanvas } from '../lib/Ppu/Canvas';
+    import { PPU } from '../lib/Ppu/PPU';
     import { loadFile } from '../lib/utils/File_Utils';
 
     const input = document.getElementById('fileInput');
     const button = document.querySelector('.button');
     const output = document.getElementById('output');
     const canvas = document.getElementById('canvas');
+    const APU = new PPU();
 
+    const debugPalette = [
+        [255, 0, 0, 255], // color0: bright red
+        [0, 255, 0, 255], // color1: bright green
+        [0, 0, 255, 255], // color2: bright blue
+        [255, 255, 0, 255], // color3: bright yellow
+    ];
     let gameboy: Gameboy | null = null;
-    let gbCanvas = new GameboyCanvas(canvas);
+    let gbCanvas = new GameboyCanvas(canvas, debugPalette);
 
+    const vram: Uint8Array = new Uint8Array([
+        0x3c, 0x7e, 0x42, 0x42, 0x42, 0x42, 0x42, 0x42, 0x7e, 0x5e, 0x7e, 0x0a, 0x7c, 0x56, 0x38,
+        0x7c,
+    ]);
+
+    //Canvas
+    APU.tileCache = PPU.decodeTileData(vram);
+    gbCanvas.renderTileData(APU.tileCache);
     gbCanvas.draw();
 
     input?.addEventListener('change', async (e) => {
@@ -33,9 +49,11 @@ import background from '../assets/background.svg';
 
         const game = await loadFile(e);
         gameboy = new Gameboy(game);
+        const { getCartridgeHeaderRaw, inferCartridgeHeader } = gameboy?.cartridge;
 
-        console.log(gameboy.cartridge.getCartridgeHeaderRaw());
-        console.log(gameboy.cartridge.inferCartridgeHeader());
+        console.log(getCartridgeHeaderRaw());
+        console.log(inferCartridgeHeader());
+
         gameboy.run();
 
         gameboy.cartridge.checkSum();
@@ -64,8 +82,11 @@ import background from '../assets/background.svg';
     }
     #canvas {
         border: 5px solid black;
-        width: 432px;
-        height: 480px;
+        /* width: 432px;
+        height: 480px; */
+        width: calc(256px + 256px + 256px);
+        height: calc(256px + 256px + 256px);
+
         image-rendering: pixelated;
     }
     #container {
