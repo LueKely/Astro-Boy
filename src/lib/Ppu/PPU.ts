@@ -1,15 +1,13 @@
 export class PPU {
     // this should store 384 tiles
-    tileCache: number[][][] = [];
-
+    tileCache: number[][] = [];
+    tileDataCache: number[][][] = [];
     static decodeTo2bpp(lsb: number, msb: number): number[] {
         const result = [];
 
         for (let i = 7; i >= 0; i--) {
             const bit0 = (lsb >> i) & 1; // low bit
             const bit1 = (msb >> i) & 1; // high bit
-            console.log('BIT 0 is 0x', lsb.toString(16));
-            console.log('BIT 1 is 0x', msb.toString(16));
 
             result.push((bit1 << 1) | bit0);
         }
@@ -27,7 +25,6 @@ export class PPU {
             const tileRow = PPU.decodeTo2bpp(lsb, msb);
             tile.push(tileRow);
         }
-        console.log(tile);
 
         return tile;
     }
@@ -36,7 +33,7 @@ export class PPU {
         const cached: number[][][] = [];
 
         for (let index = 0; index < vram.length; index += 16) {
-            const tile = PPU.decodeATile(vram.slice(0, 15));
+            const tile = PPU.decodeATile(vram.slice(index, index + 16));
             cached.push(tile);
         }
         return cached;

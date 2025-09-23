@@ -83,7 +83,7 @@ export class GameboyCanvas {
     ) {
         tileDataBuffer.forEach((tileBuffer, index) => {
             const { x, y } = coordinates[index];
-            ctx.putImageData(tileDataBuffer[0], x, y);
+            ctx.putImageData(tileBuffer, x, y);
         });
     }
 
