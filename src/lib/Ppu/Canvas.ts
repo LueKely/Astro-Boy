@@ -7,8 +7,9 @@ interface ICoordinates {
 }
 // TODO:
 //  add test for tileDataBuffer if it works or not - done
-// coordinates for the map
-// LATER:
+// coordinates for the map - done
+// i guess i'll load all the tiles form the rom into the tile map
+// LATER
 // later on i need to research on ways to clear things in the canvas
 // many solutions but all have different purposes
 
