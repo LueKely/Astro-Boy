@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
-import { PPU } from '../PPU';
+import { Tile_Decoder_Utils } from '../Tile_Decoder_Utils';
 
 describe('2BPP', () => {
     test('msb and lsb is 0b1111_1111', () => {
         const lsb = 0b1111_1111;
         const msb = 0b1111_1111;
 
-        const result = PPU.decodeTo2bpp(lsb, msb);
+        const result = Tile_Decoder_Utils.decodeTo2bpp(lsb, msb);
         expect(result).toStrictEqual([3, 3, 3, 3, 3, 3, 3, 3]);
     });
 
@@ -14,7 +14,7 @@ describe('2BPP', () => {
         const lsb = 0x7c;
         const msb = 0x7c;
 
-        const result = PPU.decodeTo2bpp(lsb, msb);
+        const result = Tile_Decoder_Utils.decodeTo2bpp(lsb, msb);
         expect(result.length).toBe(8);
         expect(result).toStrictEqual([0, 3, 3, 3, 3, 3, 0, 0]);
     });
@@ -23,7 +23,7 @@ describe('2BPP', () => {
         const lsb = 0x7c;
         const msb = 0x7c;
 
-        const result = PPU.decodeTo2bpp(lsb, msb);
+        const result = Tile_Decoder_Utils.decodeTo2bpp(lsb, msb);
         expect(result.length).toBe(8);
         expect(result).toStrictEqual([0, 3, 3, 3, 3, 3, 0, 0]);
     });
@@ -60,8 +60,8 @@ describe('renderTileData', () => {
             ],
         ];
 
-        const cache = PPU.decodeATile(vram);
-        const tileData = PPU.decodeTileData(vram);
+        const cache = Tile_Decoder_Utils.decodeATile(vram);
+        const tileData = Tile_Decoder_Utils.decodeTileData(vram);
         console.log(tileData);
 
         expect(cache).toStrictEqual(expectedResult);
@@ -92,7 +92,7 @@ describe('renderTileData', () => {
             [0, 2, 3, 3, 3, 2, 0, 0],
         ];
 
-        const cache = PPU.decodeATile(vram);
+        const cache = Tile_Decoder_Utils.decodeATile(vram);
 
         expect(cache).toStrictEqual(expectedResult);
     });
@@ -149,7 +149,7 @@ describe('renderTileData', () => {
             ],
         ];
 
-        const tileData = PPU.decodeTileData(vram);
+        const tileData = Tile_Decoder_Utils.decodeTileData(vram);
 
         expect(tileData).toStrictEqual(expectedResult);
     });

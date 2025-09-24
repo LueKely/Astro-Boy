@@ -1,10 +1,3 @@
-import { PPU } from './PPU';
-import { Tile_Mapper } from './Tile_Mapper';
-
-interface ICoordinates {
-    x: number;
-    y: number;
-}
 // TODO:
 //  add test for tileDataBuffer if it works or not - done
 // coordinates for the map - done
@@ -12,6 +5,8 @@ interface ICoordinates {
 // LATER
 // later on i need to research on ways to clear things in the canvas
 // many solutions but all have different purposes
+
+import type { ICoordinates } from './types/Tile_Types';
 
 export class GameboyCanvas {
     canvas: HTMLCanvasElement;
@@ -46,9 +41,7 @@ export class GameboyCanvas {
         const tileSize = 8;
         const tile = ctx.createImageData(tileSize, tileSize);
         const offset = 4;
-        // i want to test this - sept 21
-        // may mali dito - sept 22
-        // fixed bitch!
+
         for (let row = 0; row < tileSource.length; row++) {
             for (let col = 0; col < tileSource[row].length; col++) {
                 const pixelValue = tileSource[row][col];
@@ -90,13 +83,12 @@ export class GameboyCanvas {
 
     // i just need to map the tiles first
 
-    draw() {
+    draw(coordinates: ICoordinates[]) {
         if (this.ctx == null) {
             throw Error('context not defined');
         }
 
-        const map = new Tile_Mapper();
         this.ctx.imageSmoothingEnabled = false;
-        this.placeTile(this.ctx, map.create(), this.tileDataBuffer);
+        this.placeTile(this.ctx, coordinates, this.tileDataBuffer);
     }
 }
