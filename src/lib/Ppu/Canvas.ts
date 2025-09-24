@@ -27,9 +27,8 @@ export class GameboyCanvas {
         if (canvas && canvas instanceof HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
-            // you have to bind this into this function such that -
-            // it won't forget the variable it depends on -
-            // if you want to destruct that is you can totally not destruct
+
+            // look up bind method to understand
             this.renderTile = this.renderTile.bind(this);
             this.renderTileData = this.renderTileData.bind(this);
         } else {
@@ -87,8 +86,13 @@ export class GameboyCanvas {
         if (this.ctx == null) {
             throw Error('context not defined');
         }
+        // clean slate
 
         this.ctx.imageSmoothingEnabled = false;
         this.placeTile(this.ctx, coordinates, this.tileDataBuffer);
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, 256, 256);
     }
 }

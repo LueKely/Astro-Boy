@@ -1,5 +1,4 @@
 export class Tile_Decoder_Utils {
-    tileCache: number[][] = [];
     static decodeTo2bpp(lsb: number, msb: number): number[] {
         const result = [];
 
