@@ -78,8 +78,9 @@ import Layout from '../../layouts/Layout.astro';
     //Canvas
     APU.tileDataCache = Tile_Decoder_Utils.decodeTileData(vram);
     APU.tileCoordinates = Tile_Mapper_Utils.createBasicTileMap();
+    APU.tileMapIndices1 = Tile_Mapper_Utils.createBasicTileIndeces();
     gbCanvas.renderTileData(APU.tileDataCache);
-    gbCanvas.draw(APU.tileCoordinates);
+    gbCanvas.draw(APU.tileCoordinates, APU.tileMapIndices1);
 
     console.log(APU.tileDataCache);
 

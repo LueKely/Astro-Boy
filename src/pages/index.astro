@@ -63,8 +63,11 @@ import Layout from '../layouts/Layout.astro';
         APU.tileDataCache = Tile_Decoder_Utils.decodeTileData(gameboy.ram.getVramCut());
         APU.tileCoordinates = Tile_Mapper_Utils.createBasicTileMap();
         APU.tileMapIndices1 = gameboy.ram.getTileMapIndicesA();
+        APU.tileMapIndices2 = gameboy.ram.getTileMapIndicesB();
+        // APU.tileMapIndices1 = Tile_Mapper_Utils.createBasicTileIndeces();
+
         gbCanvas.renderTileData(APU.tileDataCache);
-        gbCanvas.draw(APU.tileCoordinates, APU.tileMapIndices1);
+        gbCanvas.draw(APU.tileCoordinates, APU.tileMapIndices2);
         // console.log(getCartridgeHeaderRaw());
         // console.log(inferCartridgeHeader());
 

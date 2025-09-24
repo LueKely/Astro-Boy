@@ -72,22 +72,24 @@ export class GameboyCanvas {
         ctx: CanvasRenderingContext2D,
         coordinates: ICoordinates[],
         tileDataBuffer: ImageData[],
-        tileMapIndeces: Uint8Array
+        tileMapIndices: Uint8Array
     ) {
-        tileMapIndeces.forEach((tileMapIndex, index) => {
+        console.log(tileMapIndices);
+
+        tileMapIndices.forEach((tileMapIndex, index) => {
             const { x, y } = coordinates[index];
             ctx.putImageData(tileDataBuffer[tileMapIndex], x, y);
         });
     }
 
-    draw(coordinates: ICoordinates[], tileMapIndeces: Uint8Array) {
+    draw(coordinates: ICoordinates[], tileMapIndices: Uint8Array) {
         if (this.ctx == null) {
             throw Error('context not defined');
         }
         // clean slate
 
         this.ctx.imageSmoothingEnabled = false;
-        this.placeTile(this.ctx, coordinates, this.tileDataBuffer, tileMapIndeces);
+        this.placeTile(this.ctx, coordinates, this.tileDataBuffer, tileMapIndices);
     }
 
     clear() {

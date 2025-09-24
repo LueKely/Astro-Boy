@@ -10,6 +10,16 @@ export class Tile_Mapper_Utils {
         return map;
     }
 
+    static createBasicTileIndeces() {
+        const map: number[] = [];
+
+        for (let index = 0; index < 384; index++) {
+            map.push(index);
+        }
+
+        return new Uint8Array(map);
+    }
+
     static renderTileMap(width: number = 256, height: number = 256) {
         const map: { x: number; y: number }[] = [];
         const offset = 8;
