@@ -53,4 +53,12 @@ export class Ram {
     getVramCut() {
         return this.memory.slice(0x8000, 0x97ff);
     }
+
+    getTileMapIndicesA() {
+        return this.memory.slice(0x9800, 0x9bff);
+    }
+
+    getTileMapIndicesB() {
+        return this.memory.slice(0x9c00, 0x9fff);
+    }
 }

@@ -68,28 +68,26 @@ export class GameboyCanvas {
         });
     }
 
-    // placement is wrong
     placeTile(
         ctx: CanvasRenderingContext2D,
         coordinates: ICoordinates[],
-        tileDataBuffer: ImageData[]
+        tileDataBuffer: ImageData[],
+        tileMapIndeces: Uint8Array
     ) {
-        tileDataBuffer.forEach((tileBuffer, index) => {
+        tileMapIndeces.forEach((tileMapIndex, index) => {
             const { x, y } = coordinates[index];
-            ctx.putImageData(tileBuffer, x, y);
+            ctx.putImageData(tileDataBuffer[tileMapIndex], x, y);
         });
     }
 
-    // i just need to map the tiles first
-
-    draw(coordinates: ICoordinates[]) {
+    draw(coordinates: ICoordinates[], tileMapIndeces: Uint8Array) {
         if (this.ctx == null) {
             throw Error('context not defined');
         }
         // clean slate
 
         this.ctx.imageSmoothingEnabled = false;
-        this.placeTile(this.ctx, coordinates, this.tileDataBuffer);
+        this.placeTile(this.ctx, coordinates, this.tileDataBuffer, tileMapIndeces);
     }
 
     clear() {
