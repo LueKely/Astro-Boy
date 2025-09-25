@@ -18,17 +18,14 @@ import { Cpu_Register, Cpu_Register_16Bit } from './CPU_Register';
  */
 
 export class Register_File {
-    readonly register = {
-        A: new Cpu_Register<'A'>(0),
-        B: new Cpu_Register<'B'>(0),
-        C: new Cpu_Register<'C'>(0),
-        D: new Cpu_Register<'D'>(0),
-        E: new Cpu_Register<'E'>(0),
-        F: new Cpu_Flag_Register(0),
-        H: new Cpu_Register<'H'>(0),
-        L: new Cpu_Register<'L'>(0),
-        // IGNORE THIS
-    };
+    A = new Cpu_Register<'A'>(0);
+    B = new Cpu_Register<'B'>(0);
+    C = new Cpu_Register<'C'>(0);
+    D = new Cpu_Register<'D'>(0);
+    E = new Cpu_Register<'E'>(0);
+    F = new Cpu_Flag_Register(0);
+    H = new Cpu_Register<'H'>(0);
+    L = new Cpu_Register<'L'>(0);
 
     // i think i might've shoot myself on the foot
     //this'll be a temporary solution for now (i hope)
@@ -45,10 +42,10 @@ export class Register_File {
     };
 
     readonly register16Bit = {
-        AF: new Cpu_Register_16Bit<'AF'>(this.register.A, this.register.F),
-        BC: new Cpu_Register_16Bit<'BC'>(this.register.B, this.register.C),
-        DE: new Cpu_Register_16Bit<'DE'>(this.register.D, this.register.E),
-        HL: new Cpu_Register_16Bit<'HL'>(this.register.H, this.register.L),
+        AF: new Cpu_Register_16Bit<'AF'>(this.A, this.F),
+        BC: new Cpu_Register_16Bit<'BC'>(this.B, this.C),
+        DE: new Cpu_Register_16Bit<'DE'>(this.D, this.E),
+        HL: new Cpu_Register_16Bit<'HL'>(this.H, this.L),
     };
 
     HALT = false;

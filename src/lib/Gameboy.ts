@@ -4,7 +4,7 @@ import { Register_File } from './Cpu/Register_File';
 import { Cpu_Scheduler } from './Cpu/CPU_Scheduler';
 
 export class Gameboy {
-    readonly registers: Register_File;
+    readonly registerFile: Register_File;
     readonly ram: Ram;
     readonly cartridge: GameBoyCatridge;
     readonly scheduler: Cpu_Scheduler;
@@ -14,7 +14,7 @@ export class Gameboy {
     lastTime = 0;
 
     constructor(game: ArrayBuffer) {
-        this.registers = new Register_File();
+        this.registerFile = new Register_File();
         this.ram = new Ram();
         this.cartridge = new GameBoyCatridge(game);
         this.ram.copyROM(this.cartridge.CartDataToBytes);
@@ -26,23 +26,23 @@ export class Gameboy {
 
     log() {
         const systemState = {
-            'Program Counter': this.registers.pointers.PC.getRegister(),
-            'Stack Pointer': this.registers.pointers.SP.getRegister(),
-            'Register A': this.registers.register.A.getRegister(),
-            'Register B': this.registers.register.B.getRegister(),
-            'Register C': this.registers.register.C.getRegister(),
-            'Register D': this.registers.register.D.getRegister(),
-            'Register E': this.registers.register.E.getRegister(),
-            'Register H': this.registers.register.H.getRegister(),
-            'Register L': this.registers.register.L.getRegister(),
-            'Register F': this.registers.register.F.getRegister().toString(2),
+            'Program Counter': this.registerFile.pointers.PC.getRegister(),
+            'Stack Pointer': this.registerFile.pointers.SP.getRegister(),
+            'Register A': this.registerFile.A.getRegister(),
+            'Register B': this.registerFile.B.getRegister(),
+            'Register C': this.registerFile.C.getRegister(),
+            'Register D': this.registerFile.D.getRegister(),
+            'Register E': this.registerFile.E.getRegister(),
+            'Register H': this.registerFile.H.getRegister(),
+            'Register L': this.registerFile.L.getRegister(),
+            'Register F': this.registerFile.F.getRegister().toString(2),
 
-            // IME: this.registers.IME.getValue(),
+            // IME: this.registerFile.IME,
             // IF: this.ram.getIF(),
             // IE: this.ram.getIE(),
-            // HALT_BUG: this.registers.HALT_BUG,
-            // HALT: this.registers.HALT,
-            // STOP: this.registers.STOP,
+            // HALT_BUG: this.registerFile.HALT_BUG,
+            // HALT: this.registerFile.HALT,
+            // STOP: this.registerFile.STOP,
             'Memory 0xFF01': this.ram.getMemoryAt(0xff01),
             'Memory 0xFF02': this.ram.getMemoryAt(0xff02),
         };
