@@ -158,14 +158,14 @@ export class CpuOpcodeRecord {
                 if (this.f.getZFlag() ^ 1) {
                     return {
                         name: 'RET NZ',
-                        cycles: '4 if CC is true; 2',
+                        cycles: 4,
                         length: 1,
                         execute: RET(),
                     };
                 }
                 return {
                     name: 'RET NZ',
-                    cycles: '4 if CC is true; 2',
+                    cycles: 2,
                     length: 1,
                     execute: RETCC(),
                 };
@@ -189,14 +189,14 @@ export class CpuOpcodeRecord {
                 if (this.f.getZFlag()) {
                     return {
                         name: 'RET Z',
-                        cycles: '4 if CC is true; 2',
+                        cycles: 4,
                         length: 1,
                         execute: RET(),
                     };
                 }
                 return {
                     name: 'RET Z',
-                    cycles: '4 if CC is true; 2',
+                    cycles: 2,
                     length: 1,
                     execute: RETCC(),
                 };
@@ -307,7 +307,7 @@ export class CpuOpcodeRecord {
                 } else {
                     return {
                         name: 'Call NC, nn',
-                        cycles: 'if CC is True: 6 else 3',
+                        cycles: 6,
                         length: 3,
                         execute: CALLCCN16(),
                     };
@@ -316,14 +316,14 @@ export class CpuOpcodeRecord {
                 if (this.f.getZFlag() != 0) {
                     return {
                         name: 'Call Z, nn',
-                        cycles: 'if CC is True: 6 else 3',
+                        cycles: 3,
                         length: 3,
                         execute: CALLN16(),
                     };
                 } else {
                     return {
                         name: 'Call Z, nn',
-                        cycles: 'if CC is True: 6 else 3',
+                        cycles: 6,
                         length: 3,
                         execute: CALLCCN16(),
                     };
@@ -332,14 +332,14 @@ export class CpuOpcodeRecord {
                 if (this.f.getCYFlag() != 0) {
                     return {
                         name: 'Call C, nn',
-                        cycles: 'if CC is True: 6 else 3',
+                        cycles: 6,
                         length: 3,
                         execute: CALLN16(),
                     };
                 } else {
                     return {
                         name: 'Call C, nn',
-                        cycles: 'if CC is True: 6 else 3',
+                        cycles: 3,
                         length: 3,
                         execute: CALLCCN16(),
                     };
@@ -356,95 +356,58 @@ export class CpuOpcodeRecord {
                 name: 'NOP',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    // M1
-                    (dmg: Gameboy) => {
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4: {
                 name: 'INC B',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.B, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.B, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5: {
                 name: 'DEC B',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        DECR8(dmg.registerFile.B, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    DECR8(dmg.registerFile.B, dmg.registerFile.F);
+
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0x14: {
                 name: 'INC D',
                 cycles: 1,
                 length: 1,
-
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.D, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.D, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x15: {
                 name: 'DEC D',
                 cycles: 1,
                 length: 1,
 
-                execute: [
-                    (dmg: Gameboy) => {
-                        DECR8(dmg.registerFile.D, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    DECR8(dmg.registerFile.D, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0x0c: {
                 name: 'INC C',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.C, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.C, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x0d: {
                 name: 'DEC C',
@@ -459,91 +422,56 @@ export class CpuOpcodeRecord {
                 name: 'INC E',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.E, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.E, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x1d: {
                 name: 'DEC E',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        DECR8(dmg.registerFile.E, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    DECR8(dmg.registerFile.E, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x24: {
                 name: 'INC H',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.H, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.H, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x25: {
                 name: 'DEC H',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        DECR8(dmg.registerFile.H, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    DECR8(dmg.registerFile.H, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x2c: {
                 name: 'INC L',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        INCR8(dmg.registerFile.L, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.L, dmg.registerFile.F);
+
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x2d: {
                 name: 'DEC L',
                 cycles: 1,
                 length: 1,
-                execute: [
-                    (dmg: Gameboy) => {
-                        DECR8(dmg.registerFile.L, dmg.registerFile.F);
-                        if (dmg.registers.HALT_BUG) {
-                            dmg.registers.HALT_BUG = false;
-                        } else {
-                            dmg.registerFile.pointers.PC.increment();
-                        }
-                    },
-                ],
+                execute: (dmg: Gameboy) => {
+                    DECR8(dmg.registerFile.L, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x34: {
                 name: 'INC [HL]',
