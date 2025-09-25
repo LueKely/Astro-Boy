@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"astro": "^5.12.3",
+		"canvas": "^3.2.0",
 		"vitest": "^3.0.6"
 	},
 	"devDependencies": {

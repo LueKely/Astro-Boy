@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -8,10 +8,10 @@ import Layout from '../layouts/Layout.astro';
 <Layout>
     <div id="container">
         <div class="wrapper">
+            <p>Testing Site</p>
             <input type="file" id="fileInput" />
             <output id="output">No Games Loaded</output>
             <button class="button">RUN</button>
-            <button class="clear">CLEAR</button>
         </div>
         <!-- the original canvas lenght is 144x160 -->
         <canvas width="256" height="256" id="canvas"></canvas>
@@ -19,17 +19,16 @@ import Layout from '../layouts/Layout.astro';
 </Layout>
 
 <script>
-    import { Gameboy } from '../lib/Gameboy';
-    import { GameboyCanvas } from '../lib/Ppu/Canvas';
-    import { PPU } from '../lib/Ppu/PPU';
-    import { Tile_Decoder_Utils } from '../lib/Ppu/Tile_Decoder_Utils';
-    import { Tile_Mapper_Utils } from '../lib/Ppu/Tile_Mapper_Utils';
+    import { Gameboy } from '../../lib/Gameboy';
+    import { GameboyCanvas } from '../../lib/Ppu/Canvas';
+    import { PPU } from '../../lib/Ppu/PPU';
+    import { Tile_Decoder_Utils } from '../../lib/Ppu/Tile_Decoder_Utils';
+    import { Tile_Mapper_Utils } from '../../lib/Ppu/Tile_Mapper_Utils';
 
-    import { loadFile } from '../lib/utils/File_Utils';
+    import { loadFile } from '../../lib/utils/File_Utils';
 
     const input = document.getElementById('fileInput');
     const button = document.querySelector('.button');
-    const clearBtn = document.querySelector('.clear');
     const output = document.getElementById('output');
     const canvas = document.getElementById('canvas');
     const APU = new PPU();
@@ -50,28 +49,52 @@ import Layout from '../layouts/Layout.astro';
     let gameboy: Gameboy | null = null;
     let gbCanvas = new GameboyCanvas(canvas, palette);
 
+    // EPIC TILE
+    const vram: Uint8Array = new Uint8Array([
+        // T
+        0x3c, 0x7e, 0x3c, 0x7e, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x00,
+        0x00,
+        // A
+        0x7c, 0x7c, 0x0, 0xc6, 0xc6, 0x00, 0x00, 0xfe, 0xc6, 0xc6, 0x0, 0xc6, 0xc6, 0x0, 0x0, 0x0,
+        // N
+        0x00, 0x00, 0x66, 0x66, 0x66, 0x66, 0x76, 0x76, 0x76, 0x76, 0x6e, 0x6e, 0x66, 0x66, 0x00,
+        0x00,
+        // G
+        0x00, 0x00, 0x7e, 0x7e, 0x7e, 0x7e, 0x60, 0x60, 0x6e, 0x6e, 0x66, 0x66, 0x7e, 0x7e, 0x00,
+        0x00,
+        // I
+        0x00, 0x00, 0x7e, 0x7e, 0x3c, 0x3c, 0x3c, 0x3c, 0x3c, 0x3c, 0x3c, 0x3c, 0x7e, 0x7e, 0x00,
+        0x00,
+        // N
+        0x00, 0x00, 0x66, 0x66, 0x66, 0x66, 0x76, 0x76, 0x76, 0x76, 0x6e, 0x6e, 0x66, 0x66, 0x00,
+        0x00,
+        // A
+        0x7c, 0x7c, 0x0, 0xc6, 0xc6, 0x00, 0x00, 0xfe, 0xc6, 0xc6, 0x0, 0xc6, 0xc6, 0x0, 0x0, 0x0,
+        // SPACE
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00,
+    ]);
+
+    //Canvas
+    APU.tileDataCache = Tile_Decoder_Utils.decodeTileData(vram);
+    APU.tileCoordinates = Tile_Mapper_Utils.createBasicTileMap();
+    APU.tileMapIndices1 = Tile_Mapper_Utils.createBasicTileIndeces();
+    gbCanvas.renderTileData(APU.tileDataCache);
+    gbCanvas.draw(APU.tileCoordinates, APU.tileMapIndices1);
+
+    console.log(APU.tileDataCache);
+
     input?.addEventListener('change', async (e) => {
         if (!output) throw new Error('Output element missing');
-
-        gbCanvas.clear();
-        APU.tileDataCache = [];
 
         const game = await loadFile(e);
         gameboy = new Gameboy(game);
         const { getCartridgeHeaderRaw, inferCartridgeHeader } = gameboy?.cartridge;
 
-        APU.tileDataCache = Tile_Decoder_Utils.decodeTileData(gameboy.ram.getVramCut());
-        APU.tileCoordinates = Tile_Mapper_Utils.createBasicTileMap();
-        APU.tileMapIndices1 = gameboy.ram.getTileMapIndicesA();
-        APU.tileMapIndices2 = gameboy.ram.getTileMapIndicesB();
-        // APU.tileMapIndices1 = Tile_Mapper_Utils.createBasicTileIndeces();
+        console.log(getCartridgeHeaderRaw());
+        console.log(inferCartridgeHeader());
 
-        gbCanvas.renderTileData(APU.tileDataCache);
-        gbCanvas.draw(APU.tileCoordinates, APU.tileMapIndices2);
-        // console.log(getCartridgeHeaderRaw());
-        // console.log(inferCartridgeHeader());
-
-        // gameboy.run();
+        gameboy.run();
 
         gameboy.cartridge.checkSum();
         output.innerText = 'Game Loaded';
@@ -84,11 +107,6 @@ import Layout from '../layouts/Layout.astro';
         // }
         // if (!gameboy?.pause) gameboy?.run();
         gameboy?.run();
-    });
-
-    clearBtn?.addEventListener('click', () => {
-        APU.tileDataCache = [];
-        gbCanvas.clear();
     });
 </script>
 
