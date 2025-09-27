@@ -1150,7 +1150,6 @@ export class CpuOpcodeRecord {
                     dmg.registerFile.pointers.PC.increment();
                     ADDAN8(n, dmg.registerFile.A, dmg.registerFile.F);
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0xd6: {
@@ -1162,7 +1161,6 @@ export class CpuOpcodeRecord {
                     dmg.registerFile.pointers.PC.increment();
                     SUBAN8(n, dmg.registerFile.F, dmg.registerFile.A);
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0xe6: {
@@ -1174,7 +1172,6 @@ export class CpuOpcodeRecord {
                     dmg.registerFile.pointers.PC.increment();
                     ANDAN8(dmg.registerFile.A, n, dmg.registerFile.F);
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0xf6: {
@@ -1183,11 +1180,9 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
                     dmg.registerFile.pointers.PC.increment();
                     ORAN8(dmg.registerFile.A, n, dmg.registerFile.F);
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0xce: {
@@ -1237,7 +1232,6 @@ export class CpuOpcodeRecord {
                     dmg.registerFile.pointers.PC.increment();
                     CPAN8(n, dmg.registerFile.A, dmg.registerFile.F);
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
 
@@ -1249,16 +1243,13 @@ export class CpuOpcodeRecord {
                 execute: (dmg: Gameboy) => {
                     // get lower byte
                     const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setLowerByte(lb);
 
                     dmg.registerFile.pointers.PC.increment();
                     // get upper byte
                     const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setUpperByte(ub);
 
                     dmg.registerFile.pointers.PC.increment();
-                    const n =
-                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    const n = (ub << 8) | lb;
                     LDR16N16(dmg.registerFile.register16Bit.BC, n);
                     dmg.registerFile.pointers.PC.increment();
                 },
@@ -1271,16 +1262,13 @@ export class CpuOpcodeRecord {
                 execute: (dmg: Gameboy) => {
                     // get lower byte
                     const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setLowerByte(lb);
 
                     dmg.registerFile.pointers.PC.increment();
                     // get upper byte
                     const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setUpperByte(ub);
 
                     dmg.registerFile.pointers.PC.increment();
-                    const n =
-                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    const n = (ub << 8) | lb;
                     LDR16N16(dmg.registerFile.register16Bit.DE, n);
                     dmg.registerFile.pointers.PC.increment();
                 },
@@ -1292,16 +1280,13 @@ export class CpuOpcodeRecord {
                 execute: (dmg: Gameboy) => {
                     // get lower byte
                     const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setLowerByte(lb);
 
                     dmg.registerFile.pointers.PC.increment();
                     // get upper byte
                     const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setUpperByte(ub);
 
                     dmg.registerFile.pointers.PC.increment();
-                    const n =
-                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    const n = (ub << 8) | lb;
                     LDR16N16(dmg.registerFile.register16Bit.HL, n);
 
                     dmg.registerFile.pointers.PC.increment();
@@ -1314,17 +1299,13 @@ export class CpuOpcodeRecord {
                 execute: (dmg: Gameboy) => {
                     // get lower byte
                     const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setLowerByte(lb);
 
                     dmg.registerFile.pointers.PC.increment();
                     // get upper byte
                     const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
 
-                    dmg.registerFile.setUpperByte(ub);
-
                     dmg.registerFile.pointers.PC.increment();
-                    const n =
-                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    const n = (ub << 8) | lb;
 
                     LDR16N16(dmg.registerFile.pointers.SP, n);
 
@@ -2039,11 +2020,10 @@ export class CpuOpcodeRecord {
                 length: 1,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.B, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x16: {
@@ -2052,11 +2032,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.D, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x26: {
@@ -2065,11 +2044,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.H, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x36: {
@@ -2078,14 +2056,14 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDHLN8(
                         dmg.registerFile.register16Bit.HL,
                         dmg.registerFile.getTempByte(),
                         dmg.ram
                     );
-                    dmg.registerFile.setTempByte(0);
+
                     dmg.registerFile.pointers.PC.increment();
                 },
             },
@@ -2096,11 +2074,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.C, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x1e: {
@@ -2109,11 +2086,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.E, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x2e: {
@@ -2122,11 +2098,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.L, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
             0x3e: {
@@ -2135,11 +2110,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDR8N8(dmg.registerFile.A, dmg.registerFile.getTempByte());
                     dmg.registerFile.pointers.PC.increment();
-                    dmg.registerFile.setTempByte(0);
                 },
             },
 
@@ -2194,9 +2168,9 @@ export class CpuOpcodeRecord {
                 execute: (dmg: Gameboy) => {
                     dmg.registerFile.pointers.PC.increment();
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                    dmg.registerFile.setTempByte(n);
+
                     LDHN16A(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
-                    dmg.registerFile.setTempByte(0);
+
                     dmg.registerFile.pointers.PC.increment();
                 },
             },
@@ -2206,10 +2180,10 @@ export class CpuOpcodeRecord {
                 length: 2,
                 execute: (dmg: Gameboy) => {
                     const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
-                    dmg.registerFile.setTempByte(n);
+
                     dmg.registerFile.pointers.PC.increment();
                     LDHAN8(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
-                    dmg.registerFile.setTempByte(0);
+
                     dmg.registerFile.pointers.PC.increment();
                 },
             },
