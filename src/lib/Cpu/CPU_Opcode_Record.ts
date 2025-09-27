@@ -786,614 +786,459 @@ export class CpuOpcodeRecord {
                 name: 'SUBC E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SBCAR8(dmg.registerFile.E, dmg.registerFile.F, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SBCAR8(dmg.registerFile.E, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x9c: {
                 name: 'SUBC H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SBCAR8(dmg.registerFile.H, dmg.registerFile.F, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SBCAR8(dmg.registerFile.H, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x9d: {
                 name: 'SUBC D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SBCAR8(dmg.registerFile.L, dmg.registerFile.F, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SBCAR8(dmg.registerFile.L, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x9e: {
                 name: 'SUBC [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SBCAHL(
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.ram,
-                            dmg.registerFile.F,
-                            dmg.registerFile.A
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SBCAHL(
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.ram,
+                        dmg.registerFile.F,
+                        dmg.registerFile.A
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x9f: {
                 name: 'SUBC A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SBCAR8(dmg.registerFile.A, dmg.registerFile.F, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SBCAR8(dmg.registerFile.A, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa0: {
                 name: 'AND B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa1: {
                 name: 'AND C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa2: {
                 name: 'AND D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa3: {
                 name: 'AND E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa4: {
                 name: 'AND H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa5: {
                 name: 'AND L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa6: {
                 name: 'AND [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ANDAHL(
-                            dmg.registerFile.A,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F,
-                            dmg.ram
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAHL(
+                        dmg.registerFile.A,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F,
+                        dmg.ram
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa7: {
                 name: 'AND A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ANDAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ANDAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa8: {
                 name: 'XOR B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xa9: {
                 name: 'XOR C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xaa: {
                 name: 'XOR D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xab: {
                 name: 'XOR E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xac: {
                 name: 'XOR H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xad: {
                 name: 'XOR L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xae: {
                 name: 'XOR [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        XORAHL(
-                            dmg.registerFile.A,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F,
-                            dmg.ram
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAHL(
+                        dmg.registerFile.A,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F,
+                        dmg.ram
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xaf: {
                 name: 'XOR A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        XORAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    XORAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb0: {
                 name: 'OR B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.B, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb1: {
                 name: 'OR C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.C, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb2: {
                 name: 'OR D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.D, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb3: {
                 name: 'OR E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.E, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb4: {
                 name: 'OR H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.H, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb5: {
                 name: 'OR L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.L, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb6: {
                 name: 'OR [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ORAHL(
-                            dmg.registerFile.A,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F,
-                            dmg.ram
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAHL(
+                        dmg.registerFile.A,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F,
+                        dmg.ram
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb7: {
                 name: 'OR A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        ORAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ORAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb8: {
                 name: 'CP B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.B, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.B, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xb9: {
                 name: 'CP C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.C, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.C, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xba: {
                 name: 'CP D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.D, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.D, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xbb: {
                 name: 'CP E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.E, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.E, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0xbc: {
                 name: 'CP H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.H, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.H, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xbd: {
                 name: 'CP L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.L, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.L, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xbe: {
                 name: 'CP [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        CPAHL(
-                            dmg.ram,
-                            dmg.registerFile.A,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAHL(
+                        dmg.ram,
+                        dmg.registerFile.A,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xbf: {
                 name: 'CP A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CPAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CPAR8(dmg.registerFile.A, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xc6: {
                 name: 'ADD N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    ADDAN8(n,
-                            dmg.registerFile.A,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                 
-                    },
-                               },
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    ADDAN8(n, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
+            },
             0xd6: {
                 name: 'SUB N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                     SUBAN8(n,
-                            dmg.registerFile.F,
-                            dmg.registerFile.A
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
- },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    SUBAN8(n, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0xe6: {
                 name: 'AND N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        ANDAN8(
-                            dmg.registerFile.A,
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    ANDAN8(dmg.registerFile.A, n, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0xf6: {
                 name: 'OR N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        ORAN8(
-                            dmg.registerFile.A,
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    ORAN8(dmg.registerFile.A, n, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0xce: {
                 name: 'ADC N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        ADCAN8(
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.A,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    ADCAN8(
+                        n,
+                        dmg.registerFile.A,
+
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xde: {
                 name: 'SBC N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        SBCAN8(
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.F,
-                            dmg.registerFile.A
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    SBCAN8(n, dmg.registerFile.F, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xee: {
                 name: 'XOR N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        XORAN8(
-                            dmg.registerFile.A,
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    XORAN8(dmg.registerFile.A, n, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xfe: {
                 name: 'CP N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        CPAN8(
-                            dmg.registerFile.getTempByte(),
-                            dmg.registerFile.A,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.pointers.PC.increment();
+                    CPAN8(n, dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
 
             // LOAD INSTRUCTIONS 16bit
@@ -1401,1288 +1246,990 @@ export class CpuOpcodeRecord {
                 name: 'LD BC NN',
                 cycles: 3,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
-                        const lb = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setLowerByte(lb);
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setLowerByte(lb);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
-                        const ub = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setUpperByte(ub);
+                    dmg.registerFile.pointers.PC.increment();
+                    // get upper byte
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setUpperByte(ub);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
-                        LDR16N16(dmg.registerFile.register16Bit.BC, n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    LDR16N16(dmg.registerFile.register16Bit.BC, n);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0x11: {
                 name: 'LD DE, NN',
                 cycles: 3,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
-                        const lb = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setLowerByte(lb);
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setLowerByte(lb);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
-                        const ub = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setUpperByte(ub);
+                    dmg.registerFile.pointers.PC.increment();
+                    // get upper byte
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setUpperByte(ub);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
-                        LDR16N16(dmg.registerFile.register16Bit.DE, n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    LDR16N16(dmg.registerFile.register16Bit.DE, n);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x21: {
                 name: 'LD HL NN',
                 cycles: 3,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
-                        const lb = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setLowerByte(lb);
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setLowerByte(lb);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
-                        const ub = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setUpperByte(ub);
+                    dmg.registerFile.pointers.PC.increment();
+                    // get upper byte
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setUpperByte(ub);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
-                        LDR16N16(dmg.registerFile.register16Bit.HL, n);
+                    dmg.registerFile.pointers.PC.increment();
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    LDR16N16(dmg.registerFile.register16Bit.HL, n);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x31: {
                 name: 'LD SP, NN',
                 cycles: 3,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
-                        const lb = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setLowerByte(lb);
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setLowerByte(lb);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
-                        const ub = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
+                    dmg.registerFile.pointers.PC.increment();
+                    // get upper byte
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
 
-                        dmg.registerFile.setUpperByte(ub);
+                    dmg.registerFile.setUpperByte(ub);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
+                    dmg.registerFile.pointers.PC.increment();
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
 
-                        LDR16N16(dmg.registerFile.pointers.SP, n);
+                    LDR16N16(dmg.registerFile.pointers.SP, n);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             // Load instruction 8bit
             0x0a: {
                 name: 'LD A, (BC)',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDAR16(dmg.registerFile.A, dmg.registerFile.register16Bit.BC, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDAR16(dmg.registerFile.A, dmg.registerFile.register16Bit.BC, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x1a: {
                 name: 'LD A,(DE)',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDAR16(dmg.registerFile.A, dmg.registerFile.register16Bit.DE, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDAR16(dmg.registerFile.A, dmg.registerFile.register16Bit.DE, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x2a: {
                 name: 'LD A, (HL+)',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDAHLI(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDAHLI(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x3a: {
                 name: 'LD  A, (HL-)',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDAHLD(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDAHLD(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             // IMPLEMENT ME LD [r16 A
             0x02: {
                 name: 'LD (BC),A',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR16A(dmg.registerFile.register16Bit.BC, dmg.registerFile.A, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDR16A(dmg.registerFile.register16Bit.BC, dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x12: {
                 name: 'LD (DE),A',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR16A(dmg.registerFile.register16Bit.DE, dmg.registerFile.A, dmg.ram);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDR16A(dmg.registerFile.register16Bit.DE, dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x22: {
                 name: 'LD (HL+), A',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLIA(dmg.ram, dmg.registerFile.register16Bit.HL, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDHLIA(dmg.ram, dmg.registerFile.register16Bit.HL, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x32: {
                 name: 'LD (HL-), A ',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLDA(dmg.ram, dmg.registerFile.register16Bit.HL, dmg.registerFile.A);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDHLDA(dmg.ram, dmg.registerFile.register16Bit.HL, dmg.registerFile.A);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x40: {
                 name: 'LD B B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x41: {
                 name: 'LD B C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x42: {
                 name: 'LD B D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x43: {
                 name: 'LD B E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x44: {
                 name: 'LD B H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x45: {
                 name: 'LD B L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x46: {
                 name: 'LD B [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.B, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.B, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x47: {
                 name: 'LD B A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.B, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.B, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x48: {
                 name: 'LD C B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x49: {
                 name: 'LD C C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4a: {
                 name: 'LD C D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4b: {
                 name: 'LD C E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4c: {
                 name: 'LD C H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4d: {
                 name: 'LD C L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4e: {
                 name: 'LD C [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.C, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.C, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x4f: {
                 name: 'LD C A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.C, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.C, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x50: {
                 name: 'LD D B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x51: {
                 name: 'LD D C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x52: {
                 name: 'LD D D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x53: {
                 name: 'LD D E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x54: {
                 name: 'LD D H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x55: {
                 name: 'LD D L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x56: {
                 name: 'LD D [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.D, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.D, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x57: {
                 name: 'LD D A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.D, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.D, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x58: {
                 name: 'LD E B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x59: {
                 name: 'LD E C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5a: {
                 name: 'LD E D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5b: {
                 name: 'LD E E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5c: {
                 name: 'LD E H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5d: {
                 name: 'LD E L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5e: {
                 name: 'LD E [HL]',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    () => {},
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.E, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.E, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x5f: {
                 name: 'LD E A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.E, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.E, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x60: {
                 name: 'LD H B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x61: {
                 name: 'LD H C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x62: {
                 name: 'LD H D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x63: {
                 name: 'LD H E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x64: {
                 name: 'LD H H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x65: {
                 name: 'LD H L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x66: {
                 name: 'LD H [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.H, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.H, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x67: {
                 name: 'LD H A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.H, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.H, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x68: {
                 name: 'LD L B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x69: {
                 name: 'LD L C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6a: {
                 name: 'LD L D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6b: {
                 name: 'LD L E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6c: {
                 name: 'LD L H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.H);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.H);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6d: {
                 name: 'LD L L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.L);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.L);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6e: {
                 name: 'LD L [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.L, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.L, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x6f: {
                 name: 'LD L A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.L, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.L, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x70: {
                 name: 'LD [HL] B',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.B, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.B, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x71: {
                 name: 'LD [HL] C',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.C, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.C, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x72: {
                 name: 'LD [HL] D',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.D, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.D, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x73: {
                 name: 'LD [HL] E',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.E, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.E, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x74: {
                 name: 'LD [HL] H',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.H, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.H, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x75: {
                 name: 'LD [HL] L',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.L, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.L, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x77: {
                 name: 'LD [HL] A',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.A, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDHLR8(dmg.registerFile.register16Bit.HL, dmg.registerFile.A, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x78: {
                 name: 'LD A B',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.B);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.B);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x79: {
                 name: 'LD A C',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.C);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.C);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7a: {
                 name: 'LD A D',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.D);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.D);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7b: {
                 name: 'LD A E',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.E);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.E);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7c: {
                 name: 'LD A, H',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.H);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.H);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7d: {
                 name: 'LD A, L',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.L);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.L);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7e: {
                 name: 'LD A, [HL]',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        LDR8HL(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
+                execute: (dmg: Gameboy) => {
+                    LDR8HL(dmg.registerFile.A, dmg.registerFile.register16Bit.HL, dmg.ram);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x7f: {
                 name: 'LD A A',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDR8R8(dmg.registerFile.A, dmg.registerFile.A);
+                execute: (dmg: Gameboy) => {
+                    LDR8R8(dmg.registerFile.A, dmg.registerFile.A);
 
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x06: {
                 name: 'LD B N',
                 cycles: 2,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.B, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.B, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x16: {
                 name: 'LD D N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.D, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.D, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x26: {
                 name: 'LD H, N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.H, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.H, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x36: {
                 name: 'LD [HL] N',
                 cycles: 3,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDHLN8(
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.getTempByte(),
-                            dmg.ram
-                        );
-                        dmg.registerFile.setTempByte(0);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDHLN8(
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.getTempByte(),
+                        dmg.ram
+                    );
+                    dmg.registerFile.setTempByte(0);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0x0e: {
                 name: 'LD C N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.C, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.C, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x1e: {
                 name: 'LD E N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.E, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.E, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x2e: {
                 name: 'LD L N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.L, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.L, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
             0x3e: {
                 name: 'LD A N',
                 cycles: 2,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDR8N8(dmg.registerFile.A, dmg.registerFile.getTempByte());
-                        dmg.registerFile.pointers.PC.increment();
-                        dmg.registerFile.setTempByte(0);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDR8N8(dmg.registerFile.A, dmg.registerFile.getTempByte());
+                    dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.setTempByte(0);
+                },
             },
 
             0xea: {
                 name: 'LD (NN), A',
                 cycles: 4,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
 
-                        dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.pointers.PC.increment();
 
-                        const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                        dmg.registerFile.setLowerByte(lb);
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+                    dmg.registerFile.setLowerByte(lb);
+                    // get upper byte
 
-                        dmg.registerFile.pointers.PC.increment();
+                    dmg.registerFile.pointers.PC.increment();
 
-                        const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                        dmg.registerFile.setUpperByte(ub);
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
-                        LDN16A(n, dmg.registerFile.A, dmg.ram);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+                    dmg.registerFile.setUpperByte(ub);
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    LDN16A(n, dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xfa: {
                 name: 'LD  A, (NN)',
                 cycles: 4,
                 length: 3,
-                execute: 
-                    (dmg: Gameboy) => {
-                        // get lower byte
+                execute: (dmg: Gameboy) => {
+                    // get lower byte
 
-                        dmg.registerFile.pointers.PC.increment();
-                        const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                        dmg.registerFile.setLowerByte(lb);
-                    },
-                    (dmg: Gameboy) => {
-                        // get upper byte
+                    dmg.registerFile.pointers.PC.increment();
+                    const lb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+                    dmg.registerFile.setLowerByte(lb);
+                    // get upper byte
 
-                        dmg.registerFile.pointers.PC.increment();
-                        const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                        dmg.registerFile.setUpperByte(ub);
-                    },
-                    (dmg: Gameboy) => {
-                        const n =
-                            (dmg.registerFile.getUpperByte() << 8) |
-                            dmg.registerFile.getLowerByte();
-                        LDAN16(dmg.registerFile.A, n, dmg.ram);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                    dmg.registerFile.pointers.PC.increment();
+                    const ub = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+                    dmg.registerFile.setUpperByte(ub);
+                    const n =
+                        (dmg.registerFile.getUpperByte() << 8) | dmg.registerFile.getLowerByte();
+                    LDAN16(dmg.registerFile.A, n, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xe0: {
                 name: 'LDH (n), A',
                 cycles: 3,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                        const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-                        dmg.registerFile.setTempByte(n);
-                    },
-                    (dmg: Gameboy) => {
-                        LDHN16A(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.setTempByte(0);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.PC.increment();
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+                    dmg.registerFile.setTempByte(n);
+                    LDHN16A(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.setTempByte(0);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xf0: {
                 name: 'LDH A, N',
                 cycles: 3,
                 length: 2,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const n = dmg.ram.getMemoryAt(
-                            dmg.registerFile.pointers.PC.getRegister() + 1
-                        );
-                        dmg.registerFile.setTempByte(n);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        LDHAN8(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.setTempByte(0);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister() + 1);
+                    dmg.registerFile.setTempByte(n);
+                    dmg.registerFile.pointers.PC.increment();
+                    LDHAN8(dmg.registerFile.getTempByte(), dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.setTempByte(0);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xe2: {
                 name: 'LDH (C), A',
                 cycles: 2,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDHCA(dmg.ram, dmg.registerFile.A, dmg.registerFile.C);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDHCA(dmg.ram, dmg.registerFile.A, dmg.registerFile.C);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xf2: {
                 name: 'LDH A, (C)',
                 cycles: 2,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        LDHAC(dmg.registerFile.C, dmg.registerFile.A, dmg.ram);
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    LDHAC(dmg.registerFile.C, dmg.registerFile.A, dmg.ram);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             // ROUTINE INSTRUCTIONS
             0xcd: {
@@ -2709,11 +2256,9 @@ export class CpuOpcodeRecord {
                 name: 'JP [HL]',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        JPHL(dmg.registerFile.register16Bit.HL, dmg.registerFile.pointers.PC);
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    JPHL(dmg.registerFile.register16Bit.HL, dmg.registerFile.pointers.PC);
+                },
             },
 
             0xc7: {
@@ -2768,23 +2313,19 @@ export class CpuOpcodeRecord {
                 name: 'CCF',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        CCF(dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    CCF(dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x37: {
                 name: 'SCF',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        SCF(dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    SCF(dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             //16bit arithmetic
@@ -2792,153 +2333,125 @@ export class CpuOpcodeRecord {
                 name: 'INC BC',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        INCR16(dmg.registerFile.register16Bit.BC);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    INCR16(dmg.registerFile.register16Bit.BC);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x13: {
                 name: 'INC DE',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        INCR16(dmg.registerFile.register16Bit.DE);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    INCR16(dmg.registerFile.register16Bit.DE);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x23: {
                 name: 'INC HL',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        INCR16(dmg.registerFile.register16Bit.HL);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    INCR16(dmg.registerFile.register16Bit.HL);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x33: {
                 name: 'INC SP',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        INCR16(dmg.registerFile.pointers.SP);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    INCR16(dmg.registerFile.pointers.SP);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x0b: {
                 name: 'DEC BC',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        DECR16(dmg.registerFile.register16Bit.BC);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    DECR16(dmg.registerFile.register16Bit.BC);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x1b: {
                 name: 'DEC DE',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        DECR16(dmg.registerFile.register16Bit.DE);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    DECR16(dmg.registerFile.register16Bit.DE);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x2b: {
                 name: 'DEC HL',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        DECR16(dmg.registerFile.register16Bit.HL);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    DECR16(dmg.registerFile.register16Bit.HL);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x3b: {
                 name: 'DEC SP',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        DECR16(dmg.registerFile.pointers.SP);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    DECR16(dmg.registerFile.pointers.SP);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x09: {
                 name: 'ADD HL BC',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ADDHLR16(
-                            dmg.registerFile.register16Bit.BC,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ADDHLR16(
+                        dmg.registerFile.register16Bit.BC,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x19: {
                 name: 'ADD HL, DE',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ADDHLR16(
-                            dmg.registerFile.register16Bit.DE,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ADDHLR16(
+                        dmg.registerFile.register16Bit.DE,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x29: {
                 name: 'ADD HL HL',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ADDHLR16(
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ADDHLR16(
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x39: {
                 name: 'ADD HL, SP',
                 cycles: 2,
                 length: 1,
-                execute: 
-           
-                    (dmg: Gameboy) => {
-                        ADDHLR16(
-                            dmg.registerFile.pointers.SP,
-                            dmg.registerFile.register16Bit.HL,
-                            dmg.registerFile.F
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    ADDHLR16(
+                        dmg.registerFile.pointers.SP,
+                        dmg.registerFile.register16Bit.HL,
+                        dmg.registerFile.F
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0xe8: {
@@ -2964,214 +2477,148 @@ export class CpuOpcodeRecord {
                 name: 'LD SP, HL',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.SP.setRegister(
-                            dmg.registerFile.register16Bit.HL.getRegister()
-                        );
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.SP.setRegister(
+                        dmg.registerFile.register16Bit.HL.getRegister()
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xc1: {
                 name: 'POP BC',
                 cycles: 3,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setLowerByte(lsb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setUpperByte(msb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const WZ =
-                            dmg.registerFile.getLowerByte() |
-                            (dmg.registerFile.getUpperByte() << 8);
-                        dmg.registerFile.register16Bit.BC.setRegister(WZ);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setLowerByte(lsb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setUpperByte(msb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const WZ =
+                        dmg.registerFile.getLowerByte() | (dmg.registerFile.getUpperByte() << 8);
+                    dmg.registerFile.register16Bit.BC.setRegister(WZ);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xd1: {
                 name: 'POP DE',
                 cycles: 3,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setLowerByte(lsb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setUpperByte(msb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const WZ =
-                            dmg.registerFile.getLowerByte() |
-                            (dmg.registerFile.getUpperByte() << 8);
-                        dmg.registerFile.register16Bit.DE.setRegister(WZ);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setLowerByte(lsb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setUpperByte(msb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const WZ =
+                        dmg.registerFile.getLowerByte() | (dmg.registerFile.getUpperByte() << 8);
+                    dmg.registerFile.register16Bit.DE.setRegister(WZ);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xe1: {
                 name: 'POP HL ',
                 cycles: 3,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setLowerByte(lsb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setUpperByte(msb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const WZ =
-                            dmg.registerFile.getLowerByte() |
-                            (dmg.registerFile.getUpperByte() << 8);
-                        dmg.registerFile.register16Bit.HL.setRegister(WZ);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setLowerByte(lsb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.setUpperByte(msb);
+                    dmg.registerFile.pointers.SP.increment();
+                    const WZ =
+                        dmg.registerFile.getLowerByte() | (dmg.registerFile.getUpperByte() << 8);
+                    dmg.registerFile.register16Bit.HL.setRegister(WZ);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xf1: {
                 name: 'POP AF ',
                 cycles: 3,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setLowerByte(lsb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
-                        dmg.registerFile.setUpperByte(msb);
-                        dmg.registerFile.pointers.SP.increment();
-                    },
-                    (dmg: Gameboy) => {
-                        const WZ =
-                            dmg.registerFile.getLowerByte() |
-                            (dmg.registerFile.getUpperByte() << 8);
-                        dmg.registerFile.register16Bit.AF.setRegister(WZ);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.pointers.SP.increment();
+                    const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+                    dmg.registerFile.pointers.SP.increment();
+                    const WZ = lsb | (msb << 8);
+                    dmg.registerFile.register16Bit.AF.setRegister(WZ);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xc5: {
                 name: 'PUSH BC ',
                 cycles: 4,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.B.getRegister()
-                        );
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.C.getRegister()
-                        );
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.B.getRegister()
+                    );
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.C.getRegister()
+                    );
+                },
             },
             0xd5: {
                 name: 'PUSH DE ',
                 cycles: 4,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.D.getRegister()
-                        );
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.E.getRegister()
-                        );
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.D.getRegister()
+                    );
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.E.getRegister()
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xe5: {
                 name: 'PUSH HL ',
                 cycles: 4,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.H.getRegister()
-                        );
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.L.getRegister()
-                        );
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.H.getRegister()
+                    );
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.L.getRegister()
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xf5: {
                 name: 'PUSH AF ',
                 cycles: 4,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.A.getRegister()
-                        );
-                        dmg.registerFile.pointers.SP.decrement();
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.ram.setMemoryAt(
-                            dmg.registerFile.pointers.SP.getRegister(),
-                            dmg.registerFile.F.getRegister()
-                        );
-                    },
-                    (dmg: Gameboy) => {
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.A.getRegister()
+                    );
+                    dmg.registerFile.pointers.SP.decrement();
+                    dmg.ram.setMemoryAt(
+                        dmg.registerFile.pointers.SP.getRegister(),
+                        dmg.registerFile.F.getRegister()
+                    );
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0xfb: {
                 name: 'Enable Interrupt (EI)',
@@ -3207,12 +2654,10 @@ export class CpuOpcodeRecord {
                 name: 'DAA',
                 cycles: 1,
                 length: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        DAA(dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    DAA(dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
 
             0x18: {
@@ -3226,45 +2671,37 @@ export class CpuOpcodeRecord {
                 name: 'RLCA',
                 length: 1,
                 cycles: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        RLCA(dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    RLCA(dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x17: {
                 name: 'RLA',
                 length: 1,
                 cycles: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        RLA(dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    RLA(dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x0f: {
                 name: 'RRCA',
                 length: 1,
                 cycles: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        RRCA(dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    RRCA(dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             0x1f: {
                 name: 'RRA',
                 length: 1,
                 cycles: 1,
-                execute: 
-                    (dmg: Gameboy) => {
-                        RRA(dmg.registerFile.A, dmg.registerFile.F);
-                        dmg.registerFile.pointers.PC.increment();
-                    },
-                
+                execute: (dmg: Gameboy) => {
+                    RRA(dmg.registerFile.A, dmg.registerFile.F);
+                    dmg.registerFile.pointers.PC.increment();
+                },
             },
             // not implemented - 0xd3, 0xe3, 0xe4, 0xf4, 0xdb, 0xeb, 0xec, 0xfc, 0xdd, 0xed, 0xfd
         };
