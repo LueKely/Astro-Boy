@@ -1,5 +1,4 @@
 import type { Gameboy } from '../Gameboy';
-
 import type { Cpu_Flag_Register } from './CPU_Flag_Register';
 import { ADDHLR16, DECR16, INCR16 } from './instructions/16bit_Arithmetic_Instructions';
 import {
