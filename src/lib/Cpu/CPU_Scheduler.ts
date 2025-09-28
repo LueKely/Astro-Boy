@@ -10,141 +10,86 @@ import type { IOpCodeEntry } from './types/OpcodeTypes';
 // OMA DMA?
 
 export class Cpu_Scheduler {
-  private dmg: Gameboy;
-  private machineCycle: Array<(dmg: Gameboy) => void> = [];
-  private opCodes: CpuOpcodeRecord;
-  private opCodesPrefixed = new CpuPrefixOpCodeRecord();
-  private interruptHandler: Interrupt_Handler;
-  currentOpcode: IOpCodeEntry;
+    private dmg: Gameboy;
+    private opCodes: CpuOpcodeRecord;
+    private opCodesPrefixed = new CpuPrefixOpCodeRecord();
+    private interruptHandler: Interrupt_Handler;
+    currentOpcode: IOpCodeEntry;
 
-  constructor(gameboy: Gameboy) {
-    this.dmg = gameboy;
-    this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
-    this.interruptHandler = new Interrupt_Handler(this.dmg);
-    this.currentOpcode = this.opCodes.get(this.readByte());
-  }
-
-  private readByte() {
-    return this.dmg.ram.getMemoryAt(
-      this.dmg.registers.pointers.PC.getRegister()
-    );
-  }
-
-  // PROBLEMS: something about fetching the currentOpcode and shit
-  private schedule() {
-    if (this.dmg.registers.STOP) {
-      this.stopHandler();
-      return;
+    constructor(gameboy: Gameboy) {
+        this.dmg = gameboy;
+        this.opCodes = new CpuOpcodeRecord(this.dmg.registerFile.F);
+        this.interruptHandler = new Interrupt_Handler(this.dmg);
+        this.currentOpcode = this.opCodes.get(this.readByte());
     }
-    if (this.dmg.registers.HALT) {
-      this.haltHandler();
-      return;
+
+    private readByte() {
+        return this.dmg.ram.getMemoryAt(this.dmg.registerFile.pointers.PC.getRegister());
     }
-    if (
-      this.dmg.registers.IME.getValue() &&
-      this.dmg.ram.isAllowedToInterrupt()
-    ) {
-      console.log('INTERRUPT IS TRIGGERED');
-      const interruptCycles = this.interruptHandler.createCycles();
-      interruptCycles.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
-    } else {
-      // for logging
-      // this.dmg.log();
 
-      // console.log(
-      // 	'The Current Opcode is:' +
-      // 		this.currentOpcode.name +
-      // 		' key: 0x' +
-      // 		this.readByte().toString(16)
-      // );
-
-      // for debug
-      this.dmg.addToList(
-        this.currentOpcode.name + ' 0x' + this.readByte().toString(16)
-      );
-
-      this.currentOpcode.jobs.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
+    private schedule() {
+        if (this.dmg.registerFile.STOP) {
+            this.stopHandler();
+            return;
+        }
+        if (this.dmg.registerFile.HALT) {
+            this.haltHandler();
+            return;
+        }
+        if (this.dmg.registerFile.IME && this.dmg.ram.isAllowedToInterrupt()) {
+            console.log('INTERRUPT IS TRIGGERED');
+            const interruptCycles = this.interruptHandler.createCycles();
+            this.currentOpcode = interruptCycles;
+        } else {
+            // for debug
+            this.dmg.addToList(this.currentOpcode.name + ' 0x' + this.readByte().toString(16));
+            this.fetchOpcode();
+        }
     }
-  }
-  private haltHandler() {
-    if (
-      this.dmg.registers.IME.getValue() &&
-      this.dmg.ram.isAllowedToInterrupt()
-    ) {
-      const interruptCycles = this.interruptHandler.createCycles();
-      this.dmg.registers.HALT = false;
 
-      interruptCycles.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
-    } else {
-      this.fetchOpcode();
-      this.currentOpcode.jobs.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
+    private haltHandler() {
+        if (this.dmg.registerFile.IME && this.dmg.ram.isAllowedToInterrupt()) {
+            const interruptCycles = this.interruptHandler.createCycles();
+            this.dmg.registerFile.HALT = false;
+            this.currentOpcode = interruptCycles;
+        } else {
+            this.fetchOpcode();
+        }
     }
-  }
-  private stopHandler() {
-    if (this.dmg.registers.IME.getValue() && this.dmg.ram.stopValidation()) {
-      const interruptCycles = this.interruptHandler.createCycles();
-      this.dmg.registers.STOP = false;
-
-      interruptCycles.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
-    } else {
-      this.fetchOpcode();
-      this.currentOpcode.jobs.forEach((entry) => {
-        this.machineCycle.push(entry);
-      });
+    private stopHandler() {
+        if (this.dmg.registerFile.IME && this.dmg.ram.stopValidation()) {
+            const interruptCycles = this.interruptHandler.createCycles();
+            this.dmg.registerFile.STOP = false;
+            this.currentOpcode = interruptCycles;
+        } else {
+            this.fetchOpcode();
+        }
     }
-  }
 
-  private fetchOpcode() {
-    if (this.readByte() == 0xcb) {
-      if (this.dmg.registers.HALT_BUG) {
-        console.log('BUG triggered');
-
-        this.dmg.registers.HALT_BUG = false;
-      } else {
-        this.dmg.registers.pointers.PC.increment();
-      }
-
-      this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
-    } else {
-      // this might be redundant
-      // this.opCodes = new CpuOpcodeRecord(this.dmg.registers.register.F);
-      this.currentOpcode = this.opCodes.get(this.readByte());
+    private fetchOpcode() {
+        if (this.readByte() == 0xcb) {
+            this.dmg.registerFile.pointers.PC.increment();
+            this.currentOpcode = this.opCodesPrefixed.get(this.readByte());
+        } else {
+            this.currentOpcode = this.opCodes.get(this.readByte());
+        }
     }
-  }
 
-  tick() {
-    try {
-      if (this.machineCycle.length == 0) {
-        this.fetchOpcode();
-        this.schedule();
-      }
-      const job = this.machineCycle.shift();
-      if (job) {
-        job(this.dmg);
-      }
-    } catch {
-      const notImplemented = this.dmg.ram.getMemoryAt(
-        this.dmg.registers.pointers.PC.getRegister()
-      );
-      this.dmg.log();
+    tick() {
+        try {
+            this.schedule();
+            this.currentOpcode.execute(this.dmg);
+        } catch {
+            const notImplemented = this.dmg.ram.getMemoryAt(
+                this.dmg.registerFile.pointers.PC.getRegister()
+            );
+            this.dmg.log();
 
-      console.log('Not Implemented: ', notImplemented);
+            console.log('Not Implemented: ', notImplemented);
 
-      throw new Error(
-        'OP CODE NOT Implemented ' + notImplemented + ' Please Check LOGS'
-      );
-    } finally {
-      // this.dmg.log();
+            throw new Error('OP CODE NOT Implemented ' + notImplemented + ' Please Check LOGS');
+        } finally {
+            // this.dmg.log();
+        }
     }
-  }
 }
