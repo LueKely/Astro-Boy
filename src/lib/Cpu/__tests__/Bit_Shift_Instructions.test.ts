@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { Cpu_Register_File } from '../Register_File';
+import { Register_File } from '../Register_File';
 import { Ram } from '../../Ram/Ram';
 import {
     RLA,
@@ -30,7 +30,7 @@ class TestCPU {
 
     constructor() {
         this.ram = new Ram();
-        this.cpu = new Cpu_Register_File();
+        this.cpu = new Register_File();
     }
 
     setHLPointTest(value: number) {
@@ -47,7 +47,7 @@ class TestCPU {
 describe('RL r8', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b1000_0000);
         RLR8(B, F);
         expect(B.getRegister()).toBe(0b0000_0000);
@@ -55,7 +55,7 @@ describe('RL r8', () => {
     });
     test('the value of the register should be 1 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b1000_0000);
         F.setCYFlag();
 
@@ -67,7 +67,7 @@ describe('RL r8', () => {
 
     test('the value of the register should be 5 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b1000_0010);
         F.setCYFlag();
         RLR8(B, F);
@@ -79,7 +79,7 @@ describe('RL r8', () => {
 describe('RLA r8', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1000_0000);
         RLA(A, F);
         expect(A.getRegister()).toBe(0b0000_0000);
@@ -87,7 +87,7 @@ describe('RLA r8', () => {
     });
     test('the value of the register should be 1 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1000_0000);
         F.setCYFlag();
         RLA(A, F);
@@ -98,7 +98,7 @@ describe('RLA r8', () => {
 
     test('the value of the register should be 5 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1000_0010);
         F.setCYFlag();
         RLA(A, F);
@@ -110,7 +110,7 @@ describe('RLA r8', () => {
 describe('RL [HL]', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
 
@@ -120,7 +120,7 @@ describe('RL [HL]', () => {
     });
     test('the value of the register should be 1 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
         F.setCYFlag();
@@ -132,7 +132,7 @@ describe('RL [HL]', () => {
 
     test('the value of the register should be 3 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
         F.setCYFlag();
@@ -146,7 +146,7 @@ describe('RL [HL]', () => {
 describe('RLC r8', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b0000_0000);
         RLCR8(B, F);
         expect(B.getRegister()).toBe(0b0000_0000);
@@ -154,7 +154,7 @@ describe('RLC r8', () => {
     });
     test('the value of the register should be 1 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b1000_0000);
 
         RLCR8(B, F);
@@ -165,7 +165,7 @@ describe('RLC r8', () => {
 
     test('the value of the register should be 5 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { B, F } = testCPU.cpu.register;
+        const { B, F } = testCPU.cpu;
         B.setRegister(0b1000_0010);
         RLCR8(B, F);
         expect(B.getRegister()).toBe(0b0000_0101);
@@ -176,7 +176,7 @@ describe('RLC r8', () => {
 describe('RLC [HL]', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0000);
 
@@ -186,7 +186,7 @@ describe('RLC [HL]', () => {
     });
     test('the value of the register should be 1 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
 
@@ -197,7 +197,7 @@ describe('RLC [HL]', () => {
 
     test('the value of the register should be 3 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
 
@@ -210,7 +210,7 @@ describe('RLC [HL]', () => {
 describe('RLCA r8', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0000);
         RLCA(A, F);
         expect(A.getRegister()).toBe(0b0000_0000);
@@ -218,7 +218,7 @@ describe('RLCA r8', () => {
     });
     test('the value of the register should be 1 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1000_0000);
 
         RLCA(A, F);
@@ -229,7 +229,7 @@ describe('RLCA r8', () => {
 
     test('the value of the register should be 5 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1000_0010);
         RLCA(A, F);
         expect(A.getRegister()).toBe(0b0000_0101);
@@ -240,7 +240,7 @@ describe('RLCA r8', () => {
 describe('RR r8', () => {
     test('value of register should be 0, CY and Z flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
         RRR8(A, F);
         expect(A.getRegister()).toBe(0b0000_0000);
@@ -248,7 +248,7 @@ describe('RR r8', () => {
     });
     test('value of register should be 129, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
         F.setCYFlag();
         RRR8(A, F);
@@ -257,7 +257,7 @@ describe('RR r8', () => {
     });
     test('value of register should be 1, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
 
         RRR8(A, F);
@@ -269,7 +269,7 @@ describe('RR r8', () => {
 describe('RR [HL]', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0000);
 
@@ -280,7 +280,7 @@ describe('RR [HL]', () => {
 
     test('the value of the register should be 192 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
         F.setCYFlag();
@@ -291,7 +291,7 @@ describe('RR [HL]', () => {
 
     test('the value of the register should be 192 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
         F.setCYFlag();
@@ -304,7 +304,7 @@ describe('RR [HL]', () => {
 describe('RR A', () => {
     test('value of register should be 0, CY is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
         RRA(A, F);
         expect(A.getRegister()).toBe(0b0000_0000);
@@ -312,7 +312,7 @@ describe('RR A', () => {
     });
     test('value of register should be 129, CY is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
         F.setCYFlag();
         RRA(A, F);
@@ -321,7 +321,7 @@ describe('RR A', () => {
     });
     test('value of register should be 1, CY is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
 
         RRA(A, F);
@@ -333,7 +333,7 @@ describe('RR A', () => {
 describe('RRC r8', () => {
     test('value of register should be 128, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
         RRCR8(A, F);
         expect(A.getRegister()).toBe(0b1000_0000);
@@ -341,7 +341,7 @@ describe('RRC r8', () => {
     });
     test('value of register should be 129, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
         F.setCYFlag();
         RRCR8(A, F);
@@ -350,7 +350,7 @@ describe('RRC r8', () => {
     });
     test('value of register should be 4, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_1000);
 
         RRCR8(A, F);
@@ -362,7 +362,7 @@ describe('RRC r8', () => {
 describe('RRC [HL]', () => {
     test('Results Should be zero and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0000);
 
@@ -373,7 +373,7 @@ describe('RRC [HL]', () => {
 
     test('the value of the register should be 64 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
         RRCHL(HL, testCPU.ram, F);
@@ -383,7 +383,7 @@ describe('RRC [HL]', () => {
 
     test('the value of the register should be 192 when CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
         RRCHL(HL, testCPU.ram, F);
@@ -395,7 +395,7 @@ describe('RRC [HL]', () => {
 describe('RRC A', () => {
     test('value of register should be 128, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
         RRCA(A, F);
         expect(A.getRegister()).toBe(0b1000_0000);
@@ -403,7 +403,7 @@ describe('RRC A', () => {
     });
     test('value of register should be 129, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0011);
         F.setCYFlag();
         RRCA(A, F);
@@ -412,7 +412,7 @@ describe('RRC A', () => {
     });
     test('value of register should be 4, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_1000);
 
         RRCA(A, F);
@@ -424,7 +424,7 @@ describe('RRC A', () => {
 describe('SLA r8', () => {
     test('value of register should be 232, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0111_0100);
         SLAR8(A, F);
         expect(A.getRegister()).toBe(0b1110_1000);
@@ -432,7 +432,7 @@ describe('SLA r8', () => {
     });
     test('value of register should be 74, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1010_0101);
         SLAR8(A, F);
         expect(A.getRegister()).toBe(0b0100_1010);
@@ -440,7 +440,7 @@ describe('SLA r8', () => {
     });
     test('value of register should be 4, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_1000);
 
         SLAR8(A, F);
@@ -452,7 +452,7 @@ describe('SLA r8', () => {
 describe('SLA [HL]', () => {
     test('Results Should be 116 and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0111_0100);
 
@@ -462,7 +462,7 @@ describe('SLA [HL]', () => {
     });
     test('the value of the register should be 0 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
 
@@ -473,7 +473,7 @@ describe('SLA [HL]', () => {
 
     test('the value of the register should be 129 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
 
@@ -486,7 +486,7 @@ describe('SLA [HL]', () => {
 describe('SRA r8', () => {
     test('value of register should be 232, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0111_0100);
         SRAR8(A, F);
         expect(A.getRegister()).toBe(0b0011_1010);
@@ -494,7 +494,7 @@ describe('SRA r8', () => {
     });
     test('value of register should be 74, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1010_0101);
         SRAR8(A, F);
         expect(A.getRegister()).toBe(0b1101_0010);
@@ -502,7 +502,7 @@ describe('SRA r8', () => {
     });
     test('value of register should be 4, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
 
         SRAR8(A, F);
@@ -514,7 +514,7 @@ describe('SRA r8', () => {
 describe('SRA [HL]', () => {
     test('Results Should be 116 and flag zero should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0111_0100);
 
@@ -524,7 +524,7 @@ describe('SRA [HL]', () => {
     });
     test('the value of the register should be 0 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1010_0101);
 
@@ -535,7 +535,7 @@ describe('SRA [HL]', () => {
 
     test('the value of the register should be 129 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0001);
 
@@ -548,7 +548,7 @@ describe('SRA [HL]', () => {
 describe('SRL r8', () => {
     test('value of register should be 58, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0111_0100);
         SRLR8(A, F);
         expect(A.getRegister()).toBe(0b0011_1010);
@@ -556,7 +556,7 @@ describe('SRL r8', () => {
     });
     test('value of register should be 82, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1010_0101);
         SRLR8(A, F);
         expect(A.getRegister()).toBe(0b0101_0010);
@@ -564,7 +564,7 @@ describe('SRL r8', () => {
     });
     test('value of register should be 0, CY and Z flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0001);
 
         SRLR8(A, F);
@@ -576,7 +576,7 @@ describe('SRL r8', () => {
 describe('SRL [HL]', () => {
     test('Results Should be 254 and no flag should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b11111110);
 
@@ -586,7 +586,7 @@ describe('SRL [HL]', () => {
     });
     test('the value of the register should be 82 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1010_0101);
 
@@ -597,7 +597,7 @@ describe('SRL [HL]', () => {
 
     test('the value of the register should be 0 and Z & CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0001);
 
@@ -610,7 +610,7 @@ describe('SRL [HL]', () => {
 describe('SWAP r8', () => {
     test('value of register should be 58, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0111_0100);
         SWAPR8(A, F);
         expect(A.getRegister()).toBe(0b0100_0111);
@@ -618,7 +618,7 @@ describe('SWAP r8', () => {
     });
     test('value of register should be 74, CY flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b1010_0101);
         SWAPR8(A, F);
         expect(A.getRegister()).toBe(0b0101_1010);
@@ -626,7 +626,7 @@ describe('SWAP r8', () => {
     });
     test('value of register should be 4, no flag is raised ', () => {
         const testCPU = new TestCPU();
-        const { A, F } = testCPU.cpu.register;
+        const { A, F } = testCPU.cpu;
         A.setRegister(0b0000_0000);
 
         SWAPR8(A, F);
@@ -638,7 +638,7 @@ describe('SWAP r8', () => {
 describe('SWAP [HL]', () => {
     test('Results Should be 254 and no flag should raise', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1111_1110);
 
@@ -648,7 +648,7 @@ describe('SWAP [HL]', () => {
     });
     test('the value of the register should be 82 and CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1010_0101);
 
@@ -659,7 +659,7 @@ describe('SWAP [HL]', () => {
 
     test('the value of the register should be 0 and Z & CYFlag is raised', () => {
         const testCPU = new TestCPU();
-        const { F } = testCPU.cpu.register;
+        const { F } = testCPU.cpu;
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b0000_0000);
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { Cpu_Register_File } from '../Register_File';
+import { Register_File } from '../Register_File';
 import {
     ANDAHL,
     ANDAN8,
@@ -16,8 +16,8 @@ import { Ram } from '../../Ram/Ram';
 
 describe('Functionalities of AND A, R8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b0000_0000);
         C.setRegister(0b0000_0000);
@@ -28,8 +28,8 @@ describe('Functionalities of AND A, R8', () => {
         expect(F.getRegister()).toBe(0b1010_0000);
     });
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b1111_1111);
         C.setRegister(0b0000_0000);
@@ -40,8 +40,8 @@ describe('Functionalities of AND A, R8', () => {
         expect(F.getRegister()).toBe(0b1010_0000);
     });
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b0000_1111);
         C.setRegister(0b0000_0000);
@@ -53,8 +53,8 @@ describe('Functionalities of AND A, R8', () => {
     });
 
     test('the value should be 0b0000_11111 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b10101_1111);
         C.setRegister(0b0000_1111);
@@ -68,8 +68,8 @@ describe('Functionalities of AND A, R8', () => {
 
 describe('Functionalities of AND A, [HL]', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -83,8 +83,8 @@ describe('Functionalities of AND A, [HL]', () => {
         expect(F.getRegister()).toBe(0b1010_0000);
     });
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -99,8 +99,8 @@ describe('Functionalities of AND A, [HL]', () => {
     });
 
     test('the value should be 0b0000_11111 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -117,8 +117,8 @@ describe('Functionalities of AND A, [HL]', () => {
 
 describe('Functionalities of AND A, N8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b0000_0000);
 
@@ -128,8 +128,8 @@ describe('Functionalities of AND A, N8', () => {
         expect(F.getRegister()).toBe(0b1010_0000);
     });
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1111_1111);
 
@@ -139,8 +139,8 @@ describe('Functionalities of AND A, N8', () => {
         expect(F.getRegister()).toBe(0b1010_0000);
     });
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b0000_1111);
 
@@ -151,8 +151,8 @@ describe('Functionalities of AND A, N8', () => {
     });
 
     test('the value should be 0b0000_11111 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b10101_1111);
 
@@ -165,8 +165,8 @@ describe('Functionalities of AND A, N8', () => {
 
 describe('Tests the functions of CPL', () => {
     test('The value 1111_0000 should be 0000_1111; N and H flags should raise', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1111_0000);
         CPL(A, F);
@@ -177,8 +177,8 @@ describe('Tests the functions of CPL', () => {
 
 describe('Tests the fucntionality of OR A,R8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b0000_0000);
         C.setRegister(0b0000_0000);
@@ -190,8 +190,8 @@ describe('Tests the fucntionality of OR A,R8', () => {
     });
 
     test('the value should be 144 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b1000_0000);
         C.setRegister(0b0001_0000);
@@ -205,8 +205,8 @@ describe('Tests the fucntionality of OR A,R8', () => {
 
 describe('Functionalities of OR A, [HL]', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -220,8 +220,8 @@ describe('Functionalities of OR A, [HL]', () => {
         expect(F.getRegister()).toBe(0b1000_0000);
     });
     test('the value should be 256 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -238,8 +238,8 @@ describe('Functionalities of OR A, [HL]', () => {
 
 describe('Tests the fucntionality of OR A,N8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b0000_0000);
 
@@ -250,8 +250,8 @@ describe('Tests the fucntionality of OR A,N8', () => {
     });
 
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1111_1111);
 
@@ -262,8 +262,8 @@ describe('Tests the fucntionality of OR A,N8', () => {
     });
 
     test('the value should be 144 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1000_0000);
 
@@ -276,8 +276,8 @@ describe('Tests the fucntionality of OR A,N8', () => {
 
 describe('Tests the fucntionality of XOR A,R8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b0000_0000);
         C.setRegister(0b0000_0000);
@@ -289,8 +289,8 @@ describe('Tests the fucntionality of XOR A,R8', () => {
     });
 
     test('the value should be 144 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b1000_0000);
         C.setRegister(0b0001_0000);
@@ -302,8 +302,8 @@ describe('Tests the fucntionality of XOR A,R8', () => {
     });
 
     test('the value should be 128 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, C, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, C, F } = CPU;
 
         A.setRegister(0b1001_0000);
         C.setRegister(0b0001_0000);
@@ -317,8 +317,8 @@ describe('Tests the fucntionality of XOR A,R8', () => {
 
 describe('Functionalities of XOR A, [HL]', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -332,8 +332,8 @@ describe('Functionalities of XOR A, [HL]', () => {
         expect(F.getRegister()).toBe(0b1000_0000);
     });
     test('the value should be 95 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         const { HL } = CPU.register16Bit;
         const dummyRam = new Ram();
 
@@ -350,8 +350,8 @@ describe('Functionalities of XOR A, [HL]', () => {
 
 describe('Tests the fucntionality of XOR A,N8', () => {
     test('the value should be zero and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b0000_0000);
 
@@ -362,8 +362,8 @@ describe('Tests the fucntionality of XOR A,N8', () => {
     });
 
     test('the value should be 144 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1000_0000);
 
@@ -374,8 +374,8 @@ describe('Tests the fucntionality of XOR A,N8', () => {
     });
 
     test('the value should be 128 and the flag value should correspond', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
 
         A.setRegister(0b1001_0000);
 

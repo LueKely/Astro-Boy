@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { Cpu_Register_File } from '../Register_File';
+import { Register_File } from '../Register_File';
 import {
     BITU3HL,
     BITU3R8,
@@ -12,8 +12,8 @@ import { Ram } from '../../Ram/Ram';
 
 describe('Tests the BIT U3, R8 funciton, Flag should be 0b1010_000', () => {
     test('u3 is 1 and R8 is 1', () => {
-        const CPU_Register = new Cpu_Register_File();
-        const { B, F } = CPU_Register.register;
+        const CPU_Register = new Register_File();
+        const { B, F } = CPU_Register;
 
         B.setRegister(1);
         const u3 = 1;
@@ -24,8 +24,8 @@ describe('Tests the BIT U3, R8 funciton, Flag should be 0b1010_000', () => {
     });
 
     test('u3 is 1 and R8 is 3, Flag should be 0b0010_000', () => {
-        const CPU_Register = new Cpu_Register_File();
-        const { B, F } = CPU_Register.register;
+        const CPU_Register = new Register_File();
+        const { B, F } = CPU_Register;
 
         B.setRegister(3);
         const u3 = 1;
@@ -38,9 +38,9 @@ describe('Tests the BIT U3, R8 funciton, Flag should be 0b1010_000', () => {
 
 describe('Tests the BIT U3, [HL] funciton, Flag should be 0b1010_000', () => {
     test('u3 is 1 and [HL] is 1', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
-        const { F } = CPU.register;
+        const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(1);
         ram.setMemoryAt(HL.getRegister(), 1);
@@ -52,9 +52,9 @@ describe('Tests the BIT U3, [HL] funciton, Flag should be 0b1010_000', () => {
     });
 
     test('u3 is 1 and R8 is 3, Flag should be 0b0010_000', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
-        const { F } = CPU.register;
+        const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(3);
         ram.setMemoryAt(HL.getRegister(), 3);
@@ -68,8 +68,8 @@ describe('Tests the BIT U3, [HL] funciton, Flag should be 0b1010_000', () => {
 
 describe('Test the RES U3, r8', () => {
     test('turn the bit 3 to 0', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         A.setRegister(0b1111_1111);
         const out = 0b1111_0111;
         const u3 = 3;
@@ -79,8 +79,8 @@ describe('Test the RES U3, r8', () => {
     });
 
     test('turn the bit 7 to 0', () => {
-        const CPU = new Cpu_Register_File();
-        const { A, F } = CPU.register;
+        const CPU = new Register_File();
+        const { A, F } = CPU;
         A.setRegister(0b1111_1111);
         const out = 0b1111_0111;
         const u3 = 7;
@@ -92,9 +92,9 @@ describe('Test the RES U3, r8', () => {
 
 describe('Tests the RES U3, [HL] function', () => {
     test('turn bit 3 to 0', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
-        const { F } = CPU.register;
+        const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_1111);
         ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
@@ -106,9 +106,9 @@ describe('Tests the RES U3, [HL] function', () => {
     });
 
     test('turn bit 7 to 0', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
-        const { F } = CPU.register;
+        const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_1111);
         ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
@@ -122,8 +122,8 @@ describe('Tests the RES U3, [HL] function', () => {
 
 describe('Test the SET U3, r8', () => {
     test('turn the bit 3 to 1', () => {
-        const CPU = new Cpu_Register_File();
-        const { A } = CPU.register;
+        const CPU = new Register_File();
+        const { A } = CPU;
         A.setRegister(0b1111_0111);
         const out = 0b000_1000;
         const u3 = 3;
@@ -133,8 +133,8 @@ describe('Test the SET U3, r8', () => {
     });
 
     test('turn the bit 7 to 0', () => {
-        const CPU = new Cpu_Register_File();
-        const { A } = CPU.register;
+        const CPU = new Register_File();
+        const { A } = CPU;
         A.setRegister(0b0111_1111);
         const u3 = 7;
 
@@ -145,7 +145,7 @@ describe('Test the SET U3, r8', () => {
 
 describe('Tests the SET U3, [HL] function', () => {
     test('turn bit 3 to 1', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_0111);
@@ -158,7 +158,7 @@ describe('Tests the SET U3, [HL] function', () => {
     });
 
     test('turn bit 7 to 0', () => {
-        const CPU = new Cpu_Register_File();
+        const CPU = new Register_File();
         const ram = new Ram();
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b0111_1111);
