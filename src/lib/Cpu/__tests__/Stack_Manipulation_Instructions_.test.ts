@@ -9,7 +9,7 @@ describe('PUSH R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { B, C } = gameboy;
+        const { B, C } = gameboy.registerFile;
 
         B.setRegister(0x12);
         C.setRegister(0x34);
@@ -17,9 +17,6 @@ describe('PUSH R16', () => {
         gameboy.ram.setMemoryAt(0x100, 0xc5);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffc);
@@ -33,7 +30,7 @@ describe('PUSH R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { D, E } = gameboy;
+        const { D, E } = gameboy.registerFile;
 
         D.setRegister(0x12);
         E.setRegister(0x34);
@@ -41,9 +38,6 @@ describe('PUSH R16', () => {
         gameboy.ram.setMemoryAt(0x100, 0xd5);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffc);
@@ -59,7 +53,7 @@ describe('PUSH R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { H, L } = gameboy;
+        const { H, L } = gameboy.registerFile;
 
         H.setRegister(0x55);
         L.setRegister(0xaa);
@@ -67,9 +61,6 @@ describe('PUSH R16', () => {
         gameboy.ram.setMemoryAt(0x100, 0xe5);
         gameboy.registerFile.pointers.SP.setRegister(0x0002);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
@@ -86,7 +77,7 @@ describe('PUSH R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { A, F } = gameboy;
+        const { A, F } = gameboy.registerFile;
 
         A.setRegister(0xff);
         F.setRegister(0xff);
@@ -95,10 +86,6 @@ describe('PUSH R16', () => {
         gameboy.registerFile.pointers.SP.setRegister(0xc000);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xbffe);
         expect(gameboy.ram.getMemoryAt(0xbfff)).toBe(0xff);
         expect(gameboy.ram.getMemoryAt(0xbffe)).toBe(0xff);
@@ -115,15 +102,13 @@ describe('POP R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { B, C } = gameboy;
+        const { B, C } = gameboy.registerFile;
 
         gameboy.ram.setMemoryAt(0x100, 0xc1);
         gameboy.registerFile.pointers.SP.setRegister(0xfffc);
         gameboy.ram.setMemoryAt(0xfffc, 0x34);
         gameboy.ram.setMemoryAt(0xfffd, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);
@@ -138,15 +123,13 @@ describe('POP R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { D, E } = gameboy;
+        const { D, E } = gameboy.registerFile;
 
         gameboy.ram.setMemoryAt(0x100, 0xd1);
         gameboy.registerFile.pointers.SP.setRegister(0xd000);
         gameboy.ram.setMemoryAt(0xd000, 0xab);
         gameboy.ram.setMemoryAt(0xd001, 0xcd);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xd002);
@@ -161,15 +144,13 @@ describe('POP R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { D, E } = gameboy;
+        const { D, E } = gameboy.registerFile;
 
         gameboy.ram.setMemoryAt(0x100, 0xd1);
         gameboy.registerFile.pointers.SP.setRegister(0xd000);
         gameboy.ram.setMemoryAt(0xd000, 0xab);
         gameboy.ram.setMemoryAt(0xd001, 0xcd);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xd002);
@@ -184,7 +165,7 @@ describe('POP R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { H, L } = gameboy;
+        const { H, L } = gameboy.registerFile;
 
         gameboy.ram.setMemoryAt(0x100, 0xe1);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -195,13 +176,11 @@ describe('POP R16', () => {
         L.setRegister(0xaa);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
         expect(H.getRegister()).toBe(0x80);
         expect(L.getRegister()).toBe(0x00);
-        expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x8000);
+        expect(gameboy.registerFile.register16Bit.HL.getRegister()).toBe(0x8000);
     });
 
     test('POP AF', () => {
@@ -211,7 +190,7 @@ describe('POP R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { A, F } = gameboy;
+        const { A, F } = gameboy.registerFile;
 
         gameboy.ram.setMemoryAt(0x100, 0xf1);
         gameboy.registerFile.pointers.SP.setRegister(0xd000);
@@ -219,9 +198,6 @@ describe('POP R16', () => {
         gameboy.ram.setMemoryAt(0xd001, 0xcd);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xd002);
         expect(A.getRegister()).toBe(0xcd);
         expect(F.getRegister()).toBe(0xab);
@@ -241,10 +217,6 @@ describe('LDNNSP', () => {
         gameboy.ram.setMemoryAt(0x151, 0x34);
         gameboy.ram.setMemoryAt(0x152, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.ram.getMemoryAt(0x1234)).toBe(0xcd);
@@ -268,10 +240,8 @@ describe('LD HL, SP+e', () => {
         gameboy.ram.setMemoryAt(0x151, 0x10);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
-        expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x000);
+        expect(gameboy.registerFile.register16Bit.HL.getRegister()).toBe(0x000);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfff0);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x152);
         expect(F.getCYFlag()).toBe(1);
@@ -291,10 +261,8 @@ describe('LD HL, SP+e', () => {
         gameboy.ram.setMemoryAt(0x2001, 0xf0);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
-        expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x00f0);
+        expect(gameboy.registerFile.register16Bit.HL.getRegister()).toBe(0x00f0);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0100);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x2002);
         expect(F.getCYFlag()).toBe(0);
@@ -314,10 +282,8 @@ describe('LD HL, SP+e', () => {
         gameboy.ram.setMemoryAt(0x3001, 0x00);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
-        expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x1234);
+        expect(gameboy.registerFile.register16Bit.HL.getRegister()).toBe(0x1234);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x01234);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3002);
         expect(F.getCYFlag()).toBe(0);
@@ -337,10 +303,7 @@ describe('LD HL, SP+e', () => {
         gameboy.ram.setMemoryAt(0x3001, 0x01);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
-        expect(gameboy.registers.register16Bit.HL.getRegister()).toBe(0x100);
+        expect(gameboy.registerFile.register16Bit.HL.getRegister()).toBe(0x100);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x00ff);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3002);
         expect(F.getCYFlag()).toBe(1);
@@ -361,10 +324,6 @@ describe('ADD SP, e', () => {
         gameboy.ram.setMemoryAt(0x3001, 0x01);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x100);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3002);
         expect(F.getCYFlag()).toBe(1);
@@ -384,10 +343,6 @@ describe('ADD SP, e', () => {
         gameboy.ram.setMemoryAt(0x3001, 0x00);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3002);
         expect(F.getCYFlag()).toBe(0);
@@ -407,10 +362,6 @@ describe('ADD SP, e', () => {
         gameboy.ram.setMemoryAt(0x3001, 0xfb);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3002);
         expect(F.getCYFlag()).toBe(1);
@@ -435,10 +386,6 @@ describe('INC and DEC SP', () => {
         gameboy.ram.setMemoryAt(0x3003, 0x33);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0005);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3004);
     });

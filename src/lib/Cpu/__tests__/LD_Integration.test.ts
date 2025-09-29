@@ -38,8 +38,8 @@ describe('lD R16', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { HL } = gameboy.registers.register16Bit;
-        const { A } = gameboy;
+        const { HL } = gameboy.registerFile.register16Bit;
+        const { A } = gameboy.registerFile;
 
         const targetValue = 0x10;
         const targetPointer = 0xff;
@@ -63,7 +63,7 @@ describe('LD R8, R8', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { B, C, D, E, F, H, L } = gameboy;
+        const { B, C, D, E, F, H, L } = gameboy.registerFile;
 
         const targetValue = 0x10;
 
@@ -85,8 +85,8 @@ describe('LD R8, [HL]', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        const { B, C, D, E, F, H, L } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { B, C, D, E, F, H, L } = gameboy.registerFile;
+        const { HL } = gameboy.registerFile.register16Bit;
         const targetValue = 0x10;
         HL.setRegister(0xff);
 

@@ -92,7 +92,7 @@ describe('DAA', () => {
                 const gameboy = new Gameboy(dummyRom);
                 gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-                const { A, F } = gameboy;
+                const { A, F } = gameboy.registerFile;
 
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
@@ -120,7 +120,7 @@ describe('DAA', () => {
                 const gameboy = new Gameboy(dummyRom);
                 gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-                const { A, F } = gameboy;
+                const { A, F } = gameboy.registerFile;
 
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
@@ -148,7 +148,7 @@ describe('DAA', () => {
                 const gameboy = new Gameboy(dummyRom);
                 gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-                const { A, F } = gameboy;
+                const { A, F } = gameboy.registerFile;
 
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
@@ -189,7 +189,7 @@ describe('Stop', () => {
 
         gameboy.scheduler.tick();
 
-        expect(gameboy.registers.STOP).toBe(true);
+        expect(gameboy.registerFile.STOP).toBe(true);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
     });
 });

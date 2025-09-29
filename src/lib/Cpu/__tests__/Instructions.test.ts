@@ -21,8 +21,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(gameboy.registerFile.register16Bit.BC.getRegister()).toBe(0x1234);
@@ -38,7 +36,6 @@ describe('Opcodes non prefix', () => {
         gameboy.registerFile.register16Bit.BC.setRegister(0x11);
 
         gameboy.ram.setMemoryAt(0x100, 0x02);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -91,7 +88,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x101, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(gameboy.registerFile.B.getRegister()).toBe(0b1111_1111);
@@ -120,10 +116,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(gameboy.ram.getMemoryAt(0x1234)).toBe(
@@ -144,7 +136,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x100, 0x09);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(HL.getRegister()).toBe(0xffff);
@@ -159,7 +150,6 @@ describe('Opcodes non prefix', () => {
         BC.setRegister(0xf);
         ram.setMemoryAt(0x100, 0x0a);
         ram.setMemoryAt(BC.getRegister(), 0xff);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -220,7 +210,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x0e);
         ram.setMemoryAt(0x101, 0x12);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0x12);
@@ -270,8 +259,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(DE.getRegister()).toBe(0x1234);
@@ -288,7 +275,6 @@ describe('Opcodes non prefix', () => {
         A.setRegister(0b0000_1111);
         ram.setMemoryAt(0x100, 0x12);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -340,7 +326,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x101, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(gameboy.registerFile.D.getRegister()).toBe(0b1111_1111);
@@ -370,7 +355,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x1000, 0x18);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1007);
     });
@@ -385,7 +369,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x100, 0x19);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(HL.getRegister()).toBe(0xffff);
@@ -399,7 +382,6 @@ describe('Opcodes non prefix', () => {
         DE.setRegister(0xf);
         ram.setMemoryAt(0x100, 0x1a);
         ram.setMemoryAt(DE.getRegister(), 0xff);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -460,7 +442,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x1e);
         ram.setMemoryAt(0x101, 0x12);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0x12);
@@ -494,8 +475,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x101, 0x05);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x107);
     });
@@ -510,7 +489,6 @@ describe('Opcodes non prefix', () => {
 
         gameboy.ram.setMemoryAt(0x101, 0x05);
         gameboy.registerFile.F.setZFlag();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -529,8 +507,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(HL.getRegister()).toBe(0x1234);
@@ -547,7 +523,6 @@ describe('Opcodes non prefix', () => {
         A.setRegister(0b0000_1111);
         ram.setMemoryAt(0x100, 0x22);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -601,7 +576,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x101, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(gameboy.registerFile.H.getRegister()).toBe(0b1111_1111);
@@ -633,8 +607,6 @@ describe('Opcodes non prefix', () => {
         gameboy.registerFile.F.setZFlag();
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x107);
     });
@@ -649,7 +621,6 @@ describe('Opcodes non prefix', () => {
 
         gameboy.ram.setMemoryAt(0x101, 0x05);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
     });
@@ -662,7 +633,6 @@ describe('Opcodes non prefix', () => {
         HL.setRegister(0x1234);
         gameboy.ram.setMemoryAt(0x100, 0x29);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -678,7 +648,6 @@ describe('Opcodes non prefix', () => {
         HL.setRegister(0xf);
         ram.setMemoryAt(0x100, 0x2a);
         ram.setMemoryAt(HL.getRegister(), 0xff);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -740,7 +709,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x2e);
         ram.setMemoryAt(0x101, 0x12);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0x12);
@@ -775,8 +743,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x101, 0x05);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x107);
     });
@@ -791,7 +757,6 @@ describe('Opcodes non prefix', () => {
 
         gameboy.ram.setMemoryAt(0x101, 0x05);
         gameboy.registerFile.F.setCYFlag();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -811,8 +776,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(SP.getRegister()).toBe(0x1234);
@@ -829,7 +792,6 @@ describe('Opcodes non prefix', () => {
         A.setRegister(0b0000_1111);
         ram.setMemoryAt(0x100, 0x32);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -857,8 +819,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0x0);
@@ -877,8 +837,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(gameboy.ram.getMemoryAt(0xffff)).toBe(0xff - 1);
@@ -896,8 +854,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x100, 0x36);
         gameboy.ram.setMemoryAt(0x101, 0x42);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -939,8 +895,6 @@ describe('Opcodes non prefix', () => {
         gameboy.registerFile.F.setCYFlag();
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x107);
     });
@@ -955,7 +909,6 @@ describe('Opcodes non prefix', () => {
 
         gameboy.ram.setMemoryAt(0x101, 0x05);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
     });
@@ -969,7 +922,6 @@ describe('Opcodes non prefix', () => {
         HL.setRegister(0x0001);
         gameboy.ram.setMemoryAt(0x100, 0x39);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -986,7 +938,6 @@ describe('Opcodes non prefix', () => {
         HL.setRegister(0xf);
         ram.setMemoryAt(0x100, 0x3a);
         ram.setMemoryAt(HL.getRegister(), 0xff);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1049,7 +1000,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x3e);
         ram.setMemoryAt(0x101, 0xff);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -1171,7 +1121,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(B.getRegister()).toBe(0xff);
@@ -1292,7 +1241,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(C.getRegister()).toBe(0xff);
@@ -1411,7 +1359,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x56);
         ram.setMemoryAt(0xffff, 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1533,7 +1480,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(E.getRegister()).toBe(0xff);
@@ -1652,7 +1598,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x56);
         ram.setMemoryAt(0xffff, 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1774,7 +1719,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(L.getRegister()).toBe(0xff);
@@ -1807,7 +1751,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x70);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0010_0000);
@@ -1824,7 +1767,6 @@ describe('Opcodes non prefix', () => {
         C.setRegister(0b0010_0000);
 
         ram.setMemoryAt(0x100, 0x71);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1843,7 +1785,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x72);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0010_0000);
@@ -1860,7 +1801,6 @@ describe('Opcodes non prefix', () => {
         E.setRegister(0b0010_0000);
 
         ram.setMemoryAt(0x100, 0x73);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1879,7 +1819,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x74);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0010_0000);
@@ -1896,7 +1835,6 @@ describe('Opcodes non prefix', () => {
         L.setRegister(0b0010_0000);
 
         ram.setMemoryAt(0x100, 0x75);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -1925,7 +1863,6 @@ describe('Opcodes non prefix', () => {
         A.setRegister(0b0010_0000);
 
         ram.setMemoryAt(0x100, 0x77);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2032,7 +1969,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x7e);
         ram.setMemoryAt(0xffff, 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2155,7 +2091,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x86);
         ram.setMemoryAt(HL.getRegister(), 0x1);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2283,7 +2218,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0x8e);
         ram.setMemoryAt(HL.getRegister(), 0);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(A.getRegister()).toBe(0x0);
@@ -2405,7 +2339,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x96);
         ram.setMemoryAt(HL.getRegister(), 0x1);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2535,7 +2468,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0x9e);
         ram.setMemoryAt(HL.getRegister(), 0x1);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2668,7 +2600,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(HL.getRegister(), 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(A.getRegister()).toBe(0xf0);
@@ -2798,7 +2729,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xae);
         ram.setMemoryAt(HL.getRegister(), 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -2930,7 +2860,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(HL.getRegister(), 0x0f);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(A.getRegister()).toBe(0xff);
@@ -3061,7 +2990,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(HL.getRegister(), 0x0);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(A.getRegister()).toBe(0x0);
@@ -3099,9 +3027,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x78);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3123,7 +3048,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xfffe, 0x56);
         ram.setMemoryAt(0xffff, 0x78);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234 + 1);
@@ -3148,8 +3072,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
         expect(BC.getRegister()).toBe(0x1234);
@@ -3166,8 +3088,6 @@ describe('Opcodes non prefix', () => {
         F.setZFlag();
         ram.setMemoryAt(0x100, 0xc2);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
     });
@@ -3182,9 +3102,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x34);
         ram.setMemoryAt(0x102, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
@@ -3201,9 +3118,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x34);
         ram.setMemoryAt(0x102, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
@@ -3224,11 +3138,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1001, 0x34);
         ram.setMemoryAt(0x1002, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffe);
@@ -3253,8 +3162,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1002, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0x0);
         expect(PC.getRegister()).toBe(0x1003);
@@ -3271,9 +3178,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xc000);
         ram.setMemoryAt(0x100, 0xc5);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -3297,7 +3201,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x80);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0x00);
@@ -3318,9 +3221,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0x0000);
         ram.setMemoryAt(0x100, 0xc7);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffe);
@@ -3345,9 +3245,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x78);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3368,7 +3265,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xfffe, 0x56);
         ram.setMemoryAt(0xffff, 0x78);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234 + 1);
@@ -3392,9 +3288,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x78);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3411,9 +3304,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
     });
@@ -3426,8 +3316,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0x100, 0xca);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
@@ -3443,7 +3331,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x19);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -3466,11 +3353,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1002, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffe);
         expect(PC.getRegister()).toBe(0x1234);
@@ -3491,8 +3373,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1001, 0x34);
         ram.setMemoryAt(0x1002, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0x0);
@@ -3515,11 +3395,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x102, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
         expect(ram.getMemoryAt(0xfffc)).toBe(0x03);
@@ -3541,7 +3416,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x0f);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0x0f);
@@ -3562,9 +3436,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xfffe);
         ram.setMemoryAt(0x1234, 0xcf);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
@@ -3589,9 +3460,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x78);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3613,7 +3481,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xfffe, 0x56);
         ram.setMemoryAt(0xffff, 0x78);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234 + 1);
@@ -3638,8 +3505,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
         expect(DE.getRegister()).toBe(0x1234);
@@ -3656,8 +3521,6 @@ describe('Opcodes non prefix', () => {
         F.setCYFlag();
         ram.setMemoryAt(0x100, 0xd2);
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
     });
@@ -3672,9 +3535,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x34);
         ram.setMemoryAt(0x102, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
@@ -3694,11 +3554,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1001, 0x34);
         ram.setMemoryAt(0x1002, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffe);
@@ -3723,8 +3578,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1002, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0x0);
         expect(PC.getRegister()).toBe(0x1003);
@@ -3741,9 +3594,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xc000);
         ram.setMemoryAt(0x100, 0xd5);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -3765,7 +3615,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x01);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0x0f);
@@ -3786,9 +3635,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xdfff);
         ram.setMemoryAt(0xc000, 0xd7);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xdffd);
@@ -3813,9 +3659,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x78);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3836,7 +3679,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xfffe, 0x56);
         ram.setMemoryAt(0xffff, 0x78);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234 + 1);
@@ -3861,8 +3703,6 @@ describe('Opcodes non prefix', () => {
         gameboy.scheduler.tick();
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
@@ -3875,8 +3715,6 @@ describe('Opcodes non prefix', () => {
         const { F } = gameboy.registerFile;
         const { ram } = gameboy;
         ram.setMemoryAt(0x100, 0xda);
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
@@ -3894,9 +3732,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x34);
         ram.setMemoryAt(0x102, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
@@ -3917,11 +3752,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1001, 0x34);
         ram.setMemoryAt(0x1002, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffe);
@@ -3944,8 +3774,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1002, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0x0);
         expect(PC.getRegister()).toBe(0x1003);
@@ -3962,7 +3790,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xde);
         ram.setMemoryAt(0x101, 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -3985,9 +3812,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1234, 0xdf);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
         expect(PC.getRegister()).toBe(0x0018);
@@ -4006,8 +3830,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x100, 0xe0);
         gameboy.ram.setMemoryAt(0x101, 0x80);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -4031,8 +3853,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xffff, 0x12);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
         expect(HL.getRegister()).toBe(0x1234);
@@ -4052,7 +3872,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x100, 0xe2);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
         expect(A.getRegister()).toBe(0x42);
@@ -4070,9 +3889,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xc000);
         ram.setMemoryAt(0x100, 0xe5);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -4094,7 +3910,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x0f);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0x0f);
@@ -4115,9 +3930,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1234, 0xe7);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
         expect(PC.getRegister()).toBe(0x20);
@@ -4137,9 +3949,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x3000, 0xe8);
         gameboy.ram.setMemoryAt(0x3001, 0xfb);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
@@ -4179,9 +3988,6 @@ describe('Opcodes non prefix', () => {
         gameboy.ram.setMemoryAt(0x102, 0xff);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(ram.getMemoryAt(0xff80)).toBe(0x77);
@@ -4197,7 +4003,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xee);
         ram.setMemoryAt(0x101, 0xff);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -4220,9 +4025,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1234, 0xef);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
         expect(PC.getRegister()).toBe(0x0028);
@@ -4242,8 +4044,6 @@ describe('Opcodes non prefix', () => {
 
         ram.setMemoryAt(0xff40, 0x80);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -4265,8 +4065,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0xfffe, 0x34);
         ram.setMemoryAt(0xffff, 0x12);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
@@ -4323,9 +4121,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xf5);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
         expect(SP.getRegister()).toBe(0xbffe);
@@ -4343,7 +4138,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xf6);
         ram.setMemoryAt(0x101, 0x0f);
 
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
@@ -4364,9 +4158,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xfffe);
         ram.setMemoryAt(0x1234, 0xf7);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);
@@ -4430,9 +4221,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x1234, 0x0f);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(A.getRegister()).toBe(0x0f);
@@ -4465,7 +4253,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0x01);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0x10);
@@ -4486,9 +4273,6 @@ describe('Opcodes non prefix', () => {
         SP.setRegister(0xfffe);
         ram.setMemoryAt(0x1234, 0xff);
 
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(SP.getRegister()).toBe(0xfffc);

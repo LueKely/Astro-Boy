@@ -25,8 +25,8 @@ import { Ram } from '../../Ram/Ram';
 describe('This will test the LD r8, r8 function', () => {
     const CpuRegisterGroup = new Register_File();
 
-    for (const [keyA, valueA] of Object.entries(CpuRegisterGroup.register)) {
-        for (const [keyB, valueB] of Object.entries(CpuRegisterGroup.register)) {
+    for (const [keyA, valueA] of Object.entries(CpuRegisterGroup)) {
+        for (const [keyB, valueB] of Object.entries(CpuRegisterGroup)) {
             // skip registers if they have the same key
             if (keyA == keyB) continue;
 
@@ -45,7 +45,7 @@ describe('This will test the LD r8, r8 function', () => {
 describe('This will test the LD r8, n8 function', () => {
     const CpuRegisterGroup = new Register_File();
 
-    for (const [key, value] of Object.entries(CpuRegisterGroup.register)) {
+    for (const [key, value] of Object.entries(CpuRegisterGroup)) {
         // skip registers if they have the same key
 
         test(`Tests register  ${key} to get the value 0xf0 `, () => {
@@ -78,7 +78,7 @@ describe('This will test LD[HL], R8', () => {
     CpuGroupRegister.register16Bit.HL.setRegister(0xffff);
     // todo: replace this once implemented a good memory
     const dummyMemory = new Ram();
-    for (const [key, value] of Object.entries(CpuGroupRegister.register)) {
+    for (const [key, value] of Object.entries(CpuGroupRegister)) {
         test(
             'This will add the number 0x00FF to register when [HL] = 0xFFFF on register ' + key,
             () => {
@@ -117,7 +117,7 @@ describe('This will test LD R8, [HL]', () => {
     CpuCluster.register16Bit.HL.setRegister(testPointer);
     DummyMemory.setMemoryAt(CpuCluster.register16Bit.HL.getRegister(), testValue);
 
-    for (const [key, value] of Object.entries(CpuCluster.register)) {
+    for (const [key, value] of Object.entries(CpuCluster)) {
         test(`The register ${key} should have the value ${testValue}`, () => {
             LDR8HL(value, CpuCluster.register16Bit.HL, DummyMemory);
             expect(value.getRegister()).toBe(DummyMemory.getMemoryAt(testPointer));
@@ -132,24 +132,24 @@ describe('This will test function LD[N16],A', () => {
     test('Set the value of register A to 15 and set the value of A to Ram pointed at N16', () => {
         const testValue = 15;
         const testPointer = 0xffff;
-        CpuCluster.register.A.setRegister(testValue);
-        LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+        CpuCluster.A.setRegister(testValue);
+        LDN16A(testPointer, CpuCluster.A, DummyMemory);
         expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
     });
 
     test('Set the value of register A to 0xff and set the value of A to Ram pointed at N16', () => {
         const testValue = 0xff;
         const testPointer = 0xff;
-        CpuCluster.register.A.setRegister(testValue);
-        LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+        CpuCluster.A.setRegister(testValue);
+        LDN16A(testPointer, CpuCluster.A, DummyMemory);
         expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
     });
 
     test('Set the value of register A to 0 and set the value of A to Ram pointed at N16', () => {
         const testValue = 0xff;
         const testPointer = 0x0;
-        CpuCluster.register.A.setRegister(testValue);
-        LDN16A(testPointer, CpuCluster.register.A, DummyMemory);
+        CpuCluster.A.setRegister(testValue);
+        LDN16A(testPointer, CpuCluster.A, DummyMemory);
         expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
     });
 });
@@ -161,16 +161,16 @@ describe('This will test function LDH[N16],A', () => {
     test('Set the value of register A to 15 and set the value of A to Ram pointed at N16', () => {
         const testValue = 15;
         const n8 = 0x1;
-        CpuCluster.register.A.setRegister(testValue);
-        LDHN16A(n8, CpuCluster.register.A, DummyMemory);
+        CpuCluster.A.setRegister(testValue);
+        LDHN16A(n8, CpuCluster.A, DummyMemory);
         expect(DummyMemory.getMemoryAt(n8 + 0xff00)).toBe(testValue);
     });
 
     test('Set the value of register A to 0xff and set the value of A to Ram pointed at N16', () => {
         const testValue = 0xff;
         const testPointer = 0xf0;
-        CpuCluster.register.A.setRegister(testValue);
-        LDHN16A(testPointer, CpuCluster.register.A, DummyMemory);
+        CpuCluster.A.setRegister(testValue);
+        LDHN16A(testPointer, CpuCluster.A, DummyMemory);
         expect(DummyMemory.getMemoryAt(testPointer + 0xff00)).toBe(testValue);
     });
 });
@@ -178,7 +178,7 @@ describe('This will test function LDH[N16],A', () => {
 describe('Testing function LDH [C], A', () => {
     test('Expect the register A to be written into the value of [C + 0xff00]', () => {
         const CpuCluster = new Register_File();
-        const { A, C } = CpuCluster.register;
+        const { A, C } = CpuCluster;
         const DummyRam = new Ram();
         const testValue = 0xff;
         const testPointer = 0xff;
@@ -192,7 +192,7 @@ describe('Testing function LDH [C], A', () => {
 
     test('Expect the register A to be written into the value of [C + 0xff00]', () => {
         const CpuCluster = new Register_File();
-        const { A, C } = CpuCluster.register;
+        const { A, C } = CpuCluster;
         const DummyRam = new Ram();
         const testValue = 0x0f;
         const testPointer = 0xff;
@@ -208,7 +208,7 @@ describe('Testing function LDH [C], A', () => {
 describe('This will test LD A,[R16]', () => {
     const CpuCluster = new Register_File();
     const DummyMemory = new Ram();
-    const { A } = CpuCluster.register;
+    const { A } = CpuCluster;
     const testPointer = 0xfff1;
     const testValue = 0xfffa;
     for (const [key, value] of Object.entries(CpuCluster.register16Bit)) {
@@ -225,7 +225,7 @@ describe('This will test LD A,[R16]', () => {
 
 describe('this will test fucntion LD A,[N16]', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const dummyMemory = new Ram();
 
     test('Load the value of [0xff] into register A', () => {
@@ -247,7 +247,7 @@ describe('this will test fucntion LD A,[N16]', () => {
 
 describe('This will test the function LDH A, [N16]', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const dummyMemory = new Ram();
 
     test('Load the value of [0xff] into register A', () => {
@@ -261,7 +261,7 @@ describe('This will test the function LDH A, [N16]', () => {
 
 describe('This will test the function LDH A, [C]', () => {
     const cpuCluster = new Register_File();
-    const { A, C } = cpuCluster.register;
+    const { A, C } = cpuCluster;
     const dummyMemory = new Ram();
 
     test('This will Load the value of [C] into Register A', () => {
@@ -279,7 +279,7 @@ describe('This will test the function LDH A, [C]', () => {
 
 describe('This will test the function LD [HLI], A', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const HLI = cpuCluster.register16Bit.HL;
     const dummyMemory = new Ram();
 
@@ -305,7 +305,7 @@ describe('This will test the function LD [HLI], A', () => {
 
 describe('This will test the function LD [HLD], A', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const HLD = cpuCluster.register16Bit.HL;
     const dummyMemory = new Ram();
 
@@ -331,7 +331,7 @@ describe('This will test the function LD [HLD], A', () => {
 
 describe('This will test the function LD A,[HLD]', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const HLD = cpuCluster.register16Bit.HL;
     const dummyMemory = new Ram();
 
@@ -360,7 +360,7 @@ describe('This will test the function LD A,[HLD]', () => {
 
 describe('This will test the function LD A,[HLI]', () => {
     const cpuCluster = new Register_File();
-    const { A } = cpuCluster.register;
+    const { A } = cpuCluster;
     const HLI = cpuCluster.register16Bit.HL;
     const dummyMemory = new Ram();
 
@@ -390,7 +390,7 @@ describe('This will test the function LD A,[HLI]', () => {
 describe('LD [R16], A ', () => {
     test('Expect [BC] to have the value of 0xff', () => {
         const cpuCluster = new Register_File();
-        const { A } = cpuCluster.register;
+        const { A } = cpuCluster;
         const { BC } = cpuCluster.register16Bit;
         const dummyMemory = new Ram();
         BC.setRegister(0xff);
@@ -401,7 +401,7 @@ describe('LD [R16], A ', () => {
     });
     test('Expect [DE] to have the value of 0xf', () => {
         const cpuCluster = new Register_File();
-        const { A } = cpuCluster.register;
+        const { A } = cpuCluster;
         const { DE } = cpuCluster.register16Bit;
         const dummyMemory = new Ram();
         DE.setRegister(0xff);

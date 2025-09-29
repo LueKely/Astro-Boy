@@ -5,8 +5,8 @@ import { Gameboy } from '../../Gameboy';
 // const dummyRom = new ArrayBuffer(1024);
 // const gameboy = new Gameboy(dummyRom);
 // const { ram, scheduler } = gameboy;
-// const {} = gameboy.registers.register16Bit;
-// const {} = gameboy.registers;
+// const {} = gameboy.registerFile.register16Bit;
+// const {} = gameboy.registerFile.
 // const { PC } = gameboy.registerFile.pointers;
 
 describe('Opcodes with prefixes', () => {
@@ -14,15 +14,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x00);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -34,15 +33,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x01);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -54,15 +52,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x02);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -74,8 +71,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1000_0000);
@@ -83,8 +80,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x03);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -94,8 +89,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1000_0000);
@@ -103,8 +98,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x04);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -114,8 +107,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1000_0000);
@@ -123,8 +116,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x05);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -134,7 +125,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -143,10 +134,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x06);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0x01);
@@ -157,8 +144,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1000_0000);
@@ -166,8 +153,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x07);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -177,8 +162,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0001);
@@ -186,8 +171,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x08);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -197,8 +180,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0001);
@@ -206,8 +189,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x09);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -217,8 +198,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0001);
@@ -226,8 +207,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -237,8 +216,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0001);
@@ -246,8 +225,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -257,8 +234,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0001);
@@ -266,8 +243,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -277,8 +252,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0001);
@@ -286,8 +261,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -297,7 +270,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -306,10 +279,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0e);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0x80);
@@ -320,8 +289,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0001);
@@ -329,8 +298,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x0f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -340,8 +307,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         B.setRegister(0b1000_0000);
@@ -349,8 +316,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x10);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -360,8 +325,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         C.setRegister(0b0000_0000);
@@ -369,8 +334,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x11);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -380,8 +343,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         D.setRegister(0b1000_0000);
@@ -389,8 +352,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x12);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -400,8 +361,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         E.setRegister(0b1000_0000);
@@ -409,8 +370,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x13);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -420,8 +379,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         H.setRegister(0b1000_0000);
@@ -429,8 +388,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x14);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -440,8 +397,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         L.setRegister(0b1000_0000);
@@ -449,8 +406,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x15);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -460,7 +415,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -469,9 +424,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x16);
 
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -484,8 +436,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         A.setRegister(0b0000_0000);
@@ -493,8 +445,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x17);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -504,8 +454,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         F.setCYFlag();
@@ -514,8 +464,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x18);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -525,8 +473,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -535,8 +483,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x19);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -546,8 +492,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -556,8 +502,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x1a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -567,8 +511,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -577,8 +521,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x1b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -588,8 +530,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -598,8 +540,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x1c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -609,8 +549,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -619,8 +559,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x1d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -630,7 +568,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
@@ -640,9 +578,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x1e);
 
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -655,8 +590,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
 
@@ -664,7 +599,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x1f);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -676,8 +610,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         B.setRegister(0b1000_0000);
@@ -685,8 +619,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x20);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -696,8 +628,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         C.setRegister(0b1000_0000);
@@ -705,8 +637,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x21);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -716,8 +646,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0000);
@@ -725,8 +655,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x22);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1000_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -736,8 +664,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         E.setRegister(0b1000_0000);
@@ -745,8 +673,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x23);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -756,16 +682,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         H.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x24);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -775,16 +699,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         L.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x25);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -794,7 +716,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -803,10 +725,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x26);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0x00);
@@ -817,16 +735,14 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         A.setRegister(0b1000_0000);
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x27);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
@@ -836,8 +752,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1100_0001);
@@ -845,8 +761,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x28);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -856,8 +770,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1100_0001);
@@ -865,8 +779,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x29);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -876,8 +788,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0001);
@@ -885,8 +797,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -896,8 +806,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1100_0001);
@@ -905,8 +815,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -916,8 +824,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1100_0001);
@@ -925,8 +833,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -936,8 +842,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1100_0001);
@@ -945,8 +851,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -956,7 +860,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
@@ -967,10 +871,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2e);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1110_0000);
@@ -980,8 +880,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1100_0001);
@@ -989,8 +889,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x2f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1000,8 +898,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_0000);
@@ -1009,8 +907,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x30);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1020,8 +916,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_0000);
@@ -1029,8 +925,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x31);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1040,8 +934,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_0000);
@@ -1049,8 +943,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x32);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1060,8 +952,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_0000);
@@ -1069,8 +961,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x33);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1080,8 +970,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0000);
@@ -1089,8 +979,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x34);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1100,8 +988,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0000);
@@ -1109,8 +997,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x35);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1120,7 +1006,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -1129,10 +1015,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x36);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_1111);
@@ -1143,8 +1025,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0000);
@@ -1152,8 +1034,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x37);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
@@ -1163,8 +1043,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1100_0001);
@@ -1172,8 +1052,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x38);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1183,8 +1061,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1100_0001);
@@ -1192,8 +1070,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x39);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1203,8 +1079,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0001);
@@ -1212,8 +1088,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1223,8 +1097,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1100_0001);
@@ -1232,8 +1106,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1242,8 +1114,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1100_0001);
@@ -1251,8 +1123,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1262,8 +1132,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1100_0001);
@@ -1271,8 +1141,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1282,7 +1150,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
@@ -1293,10 +1161,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3e);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0110_0000);
@@ -1307,8 +1171,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1100_0001);
@@ -1316,8 +1180,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x3f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
@@ -1327,8 +1189,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1110);
@@ -1336,8 +1198,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x40);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1110);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1347,8 +1207,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1110);
@@ -1356,8 +1216,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x41);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1110);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1367,8 +1225,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1110);
@@ -1376,8 +1234,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x42);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1110);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1387,8 +1243,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1110);
@@ -1396,8 +1252,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x43);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1110);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1407,8 +1261,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0001);
@@ -1416,8 +1270,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x44);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_0001);
         expect(F.getRegister()).toBe(0b0010_0000);
@@ -1427,8 +1279,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0001);
@@ -1436,8 +1288,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x45);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_0001);
         expect(F.getRegister()).toBe(0b0010_0000);
@@ -1447,7 +1297,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -1455,8 +1305,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x46);
 
-        scheduler.tick();
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -1469,8 +1317,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0001);
@@ -1478,8 +1326,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x47);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_0001);
         expect(F.getRegister()).toBe(0b0010_0000);
@@ -1489,8 +1335,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1101);
@@ -1498,8 +1344,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x48);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1509,8 +1353,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1101);
@@ -1518,8 +1362,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x49);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1529,8 +1371,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1101);
@@ -1538,8 +1380,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1549,8 +1389,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1101);
@@ -1558,8 +1398,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1569,8 +1407,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1101);
@@ -1578,8 +1416,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1589,8 +1425,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1101);
@@ -1598,8 +1434,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1609,7 +1443,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -1617,7 +1451,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x4e);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -1631,8 +1464,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1101);
@@ -1640,8 +1473,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1651,8 +1482,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1011);
@@ -1660,8 +1491,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x50);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1671,8 +1500,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1011);
@@ -1680,8 +1509,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x51);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1691,8 +1518,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1011);
@@ -1700,8 +1527,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x52);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1711,8 +1536,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1011);
@@ -1720,8 +1545,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x53);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1731,8 +1554,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1011);
@@ -1740,8 +1563,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x54);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1751,8 +1572,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1011);
@@ -1760,8 +1581,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x55);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1771,7 +1590,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -1779,7 +1598,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x56);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -1793,8 +1611,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1011);
@@ -1802,8 +1620,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x57);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1813,8 +1629,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_0111);
@@ -1822,8 +1638,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x58);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1833,8 +1647,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_0111);
@@ -1842,8 +1656,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x59);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1853,8 +1665,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_0111);
@@ -1862,8 +1674,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x5a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1873,8 +1683,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_0111);
@@ -1882,8 +1692,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x5b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1893,8 +1701,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0111);
@@ -1902,8 +1710,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x5c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1913,8 +1719,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0111);
@@ -1922,8 +1728,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x5d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1933,7 +1737,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -1941,8 +1745,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x5e);
 
-        scheduler.tick();
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -1955,8 +1757,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0111);
@@ -1964,8 +1766,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x5f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1975,8 +1775,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1110_1111);
@@ -1984,8 +1784,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x60);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -1995,8 +1793,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1110_1111);
@@ -2004,8 +1802,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x61);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2015,8 +1811,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1110_1111);
@@ -2024,8 +1820,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x62);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2035,8 +1829,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1110_1111);
@@ -2044,8 +1838,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x63);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2055,8 +1847,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1110_1111);
@@ -2064,8 +1856,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x64);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2075,8 +1865,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1110_1111);
@@ -2084,8 +1874,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x65);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2095,7 +1883,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2103,7 +1891,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x66);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -2117,8 +1904,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1110_1111);
@@ -2126,8 +1913,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x67);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2137,8 +1922,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1101_1111);
@@ -2146,8 +1931,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x68);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2157,8 +1940,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1101_1111);
@@ -2166,8 +1949,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x69);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2177,8 +1958,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1101_1111);
@@ -2186,8 +1967,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x6a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2197,8 +1976,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1101_1111);
@@ -2206,8 +1985,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x6b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2217,8 +1994,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1101_1111);
@@ -2226,8 +2003,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x6c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2237,8 +2012,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1101_1111);
@@ -2246,8 +2021,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x6d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2257,7 +2030,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2265,7 +2038,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x6e);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -2279,8 +2051,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1101_1111);
@@ -2288,8 +2060,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x6f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2299,8 +2069,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1011_1111);
@@ -2308,8 +2078,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x70);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2319,8 +2087,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1011_1111);
@@ -2328,8 +2096,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x71);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2339,8 +2105,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1011_1111);
@@ -2348,8 +2114,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x72);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2359,8 +2123,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1011_1111);
@@ -2368,8 +2132,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x73);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2379,8 +2141,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1011_1111);
@@ -2388,8 +2150,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x74);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2399,8 +2159,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1011_1111);
@@ -2408,8 +2168,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x75);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2419,7 +2177,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2427,7 +2185,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x76);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -2441,8 +2198,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1011_1111);
@@ -2450,8 +2207,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x77);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2461,8 +2216,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0111_1111);
@@ -2470,8 +2225,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x78);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2481,8 +2234,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0111_1111);
@@ -2490,8 +2243,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x79);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2501,8 +2252,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0111_1111);
@@ -2510,8 +2261,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x7a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2521,8 +2270,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0111_1111);
@@ -2530,8 +2279,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x7b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2541,8 +2288,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0111_1111);
@@ -2550,8 +2297,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x7c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2561,8 +2306,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0111_1111);
@@ -2570,8 +2315,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x7d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2581,7 +2324,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2589,7 +2332,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x7e);
 
-        scheduler.tick();
         scheduler.tick();
         scheduler.tick();
 
@@ -2603,8 +2345,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0111_1111);
@@ -2612,8 +2354,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x7f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
@@ -2623,8 +2363,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -2632,8 +2372,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x80);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1110);
     });
@@ -2642,8 +2380,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -2651,8 +2389,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x81);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1110);
     });
@@ -2661,8 +2397,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -2670,8 +2406,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x82);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1110);
     });
@@ -2680,8 +2414,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -2689,8 +2423,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x83);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1110);
     });
@@ -2699,8 +2431,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -2708,8 +2440,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x84);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_1110);
     });
@@ -2718,8 +2448,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -2727,8 +2457,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x85);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_1110);
     });
@@ -2737,7 +2465,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2746,10 +2474,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x86);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1110);
@@ -2759,8 +2483,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -2768,8 +2492,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x87);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_1110);
     });
@@ -2778,8 +2500,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -2787,8 +2509,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x88);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1101);
     });
@@ -2797,8 +2517,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -2806,8 +2526,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x89);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1101);
     });
@@ -2816,8 +2534,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -2825,8 +2543,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1101);
     });
@@ -2835,8 +2551,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -2844,8 +2560,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1101);
     });
@@ -2854,8 +2568,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -2863,8 +2577,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_1101);
     });
@@ -2873,8 +2585,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -2882,8 +2594,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_1101);
     });
@@ -2892,7 +2602,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -2901,10 +2611,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8e);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1101);
@@ -2914,8 +2620,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -2923,8 +2629,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x8f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_1101);
     });
@@ -2933,8 +2637,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -2942,8 +2646,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x90);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_1011);
     });
@@ -2952,8 +2654,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -2961,8 +2663,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x91);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_1011);
     });
@@ -2971,8 +2671,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -2980,8 +2680,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x92);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_1011);
     });
@@ -2990,8 +2688,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -2999,8 +2697,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x93);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_1011);
     });
@@ -3009,8 +2705,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3018,8 +2714,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x94);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_1011);
     });
@@ -3028,8 +2722,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3037,8 +2731,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x95);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_1011);
     });
@@ -3047,7 +2739,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3056,10 +2748,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x96);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1011);
@@ -3069,8 +2757,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3078,8 +2766,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x97);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_1011);
     });
@@ -3088,8 +2774,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -3097,8 +2783,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x98);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1111_0111);
     });
@@ -3107,8 +2791,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -3116,8 +2800,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x99);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1111_0111);
     });
@@ -3126,8 +2808,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -3135,8 +2817,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9a);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1111_0111);
     });
@@ -3145,8 +2825,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -3154,8 +2834,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9b);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1111_0111);
     });
@@ -3164,8 +2842,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3173,8 +2851,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9c);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1111_0111);
     });
@@ -3183,8 +2859,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3192,8 +2868,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9d);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1111_0111);
     });
@@ -3202,7 +2876,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3211,10 +2885,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9e);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_0111);
@@ -3224,8 +2894,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3233,8 +2903,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x9f);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1111_0111);
     });
@@ -3243,8 +2911,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -3252,8 +2920,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1110_1111);
     });
@@ -3262,8 +2928,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -3271,8 +2937,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1110_1111);
     });
@@ -3281,8 +2945,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -3290,8 +2954,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1110_1111);
     });
@@ -3300,8 +2962,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -3309,8 +2971,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1110_1111);
     });
@@ -3319,8 +2979,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3328,8 +2988,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1110_1111);
     });
@@ -3338,8 +2996,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3347,8 +3005,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1110_1111);
     });
@@ -3357,7 +3013,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3366,10 +3022,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1110_1111);
@@ -3379,8 +3031,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3388,8 +3040,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1110_1111);
     });
@@ -3398,8 +3048,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -3407,8 +3057,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1101_1111);
     });
@@ -3417,8 +3065,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -3426,8 +3074,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xa9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1101_1111);
     });
@@ -3436,8 +3082,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -3445,8 +3091,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xaa);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1101_1111);
     });
@@ -3455,8 +3099,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -3464,8 +3108,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xab);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1101_1111);
     });
@@ -3474,8 +3116,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3483,8 +3125,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xac);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1101_1111);
     });
@@ -3493,8 +3133,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3502,8 +3142,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xad);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1101_1111);
     });
@@ -3512,7 +3150,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3521,10 +3159,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xae);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1101_1111);
@@ -3534,8 +3168,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3543,8 +3177,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xaf);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1101_1111);
     });
@@ -3553,8 +3185,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -3562,8 +3194,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1011_1111);
     });
@@ -3572,8 +3202,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -3581,8 +3211,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1011_1111);
     });
@@ -3591,8 +3219,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -3600,8 +3228,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1011_1111);
     });
@@ -3610,8 +3236,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -3619,8 +3245,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1011_1111);
     });
@@ -3629,8 +3253,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3638,8 +3262,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1011_1111);
     });
@@ -3648,8 +3270,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3657,8 +3279,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1011_1111);
     });
@@ -3667,7 +3287,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3676,10 +3296,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1011_1111);
@@ -3689,8 +3305,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3698,8 +3314,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1011_1111);
     });
@@ -3708,8 +3322,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
@@ -3717,8 +3331,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0111_1111);
     });
@@ -3727,8 +3339,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
@@ -3736,8 +3348,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xb9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0111_1111);
     });
@@ -3746,8 +3356,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
@@ -3755,8 +3365,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xba);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0111_1111);
     });
@@ -3765,8 +3373,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
@@ -3774,8 +3382,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xbb);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0111_1111);
     });
@@ -3784,8 +3390,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
@@ -3793,8 +3399,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xbc);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0111_1111);
     });
@@ -3803,8 +3407,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
@@ -3812,8 +3416,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xbd);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0111_1111);
     });
@@ -3822,7 +3424,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3831,10 +3433,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xbe);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0111_1111);
@@ -3844,8 +3442,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
@@ -3853,8 +3451,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xbf);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0111_1111);
     });
@@ -3863,8 +3459,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -3872,8 +3468,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_0001);
     });
@@ -3882,8 +3476,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -3891,8 +3485,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_0001);
     });
@@ -3901,8 +3493,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -3910,8 +3502,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_0001);
     });
@@ -3920,8 +3510,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -3929,8 +3519,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0001);
     });
@@ -3939,8 +3527,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -3948,8 +3536,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0001);
     });
@@ -3958,8 +3544,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -3967,8 +3553,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0001);
     });
@@ -3977,7 +3561,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -3986,10 +3570,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0001);
@@ -3999,8 +3579,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4008,8 +3588,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0001);
     });
@@ -4018,8 +3596,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4027,8 +3605,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_0010);
     });
@@ -4037,8 +3613,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4046,8 +3622,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xc9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_0010);
     });
@@ -4056,8 +3630,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4065,8 +3639,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xca);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_0010);
     });
@@ -4075,8 +3647,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4084,8 +3656,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xcb);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0010);
     });
@@ -4094,8 +3664,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4103,8 +3673,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xcc);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0010);
     });
@@ -4113,8 +3681,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4122,8 +3690,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xcd);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0010);
     });
@@ -4132,7 +3698,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4141,10 +3707,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xce);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0010);
@@ -4154,8 +3716,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4163,8 +3725,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xcf);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0010);
     });
@@ -4173,8 +3733,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4182,8 +3742,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_0100);
     });
@@ -4192,8 +3750,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4201,8 +3759,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_0100);
     });
@@ -4211,8 +3767,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4220,8 +3776,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_0100);
     });
@@ -4230,8 +3784,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4239,8 +3793,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_0100);
     });
@@ -4249,8 +3801,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4258,8 +3810,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_0100);
     });
@@ -4268,8 +3818,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4277,8 +3827,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_0100);
     });
@@ -4287,7 +3835,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4296,10 +3844,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0100);
@@ -4309,8 +3853,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4318,8 +3862,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_0100);
     });
@@ -4328,8 +3870,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4337,8 +3879,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0000_1000);
     });
@@ -4347,8 +3887,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4356,8 +3896,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xd9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0000_1000);
     });
@@ -4366,8 +3904,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4375,8 +3913,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xda);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0000_1000);
     });
@@ -4385,8 +3921,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4394,8 +3930,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xdb);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0000_1000);
     });
@@ -4404,8 +3938,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4413,8 +3947,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xdc);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0000_1000);
     });
@@ -4423,8 +3955,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4432,8 +3964,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xdd);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0000_1000);
     });
@@ -4442,7 +3972,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4451,10 +3981,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xde);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_1000);
@@ -4464,8 +3990,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4473,8 +3999,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xdf);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0000_1000);
     });
@@ -4483,8 +4007,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4492,8 +4016,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0001_0000);
     });
@@ -4502,8 +4024,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4511,8 +4033,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0001_0000);
     });
@@ -4521,8 +4041,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4530,8 +4050,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0001_0000);
     });
@@ -4540,8 +4058,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4549,8 +4067,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0001_0000);
     });
@@ -4559,8 +4075,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4568,8 +4084,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0001_0000);
     });
@@ -4578,8 +4092,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4587,8 +4101,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0001_0000);
     });
@@ -4597,7 +4109,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4606,10 +4118,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0001_0000);
@@ -4619,8 +4127,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4628,8 +4136,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0001_0000);
     });
@@ -4638,8 +4144,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4647,8 +4153,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0010_0000);
     });
@@ -4657,8 +4161,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4666,8 +4170,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xe9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0010_0000);
     });
@@ -4676,8 +4178,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4685,8 +4187,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xea);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0010_0000);
     });
@@ -4695,8 +4195,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4704,8 +4204,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xeb);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0010_0000);
     });
@@ -4714,8 +4212,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4723,8 +4221,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xec);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0010_0000);
     });
@@ -4733,8 +4229,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4742,8 +4238,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xed);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0010_0000);
     });
@@ -4752,7 +4246,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4761,10 +4255,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xee);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0010_0000);
@@ -4774,8 +4264,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4783,8 +4273,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xef);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0010_0000);
     });
@@ -4793,8 +4281,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4802,8 +4290,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf0);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b0100_0000);
     });
@@ -4812,8 +4298,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4821,8 +4307,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf1);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b0100_0000);
     });
@@ -4831,8 +4315,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4840,8 +4324,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf2);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b0100_0000);
     });
@@ -4850,8 +4332,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -4859,8 +4341,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf3);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b0100_0000);
     });
@@ -4869,8 +4349,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -4878,8 +4358,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf4);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b0100_0000);
     });
@@ -4888,8 +4366,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -4897,8 +4375,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf5);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b0100_0000);
     });
@@ -4907,7 +4383,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -4916,10 +4392,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf6);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0100_0000);
@@ -4929,8 +4401,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -4938,8 +4410,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf7);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b0100_0000);
     });
@@ -4948,8 +4418,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { B, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { B, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
@@ -4957,8 +4427,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf8);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(B.getRegister()).toBe(0b1000_0000);
     });
@@ -4967,8 +4435,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { C, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { C, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
@@ -4976,8 +4444,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xf9);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(C.getRegister()).toBe(0b1000_0000);
     });
@@ -4986,8 +4452,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { D, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { D, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
@@ -4995,8 +4461,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xfa);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(D.getRegister()).toBe(0b1000_0000);
     });
@@ -5005,8 +4469,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { E, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { E, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
@@ -5014,8 +4478,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xfb);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(E.getRegister()).toBe(0b1000_0000);
     });
@@ -5024,8 +4486,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { H, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
@@ -5033,8 +4495,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xfc);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(H.getRegister()).toBe(0b1000_0000);
     });
@@ -5043,8 +4503,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { L, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
@@ -5052,8 +4512,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xfd);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(L.getRegister()).toBe(0b1000_0000);
     });
@@ -5062,7 +4520,7 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const { HL } = gameboy.registers.register16Bit;
+        const { HL } = gameboy.registerFile.register16Bit;
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
@@ -5071,10 +4529,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xfe);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
         expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1000_0000);
@@ -5084,8 +4538,8 @@ describe('Opcodes with prefixes', () => {
         const dummyRom = new ArrayBuffer(1024);
         const gameboy = new Gameboy(dummyRom);
         const { ram, scheduler } = gameboy;
-        const {} = gameboy.registers.register16Bit;
-        const { A, F } = gameboy;
+        const {} = gameboy.registerFile.register16Bit;
+        const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
@@ -5093,8 +4547,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0xff);
 
         scheduler.tick();
-        scheduler.tick();
-
         expect(PC.getRegister()).toBe(0x102);
         expect(A.getRegister()).toBe(0b1000_0000);
     });
