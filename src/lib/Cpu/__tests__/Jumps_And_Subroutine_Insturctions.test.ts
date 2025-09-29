@@ -129,9 +129,7 @@ describe('Tests for JUMP N16', () => {
 
         const jumpN16 = JPN16();
 
-        jumpN16.forEach((callback) => {
-            callNN(gameboy);
-        });
+        jumpN16(gameboy);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x150);
     });
@@ -149,9 +147,7 @@ describe('Tests for JUMP N16', () => {
 
         const jumpN16 = JPN16();
 
-        jumpN16.forEach((callback) => {
-            callNN(gameboy);
-        });
+        jumpN16(gameboy);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0xc000);
     });
@@ -164,17 +160,9 @@ describe('Tests for JP [HL]', () => {
         const gameboy = new Gameboy(dummyRom);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
-        gameboy.registers.register16Bit.HL.setRegister(0x200);
+        gameboy.registerFile.register16Bit.HL.setRegister(0x200);
 
-        const jobs = [
-            (dmg: Gameboy) => {
-                JPHL(dmg.registers.register16Bit.HL, dmg.registers.pointers.PC);
-            },
-        ];
-
-        jobs.forEach((callback) => {
-            callNN(gameboy);
-        });
+        JPHL(gameboy.registerFile.register16Bit.HL, gameboy.registerFile.pointers.PC);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x200);
     });
@@ -195,9 +183,7 @@ describe('Tests for RET', () => {
 
         const job = RET();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
@@ -217,9 +203,7 @@ describe('Tests for RET', () => {
 
         const job = RET();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfff2);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x0000);
@@ -239,9 +223,7 @@ describe('Tests for RET', () => {
 
         const job = RET();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0001);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
@@ -254,7 +236,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registers.IME.getValue()).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(0);
         gameboy.registerFile.pointers.PC.setRegister(0x200);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
 
@@ -263,13 +245,11 @@ describe('Tests for RETI', () => {
 
         const job = RETI();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
-        expect(gameboy.registers.IME.getValue()).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(1);
     });
 
     test(' PC should be 0x0000 and SP 0xFFF2 ', () => {
@@ -277,7 +257,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registers.IME.getValue()).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(0);
 
         gameboy.registerFile.pointers.PC.setRegister(0x300);
         gameboy.registerFile.pointers.SP.setRegister(0xfff0);
@@ -287,13 +267,10 @@ describe('Tests for RETI', () => {
 
         const job = RETI();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
-
+        job(gameboy);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfff2);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x0000);
-        expect(gameboy.registers.IME.getValue()).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(1);
     });
 
     test(' Wrap Around ', () => {
@@ -301,7 +278,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registers.IME.getValue()).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(0);
 
         gameboy.registerFile.pointers.PC.setRegister(0x100);
         gameboy.registerFile.pointers.SP.setRegister(0xffff);
@@ -311,13 +288,11 @@ describe('Tests for RETI', () => {
 
         const job = RETI();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0001);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
-        expect(gameboy.registers.IME.getValue()).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(1);
     });
 });
 
@@ -336,9 +311,7 @@ describe('Tests for RST N', () => {
 
             const job = RSTN(value);
 
-            job.forEach((callback) => {
-                callNN(gameboy);
-            });
+            job(gameboy);
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(value);
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);
@@ -359,9 +332,7 @@ describe('Tests for RST N', () => {
 
             const job = RSTN(value);
 
-            job.forEach((callback) => {
-                callNN(gameboy);
-            });
+            job(gameboy);
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(value);
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffc);
@@ -382,9 +353,7 @@ describe('Tests for RST N', () => {
 
             const job = RSTN(value);
 
-            job.forEach((callback) => {
-                callNN(gameboy);
-            });
+            job(gameboy);
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(value);
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xffff);
@@ -405,9 +374,7 @@ describe('JR e', () => {
 
         const job = JRE();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1007);
     });
@@ -422,9 +389,7 @@ describe('JR e', () => {
 
         const job = JRE();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1ffd);
     });
@@ -439,9 +404,7 @@ describe('JR e', () => {
 
         const job = JRE();
 
-        job.forEach((callback) => {
-            callNN(gameboy);
-        });
+        job(gameboy);
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x300c);
     });
@@ -453,40 +416,40 @@ describe('Tests for CALLCCN16', () => {
             name: 'Call NZ',
             opcode: 0xc4,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'Call NC',
             opcode: 0xd4,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'Call Z',
             opcode: 0xcc,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
         },
         {
             name: 'Call C',
             opcode: 0xdc,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
         },
     ];
@@ -553,40 +516,40 @@ describe('JR CC e', () => {
             name: 'JR NZ',
             opcode: 0x20,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'JR NC',
             opcode: 0x30,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'JR Z',
             opcode: 0x28,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
         },
         {
             name: 'JR C',
             opcode: 0x38,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
         },
     ];
@@ -635,40 +598,40 @@ describe('RET CC ', () => {
             name: 'RET NZ',
             opcode: 0xc0,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'RET NC',
             opcode: 0xd0,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'RET Z',
             opcode: 0xc8,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
         },
         {
             name: 'RET C',
             opcode: 0xd8,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
         },
     ];
@@ -730,40 +693,40 @@ describe('Tests for JP CC NN', () => {
             name: 'JP NZ NN',
             opcode: 0xc2,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'JP NC NN',
             opcode: 0xd2,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
         },
         {
             name: 'JP Z, nn',
             opcode: 0xca,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
         },
         {
             name: 'JP C, nn',
             opcode: 0xda,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
         },
     ];
@@ -820,40 +783,40 @@ describe('Tests for CALL NN', () => {
             name: 'CALL NZ NN',
             opcode: 0xc4,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
         },
         {
             name: 'CALL NC NN',
             opcode: 0xd4,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
         },
         {
             name: 'CALL Z, nn',
             opcode: 0xcc,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearZFlag();
+                Gameboy.registerFile.F.clearZFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setZFlag();
+                Gameboy.registerFile.F.setZFlag();
             },
         },
         {
             name: 'CALL C, nn',
             opcode: 0xdc,
             ccIsFalse: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.clearCYFlag();
+                Gameboy.registerFile.F.clearCYFlag();
             },
             ccIsTrue: (Gameboy: Gameboy) => {
-                Gameboy.registers.register.F.setCYFlag();
+                Gameboy.registerFile.F.setCYFlag();
             },
         },
     ];
