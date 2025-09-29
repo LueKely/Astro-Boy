@@ -1452,7 +1452,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x4e);
 
         scheduler.tick();
-        scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
@@ -1598,7 +1597,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x56);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -1892,7 +1890,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x66);
 
         scheduler.tick();
-        scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
@@ -2038,7 +2035,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x6e);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
@@ -2186,7 +2182,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x101, 0x76);
 
         scheduler.tick();
-        scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
@@ -2332,7 +2327,6 @@ describe('Opcodes with prefixes', () => {
         ram.setMemoryAt(0x100, 0xcb);
         ram.setMemoryAt(0x101, 0x7e);
 
-        scheduler.tick();
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
