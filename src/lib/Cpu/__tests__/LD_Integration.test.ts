@@ -19,9 +19,6 @@ describe('lD R16', () => {
         gameboy.ram.setMemoryAt(0x102, 0x03);
 
         gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-        gameboy.scheduler.tick();
-
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
         expect(SP.getRegister()).toBe(targetValue);
         expect(SP.getRegister() >>> 8).toBe(0x03);
@@ -47,7 +44,6 @@ describe('lD R16', () => {
         A.setRegister(targetValue);
 
         gameboy.ram.setMemoryAt(0x100, 0x22);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
@@ -93,7 +89,6 @@ describe('LD R8, [HL]', () => {
         gameboy.ram.setMemoryAt(0xff, targetValue);
 
         gameboy.ram.setMemoryAt(0x100, 0x56);
-        gameboy.scheduler.tick();
         gameboy.scheduler.tick();
 
         expect(D.getRegister()).toBe(targetValue);
