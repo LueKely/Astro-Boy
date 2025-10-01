@@ -8,99 +8,52 @@ import { validateADDSPe } from '../../utils/instructions/instruction_utils';
 
 // Tested
 function ADDSPe() {
-  return [
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-      const e = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      dmg.registers.setLowerByte(e);
-    },
-    (dmg: Gameboy) => {
-      // settig up e
-      const e = dmg.registers.getLowerByte();
-      const eSigned = e > 127 ? e - 256 : e;
-      const SP = dmg.registers.pointers.SP.getRegister();
-      validateADDSPe(SP, eSigned, dmg.registers.register.F);
-      const result = SP + eSigned;
-
-      dmg.registers.setTempByte(result);
-    },
-    (dmg: Gameboy) => {
-      const result = dmg.registers.getTempByte();
-      dmg.registers.pointers.SP.setRegister(result);
-    },
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-    },
-  ];
+    return (dmg: Gameboy) => {
+        dmg.registerFile.pointers.PC.increment();
+        const e = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        // settig up e
+        const eSigned = e > 127 ? e - 256 : e;
+        const SP = dmg.registerFile.pointers.SP.getRegister();
+        validateADDSPe(SP, eSigned, dmg.registerFile.F);
+        const result = SP + eSigned;
+        dmg.registerFile.pointers.SP.setRegister(result);
+        dmg.registerFile.pointers.PC.increment();
+    };
 }
 // TESTED
 function LDNNSP() {
-  return [
-    // M2
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-      const lsb = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      dmg.registers.setLowerByte(lsb);
-    },
-    // M3
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-      const msb = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
-      dmg.registers.setUpperByte(msb);
-    },
-    // M4
-    (dmg: Gameboy) => {
-      dmg.registers.setTempByte(
-        dmg.registers.getLowerByte() | (dmg.registers.getUpperByte() << 8)
-      );
-      dmg.ram.setMemoryAt(
-        dmg.registers.getTempByte(),
-        dmg.registers.pointers.SP.getRegister() & 0xff
-      );
+    return (dmg: Gameboy) => {
+        dmg.registerFile.pointers.PC.increment();
+        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        dmg.registerFile.pointers.PC.increment();
+        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        dmg.ram.setMemoryAt(lsb | (msb << 8), dmg.registerFile.pointers.SP.getRegister() & 0xff);
 
-      dmg.registers.setTempByte(dmg.registers.getTempByte() + 1);
-    },
-    // M5
-    (dmg: Gameboy) => {
-      dmg.ram.setMemoryAt(
-        dmg.registers.getTempByte(),
-        dmg.registers.pointers.SP.getRegister() >> 8
-      );
-    },
-    // M1/M6
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-    },
-  ];
+        dmg.ram.setMemoryAt(
+            lsb | ((msb << 8) + 1),
+
+            dmg.registerFile.pointers.SP.getRegister() >> 8
+        );
+        dmg.registerFile.pointers.PC.increment();
+    };
 }
 // TESTED
 function LDHLSPe() {
-  return [
-    // M2
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-      const pc = dmg.ram.getMemoryAt(dmg.registers.pointers.PC.getRegister());
+    return (dmg: Gameboy) => {
+        dmg.registerFile.pointers.PC.increment();
+        const pc = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
 
-      dmg.registers.setLowerByte(pc);
-    },
-    // M3
-    (dmg: Gameboy) => {
-      const SP = dmg.registers.pointers.SP.getRegister();
+        const SP = dmg.registerFile.pointers.SP.getRegister();
 
-      // this is the e
-      let e = dmg.registers.getLowerByte();
+        // this is the e
 
-      const eSigned = e > 127 ? e - 256 : e;
-      const result = eSigned + SP;
+        const eSigned = pc > 127 ? pc - 256 : pc;
+        const result = eSigned + SP;
 
-      validateADDSPe(SP, eSigned, dmg.registers.register.F);
-      dmg.registers.register16Bit.HL.setRegister(result);
-    },
-    // M4
-    (dmg: Gameboy) => {
-      dmg.registers.pointers.PC.increment();
-    },
-  ];
+        validateADDSPe(SP, eSigned, dmg.registerFile.F);
+        dmg.registerFile.register16Bit.HL.setRegister(result);
+        dmg.registerFile.pointers.PC.increment();
+    };
 }
 
 export { LDNNSP, ADDSPe, LDHLSPe };
