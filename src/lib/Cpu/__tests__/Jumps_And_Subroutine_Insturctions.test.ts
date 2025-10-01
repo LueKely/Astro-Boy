@@ -236,7 +236,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
         gameboy.registerFile.pointers.PC.setRegister(0x200);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
 
@@ -249,7 +249,7 @@ describe('Tests for RETI', () => {
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
-        expect(gameboy.registerFile.IME).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(true);
     });
 
     test(' PC should be 0x0000 and SP 0xFFF2 ', () => {
@@ -257,7 +257,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
 
         gameboy.registerFile.pointers.PC.setRegister(0x300);
         gameboy.registerFile.pointers.SP.setRegister(0xfff0);
@@ -270,7 +270,7 @@ describe('Tests for RETI', () => {
         job(gameboy);
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfff2);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x0000);
-        expect(gameboy.registerFile.IME).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(true);
     });
 
     test(' Wrap Around ', () => {
@@ -278,7 +278,7 @@ describe('Tests for RETI', () => {
 
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
 
         gameboy.registerFile.pointers.PC.setRegister(0x100);
         gameboy.registerFile.pointers.SP.setRegister(0xffff);
@@ -292,7 +292,7 @@ describe('Tests for RETI', () => {
 
         expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0001);
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
-        expect(gameboy.registerFile.IME).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(true);
     });
 });
 
@@ -471,8 +471,6 @@ describe('Tests for CALLCCN16', () => {
             gameboy.ram.setMemoryAt(0x0152, 0x12);
 
             gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x0153);
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);
@@ -495,11 +493,6 @@ describe('Tests for CALLCCN16', () => {
             gameboy.ram.setMemoryAt(0x0151, 0x34);
             gameboy.ram.setMemoryAt(0x0152, 0x12);
 
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
             gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffc);
@@ -566,8 +559,6 @@ describe('JR CC e', () => {
             gameboy.ram.setMemoryAt(0x1001, 0x05);
 
             gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1007);
         });
@@ -584,7 +575,6 @@ describe('JR CC e', () => {
             gameboy.ram.setMemoryAt(0x1000, value.opcode);
             gameboy.ram.setMemoryAt(0x1001, 0x05);
 
-            gameboy.scheduler.tick();
             gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1002);
@@ -653,10 +643,6 @@ describe('RET CC ', () => {
             gameboy.ram.setMemoryAt(0xffff, 0x12);
 
             gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0000);
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
         });
@@ -678,7 +664,6 @@ describe('RET CC ', () => {
             gameboy.ram.setMemoryAt(0xfffe, 0x34);
             gameboy.ram.setMemoryAt(0xffff, 0x12);
 
-            gameboy.scheduler.tick();
             gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);
@@ -746,10 +731,6 @@ describe('Tests for JP CC NN', () => {
             gameboy.ram.setMemoryAt(0x0102, 0x02);
 
             gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x200);
         });
     });
@@ -768,8 +749,6 @@ describe('Tests for JP CC NN', () => {
             gameboy.ram.setMemoryAt(0x0101, 0x00);
             gameboy.ram.setMemoryAt(0x0102, 0x02);
 
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
             gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
@@ -839,12 +818,6 @@ describe('Tests for CALL NN', () => {
             value.ccIsTrue(gameboy);
 
             gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
-
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffc);
             expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x1234);
             expect(gameboy.ram.getMemoryAt(0xfffd)).toBe(0x01);
@@ -869,8 +842,6 @@ describe('Tests for CALL NN', () => {
 
             value.ccIsFalse(gameboy);
 
-            gameboy.scheduler.tick();
-            gameboy.scheduler.tick();
             gameboy.scheduler.tick();
 
             expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0xfffe);

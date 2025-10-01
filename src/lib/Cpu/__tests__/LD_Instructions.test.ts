@@ -23,7 +23,17 @@ import { Register_File } from '../Register_File';
 import { Ram } from '../../Ram/Ram';
 
 describe('This will test the LD r8, r8 function', () => {
-    const CpuRegisterGroup = new Register_File();
+    const poop = new Register_File();
+
+    const CpuRegisterGroup = {
+        A: poop.A,
+        B: poop.A,
+        C: poop.A,
+        D: poop.A,
+        E: poop.A,
+        H: poop.A,
+        L: poop.A,
+    };
 
     for (const [keyA, valueA] of Object.entries(CpuRegisterGroup)) {
         for (const [keyB, valueB] of Object.entries(CpuRegisterGroup)) {
@@ -43,7 +53,17 @@ describe('This will test the LD r8, r8 function', () => {
 });
 
 describe('This will test the LD r8, n8 function', () => {
-    const CpuRegisterGroup = new Register_File();
+    const poop = new Register_File();
+
+    const CpuRegisterGroup = {
+        A: poop.A,
+        B: poop.A,
+        C: poop.A,
+        D: poop.A,
+        E: poop.A,
+        H: poop.A,
+        L: poop.A,
+    };
 
     for (const [key, value] of Object.entries(CpuRegisterGroup)) {
         // skip registers if they have the same key
@@ -74,21 +94,32 @@ describe('This will test the LD R16, N16 function', () => {
 });
 
 describe('This will test LD[HL], R8', () => {
-    const CpuGroupRegister = new Register_File();
-    CpuGroupRegister.register16Bit.HL.setRegister(0xffff);
+    const poop = new Register_File();
+
+    const CpuRegisterGroup = {
+        A: poop.A,
+        B: poop.A,
+        C: poop.A,
+        D: poop.A,
+        E: poop.A,
+        H: poop.A,
+        L: poop.A,
+    };
+
+    poop.register16Bit.HL.setRegister(0xffff);
+
     // todo: replace this once implemented a good memory
     const dummyMemory = new Ram();
-    for (const [key, value] of Object.entries(CpuGroupRegister)) {
+
+    for (const [key, value] of Object.entries(CpuRegisterGroup)) {
         test(
             'This will add the number 0x00FF to register when [HL] = 0xFFFF on register ' + key,
             () => {
                 value.setRegister(0xff);
 
-                LDHLR8(CpuGroupRegister.register16Bit.HL, value, dummyMemory);
+                LDHLR8(poop.register16Bit.HL, value, dummyMemory);
 
-                expect(
-                    dummyMemory.getMemoryAt(CpuGroupRegister.register16Bit.HL.getRegister())
-                ).toBe(0xff);
+                expect(dummyMemory.getMemoryAt(poop.register16Bit.HL.getRegister())).toBe(0xff);
             }
         );
     }
@@ -108,18 +139,30 @@ describe('This will test LD[HL], N8', () => {
 });
 
 describe('This will test LD R8, [HL]', () => {
-    const CpuCluster = new Register_File();
+    const poop = new Register_File();
+
+    const CpuCluster = {
+        A: poop.A,
+        B: poop.A,
+        C: poop.A,
+        D: poop.A,
+        E: poop.A,
+        H: poop.A,
+        L: poop.A,
+    };
+
     const DummyMemory = new Ram();
     const testPointer = 0xffff;
     const testValue = 0xff;
+
     // setup the environment
     // let hl get the value of where to point in the mem address
-    CpuCluster.register16Bit.HL.setRegister(testPointer);
-    DummyMemory.setMemoryAt(CpuCluster.register16Bit.HL.getRegister(), testValue);
+    poop.register16Bit.HL.setRegister(testPointer);
+    DummyMemory.setMemoryAt(poop.register16Bit.HL.getRegister(), testValue);
 
     for (const [key, value] of Object.entries(CpuCluster)) {
         test(`The register ${key} should have the value ${testValue}`, () => {
-            LDR8HL(value, CpuCluster.register16Bit.HL, DummyMemory);
+            LDR8HL(value, poop.register16Bit.HL, DummyMemory);
             expect(value.getRegister()).toBe(DummyMemory.getMemoryAt(testPointer));
         });
     }

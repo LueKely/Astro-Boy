@@ -495,6 +495,7 @@ export class CpuOpcodeRecord {
                 cycles: 1,
                 length: 1,
                 execute: (dmg: Gameboy) => {
+                    INCR8(dmg.registerFile.A, dmg.registerFile.F);
                     dmg.registerFile.pointers.PC.increment();
                 },
             },
@@ -2328,7 +2329,7 @@ export class CpuOpcodeRecord {
                 cycles: 1,
                 length: 1,
                 execute: (dmg: Gameboy) => {
-                    INCR16(dmg.registerFile.pointers.SP);
+                    dmg.registerFile.pointers.SP.increment();
                     dmg.registerFile.pointers.PC.increment();
                 },
             },
@@ -2530,6 +2531,7 @@ export class CpuOpcodeRecord {
                         dmg.registerFile.pointers.SP.getRegister(),
                         dmg.registerFile.C.getRegister()
                     );
+                    dmg.registerFile.pointers.PC.increment();
                 },
             },
             0xd5: {

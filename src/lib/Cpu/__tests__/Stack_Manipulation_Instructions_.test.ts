@@ -371,7 +371,7 @@ describe('ADD SP, e', () => {
 
 // added INC SP and DEC SP
 describe('INC and DEC SP', () => {
-    test('simple inc and dec', () => {
+    test('simple inc ', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
@@ -381,12 +381,25 @@ describe('INC and DEC SP', () => {
         gameboy.registerFile.pointers.SP.setRegister(0x0005);
 
         gameboy.ram.setMemoryAt(0x3000, 0x33);
-        gameboy.ram.setMemoryAt(0x3001, 0x3b);
-        gameboy.ram.setMemoryAt(0x3002, 0x3b);
-        gameboy.ram.setMemoryAt(0x3003, 0x33);
 
         gameboy.scheduler.tick();
-        expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0005);
-        expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3004);
+        expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0006);
+        expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3001);
+    });
+
+    test('simple dec ', () => {
+        const dummyRom = new ArrayBuffer(1024);
+
+        // init gameboy
+        const gameboy = new Gameboy(dummyRom);
+
+        gameboy.registerFile.pointers.PC.setRegister(0x3000);
+        gameboy.registerFile.pointers.SP.setRegister(0x0005);
+
+        gameboy.ram.setMemoryAt(0x3000, 0x3b);
+
+        gameboy.scheduler.tick();
+        expect(gameboy.registerFile.pointers.SP.getRegister()).toBe(0x0004);
+        expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x3001);
     });
 });

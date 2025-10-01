@@ -3695,18 +3695,17 @@ describe('Opcodes non prefix', () => {
 
         PC.setRegister(0x1234);
         SP.setRegister(0xfffe);
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
 
         ram.setMemoryAt(0x1234, 0xd9);
         ram.setMemoryAt(0xfffe, 0x56);
         ram.setMemoryAt(0xffff, 0x78);
-        gameboy.scheduler.tick();
 
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x7856);
         expect(SP.getRegister()).toBe(0x0);
-        expect(gameboy.registerFile.IME).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(true);
     });
 
     test('0xda - JP C : true', () => {
@@ -4087,7 +4086,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x100, 0xf2);
 
         scheduler.tick();
-        scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
         expect(C.getRegister()).toBe(0x80);
@@ -4106,7 +4104,7 @@ describe('Opcodes non prefix', () => {
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
     });
 
     test('0xf5 - PUSH AF', () => {
@@ -4180,8 +4178,6 @@ describe('Opcodes non prefix', () => {
         ram.setMemoryAt(0x101, 0xf8);
 
         scheduler.tick();
-        scheduler.tick();
-        scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0x0000);
@@ -4232,14 +4228,14 @@ describe('Opcodes non prefix', () => {
         const { ram, scheduler } = gameboy;
         const { PC } = gameboy.registerFile.pointers;
 
-        expect(gameboy.registerFile.IME).toBe(0);
+        expect(gameboy.registerFile.IME).toBe(false);
 
         ram.setMemoryAt(0x100, 0xfb);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x101);
-        expect(gameboy.registerFile.IME).toBe(1);
+        expect(gameboy.registerFile.IME).toBe(true);
     });
 
     test('0xfe - CP N', () => {
