@@ -10,8 +10,6 @@ export class Gameboy {
     readonly scheduler: Cpu_Scheduler;
     pause = false;
     // TODO create a class for timer
-    cycleBudget = 0;
-    lastTime = 0;
 
     constructor(game: ArrayBuffer) {
         this.registerFile = new Register_File();
@@ -20,8 +18,6 @@ export class Gameboy {
         this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
         // timer
-        this.cycleBudget = 0;
-        this.lastTime = performance.now();
     }
 
     log() {
@@ -63,27 +59,14 @@ export class Gameboy {
     }
 
     run() {
-        if (this.pause) return;
-
-        // for (let i = 0; i < 50000; i++) {
-        //   this.scheduler.tick();
-        // }
-
-        // requestAnimationFrame(() => this.run());
-
-        for (let i = 0; i < 41_000; i++) {
+        while (!this.pause) {
             this.scheduler.tick();
+            // this.listALL();
         }
-        this.listALL();
-        // console.log(this.ram.getMemory()[49700]);
-        // console.log(this.ram.getMemory()[49701]);
-        // console.log(this.ram.getMemory()[49702]);
     }
     listALL() {
         console.log('ALL THE OPCODES');
         console.log(this.list);
-        // console.log('0XFF01: ' + String.fromCharCode(this.ram.getMemoryAt(0xff01)));
-        // console.log('0XFF02: ' + String.fromCharCode(this.ram.getMemoryAt(0xff02)));
         console.log('0XFF01: 0x' + this.ram.getMemoryAt(0xff01).toString(16));
         console.log('0XFF02: 0x' + this.ram.getMemoryAt(0xff02).toString(16));
         console.log('TILE DATA');

@@ -14,6 +14,7 @@ export class Cpu_Scheduler {
     private opCodes: CpuOpcodeRecord;
     private opCodesPrefixed = new CpuPrefixOpCodeRecord();
     private interruptHandler: Interrupt_Handler;
+    currentMachineCycles = 0;
     currentOpcode: IOpCodeEntry;
 
     constructor(gameboy: Gameboy) {
@@ -79,6 +80,8 @@ export class Cpu_Scheduler {
         try {
             this.schedule();
             this.currentOpcode.execute(this.dmg);
+            // after executing
+            this.currentMachineCycles = this.currentOpcode.cycles;
         } catch {
             const notImplemented = this.dmg.ram.getMemoryAt(
                 this.dmg.registerFile.pointers.PC.getRegister()
