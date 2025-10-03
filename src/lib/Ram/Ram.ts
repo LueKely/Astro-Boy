@@ -61,4 +61,15 @@ export class Ram {
     getTileMapIndicesB() {
         return this.memory.slice(0x9c00, 0x9fff);
     }
+
+    getSCYandSCX() {
+        return {
+            x: this.getMemoryAt(0xff42),
+            y: this.getMemoryAt(0xff43),
+        };
+    }
+
+    getOAMCut() {
+        return this.memory.slice(0xfe00, 0xfe9f);
+    }
 }

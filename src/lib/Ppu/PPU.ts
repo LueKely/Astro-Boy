@@ -6,6 +6,7 @@ export class PPU {
     tileDataCache: number[][][] = [];
     tileMapIndices1: Uint8Array = new Uint8Array();
     tileMapIndices2: Uint8Array = new Uint8Array();
+    oamCache: number[][][] = [];
 
     constructor() {}
 }
