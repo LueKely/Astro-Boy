@@ -1,7 +1,7 @@
 import type { Gameboy } from '../Gameboy';
 import type { IOpCodeEntry } from './types/OpcodeTypes';
 
-export function OamTransfer(): IOpCodeEntry {
+export function oamTransfer(): IOpCodeEntry {
     return {
         name: 'OAM Transfer',
         cycles: 160,
