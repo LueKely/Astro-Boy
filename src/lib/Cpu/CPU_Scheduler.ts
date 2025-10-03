@@ -2,6 +2,7 @@ import type { Gameboy } from '../Gameboy';
 import { CpuOpcodeRecord } from './CPU_Opcode_Record';
 import { CpuPrefixOpCodeRecord } from './CPU_Opcode_Record_Prefix';
 import { Interrupt_Handler } from './Interrupt_Handler';
+import { oamTransfer } from './OAM_Transfer';
 import type { IOpCodeEntry } from './types/OpcodeTypes';
 
 // TODO:
@@ -43,6 +44,12 @@ export class Cpu_Scheduler {
             this.currentOpcode = interruptCycles;
         } else {
             // for debug
+            // check if anything is written in 0xff46
+            if (this.dmg.ram.getMemoryAt(0xff46) != 0) {
+                // i dunno how this will be handled
+                this.currentOpcode = oamTransfer();
+                return;
+            }
             this.dmg.addToList(this.currentOpcode.name + ' 0x' + this.readByte().toString(16));
             this.fetchOpcode();
         }
@@ -91,8 +98,6 @@ export class Cpu_Scheduler {
             console.log('Not Implemented: ', notImplemented);
 
             throw new Error('OP CODE NOT Implemented ' + notImplemented + ' Please Check LOGS');
-        } finally {
-            // this.dmg.log();
         }
     }
 }
