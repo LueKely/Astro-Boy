@@ -72,6 +72,10 @@ export class Ram {
         };
     }
 
+    getLCDC() {
+        return this.getMemoryAt(0xff40);
+    }
+
     getOAMCut() {
         return this.memory.slice(0xfe00, 0xfe9f);
     }
