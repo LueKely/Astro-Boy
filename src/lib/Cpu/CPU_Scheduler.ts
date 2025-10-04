@@ -45,9 +45,9 @@ export class Cpu_Scheduler {
         } else {
             // for debug
             // check if anything is written in 0xff46
-            if (this.dmg.ram.getMemoryAt(0xff46) != 0) {
-                // i dunno how this will be handled
+            if (this.dmg.ram.TRANSFER) {
                 this.currentOpcode = oamTransfer();
+                this.dmg.ram.TRANSFER = false;
                 return;
             }
             this.dmg.addToList(this.currentOpcode.name + ' 0x' + this.readByte().toString(16));

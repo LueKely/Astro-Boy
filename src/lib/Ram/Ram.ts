@@ -4,7 +4,7 @@
 
 export class Ram {
     protected memory: Uint8Array;
-
+    TRANSFER = false;
     constructor() {
         this.memory = new Uint8Array(0x10000);
         // this ain't accurate chief
@@ -39,6 +39,9 @@ export class Ram {
     }
 
     setMemoryAt(pointer: number, value: number) {
+        if (pointer == 0xff46) {
+            this.TRANSFER = true;
+        }
         // console.log('Wrote at address: ' + pointer + ' wit the value of: ' + value);
 
         this.memory[pointer] = value & 0xff;
