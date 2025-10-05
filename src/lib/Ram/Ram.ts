@@ -11,7 +11,6 @@ export class Ram {
         // this.memory.fill(0);
     }
     // is hardware controlled
-    setIE() {}
 
     getIE() {
         return this.memory[0xffff];
@@ -52,7 +51,7 @@ export class Ram {
             this.setMemoryAt(index, value);
         });
     }
-
+    // UTILS
     getVramCut() {
         return this.memory.slice(0x8000, 0x97ff);
     }
