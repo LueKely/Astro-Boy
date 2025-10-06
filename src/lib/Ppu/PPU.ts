@@ -1,6 +1,8 @@
 import type { Ram } from '../Ram/Ram';
 import type { ICoordinates } from './types/Tile_Types';
-
+// DONT FORGET
+// STAT INTERRUPTS
+// STAT has bits for modes 0,1,2 that will trigger interrupts
 export class PPU {
     // Tile relatad data
     static tileMapA = [0x9800, 0x9bff];
@@ -54,22 +56,50 @@ export class PPU {
 
     // LCDC Dictates what are placed and shi cuh!
     //
-    oamScan() {}
-    drawRow() {}
-    horizontalBlank() {}
+    private oamScan() {
+        const LCDC = this.ram.getMemoryAt(PPU.LCDC);
+        const STAT = this.ram.getMemoryAt(PPU.STAT);
+        const objMode = 0;
 
-    pipeLine() {}
+        // check if is allowed to raise IF register
+        if (STAT & 0b0001_0000) {
+            this.ram.setMemoryAt(0xff, this.ram.getIF() | 0b0000_0010);
+        }
+        if ((LCDC & 0b0000_0010) == 0b0000_00010) {
+            // check if enabled to create objects
+        }
+        // check if objects can be drawn
+        // check what type if 8by8 for 8by16
+
+        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0011);
+    }
+    private drawRow() {
+        // mode 3
+        // apply scrolling here
+        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) & 0);
+    }
+    private horizontalBlank() {
+        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0001);
+    }
+    private vBlank() {
+        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0010);
+    }
     step() {
         switch (this.ram.getMemoryAt(PPU.STAT) & 0b0000_0011) {
             case 0:
+                this.horizontalBlank();
                 break;
             case 1:
+                this.vBlank();
                 break;
             case 2:
+                this.oamScan();
+                break;
+            case 3:
+                this.drawRow();
                 break;
             default:
                 throw new Error('This should not happen');
-                break;
         }
         // consumes MCycles during what state
     }
