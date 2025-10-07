@@ -47,6 +47,10 @@ export class Interrupt_Handler {
             name: 'Interrupt',
             cycles: 5,
             execute: (dmg: Gameboy) => {
+                //  Clear interrupt flag
+                dmg.ram.setMemoryAt(0xff0f, dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit));
+                dmg.registerFile.IME = false;
+
                 dmg.registerFile.pointers.SP.decrement();
                 dmg.ram.setMemoryAt(
                     dmg.registerFile.pointers.SP.getRegister(),
@@ -57,11 +61,6 @@ export class Interrupt_Handler {
                     dmg.registerFile.pointers.SP.getRegister(),
                     dmg.registerFile.pointers.PC.getRegister() & 0xff
                 );
-                //  Clear interrupt flag
-                dmg.ram.setMemoryAt(0xff0f, dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit));
-
-                dmg.registerFile.IME = false;
-
                 //  Jump to 0x40, 0x48, 0x50, 0x58, or 0x60
                 dmg.registerFile.pointers.PC.setRegister(
                     Interrupt_Handler.LookUpTable[this.priorityBit]

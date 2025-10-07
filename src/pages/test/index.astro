@@ -24,6 +24,7 @@ import Layout from '../../layouts/Layout.astro';
     import { PPU } from '../../lib/Ppu/PPU';
     import { Tile_Decoder_Utils } from '../../lib/Ppu/Tile_Decoder_Utils';
     import { Tile_Mapper_Utils } from '../../lib/Ppu/Tile_Mapper_Utils';
+    import { Ram } from '../../lib/Ram/Ram';
 
     import { loadFile } from '../../lib/utils/File_Utils';
 
@@ -31,7 +32,8 @@ import Layout from '../../layouts/Layout.astro';
     const button = document.querySelector('.button');
     const output = document.getElementById('output');
     const canvas = document.getElementById('canvas');
-    const APU = new PPU();
+    const ram = new Ram();
+    const APU = new PPU(ram);
 
     const debugPalette = [
         [255, 0, 0, 255], // color0: bright red

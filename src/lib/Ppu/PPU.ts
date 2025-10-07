@@ -1,25 +1,11 @@
 import type { Ram } from '../Ram/Ram';
+import { Address } from '../utils/Address_Pointers';
 import type { ICoordinates } from './types/Tile_Types';
 // DONT FORGET
 // STAT INTERRUPTS
 // STAT has bits for modes 0,1,2 that will trigger interrupts
 export class PPU {
     // Tile relatad data
-    static tileMapA = [0x9800, 0x9bff];
-    static timeMapB = [0x9c00, 0x9fff];
-    static OAM = [0xfe00, 0xfe9f];
-
-    // scroll
-    static SCY = 0xff43;
-    static SCX = 0xff42;
-
-    // modifiers
-    static LCDC = 0xff40;
-    static STAT = 0xff41;
-
-    // i need to compare this
-    static LYC = 0xff45;
-    static LY = 0xff44;
 
     // this should store 384 tiles
     tileCoordinates: ICoordinates[] = [];
@@ -29,63 +15,83 @@ export class PPU {
     oamCache: number[] = [];
 
     private ram: Ram;
-    // so the registers for the ppu
+    // so the registers for the Address
     // are the things stored in the ram
     // todo: comebine all the stuff here
 
     constructor(ram: Ram) {
         this.ram = ram;
-        this.ram.setMemoryAt(PPU.STAT, PPU.STAT | 0b0000_0010);
+        this.ram.setMemoryAt(Address.STAT, Address.STAT | 0b0000_0010);
     }
 
     flagCheck() {
         // check for STAT
-        const LYC = this.ram.getMemoryAt(PPU.LYC);
-        const LY = this.ram.getMemoryAt(PPU.LY);
-        const LCDC = this.ram.getMemoryAt(PPU.LCDC);
-
-        // init STAT
+        const LYC = this.ram.getMemoryAt(Address.LYC);
+        const LY = this.ram.getMemoryAt(Address.LY);
+        const LCDC = this.ram.getMemoryAt(Address.LCDC);
+        const STAT = this.ram.getMemoryAt(Address.STAT);
+        // init STAT INT
         if (LY == LYC) {
-            this.ram.setMemoryAt(PPU.LCDC, LCDC | 0b0000_0010);
+            this.ram.setMemoryAt(Address.LCDC, LCDC | 0b0000_0010);
         }
 
-        // init vblank interrupt
+        // init vblank interrupt INT
         if (LY == 144) {
+            const IF = this.ram.getMemoryAt(Address.IF) | 0b0000_0001;
+            this.ram.setMemoryAt(Address.IF, IF);
         }
     }
 
     // LCDC Dictates what are placed and shi cuh!
-    //
-    private oamScan() {
-        const LCDC = this.ram.getMemoryAt(PPU.LCDC);
-        const STAT = this.ram.getMemoryAt(PPU.STAT);
-        const objMode = 0;
+    // TODO:
+    // LOOP Through the 40 sprites
+    // Check if they are contained in the Scan line
+    // if so proceed to push them to the conveyer belt
 
+    private oamScan() {
+        //  mode 2
+        const LCDC = this.ram.getMemoryAt(Address.LCDC);
+        const STAT = this.ram.getMemoryAt(Address.STAT);
+        const offSetX = 0;
+        const offSetY = 0;
         // check if is allowed to raise IF register
-        if (STAT & 0b0001_0000) {
-            this.ram.setMemoryAt(0xff, this.ram.getIF() | 0b0000_0010);
+        if ((STAT & 0b0010_0000) == 0b0010_0000) {
+            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0010);
+        }
+        // OBJ SIZE CHECKER
+        if ((STAT & 0b0000_0100) == 0b0000_0100) {
         }
         if ((LCDC & 0b0000_0010) == 0b0000_00010) {
             // check if enabled to create objects
         }
-        // check if objects can be drawn
         // check what type if 8by8 for 8by16
-
-        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0011);
+        // push the OAM stuff into as an object
+        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0011);
     }
     private drawRow() {
         // mode 3
         // apply scrolling here
-        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) & 0);
+
+        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) & 0b1111_1100);
     }
     private horizontalBlank() {
-        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0001);
+        // mode 0
+        const STAT = this.ram.getMemoryAt(Address.STAT);
+        if ((STAT & 0b0000_1000) == 0b0000_1000) {
+            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0010);
+        }
+        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
     }
     private vBlank() {
-        this.ram.setMemoryAt(PPU.STAT, this.ram.getMemoryAt(PPU.STAT) | 0b0000_0010);
+        // mode 1
+        const STAT = this.ram.getMemoryAt(Address.STAT);
+        if ((STAT & 0b0001_0000) == 0b0001_0000) {
+            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0001);
+        }
+        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
     }
     step() {
-        switch (this.ram.getMemoryAt(PPU.STAT) & 0b0000_0011) {
+        switch (this.ram.getMemoryAt(Address.STAT) & 0b0000_0011) {
             case 0:
                 this.horizontalBlank();
                 break;
