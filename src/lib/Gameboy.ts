@@ -62,9 +62,10 @@ export class Gameboy {
         let totalCycleCount = 0;
         const limit = 69905;
 
-        while (!this.pause) {
+        while (totalCycleCount < limit) {
             this.scheduler.tick();
             totalCycleCount += this.scheduler.currentMachineCycles * 4;
+            // todo init ppu here to sync with the cpu clock
             // this.listALL();
         }
     }
