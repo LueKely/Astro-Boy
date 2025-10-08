@@ -59,8 +59,12 @@ export class Gameboy {
     }
 
     run() {
+        let totalCycleCount = 0;
+        const limit = 69905;
+
         while (!this.pause) {
             this.scheduler.tick();
+            totalCycleCount += this.scheduler.currentMachineCycles * 4;
             // this.listALL();
         }
     }

@@ -10,7 +10,6 @@ export class Ram {
         // this ain't accurate chief
         // this.memory.fill(0);
     }
-    // is hardware controlled
 
     getIE() {
         return this.memory[0xffff];
@@ -50,32 +49,5 @@ export class Ram {
         raw.forEach((value, index) => {
             this.setMemoryAt(index, value);
         });
-    }
-    // UTILS
-    getVramCut() {
-        return this.memory.slice(0x8000, 0x97ff);
-    }
-
-    getTileMapIndicesA() {
-        return this.memory.slice(0x9800, 0x9bff);
-    }
-
-    getTileMapIndicesB() {
-        return this.memory.slice(0x9c00, 0x9fff);
-    }
-
-    getSCYandSCX() {
-        return {
-            x: this.getMemoryAt(0xff42),
-            y: this.getMemoryAt(0xff43),
-        };
-    }
-
-    getLCDC() {
-        return this.getMemoryAt(0xff40);
-    }
-
-    getOAMCut() {
-        return this.memory.slice(0xfe00, 0xfe9f);
     }
 }

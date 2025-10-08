@@ -60,8 +60,6 @@ export class Cpu_Scheduler {
             const interruptCycles = this.interruptHandler.createCycles();
             this.dmg.registerFile.HALT = false;
             this.currentOpcode = interruptCycles;
-        } else {
-            this.fetchOpcode();
         }
     }
     private stopHandler() {
@@ -69,8 +67,6 @@ export class Cpu_Scheduler {
             const interruptCycles = this.interruptHandler.createCycles();
             this.dmg.registerFile.STOP = false;
             this.currentOpcode = interruptCycles;
-        } else {
-            this.fetchOpcode();
         }
     }
 
@@ -86,6 +82,10 @@ export class Cpu_Scheduler {
     tick() {
         try {
             this.schedule();
+            if (this.dmg.registerFile.HALT || this.dmg.registerFile.STOP) {
+                this.currentMachineCycles = 0;
+                return;
+            }
             this.currentOpcode.execute(this.dmg);
             // after executing
             this.currentMachineCycles = this.currentOpcode.cycles;
