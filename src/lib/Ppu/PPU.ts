@@ -61,11 +61,9 @@ export class PPU {
         // OBJ SIZE CHECKER
         if ((STAT & 0b0000_0100) == 0b0000_0100) {
         }
+        // Is allowed to create objects
         if ((LCDC & 0b0000_0010) == 0b0000_00010) {
-            // check if enabled to create objects
         }
-        // check what type if 8by8 for 8by16
-        // push the OAM stuff into as an object
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0011);
     }
     private drawRow() {
