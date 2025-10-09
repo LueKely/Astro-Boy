@@ -2,12 +2,14 @@ import { GameBoyCatridge } from './Cartridge/Cartridge';
 import { Ram } from './Ram/Ram';
 import { Register_File } from './Cpu/Register_File';
 import { Cpu_Scheduler } from './Cpu/CPU_Scheduler';
+import { PPU } from './Ppu/PPU';
 
 export class Gameboy {
     readonly registerFile: Register_File;
     readonly ram: Ram;
     readonly cartridge: GameBoyCatridge;
     readonly scheduler: Cpu_Scheduler;
+    readonly PPU: PPU;
     pause = false;
     // TODO create a class for timer
 
@@ -17,6 +19,7 @@ export class Gameboy {
         this.cartridge = new GameBoyCatridge(game);
         this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
+        this.PPU = new PPU(this.ram);
         // timer
     }
 
@@ -64,7 +67,7 @@ export class Gameboy {
 
         while (totalCycleCount < limit) {
             this.scheduler.tick();
-            totalCycleCount += this.scheduler.currentMachineCycles * 4;
+            this.PPU.step(this.scheduler.currentMachineCycles);
             // todo init ppu here to sync with the cpu clock
             // this.listALL();
         }

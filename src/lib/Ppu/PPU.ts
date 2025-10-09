@@ -13,7 +13,7 @@ export class PPU {
     tileMapIndices1: Uint8Array = new Uint8Array();
     tileMapIndices2: Uint8Array = new Uint8Array();
     oamCache: number[] = [];
-
+    private dot = 0;
     private ram: Ram;
     // so the registers for the Address
     // are the things stored in the ram
@@ -24,7 +24,7 @@ export class PPU {
         this.ram.setMemoryAt(Address.STAT, Address.STAT | 0b0000_0010);
     }
 
-    flagCheck() {
+    private flagCheck() {
         // check for STAT
         const LYC = this.ram.getMemoryAt(Address.LYC);
         const LY = this.ram.getMemoryAt(Address.LY);
@@ -82,6 +82,7 @@ export class PPU {
         }
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
     }
+
     private vBlank() {
         // mode 1
         const STAT = this.ram.getMemoryAt(Address.STAT);
@@ -90,23 +91,34 @@ export class PPU {
         }
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
     }
-    step() {
-        switch (this.ram.getMemoryAt(Address.STAT) & 0b0000_0011) {
+
+    step(tCycle: number) {
+        const PPU_MODE = this.ram.getMemoryAt(Address.STAT) & 0b0000_0011;
+        this.dot += tCycle;
+        switch (PPU_MODE) {
             case 0:
+                if (this.dot < 204) return;
                 this.horizontalBlank();
+                this.dot -= 204;
                 break;
             case 1:
+                if (this.dot < 456) return;
                 this.vBlank();
+                this.dot -= 456;
                 break;
             case 2:
+                if (this.dot < 80) return;
                 this.oamScan();
+                this.dot -= 80;
                 break;
             case 3:
+                if (this.dot < 172) return;
                 this.drawRow();
+                this.dot -= 172;
                 break;
             default:
                 throw new Error('This should not happen');
         }
-        // consumes MCycles during what state
+        this.flagCheck();
     }
 }
