@@ -7,6 +7,9 @@ export enum Address {
     tileMapAEnd = 0x9bff,
     tileMapBStart = 0x9c00,
     tileMapBEnd = 0x9fff,
+    // VRAM
+    vramStart = 0x8000,
+    vramEnd = 0x9fff,
     // OAM
     oamStart = 0xfe00,
     oamEnd = 0xfe9f,

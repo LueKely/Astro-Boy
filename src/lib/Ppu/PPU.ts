@@ -2,11 +2,14 @@ import type { Ram } from '../Ram/Ram';
 import { Address } from '../utils/Address_Pointers';
 import type { TOam } from './types/OAM';
 import type { ICoordinates } from './types/Tile_Types';
-// DONT FORGET
-// STAT INTERRUPTS
-// STAT has bits for modes 0,1,2 that will trigger interrupts
+
+//TODO:
+// during MODE 2 and 3 it says that Figure this shit out:
+// "While the PPU is accessing some video-related memory, that
+// memory is inaccessible to the CPU (writes are ignored, and reads
+//  return garbage values, usually $FF)."
+
 export class PPU {
-    
     tileCoordinates: ICoordinates[] = [];
     tileDataCache: number[][][] = [];
     tileMapIndices1: Uint8Array = new Uint8Array();
@@ -77,10 +80,12 @@ export class PPU {
         // change to mode 3
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0011);
     }
+
     private drawRow() {
         // mode 3
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) & 0b1111_1100);
     }
+
     private horizontalBlank() {
         // mode 0
         const STAT = this.ram.getMemoryAt(Address.STAT);

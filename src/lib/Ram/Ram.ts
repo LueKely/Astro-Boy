@@ -2,6 +2,8 @@
 // logging feature
 // making some addresses readonly prolly make this some sort of hook
 
+import { Address } from '../utils/Address_Pointers';
+
 export class Ram {
     memory: Uint8Array;
     TRANSFER = false;
@@ -31,17 +33,39 @@ export class Ram {
     }
 
     getMemoryAt(index: number) {
+        const ppuMode = this.memory[Address.STAT] & 0b0000_0011;
+        const mode2 = ppuMode == 2;
+        const mode3 = ppuMode == 3;
+        const vramPointer = index >= Address.vramStart && index <= Address.vramEnd;
+        const oamPointer = index >= Address.oamStart && index <= Address.oamEnd;
+
         if (this.memory[index] == undefined) throw new Error('INVALID VALUE');
 
+        if (vramPointer && mode3) {
+            return 0xff;
+        }
+        if (oamPointer && (mode2 || mode3)) {
+            return 0xff;
+        }
         return this.memory[index];
     }
 
     setMemoryAt(pointer: number, value: number) {
+        const ppuMode = this.memory[Address.STAT] & 0b0000_0011;
+        const mode2 = ppuMode == 2;
+        const mode3 = ppuMode == 3;
+        const vramPointer = pointer >= Address.vramStart && pointer <= Address.vramEnd;
+        const oamPointer = pointer >= Address.oamStart && pointer <= Address.oamEnd;
         if (pointer == 0xff46) {
             this.TRANSFER = true;
         }
-        // console.log('Wrote at address: ' + pointer + ' wit the value of: ' + value);
 
+        if (vramPointer && mode3) {
+            return;
+        }
+        if (oamPointer && (mode2 || mode3)) {
+            return;
+        }
         this.memory[pointer] = value & 0xff;
     }
 
