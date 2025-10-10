@@ -3,7 +3,7 @@
 // making some addresses readonly prolly make this some sort of hook
 
 export class Ram {
-    protected memory: Uint8Array;
+    memory: Uint8Array;
     TRANSFER = false;
     constructor() {
         this.memory = new Uint8Array(0x10000);

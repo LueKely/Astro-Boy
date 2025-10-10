@@ -1,23 +1,20 @@
 import type { Ram } from '../Ram/Ram';
 import { Address } from '../utils/Address_Pointers';
+import type { TOam } from './types/OAM';
 import type { ICoordinates } from './types/Tile_Types';
 // DONT FORGET
 // STAT INTERRUPTS
 // STAT has bits for modes 0,1,2 that will trigger interrupts
 export class PPU {
-    // Tile relatad data
-
-    // this should store 384 tiles
+    
     tileCoordinates: ICoordinates[] = [];
     tileDataCache: number[][][] = [];
     tileMapIndices1: Uint8Array = new Uint8Array();
     tileMapIndices2: Uint8Array = new Uint8Array();
-    oamCache: number[] = [];
+
+    private oamCache: TOam[] = [];
     private dot = 0;
     private ram: Ram;
-    // so the registers for the Address
-    // are the things stored in the ram
-    // todo: comebine all the stuff here
 
     constructor(ram: Ram) {
         this.ram = ram;
@@ -26,10 +23,10 @@ export class PPU {
 
     private flagCheck() {
         // check for STAT
-        const LYC = this.ram.getMemoryAt(Address.LYC);
-        const LY = this.ram.getMemoryAt(Address.LY);
-        const LCDC = this.ram.getMemoryAt(Address.LCDC);
-        const STAT = this.ram.getMemoryAt(Address.STAT);
+        const LYC = this.ram.memory[Address.LYC];
+        const LY = this.ram.memory[Address.LY];
+        const LCDC = this.ram.memory[Address.LCDC];
+        const STAT = this.ram.memory[Address.STAT];
         // init STAT INT
         if (LY == LYC) {
             this.ram.setMemoryAt(Address.LCDC, LCDC | 0b0000_0010);
@@ -42,34 +39,46 @@ export class PPU {
         }
     }
 
-    // LCDC Dictates what are placed and shi cuh!
-    // TODO:
-    // LOOP Through the 40 sprites
-    // Check if they are contained in the Scan line
-    // if so proceed to push them to the conveyer belt
-
     private oamScan() {
         //  mode 2
         const LCDC = this.ram.getMemoryAt(Address.LCDC);
         const STAT = this.ram.getMemoryAt(Address.STAT);
-        const offSetX = 0;
-        const offSetY = 0;
-        // check if is allowed to raise IF register
-        if ((STAT & 0b0010_0000) == 0b0010_0000) {
+        const LY = this.ram.memory[Address.LY];
+
+        const interruptFlag = (STAT & 0b0010_0000) == 0b0010_0000;
+        const isOn = LCDC >>> 7;
+        const isAllowed = (LCDC & 0b0000_0010) == 0b0000_00010;
+        const spriteHeight = LCDC & 0b0000_0100 ? 16 : 8;
+
+        if (interruptFlag) {
             this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
-        // OBJ SIZE CHECKER
-        if ((STAT & 0b0000_0100) == 0b0000_0100) {
+
+        if (!isOn || !isAllowed) {
+            return;
         }
-        // Is allowed to create objects
-        if ((LCDC & 0b0000_0010) == 0b0000_00010) {
+
+        for (let i = 0; i < 40; i++) {
+            const oamAddress = Address.oamStart + i * 4;
+            const sprite = this.ram.memory[oamAddress] - 16;
+
+            // todo read on this
+            if (LY >= sprite && LY < sprite + spriteHeight) {
+                const object: TOam = {
+                    yPos: this.ram.memory[Address.oamStart + i],
+                    xPos: this.ram.memory[Address.oamStart + i + 1],
+                    tileIndex: this.ram.memory[Address.oamStart + i + 2],
+                    attributes: this.ram.memory[Address.oamStart + i + 3],
+                };
+                this.oamCache.push(object);
+                if (this.oamCache.length == 10) break;
+            }
         }
+        // change to mode 3
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0011);
     }
     private drawRow() {
         // mode 3
-        // apply scrolling here
-
         this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) & 0b1111_1100);
     }
     private horizontalBlank() {
