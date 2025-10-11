@@ -14,9 +14,9 @@ describe('lD R16', () => {
 
         const targetValue = 0x2 | (0x03 << 8);
 
-        gameboy.ram.setMemoryAt(0x100, 0x31);
-        gameboy.ram.setMemoryAt(0x101, 0x02);
-        gameboy.ram.setMemoryAt(0x102, 0x03);
+        gameboy.ram.write(0x100, 0x31);
+        gameboy.ram.write(0x101, 0x02);
+        gameboy.ram.write(0x102, 0x03);
 
         gameboy.scheduler.tick();
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x103);
@@ -43,11 +43,11 @@ describe('lD R16', () => {
         HL.setRegister(targetPointer);
         A.setRegister(targetValue);
 
-        gameboy.ram.setMemoryAt(0x100, 0x22);
+        gameboy.ram.write(0x100, 0x22);
         gameboy.scheduler.tick();
 
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
-        expect(gameboy.ram.getMemoryAt(HL.getRegister() - 1)).toBe(targetValue);
+        expect(gameboy.ram.read(HL.getRegister() - 1)).toBe(targetValue);
     });
 });
 
@@ -65,7 +65,7 @@ describe('LD R8, R8', () => {
 
         L.setRegister(targetValue);
 
-        gameboy.ram.setMemoryAt(0x100, 0x45);
+        gameboy.ram.write(0x100, 0x45);
         gameboy.scheduler.tick();
 
         expect(B.getRegister()).toBe(targetValue);
@@ -86,9 +86,9 @@ describe('LD R8, [HL]', () => {
         const targetValue = 0x10;
         HL.setRegister(0xff);
 
-        gameboy.ram.setMemoryAt(0xff, targetValue);
+        gameboy.ram.write(0xff, targetValue);
 
-        gameboy.ram.setMemoryAt(0x100, 0x56);
+        gameboy.ram.write(0x100, 0x56);
         gameboy.scheduler.tick();
 
         expect(D.getRegister()).toBe(targetValue);

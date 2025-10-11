@@ -91,7 +91,7 @@ describe('ADC A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x01);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x01);
         CPU.A.setRegister(0x0);
 
         ADCAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -108,7 +108,7 @@ describe('ADC A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x01);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x01);
         CPU.A.setRegister(0x0e);
         CPU.F.setCYFlag();
 
@@ -126,7 +126,7 @@ describe('ADC A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x00);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x00);
         CPU.A.setRegister(0x0);
 
         ADCAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -252,7 +252,7 @@ describe('ADD A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0xff);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0xff);
         CPU.A.setRegister(0x1);
 
         ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -268,7 +268,7 @@ describe('ADD A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x01);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x01);
         CPU.A.setRegister(0x1e);
 
         ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -284,7 +284,7 @@ describe('ADD A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x01);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x01);
         CPU.A.setRegister(0x0);
 
         ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -301,7 +301,7 @@ describe('ADD A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 2);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 2);
         CPU.A.setRegister(0x0e);
         CPU.F.setCYFlag();
 
@@ -319,7 +319,7 @@ describe('ADD A, HL Functionalitys', () => {
         const CPU = new Register_File();
         const dummyMemory = new Ram();
         CPU.register16Bit.HL.setRegister(0xff);
-        dummyMemory.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x00);
+        dummyMemory.write(CPU.register16Bit.HL.getRegister(), 0x00);
         CPU.A.setRegister(0x0);
 
         ADDAHL(CPU.register16Bit.HL, dummyMemory, CPU.F, CPU.A);
@@ -456,7 +456,7 @@ describe('CP A, [HL] Functionalities', () => {
 
         HL.setRegister(16);
         A.setRegister(16);
-        dummyRam.setMemoryAt(HL.getRegister(), 16);
+        dummyRam.write(HL.getRegister(), 16);
         CPAHL(dummyRam, A, HL, CPU.F);
         expect(CPU.F.getZFlag()).toBe(1);
     });
@@ -469,7 +469,7 @@ describe('CP A, [HL] Functionalities', () => {
 
         HL.setRegister(86);
         A.setRegister(18);
-        dummyRam.setMemoryAt(HL.getRegister(), 86);
+        dummyRam.write(HL.getRegister(), 86);
         CPAHL(dummyRam, A, HL, CPU.F);
 
         expect(CPU.F.getHFlag()).toBe(1);
@@ -484,7 +484,7 @@ describe('CP A, [HL] Functionalities', () => {
 
         HL.setRegister(0x9c);
         A.setRegister(0x78);
-        dummyRam.setMemoryAt(HL.getRegister(), 0x9c);
+        dummyRam.write(HL.getRegister(), 0x9c);
         CPAHL(dummyRam, A, HL, CPU.F);
 
         expect(CPU.F.getZFlag()).toBe(0);
@@ -501,7 +501,7 @@ describe('CP A, [HL] Functionalities', () => {
 
         HL.setRegister(55);
         A.setRegister(66);
-        dummyRam.setMemoryAt(HL.getRegister(), 55);
+        dummyRam.write(HL.getRegister(), 55);
         CPAHL(dummyRam, A, HL, CPU.F);
 
         expect(CPU.F.getZFlag()).toBe(0);
@@ -516,7 +516,7 @@ describe('CP A, [HL] Functionalities', () => {
 
         HL.setRegister(48);
         A.setRegister(32);
-        dummyRam.setMemoryAt(HL.getRegister(), 48);
+        dummyRam.write(HL.getRegister(), 48);
         CPAHL(dummyRam, A, HL, CPU.F);
 
         expect(CPU.F.getZFlag()).toBe(0);
@@ -655,24 +655,24 @@ describe('DEC HL Functionalities', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b1111_1111);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x00);
+        ram.write(CPU.register16Bit.HL.getRegister(), 0x00);
 
         DECHL(CPU.register16Bit.HL, ram, CPU.F);
 
         expect(CPU.F.getNFlag()).toBe(1);
         expect(CPU.F.getHFlag()).toBe(1);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0xff);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(0xff);
     });
     test('When decrementing the value 16, H flag should raise', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b0001_0000);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 16);
+        ram.write(CPU.register16Bit.HL.getRegister(), 16);
 
         DECHL(CPU.register16Bit.HL, ram, CPU.F);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(15);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(15);
         expect(CPU.F.getNFlag()).toBe(1);
         expect(CPU.F.getHFlag()).toBe(1);
     });
@@ -680,11 +680,11 @@ describe('DEC HL Functionalities', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 1);
+        ram.write(CPU.register16Bit.HL.getRegister(), 1);
 
         DECHL(CPU.register16Bit.HL, ram, CPU.F);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(0);
         expect(CPU.F.getNFlag()).toBe(1);
         expect(CPU.F.getZFlag()).toBe(1);
     });
@@ -767,37 +767,37 @@ describe('INC HL Functionalities', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b1111_1110);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 0x7f);
+        ram.write(CPU.register16Bit.HL.getRegister(), 0x7f);
 
         INCHL(CPU.register16Bit.HL, ram, CPU.F);
 
         expect(CPU.F.getNFlag()).toBe(0);
         expect(CPU.F.getHFlag()).toBe(1);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(0x80);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(0x80);
     });
 
     test('When incrementing the value of 254, the value of A should be 255', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b1111_1110);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 254);
+        ram.write(CPU.register16Bit.HL.getRegister(), 254);
 
         INCHL(CPU.register16Bit.HL, ram, CPU.F);
 
         expect(CPU.F.getNFlag()).toBe(0);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(255);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(255);
     });
     test('When incrementing the value 15, H flag should raise', () => {
         const CPU = new Register_File();
         const ram = new Ram();
         CPU.register16Bit.HL.setRegister(0b0000_1111);
-        ram.setMemoryAt(CPU.register16Bit.HL.getRegister(), 15);
+        ram.write(CPU.register16Bit.HL.getRegister(), 15);
 
         INCHL(CPU.register16Bit.HL, ram, CPU.F);
 
-        expect(ram.getMemoryAt(CPU.register16Bit.HL.getRegister())).toBe(16);
+        expect(ram.read(CPU.register16Bit.HL.getRegister())).toBe(16);
         expect(CPU.F.getNFlag()).toBe(0);
         expect(CPU.F.getHFlag()).toBe(1);
     });
@@ -967,7 +967,7 @@ describe('SBC A, [HL] functionalities', () => {
         A.setRegister(0b0000_1111);
 
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -988,7 +988,7 @@ describe('SBC A, [HL] functionalities', () => {
         A.setRegister(0b0000_1111);
 
         HL.setRegister(0b0000_1111);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -1009,7 +1009,7 @@ describe('SBC A, [HL] functionalities', () => {
         A.setRegister(0b0010_0000);
 
         HL.setRegister(0b0000_1111);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
         F.setCYFlag();
         SBCAHL(HL, ram, F, A);
         expect(A.getRegister()).toBe(16);
@@ -1027,7 +1027,7 @@ describe('SBC A, [HL] functionalities', () => {
 
         A.setRegister(0b0001_0000);
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -1049,7 +1049,7 @@ describe('SBC A, [HL] functionalities', () => {
         A.setRegister(0b0000_0000);
 
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
         SBCAHL(HL, ram, F, A);
@@ -1272,7 +1272,7 @@ describe('SUB A, [HL] functionalities', () => {
         A.setRegister(0b0000_0000);
 
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         F.setCYFlag();
 
@@ -1293,7 +1293,7 @@ describe('SUB A, [HL] functionalities', () => {
         A.setRegister(0b0000_1111);
 
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -1314,7 +1314,7 @@ describe('SUB A, [HL] functionalities', () => {
         A.setRegister(0x10);
 
         HL.setRegister(0x01);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -1335,7 +1335,7 @@ describe('SUB A, [HL] functionalities', () => {
         A.setRegister(0b0010_0000);
 
         HL.setRegister(0b0000_1111);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         SUBAHL(HL, ram, F, A);
         expect(A.getRegister()).toBe(17);
@@ -1353,7 +1353,7 @@ describe('SUB A, [HL] functionalities', () => {
 
         A.setRegister(0b0001_0000);
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         SUBAHL(HL, ram, F, A);
 
@@ -1373,7 +1373,7 @@ describe('SUB A, [HL] functionalities', () => {
         A.setRegister(0b0000_0000);
 
         HL.setRegister(0b0000_0001);
-        ram.setMemoryAt(HL.getRegister(), HL.getRegister());
+        ram.write(HL.getRegister(), HL.getRegister());
 
         // F.setCYFlag();
 
@@ -1470,7 +1470,7 @@ describe('ADC R8', () => {
             const gameboy = new Gameboy(dummyRom);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile.A.setRegister(0x10);
             gameboy.registerFile[value.register].setRegister(0x20);
 
@@ -1491,7 +1491,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0x0);
             gameboy.registerFile[value.register].setRegister(0x0);
 
@@ -1512,7 +1512,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0xff);
             gameboy.registerFile[value.register].setRegister(0x01);
 
@@ -1533,7 +1533,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0xff);
             gameboy.registerFile[value.register].setRegister(0xff);
 
@@ -1556,7 +1556,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0x07);
             gameboy.registerFile[value.register].setRegister(0x08);
 
@@ -1579,7 +1579,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0x0f);
             gameboy.registerFile[value.register].setRegister(0x01);
 
@@ -1600,7 +1600,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0x08);
             gameboy.registerFile[value.register].setRegister(0x08);
 
@@ -1621,7 +1621,7 @@ describe('ADC R8', () => {
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
-            gameboy.ram.setMemoryAt(0x0100, value.opcode);
+            gameboy.ram.write(0x0100, value.opcode);
             gameboy.registerFile['A'].setRegister(0x0ff);
             gameboy.registerFile[value.register].setRegister(0x00);
 
@@ -1644,7 +1644,7 @@ describe('ADC A', () => {
         const gameboy = new Gameboy(dummyRom);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
-        gameboy.ram.setMemoryAt(0x0100, 0x8f);
+        gameboy.ram.write(0x0100, 0x8f);
         gameboy.registerFile.A.setRegister(0x10);
 
         F.setCYFlag();
@@ -1664,7 +1664,7 @@ describe('ADC A', () => {
         const gameboy = new Gameboy(dummyRom);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
-        gameboy.ram.setMemoryAt(0x0100, 0x8f);
+        gameboy.ram.write(0x0100, 0x8f);
         gameboy.registerFile.A.setRegister(0x10);
 
         gameboy.scheduler.tick();
@@ -1682,7 +1682,7 @@ describe('ADC A', () => {
         const gameboy = new Gameboy(dummyRom);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
-        gameboy.ram.setMemoryAt(0x0100, 0x07);
+        gameboy.ram.write(0x0100, 0x07);
         gameboy.registerFile['A'].setRegister(0x07);
 
         gameboy.scheduler.tick();
@@ -1700,7 +1700,7 @@ describe('ADC A', () => {
         const gameboy = new Gameboy(dummyRom);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
-        gameboy.ram.setMemoryAt(0x0100, 0x07);
+        gameboy.ram.write(0x0100, 0x07);
         gameboy.registerFile['A'].setRegister(0xf0);
         F.setCYFlag();
         gameboy.scheduler.tick();

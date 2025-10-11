@@ -42,8 +42,8 @@ export class Gameboy {
             // HALT_BUG: this.registerFile.HALT_BUG,
             // HALT: this.registerFile.HALT,
             // STOP: this.registerFile.STOP,
-            'Memory 0xFF01': this.ram.getMemoryAt(0xff01),
-            'Memory 0xFF02': this.ram.getMemoryAt(0xff02),
+            'Memory 0xFF01': this.ram.read(0xff01),
+            'Memory 0xFF02': this.ram.read(0xff02),
         };
         console.table(systemState);
     }
@@ -75,8 +75,8 @@ export class Gameboy {
     listALL() {
         console.log('ALL THE OPCODES');
         console.log(this.list);
-        console.log('0XFF01: 0x' + this.ram.getMemoryAt(0xff01).toString(16));
-        console.log('0XFF02: 0x' + this.ram.getMemoryAt(0xff02).toString(16));
+        console.log('0XFF01: 0x' + this.ram.read(0xff01).toString(16));
+        console.log('0XFF02: 0x' + this.ram.read(0xff02).toString(16));
         console.log('TILE DATA');
         console.log(this.ram.getMemory().slice(0x8000, 0x97ff));
     }

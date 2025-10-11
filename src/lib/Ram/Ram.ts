@@ -32,7 +32,7 @@ export class Ram {
         return this.memory;
     }
 
-    getMemoryAt(index: number) {
+    read(index: number) {
         const ppuMode = this.memory[Address.STAT] & 0b0000_0011;
         const mode2 = ppuMode == 2;
         const mode3 = ppuMode == 3;
@@ -50,7 +50,7 @@ export class Ram {
         return this.memory[index];
     }
 
-    setMemoryAt(pointer: number, value: number) {
+    write(pointer: number, value: number) {
         const ppuMode = this.memory[Address.STAT] & 0b0000_0011;
         const mode2 = ppuMode == 2;
         const mode3 = ppuMode == 3;
@@ -71,7 +71,7 @@ export class Ram {
 
     copyROM(raw: Uint8Array) {
         raw.forEach((value, index) => {
-            this.setMemoryAt(index, value);
+            this.write(index, value);
         });
     }
 }

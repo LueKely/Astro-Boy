@@ -48,16 +48,16 @@ export class Interrupt_Handler {
             cycles: 5,
             execute: (dmg: Gameboy) => {
                 //  Clear interrupt flag
-                dmg.ram.setMemoryAt(0xff0f, dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit));
+                dmg.ram.write(0xff0f, dmg.ram.getIF() & ~(0b0_0001 << this.priorityBit));
                 dmg.registerFile.IME = false;
 
                 dmg.registerFile.pointers.SP.decrement();
-                dmg.ram.setMemoryAt(
+                dmg.ram.write(
                     dmg.registerFile.pointers.SP.getRegister(),
                     dmg.registerFile.pointers.PC.getRegister() >>> 8
                 );
                 dmg.registerFile.pointers.SP.decrement();
-                dmg.ram.setMemoryAt(
+                dmg.ram.write(
                     dmg.registerFile.pointers.SP.getRegister(),
                     dmg.registerFile.pointers.PC.getRegister() & 0xff
                 );

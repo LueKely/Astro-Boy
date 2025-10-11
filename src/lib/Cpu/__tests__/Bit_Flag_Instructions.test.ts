@@ -43,7 +43,7 @@ describe('Tests the BIT U3, [HL] funciton, Flag should be 0b1010_000', () => {
         const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(1);
-        ram.setMemoryAt(HL.getRegister(), 1);
+        ram.write(HL.getRegister(), 1);
         const u3 = 1;
 
         BITU3HL(u3, HL, ram, F);
@@ -57,7 +57,7 @@ describe('Tests the BIT U3, [HL] funciton, Flag should be 0b1010_000', () => {
         const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(3);
-        ram.setMemoryAt(HL.getRegister(), 3);
+        ram.write(HL.getRegister(), 3);
         const u3 = 1;
 
         BITU3HL(u3, HL, ram, F);
@@ -97,12 +97,12 @@ describe('Tests the RES U3, [HL] function', () => {
         const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_1111);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
+        ram.write(HL.getRegister(), 0b1111_1111);
         const u3 = 3;
 
         RESU3HL(u3, HL, ram);
 
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_0111);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_0111);
     });
 
     test('turn bit 7 to 0', () => {
@@ -111,12 +111,12 @@ describe('Tests the RES U3, [HL] function', () => {
         const { F } = CPU;
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_1111);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
+        ram.write(HL.getRegister(), 0b1111_1111);
         const u3 = 7;
 
         RESU3HL(u3, HL, ram);
 
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0111_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b0111_1111);
     });
 });
 
@@ -149,12 +149,12 @@ describe('Tests the SET U3, [HL] function', () => {
         const ram = new Ram();
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b1111_0111);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_0111);
+        ram.write(HL.getRegister(), 0b1111_0111);
         const u3 = 3;
 
         SETU3HL(u3, HL, ram);
 
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1111);
     });
 
     test('turn bit 7 to 0', () => {
@@ -162,11 +162,11 @@ describe('Tests the SET U3, [HL] function', () => {
         const ram = new Ram();
         const { HL } = CPU.register16Bit;
         HL.setRegister(0b0111_1111);
-        ram.setMemoryAt(HL.getRegister(), 0b0111_1111);
+        ram.write(HL.getRegister(), 0b0111_1111);
         const u3 = 7;
 
         SETU3HL(u3, HL, ram);
 
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1111);
     });
 });

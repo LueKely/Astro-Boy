@@ -21,7 +21,7 @@ export class PPU {
 
     constructor(ram: Ram) {
         this.ram = ram;
-        this.ram.setMemoryAt(Address.STAT, Address.STAT | 0b0000_0010);
+        this.ram.write(Address.STAT, Address.STAT | 0b0000_0010);
     }
 
     private flagCheck() {
@@ -32,20 +32,20 @@ export class PPU {
         const STAT = this.ram.memory[Address.STAT];
         // init STAT INT
         if (LY == LYC) {
-            this.ram.setMemoryAt(Address.LCDC, LCDC | 0b0000_0010);
+            this.ram.write(Address.LCDC, LCDC | 0b0000_0010);
         }
 
         // init vblank interrupt INT
         if (LY == 144) {
-            const IF = this.ram.getMemoryAt(Address.IF) | 0b0000_0001;
-            this.ram.setMemoryAt(Address.IF, IF);
+            const IF = this.ram.read(Address.IF) | 0b0000_0001;
+            this.ram.write(Address.IF, IF);
         }
     }
 
     private oamScan() {
         //  mode 2
-        const LCDC = this.ram.getMemoryAt(Address.LCDC);
-        const STAT = this.ram.getMemoryAt(Address.STAT);
+        const LCDC = this.ram.read(Address.LCDC);
+        const STAT = this.ram.read(Address.STAT);
         const LY = this.ram.memory[Address.LY];
 
         const interruptFlag = (STAT & 0b0010_0000) == 0b0010_0000;
@@ -54,7 +54,7 @@ export class PPU {
         const spriteHeight = LCDC & 0b0000_0100 ? 16 : 8;
 
         if (interruptFlag) {
-            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0010);
+            this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
 
         if (!isOn || !isAllowed) {
@@ -78,34 +78,34 @@ export class PPU {
             }
         }
         // change to mode 3
-        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0011);
+        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0011);
     }
 
     private drawRow() {
         // mode 3
-        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) & 0b1111_1100);
+        this.ram.write(Address.STAT, this.ram.read(Address.STAT) & 0b1111_1100);
     }
 
     private horizontalBlank() {
         // mode 0
-        const STAT = this.ram.getMemoryAt(Address.STAT);
+        const STAT = this.ram.read(Address.STAT);
         if ((STAT & 0b0000_1000) == 0b0000_1000) {
-            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0010);
+            this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
-        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
+        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
     }
 
     private vBlank() {
         // mode 1
-        const STAT = this.ram.getMemoryAt(Address.STAT);
+        const STAT = this.ram.read(Address.STAT);
         if ((STAT & 0b0001_0000) == 0b0001_0000) {
-            this.ram.setMemoryAt(Address.IF, this.ram.getIF() | 0b0000_0001);
+            this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0001);
         }
-        this.ram.setMemoryAt(Address.STAT, this.ram.getMemoryAt(Address.STAT) | 0b0000_0010);
+        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
     }
 
     step(tCycle: number) {
-        const PPU_MODE = this.ram.getMemoryAt(Address.STAT) & 0b0000_0011;
+        const PPU_MODE = this.ram.read(Address.STAT) & 0b0000_0011;
         this.dot += tCycle;
         switch (PPU_MODE) {
             case 0:

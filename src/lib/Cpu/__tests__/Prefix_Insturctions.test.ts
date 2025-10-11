@@ -19,8 +19,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x00);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x00);
 
         scheduler.tick();
 
@@ -38,8 +38,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x01);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x01);
 
         scheduler.tick();
 
@@ -57,8 +57,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x02);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x02);
 
         scheduler.tick();
 
@@ -76,8 +76,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x03);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x03);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -94,8 +94,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x04);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x04);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -112,8 +112,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x05);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x05);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -129,14 +129,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x06);
+        ram.write(HL.getRegister(), 0b1000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x06);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0x01);
+        expect(ram.read(HL.getRegister())).toBe(0x01);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -149,8 +149,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x07);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x07);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -167,8 +167,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x08);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x08);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -185,8 +185,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x09);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x09);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -203,8 +203,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -221,8 +221,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -239,8 +239,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -257,8 +257,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -274,14 +274,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0e);
+        ram.write(HL.getRegister(), 0b0000_0001);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0e);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0x80);
+        expect(ram.read(HL.getRegister())).toBe(0x80);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -294,8 +294,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x0f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x0f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -312,8 +312,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         B.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x10);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x10);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -330,8 +330,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x11);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x11);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -348,8 +348,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         D.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x12);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x12);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -366,8 +366,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         E.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x13);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x13);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -384,8 +384,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         H.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x14);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x14);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -402,8 +402,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         L.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x15);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x15);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -420,15 +420,15 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
         F.setCYFlag();
-        ram.setMemoryAt(HL.getRegister(), 0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x16);
+        ram.write(HL.getRegister(), 0b1000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x16);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0x01);
+        expect(ram.read(HL.getRegister())).toBe(0x01);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -441,8 +441,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x17);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x17);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -460,8 +460,8 @@ describe('Opcodes with prefixes', () => {
 
         F.setCYFlag();
         B.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x18);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x18);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -479,8 +479,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         C.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x19);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x19);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -498,8 +498,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         D.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -517,8 +517,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         E.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -536,8 +536,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         H.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -555,8 +555,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         L.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -574,15 +574,15 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1e);
+        ram.write(HL.getRegister(), 0b0000_0001);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1e);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0x80);
+        expect(ram.read(HL.getRegister())).toBe(0x80);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -596,8 +596,8 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         A.setRegister(0b0000_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x1f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x1f);
 
         scheduler.tick();
 
@@ -615,8 +615,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         B.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x20);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x20);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -633,8 +633,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         C.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x21);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x21);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -651,8 +651,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x22);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x22);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -669,8 +669,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
         F.setCYFlag();
         E.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x23);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x23);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -686,8 +686,8 @@ describe('Opcodes with prefixes', () => {
         const { H, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         H.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x24);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x24);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -703,8 +703,8 @@ describe('Opcodes with prefixes', () => {
         const { L, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         L.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x25);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x25);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -720,14 +720,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x26);
+        ram.write(HL.getRegister(), 0b1000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x26);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0x00);
+        expect(ram.read(HL.getRegister())).toBe(0x00);
         expect(F.getRegister()).toBe(0b1001_0000);
     });
 
@@ -739,8 +739,8 @@ describe('Opcodes with prefixes', () => {
         const { A, F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         A.setRegister(0b1000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x27);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x27);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -757,8 +757,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x28);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x28);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -775,8 +775,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x29);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x29);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -793,8 +793,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -811,8 +811,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -829,8 +829,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -847,8 +847,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -866,14 +866,14 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2e);
+        ram.write(HL.getRegister(), 0b1100_0001);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2e);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1110_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b1110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
     test('0x2f - SRA A', () => {
@@ -885,8 +885,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x2f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x2f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -903,8 +903,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x30);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x30);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -921,8 +921,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x31);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x31);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -939,8 +939,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x32);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x32);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -957,8 +957,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x33);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x33);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -975,8 +975,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x34);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x34);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -993,8 +993,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x35);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x35);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1010,14 +1010,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x36);
+        ram.write(HL.getRegister(), 0b1111_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x36);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b0000_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
 
@@ -1030,8 +1030,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x37);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x37);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1048,8 +1048,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x38);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x38);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1066,8 +1066,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x39);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x39);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1084,8 +1084,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1102,8 +1102,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1119,8 +1119,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1137,8 +1137,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1156,14 +1156,14 @@ describe('Opcodes with prefixes', () => {
         F.setCYFlag();
 
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3e);
+        ram.write(HL.getRegister(), 0b1100_0001);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3e);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0110_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b0110_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -1176,8 +1176,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1100_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x3f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x3f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1194,8 +1194,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1110);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x40);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x40);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1212,8 +1212,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1110);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x41);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x41);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1230,8 +1230,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1110);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x42);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x42);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1248,8 +1248,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1110);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x43);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x43);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1266,8 +1266,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x44);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x44);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1284,8 +1284,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x45);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x45);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1301,15 +1301,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x46);
+        ram.write(HL.getRegister(), 0b1111_0001);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x46);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_0001);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_0001);
         expect(F.getRegister()).toBe(0b0010_0000);
     });
 
@@ -1322,8 +1322,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0001);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x47);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x47);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1340,8 +1340,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x48);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x48);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1358,8 +1358,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x49);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x49);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1376,8 +1376,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1394,8 +1394,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1412,8 +1412,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1430,8 +1430,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1447,15 +1447,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4e);
+        ram.write(HL.getRegister(), 0b1111_1101);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4e);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1101);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1101);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -1468,8 +1468,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1101);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x4f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x4f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1486,8 +1486,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x50);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x50);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1504,8 +1504,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x51);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x51);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1522,8 +1522,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x52);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x52);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1540,8 +1540,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x53);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x53);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1558,8 +1558,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x54);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x54);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1576,8 +1576,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x55);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x55);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1593,15 +1593,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x56);
+        ram.write(HL.getRegister(), 0b1111_1011);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x56);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1011);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1011);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -1614,8 +1614,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1011);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x57);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x57);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1632,8 +1632,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x58);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x58);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1650,8 +1650,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x59);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x59);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1668,8 +1668,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1686,8 +1686,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1704,8 +1704,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1722,8 +1722,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1739,15 +1739,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5e);
+        ram.write(HL.getRegister(), 0b1111_0111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5e);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_0111);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_0111);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -1760,8 +1760,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_0111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x5f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x5f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1778,8 +1778,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x60);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x60);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1796,8 +1796,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x61);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x61);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1814,8 +1814,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x62);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x62);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1832,8 +1832,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x63);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x63);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1850,8 +1850,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x64);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x64);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1868,8 +1868,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x65);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x65);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1885,15 +1885,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x66);
+        ram.write(HL.getRegister(), 0b1110_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x66);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1110_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -1906,8 +1906,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1110_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x67);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x67);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1924,8 +1924,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x68);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x68);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1942,8 +1942,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x69);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x69);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1960,8 +1960,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1978,8 +1978,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -1996,8 +1996,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2014,8 +2014,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2031,15 +2031,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6e);
+        ram.write(HL.getRegister(), 0b1101_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6e);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1101_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1101_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -2052,8 +2052,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1101_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x6f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x6f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2070,8 +2070,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x70);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x70);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2088,8 +2088,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x71);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x71);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2106,8 +2106,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x72);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x72);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2124,8 +2124,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x73);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x73);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2142,8 +2142,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x74);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x74);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2160,8 +2160,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x75);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x75);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2177,15 +2177,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x76);
+        ram.write(HL.getRegister(), 0b1011_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x76);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1011_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1011_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -2198,8 +2198,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1011_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x77);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x77);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2216,8 +2216,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x78);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x78);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2234,8 +2234,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x79);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x79);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2252,8 +2252,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2270,8 +2270,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2288,8 +2288,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2306,8 +2306,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2323,15 +2323,15 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7e);
+        ram.write(HL.getRegister(), 0b0111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7e);
 
         scheduler.tick();
 
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0111_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b0111_1111);
         expect(F.getRegister()).toBe(0b1010_0000);
     });
 
@@ -2344,8 +2344,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x7f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x7f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2362,8 +2362,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x80);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x80);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2379,8 +2379,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x81);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x81);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2396,8 +2396,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x82);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x82);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2413,8 +2413,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x83);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x83);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2430,8 +2430,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x84);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x84);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2447,8 +2447,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x85);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x85);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2463,14 +2463,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x86);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x86);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1110);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1110);
     });
 
     test('0x87 - RES 0, A', () => {
@@ -2482,8 +2482,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x87);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x87);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2499,8 +2499,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x88);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x88);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2516,8 +2516,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x89);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x89);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2533,8 +2533,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2550,8 +2550,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2567,8 +2567,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2584,8 +2584,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2600,14 +2600,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8e);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8e);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1101);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1101);
     });
 
     test('0x8f - RES 1, A', () => {
@@ -2619,8 +2619,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x8f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x8f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2636,8 +2636,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x90);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x90);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2653,8 +2653,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x91);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x91);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2670,8 +2670,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x92);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x92);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2687,8 +2687,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x93);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x93);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2704,8 +2704,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x94);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x94);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2721,8 +2721,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x95);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x95);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2737,14 +2737,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x96);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x96);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_1011);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_1011);
     });
 
     test('0x97 - RES 2, A', () => {
@@ -2756,8 +2756,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x97);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x97);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2773,8 +2773,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x98);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x98);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2790,8 +2790,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x99);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x99);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2807,8 +2807,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9a);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9a);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2824,8 +2824,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9b);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9b);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2841,8 +2841,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9c);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9c);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2858,8 +2858,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9d);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9d);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2874,14 +2874,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9e);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9e);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1111_0111);
+        expect(ram.read(HL.getRegister())).toBe(0b1111_0111);
     });
 
     test('0x9f - RES 3, A', () => {
@@ -2893,8 +2893,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0x9f);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0x9f);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2910,8 +2910,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2927,8 +2927,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2944,8 +2944,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2961,8 +2961,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2978,8 +2978,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -2995,8 +2995,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3011,14 +3011,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa6);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1110_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1110_1111);
     });
 
     test('0xa7 - RES 4, A', () => {
@@ -3030,8 +3030,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3047,8 +3047,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3064,8 +3064,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xa9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xa9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3081,8 +3081,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xaa);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xaa);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3098,8 +3098,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xab);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xab);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3115,8 +3115,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xac);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xac);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3132,8 +3132,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xad);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xad);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3148,14 +3148,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xae);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xae);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1101_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1101_1111);
     });
 
     test('0xaf - RES 5, A', () => {
@@ -3167,8 +3167,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xaf);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xaf);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3184,8 +3184,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3201,8 +3201,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3218,8 +3218,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3235,8 +3235,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3252,8 +3252,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3269,8 +3269,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3285,14 +3285,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb6);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1011_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b1011_1111);
     });
 
     test('0xb7 - RES 6, A', () => {
@@ -3304,8 +3304,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3321,8 +3321,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3338,8 +3338,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xb9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xb9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3355,8 +3355,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xba);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xba);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3372,8 +3372,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xbb);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xbb);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3389,8 +3389,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xbc);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xbc);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3406,8 +3406,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xbd);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xbd);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3422,14 +3422,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xbe);
+        ram.write(HL.getRegister(), 0b1111_1111);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xbe);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0111_1111);
+        expect(ram.read(HL.getRegister())).toBe(0b0111_1111);
     });
 
     test('0xbf - RES 7, A', () => {
@@ -3441,8 +3441,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b1111_1111);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xbf);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xbf);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3458,8 +3458,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3475,8 +3475,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3492,8 +3492,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3509,8 +3509,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3526,8 +3526,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3543,8 +3543,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3559,14 +3559,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc6);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0001);
+        expect(ram.read(HL.getRegister())).toBe(0b0000_0001);
     });
 
     test('0xc7 - SET 0, A', () => {
@@ -3578,8 +3578,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3595,8 +3595,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3612,8 +3612,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xc9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xc9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3629,8 +3629,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xca);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xca);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3646,8 +3646,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xcb);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xcb);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3663,8 +3663,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xcc);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xcc);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3680,8 +3680,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xcd);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xcd);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3696,14 +3696,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xce);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xce);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0010);
+        expect(ram.read(HL.getRegister())).toBe(0b0000_0010);
     });
 
     test('0xcf - SET 1, A', () => {
@@ -3715,8 +3715,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xcf);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xcf);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3732,8 +3732,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3749,8 +3749,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3766,8 +3766,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3783,8 +3783,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3800,8 +3800,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3817,8 +3817,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3833,14 +3833,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd6);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0100);
+        expect(ram.read(HL.getRegister())).toBe(0b0000_0100);
     });
 
     test('0xd7 - SET 2, A', () => {
@@ -3852,8 +3852,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3869,8 +3869,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3886,8 +3886,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xd9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xd9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3903,8 +3903,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xda);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xda);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3920,8 +3920,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xdb);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xdb);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3937,8 +3937,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xdc);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xdc);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3954,8 +3954,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xdd);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xdd);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -3970,14 +3970,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xde);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xde);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0000_1000);
+        expect(ram.read(HL.getRegister())).toBe(0b0000_1000);
     });
 
     test('0xdf - SET 3, A', () => {
@@ -3989,8 +3989,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xdf);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xdf);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4006,8 +4006,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4023,8 +4023,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4040,8 +4040,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4057,8 +4057,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4074,8 +4074,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4091,8 +4091,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4107,14 +4107,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe6);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0001_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b0001_0000);
     });
 
     test('0xe7 - SET 4, A', () => {
@@ -4126,8 +4126,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4143,8 +4143,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4160,8 +4160,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xe9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xe9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4177,8 +4177,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xea);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xea);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4194,8 +4194,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xeb);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xeb);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4211,8 +4211,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xec);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xec);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4228,8 +4228,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xed);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xed);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4244,14 +4244,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xee);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xee);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0010_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b0010_0000);
     });
 
     test('0xef - SET 5, A', () => {
@@ -4263,8 +4263,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xef);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xef);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4280,8 +4280,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf0);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf0);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4297,8 +4297,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf1);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf1);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4314,8 +4314,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf2);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf2);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4331,8 +4331,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf3);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf3);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4348,8 +4348,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf4);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf4);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4365,8 +4365,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf5);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf5);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4381,14 +4381,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf6);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf6);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b0100_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b0100_0000);
     });
 
     test('0xf7 - SET 6, A', () => {
@@ -4400,8 +4400,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf7);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf7);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4417,8 +4417,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         B.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf8);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf8);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4434,8 +4434,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         C.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xf9);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xf9);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4451,8 +4451,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         D.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xfa);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xfa);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4468,8 +4468,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         E.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xfb);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xfb);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4485,8 +4485,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         H.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xfc);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xfc);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4502,8 +4502,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         L.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xfd);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xfd);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
@@ -4518,14 +4518,14 @@ describe('Opcodes with prefixes', () => {
         const { F } = gameboy.registerFile;
         const { PC } = gameboy.registerFile.pointers;
         HL.setRegister(0xff);
-        ram.setMemoryAt(HL.getRegister(), 0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xfe);
+        ram.write(HL.getRegister(), 0b0000_0000);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xfe);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);
         expect(HL.getRegister()).toBe(0xff);
-        expect(ram.getMemoryAt(HL.getRegister())).toBe(0b1000_0000);
+        expect(ram.read(HL.getRegister())).toBe(0b1000_0000);
     });
 
     test('0xff - SET 7, A', () => {
@@ -4537,8 +4537,8 @@ describe('Opcodes with prefixes', () => {
         const { PC } = gameboy.registerFile.pointers;
 
         A.setRegister(0b0000_0000);
-        ram.setMemoryAt(0x100, 0xcb);
-        ram.setMemoryAt(0x101, 0xff);
+        ram.write(0x100, 0xcb);
+        ram.write(0x101, 0xff);
 
         scheduler.tick();
         expect(PC.getRegister()).toBe(0x102);

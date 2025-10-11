@@ -119,7 +119,7 @@ describe('This will test LD[HL], R8', () => {
 
                 LDHLR8(poop.register16Bit.HL, value, dummyMemory);
 
-                expect(dummyMemory.getMemoryAt(poop.register16Bit.HL.getRegister())).toBe(0xff);
+                expect(dummyMemory.read(poop.register16Bit.HL.getRegister())).toBe(0xff);
             }
         );
     }
@@ -134,7 +134,7 @@ describe('This will test LD[HL], N8', () => {
         const testValue = 15;
 
         LDHLN8(CpuCluster.register16Bit.HL, testValue, dummyMemory);
-        expect(dummyMemory.getMemoryAt(CpuCluster.register16Bit.HL.getRegister())).toBe(testValue);
+        expect(dummyMemory.read(CpuCluster.register16Bit.HL.getRegister())).toBe(testValue);
     });
 });
 
@@ -158,12 +158,12 @@ describe('This will test LD R8, [HL]', () => {
     // setup the environment
     // let hl get the value of where to point in the mem address
     poop.register16Bit.HL.setRegister(testPointer);
-    DummyMemory.setMemoryAt(poop.register16Bit.HL.getRegister(), testValue);
+    DummyMemory.write(poop.register16Bit.HL.getRegister(), testValue);
 
     for (const [key, value] of Object.entries(CpuCluster)) {
         test(`The register ${key} should have the value ${testValue}`, () => {
             LDR8HL(value, poop.register16Bit.HL, DummyMemory);
-            expect(value.getRegister()).toBe(DummyMemory.getMemoryAt(testPointer));
+            expect(value.getRegister()).toBe(DummyMemory.read(testPointer));
         });
     }
 });
@@ -177,7 +177,7 @@ describe('This will test function LD[N16],A', () => {
         const testPointer = 0xffff;
         CpuCluster.A.setRegister(testValue);
         LDN16A(testPointer, CpuCluster.A, DummyMemory);
-        expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+        expect(DummyMemory.read(testPointer)).toBe(testValue);
     });
 
     test('Set the value of register A to 0xff and set the value of A to Ram pointed at N16', () => {
@@ -185,7 +185,7 @@ describe('This will test function LD[N16],A', () => {
         const testPointer = 0xff;
         CpuCluster.A.setRegister(testValue);
         LDN16A(testPointer, CpuCluster.A, DummyMemory);
-        expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+        expect(DummyMemory.read(testPointer)).toBe(testValue);
     });
 
     test('Set the value of register A to 0 and set the value of A to Ram pointed at N16', () => {
@@ -193,7 +193,7 @@ describe('This will test function LD[N16],A', () => {
         const testPointer = 0x0;
         CpuCluster.A.setRegister(testValue);
         LDN16A(testPointer, CpuCluster.A, DummyMemory);
-        expect(DummyMemory.getMemoryAt(testPointer)).toBe(testValue);
+        expect(DummyMemory.read(testPointer)).toBe(testValue);
     });
 });
 
@@ -206,7 +206,7 @@ describe('This will test function LDH[N16],A', () => {
         const n8 = 0x1;
         CpuCluster.A.setRegister(testValue);
         LDHN16A(n8, CpuCluster.A, DummyMemory);
-        expect(DummyMemory.getMemoryAt(n8 + 0xff00)).toBe(testValue);
+        expect(DummyMemory.read(n8 + 0xff00)).toBe(testValue);
     });
 
     test('Set the value of register A to 0xff and set the value of A to Ram pointed at N16', () => {
@@ -214,7 +214,7 @@ describe('This will test function LDH[N16],A', () => {
         const testPointer = 0xf0;
         CpuCluster.A.setRegister(testValue);
         LDHN16A(testPointer, CpuCluster.A, DummyMemory);
-        expect(DummyMemory.getMemoryAt(testPointer + 0xff00)).toBe(testValue);
+        expect(DummyMemory.read(testPointer + 0xff00)).toBe(testValue);
     });
 });
 
@@ -229,8 +229,8 @@ describe('Testing function LDH [C], A', () => {
         C.setRegister(testPointer);
         LDHCA(DummyRam, A, C);
 
-        expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(testValue);
-        expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(A.getRegister());
+        expect(DummyRam.read(0xff00 + C.getRegister())).toBe(testValue);
+        expect(DummyRam.read(0xff00 + C.getRegister())).toBe(A.getRegister());
     });
 
     test('Expect the register A to be written into the value of [C + 0xff00]', () => {
@@ -243,8 +243,8 @@ describe('Testing function LDH [C], A', () => {
         C.setRegister(testPointer);
         LDHCA(DummyRam, A, C);
 
-        expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(testValue);
-        expect(DummyRam.getMemoryAt(0xff00 + C.getRegister())).toBe(A.getRegister());
+        expect(DummyRam.read(0xff00 + C.getRegister())).toBe(testValue);
+        expect(DummyRam.read(0xff00 + C.getRegister())).toBe(A.getRegister());
     });
 });
 
@@ -259,9 +259,9 @@ describe('This will test LD A,[R16]', () => {
         if (key == 'AF') continue;
         test(`This will add the values of [${key}] into register a`, () => {
             value.setRegister(testPointer);
-            DummyMemory.setMemoryAt(value.getRegister(), testValue);
+            DummyMemory.write(value.getRegister(), testValue);
             LDAR16(A, value, DummyMemory);
-            expect(A.getRegister()).toBe(DummyMemory.getMemoryAt(value.getRegister()));
+            expect(A.getRegister()).toBe(DummyMemory.read(value.getRegister()));
         });
     }
 });
@@ -274,7 +274,7 @@ describe('this will test fucntion LD A,[N16]', () => {
     test('Load the value of [0xff] into register A', () => {
         const testPointer = 0xff;
         const testValue = 0xff;
-        dummyMemory.setMemoryAt(testPointer, testValue);
+        dummyMemory.write(testPointer, testValue);
         LDAN16(A, testPointer, dummyMemory);
         expect(A.getRegister()).toBe(testValue);
     });
@@ -282,7 +282,7 @@ describe('this will test fucntion LD A,[N16]', () => {
     test('Load the value of [0xf] into register A', () => {
         const testPointer = 0xf;
         const testValue = 0xf;
-        dummyMemory.setMemoryAt(testPointer, testValue);
+        dummyMemory.write(testPointer, testValue);
         LDAN16(A, testPointer, dummyMemory);
         expect(A.getRegister()).toBe(testValue);
     });
@@ -296,7 +296,7 @@ describe('This will test the function LDH A, [N16]', () => {
     test('Load the value of [0xff] into register A', () => {
         const testPointer = 0x1;
         const testValue = 0xb;
-        dummyMemory.setMemoryAt(testPointer + 0xff00, testValue);
+        dummyMemory.write(testPointer + 0xff00, testValue);
         LDHAN8(testPointer, A, dummyMemory);
         expect(A.getRegister()).toBe(testValue);
     });
@@ -312,11 +312,11 @@ describe('This will test the function LDH A, [C]', () => {
         const testValue = 0xf;
 
         C.setRegister(testPointer);
-        dummyMemory.setMemoryAt(C.getRegister() + 0xff00, testValue);
+        dummyMemory.write(C.getRegister() + 0xff00, testValue);
 
         LDHAC(C, A, dummyMemory);
 
-        expect(A.getRegister()).toBe(dummyMemory.getMemoryAt(C.getRegister() + 0xff00));
+        expect(A.getRegister()).toBe(dummyMemory.read(C.getRegister() + 0xff00));
     });
 });
 
@@ -333,7 +333,7 @@ describe('This will test the function LD [HLI], A', () => {
 
         HLI.setRegister(testPointer);
         LDHLIA(dummyMemory, HLI, A);
-        expect(dummyMemory.getMemoryAt(HLI.getRegister() - 1)).toBe(A.getRegister());
+        expect(dummyMemory.read(HLI.getRegister() - 1)).toBe(A.getRegister());
     });
 
     test('Expect HLI will incriment after the instruction', () => {
@@ -359,7 +359,7 @@ describe('This will test the function LD [HLD], A', () => {
 
         HLD.setRegister(testPointer);
         LDHLDA(dummyMemory, HLD, A);
-        expect(dummyMemory.getMemoryAt(HLD.getRegister() + 1)).toBe(A.getRegister());
+        expect(dummyMemory.read(HLD.getRegister() + 1)).toBe(A.getRegister());
     });
 
     test('Expect HLD will incriment after the instruction', () => {
@@ -382,7 +382,7 @@ describe('This will test the function LD A,[HLD]', () => {
         const testValue = 0xff;
         const testPointer = 0b1111_1111_1111_1111;
         HLD.setRegister(testPointer);
-        dummyMemory.setMemoryAt(HLD.getRegister(), testValue);
+        dummyMemory.write(HLD.getRegister(), testValue);
 
         LDAHLD(A, HLD, dummyMemory);
 
@@ -393,7 +393,7 @@ describe('This will test the function LD A,[HLD]', () => {
         const testValue = 0xff;
         const testPointer = 0b1111_1111_1111_1111;
         HLD.setRegister(testPointer);
-        dummyMemory.setMemoryAt(HLD.getRegister(), testValue);
+        dummyMemory.write(HLD.getRegister(), testValue);
 
         LDAHLD(A, HLD, dummyMemory);
 
@@ -411,7 +411,7 @@ describe('This will test the function LD A,[HLI]', () => {
         const testValue = 0xff;
         const testPointer = 0b1111_1111_1111_1110;
         HLI.setRegister(testPointer);
-        dummyMemory.setMemoryAt(HLI.getRegister(), testValue);
+        dummyMemory.write(HLI.getRegister(), testValue);
 
         LDAHLI(A, HLI, dummyMemory);
 
@@ -422,7 +422,7 @@ describe('This will test the function LD A,[HLI]', () => {
         const testValue = 0xff;
         const testPointer = 0b1111_1111_1111_0000;
         HLI.setRegister(testPointer);
-        dummyMemory.setMemoryAt(HLI.getRegister(), testValue);
+        dummyMemory.write(HLI.getRegister(), testValue);
 
         LDAHLI(A, HLI, dummyMemory);
 
@@ -440,7 +440,7 @@ describe('LD [R16], A ', () => {
         A.setRegister(0xff);
         LDR16A(BC, A, dummyMemory);
 
-        expect(dummyMemory.getMemoryAt(BC.getRegister())).toBe(A.getRegister());
+        expect(dummyMemory.read(BC.getRegister())).toBe(A.getRegister());
     });
     test('Expect [DE] to have the value of 0xf', () => {
         const cpuCluster = new Register_File();
@@ -451,6 +451,6 @@ describe('LD [R16], A ', () => {
         A.setRegister(0xf);
         LDR16A(DE, A, dummyMemory);
 
-        expect(dummyMemory.getMemoryAt(DE.getRegister())).toBe(A.getRegister());
+        expect(dummyMemory.read(DE.getRegister())).toBe(A.getRegister());
     });
 });

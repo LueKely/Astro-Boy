@@ -75,7 +75,7 @@ describe('Functionalities of AND A, [HL]', () => {
 
         A.setRegister(0b0000_0000);
         HL.setRegister(0b0000_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b0000_0000);
+        dummyRam.write(HL.getRegister(), 0b0000_0000);
 
         ANDAHL(A, HL, F, dummyRam);
 
@@ -90,7 +90,7 @@ describe('Functionalities of AND A, [HL]', () => {
 
         A.setRegister(0b0000_0000);
         HL.setRegister(0b1111_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b0000_0000);
+        dummyRam.write(HL.getRegister(), 0b0000_0000);
 
         ANDAHL(A, HL, F, dummyRam);
 
@@ -106,7 +106,7 @@ describe('Functionalities of AND A, [HL]', () => {
 
         A.setRegister(0b0000_1111);
         HL.setRegister(0b0001_1111);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b0001_1111);
+        dummyRam.write(HL.getRegister(), 0b0001_1111);
 
         ANDAHL(A, HL, F, dummyRam);
 
@@ -212,7 +212,7 @@ describe('Functionalities of OR A, [HL]', () => {
 
         A.setRegister(0b0000_0000);
         HL.setRegister(0b0000_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b0000_0000);
+        dummyRam.write(HL.getRegister(), 0b0000_0000);
 
         ORAHL(A, HL, F, dummyRam);
 
@@ -227,7 +227,7 @@ describe('Functionalities of OR A, [HL]', () => {
 
         A.setRegister(0b1010_1111);
         HL.setRegister(0b1111_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b1111_0000);
+        dummyRam.write(HL.getRegister(), 0b1111_0000);
 
         ORAHL(A, HL, F, dummyRam);
 
@@ -324,7 +324,7 @@ describe('Functionalities of XOR A, [HL]', () => {
 
         A.setRegister(0b0000_0000);
         HL.setRegister(0b0000_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b0000_0000);
+        dummyRam.write(HL.getRegister(), 0b0000_0000);
 
         XORAHL(A, HL, F, dummyRam);
 
@@ -339,7 +339,7 @@ describe('Functionalities of XOR A, [HL]', () => {
 
         A.setRegister(0b1010_1111);
         HL.setRegister(0b1111_0000);
-        dummyRam.setMemoryAt(HL.getRegister(), 0b1111_0000);
+        dummyRam.write(HL.getRegister(), 0b1111_0000);
 
         XORAHL(A, HL, F, dummyRam);
 

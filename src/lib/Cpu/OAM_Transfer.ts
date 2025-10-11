@@ -8,8 +8,8 @@ export function oamTransfer(): IOpCodeEntry {
         length: 1,
         execute: (dmg: Gameboy) => {
             for (let index = 0; index < 160; index++) {
-                const element = dmg.ram.getMemoryAt(index);
-                dmg.ram.setMemoryAt(0xfe00 + index, element);
+                const element = dmg.ram.read(index);
+                dmg.ram.write(0xfe00 + index, element);
             }
         },
     };

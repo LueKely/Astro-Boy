@@ -35,7 +35,7 @@ class TestCPU {
 
     setHLPointTest(value: number) {
         this.cpu.register16Bit.HL.setRegister(value);
-        this.ram.setMemoryAt(this.cpu.register16Bit.HL.getRegister(), value);
+        this.ram.write(this.cpu.register16Bit.HL.getRegister(), value);
     }
 }
 // to future lue form past lue
@@ -115,7 +115,7 @@ describe('RL [HL]', () => {
         testCPU.setHLPointTest(0b1000_0000);
 
         RLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getZFlag()).toBe(1);
     });
     test('the value of the register should be 1 when CYFlag is raised', () => {
@@ -126,7 +126,7 @@ describe('RL [HL]', () => {
         F.setCYFlag();
 
         RLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0001);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -138,7 +138,7 @@ describe('RL [HL]', () => {
         F.setCYFlag();
 
         RLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0011);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0011);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 });
@@ -181,7 +181,7 @@ describe('RLC [HL]', () => {
         testCPU.setHLPointTest(0b0000_0000);
 
         RLCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getZFlag()).toBe(1);
     });
     test('the value of the register should be 1 and CYFlag is raised', () => {
@@ -191,7 +191,7 @@ describe('RLC [HL]', () => {
         testCPU.setHLPointTest(0b1000_0000);
 
         RLCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0001);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0001);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -202,7 +202,7 @@ describe('RLC [HL]', () => {
         testCPU.setHLPointTest(0b1000_0001);
 
         RLCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0011);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0011);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 });
@@ -274,7 +274,7 @@ describe('RR [HL]', () => {
         testCPU.setHLPointTest(0b0000_0000);
 
         RRHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getZFlag()).toBe(1);
     });
 
@@ -285,7 +285,7 @@ describe('RR [HL]', () => {
         testCPU.setHLPointTest(0b1000_0000);
         F.setCYFlag();
         RRHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1100_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1100_0000);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
 
@@ -296,7 +296,7 @@ describe('RR [HL]', () => {
         testCPU.setHLPointTest(0b1000_0001);
         F.setCYFlag();
         RRHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1100_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1100_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 });
@@ -367,7 +367,7 @@ describe('RRC [HL]', () => {
         testCPU.setHLPointTest(0b0000_0000);
 
         RRCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getZFlag()).toBe(1);
     });
 
@@ -377,7 +377,7 @@ describe('RRC [HL]', () => {
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0000);
         RRCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0100_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0100_0000);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
 
@@ -387,7 +387,7 @@ describe('RRC [HL]', () => {
         const { HL } = testCPU.cpu.register16Bit;
         testCPU.setHLPointTest(0b1000_0001);
         RRCHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1100_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1100_0000);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 });
@@ -457,7 +457,7 @@ describe('SLA [HL]', () => {
         testCPU.setHLPointTest(0b0111_0100);
 
         SLAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1110_1000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1110_1000);
         expect(F.getZFlag()).toBe(0);
     });
     test('the value of the register should be 0 and CYFlag is raised', () => {
@@ -467,7 +467,7 @@ describe('SLA [HL]', () => {
         testCPU.setHLPointTest(0b1000_0000);
 
         SLAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
     });
 
@@ -478,7 +478,7 @@ describe('SLA [HL]', () => {
         testCPU.setHLPointTest(0b1000_0001);
 
         SLAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0010);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0010);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 });
@@ -519,7 +519,7 @@ describe('SRA [HL]', () => {
         testCPU.setHLPointTest(0b0111_0100);
 
         SRAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0011_1010);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0011_1010);
         expect(F.getZFlag()).toBe(0);
     });
     test('the value of the register should be 0 and CYFlag is raised', () => {
@@ -529,7 +529,7 @@ describe('SRA [HL]', () => {
         testCPU.setHLPointTest(0b1010_0101);
 
         SRAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1101_0010);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1101_0010);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -540,7 +540,7 @@ describe('SRA [HL]', () => {
         testCPU.setHLPointTest(0b0000_0001);
 
         SRAHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
     });
 });
@@ -581,7 +581,7 @@ describe('SRL [HL]', () => {
         testCPU.setHLPointTest(0b11111110);
 
         SRLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b01111111);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b01111111);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
     test('the value of the register should be 82 and CYFlag is raised', () => {
@@ -591,7 +591,7 @@ describe('SRL [HL]', () => {
         testCPU.setHLPointTest(0b1010_0101);
 
         SRLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0101_0010);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0101_0010);
         expect(F.getRegister()).toBe(0b0001_0000);
     });
 
@@ -602,7 +602,7 @@ describe('SRL [HL]', () => {
         testCPU.setHLPointTest(0b0000_0001);
 
         SRLHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1001_0000);
     });
 });
@@ -643,7 +643,7 @@ describe('SWAP [HL]', () => {
         testCPU.setHLPointTest(0b1111_1110);
 
         SWAPHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b1110_1111);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b1110_1111);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
     test('the value of the register should be 82 and CYFlag is raised', () => {
@@ -653,7 +653,7 @@ describe('SWAP [HL]', () => {
         testCPU.setHLPointTest(0b1010_0101);
 
         SWAPHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0101_1010);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0101_1010);
         expect(F.getRegister()).toBe(0b0000_0000);
     });
 
@@ -664,7 +664,7 @@ describe('SWAP [HL]', () => {
         testCPU.setHLPointTest(0b0000_0000);
 
         SWAPHL(HL, testCPU.ram, F);
-        expect(testCPU.ram.getMemoryAt(HL.getRegister())).toBe(0b0000_0000);
+        expect(testCPU.ram.read(HL.getRegister())).toBe(0b0000_0000);
         expect(F.getRegister()).toBe(0b1000_0000);
     });
 });

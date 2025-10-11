@@ -9,21 +9,21 @@ function CALLN16() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
 
-        const lowerByte = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const lowerByte = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
 
         dmg.registerFile.pointers.PC.increment();
 
-        const upperByte = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const upperByte = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
 
         dmg.registerFile.pointers.SP.decrement();
         dmg.registerFile.pointers.PC.increment();
-        dmg.ram.setMemoryAt(
+        dmg.ram.write(
             dmg.registerFile.pointers.SP.getRegister(),
             (dmg.registerFile.pointers.PC.getRegister() >> 8) & 0xff
         );
         dmg.registerFile.pointers.SP.decrement();
 
-        dmg.ram.setMemoryAt(
+        dmg.ram.write(
             dmg.registerFile.pointers.SP.getRegister(),
             dmg.registerFile.pointers.PC.getRegister() & 0xff
         );
@@ -43,9 +43,9 @@ function CALLCCN16() {
 function JPN16() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
-        const lowerByte = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const lowerByte = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
         dmg.registerFile.pointers.PC.increment();
-        const upperByte = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const upperByte = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
         const nn = (upperByte << 8) | lowerByte;
         dmg.registerFile.pointers.PC.setRegister(nn);
     };
@@ -66,9 +66,9 @@ function JPHL(HL: Cpu_Register_16Bit<'HL'>, PC: Program_Counter_Register) {
 // TESTED
 function RET() {
     return (dmg: Gameboy) => {
-        const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+        const n = dmg.ram.read(dmg.registerFile.pointers.SP.getRegister());
         dmg.registerFile.pointers.SP.increment();
-        const n2 = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+        const n2 = dmg.ram.read(dmg.registerFile.pointers.SP.getRegister());
         dmg.registerFile.pointers.SP.increment();
         const nn = n | (n2 << 8);
         dmg.registerFile.pointers.PC.setRegister(nn);
@@ -78,9 +78,9 @@ function RET() {
 // TESTED
 function RETI() {
     return (dmg: Gameboy) => {
-        const n = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+        const n = dmg.ram.read(dmg.registerFile.pointers.SP.getRegister());
         dmg.registerFile.pointers.SP.increment();
-        const n2 = dmg.ram.getMemoryAt(dmg.registerFile.pointers.SP.getRegister());
+        const n2 = dmg.ram.read(dmg.registerFile.pointers.SP.getRegister());
         dmg.registerFile.pointers.SP.increment();
 
         const nn = n | (n2 << 8);
@@ -101,10 +101,10 @@ function RSTN(n: number) {
         dmg.registerFile.pointers.SP.decrement();
         dmg.registerFile.pointers.PC.increment();
         const msb = dmg.registerFile.pointers.PC.getRegister() >>> 8;
-        dmg.ram.setMemoryAt(dmg.registerFile.pointers.SP.getRegister(), msb);
+        dmg.ram.write(dmg.registerFile.pointers.SP.getRegister(), msb);
         dmg.registerFile.pointers.SP.decrement();
         const lsb = dmg.registerFile.pointers.PC.getRegister() & 0xff;
-        dmg.ram.setMemoryAt(dmg.registerFile.pointers.SP.getRegister(), lsb);
+        dmg.ram.write(dmg.registerFile.pointers.SP.getRegister(), lsb);
         dmg.registerFile.pointers.PC.setRegister(n);
     };
 }
@@ -113,7 +113,7 @@ function JRE() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
         // Get current PC and increment to operand
-        let e = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        let e = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
 
         // Convert to signed 8-bit and add to PC+1
         if (e > 127) e -= 256;

@@ -10,7 +10,7 @@ import { validateADDSPe } from '../../utils/instructions/instruction_utils';
 function ADDSPe() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
-        const e = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const e = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
         // settig up e
         const eSigned = e > 127 ? e - 256 : e;
         const SP = dmg.registerFile.pointers.SP.getRegister();
@@ -24,12 +24,12 @@ function ADDSPe() {
 function LDNNSP() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
-        const lsb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const lsb = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
         dmg.registerFile.pointers.PC.increment();
-        const msb = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
-        dmg.ram.setMemoryAt(lsb | (msb << 8), dmg.registerFile.pointers.SP.getRegister() & 0xff);
+        const msb = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
+        dmg.ram.write(lsb | (msb << 8), dmg.registerFile.pointers.SP.getRegister() & 0xff);
 
-        dmg.ram.setMemoryAt(
+        dmg.ram.write(
             lsb | ((msb << 8) + 1),
 
             dmg.registerFile.pointers.SP.getRegister() >> 8
@@ -41,7 +41,7 @@ function LDNNSP() {
 function LDHLSPe() {
     return (dmg: Gameboy) => {
         dmg.registerFile.pointers.PC.increment();
-        const pc = dmg.ram.getMemoryAt(dmg.registerFile.pointers.PC.getRegister());
+        const pc = dmg.ram.read(dmg.registerFile.pointers.PC.getRegister());
 
         const SP = dmg.registerFile.pointers.SP.getRegister();
 

@@ -97,7 +97,7 @@ describe('DAA', () => {
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
 
-                gameboy.ram.setMemoryAt(0x100, 0x27);
+                gameboy.ram.write(0x100, 0x27);
 
                 gameboy.scheduler.tick();
 
@@ -125,7 +125,7 @@ describe('DAA', () => {
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
 
-                gameboy.ram.setMemoryAt(0x100, 0x27);
+                gameboy.ram.write(0x100, 0x27);
 
                 gameboy.scheduler.tick();
 
@@ -153,7 +153,7 @@ describe('DAA', () => {
                 A.setRegister(values.a_before);
                 F.setRegister(values.f_before);
 
-                gameboy.ram.setMemoryAt(0x100, 0x27);
+                gameboy.ram.write(0x100, 0x27);
 
                 gameboy.scheduler.tick();
 
@@ -171,7 +171,7 @@ describe('NOP', () => {
         // init gameboy
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
-        gameboy.ram.setMemoryAt(0x100, 0x0);
+        gameboy.ram.write(0x100, 0x0);
         gameboy.scheduler.tick();
         expect(gameboy.registerFile.pointers.PC.getRegister()).toBe(0x101);
     });
@@ -185,7 +185,7 @@ describe('Stop', () => {
         const gameboy = new Gameboy(dummyRom);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
-        gameboy.ram.setMemoryAt(0x100, 0x10);
+        gameboy.ram.write(0x100, 0x10);
 
         gameboy.scheduler.tick();
 

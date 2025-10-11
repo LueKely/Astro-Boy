@@ -26,7 +26,7 @@ export class Cpu_Scheduler {
     }
 
     private readByte() {
-        return this.dmg.ram.getMemoryAt(this.dmg.registerFile.pointers.PC.getRegister());
+        return this.dmg.ram.read(this.dmg.registerFile.pointers.PC.getRegister());
     }
 
     private schedule() {
@@ -90,7 +90,7 @@ export class Cpu_Scheduler {
             // after executing
             this.currentMachineCycles = this.currentOpcode.cycles;
         } catch {
-            const notImplemented = this.dmg.ram.getMemoryAt(
+            const notImplemented = this.dmg.ram.read(
                 this.dmg.registerFile.pointers.PC.getRegister()
             );
             this.dmg.log();
