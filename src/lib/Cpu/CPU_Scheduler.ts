@@ -82,8 +82,9 @@ export class Cpu_Scheduler {
     tick() {
         try {
             this.schedule();
+            // this might be wrong but i just need to make this shit run
             if (this.dmg.registerFile.HALT || this.dmg.registerFile.STOP) {
-                this.currentMachineCycles = 0;
+                this.currentMachineCycles = 1;
                 return;
             }
             this.currentOpcode.execute(this.dmg);
