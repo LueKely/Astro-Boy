@@ -62,16 +62,26 @@ export class Gameboy {
     }
 
     run() {
-        let totalCycleCount = 0;
-        const limit = 69905;
+        this.cycle();
+        requestAnimationFrame(() => {
+            this.run();
+        });
+    }
 
+    cycle() {
+        // TODO: Implement a way to ignore ticks when the register STOP is true
+        const limit = 69905;
+        let totalCycleCount = 0;
         while (totalCycleCount < limit) {
-            this.scheduler.tick();
-            this.PPU.step(this.scheduler.currentMachineCycles);
-            // todo init ppu here to sync with the cpu clock
+            if (!this.registerFile.STOP) {
+                this.scheduler.tick();
+                this.PPU.step(this.scheduler.currentMachineCycles);
+            }
+            totalCycleCount += this.scheduler.currentMachineCycles * 4;
             // this.listALL();
         }
     }
+
     listALL() {
         console.log('ALL THE OPCODES');
         console.log(this.list);
