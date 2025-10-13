@@ -70,7 +70,7 @@ export class Gameboy {
 
     cycle() {
         // TODO: Implement a way to ignore ticks when the register STOP is true
-        const limit = 69905;
+        const limit = 70224;
         let totalCycleCount = 0;
         while (totalCycleCount < limit) {
             if (!this.registerFile.STOP) {
