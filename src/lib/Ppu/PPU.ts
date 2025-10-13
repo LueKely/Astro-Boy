@@ -57,6 +57,7 @@ export class PPU {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
 
+        // check on this is cycles are consumed during this time
         if (!isOn || !isAllowed) {
             return;
         }
@@ -64,9 +65,10 @@ export class PPU {
         for (let i = 0; i < 40; i++) {
             const oamAddress = Address.oamStart + i * 4;
             const sprite = this.ram.memory[oamAddress] - 16;
+            const topSprite = LY >= sprite;
+            const bottomSprite  = LY < sprite + spriteHeight;
 
-            // todo read on this
-            if (LY >= sprite && LY < sprite + spriteHeight) {
+            if (topSprite && bottomSprite) {
                 const object: TOam = {
                     yPos: this.ram.memory[Address.oamStart + i],
                     xPos: this.ram.memory[Address.oamStart + i + 1],
