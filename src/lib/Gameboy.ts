@@ -71,13 +71,13 @@ export class Gameboy {
     cycle() {
         // TODO: Implement a way to ignore ticks when the register STOP is true
         const limit = 70224;
-        let totalCycleCount = 0;
-        while (totalCycleCount < limit) {
+        let totalCycleBudget = 0;
+        while (totalCycleBudget < limit) {
             if (!this.registerFile.STOP) {
                 this.scheduler.tick();
                 this.PPU.step(this.scheduler.currentMachineCycles);
             }
-            totalCycleCount += this.scheduler.currentMachineCycles * 4;
+            totalCycleBudget += this.scheduler.currentMachineCycles * 4;
             // this.listALL();
         }
     }
