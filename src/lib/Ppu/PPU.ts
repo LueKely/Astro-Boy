@@ -8,7 +8,7 @@ import type { ICoordinates } from './types/Tile_Types';
 // "While the PPU is accessing some video-related memory, that
 // memory is inaccessible to the CPU (writes are ignored, and reads
 //  return garbage values, usually $FF)."
-
+// testing the thing
 export class PPU {
     tileCoordinates: ICoordinates[] = [];
     tileDataCache: number[][][] = [];
@@ -66,7 +66,7 @@ export class PPU {
             const oamAddress = Address.oamStart + i * 4;
             const sprite = this.ram.memory[oamAddress] - 16;
             const topSprite = LY >= sprite;
-            const bottomSprite  = LY < sprite + spriteHeight;
+            const bottomSprite = LY < sprite + spriteHeight;
 
             if (topSprite && bottomSprite) {
                 const object: TOam = {
