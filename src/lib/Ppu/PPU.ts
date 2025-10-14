@@ -34,7 +34,7 @@ export class PPU {
             bgAndWindowTiles:
                 (LCDC & 0b0001_0000) == 0b0000_1000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
             objSize: (LCDC & 0b0000_0100) == 0b0000_0100 ? 16 : 8,
-            isObjAllowed: (LCDC & 0b0000_0010) == 0b0000_00010,
+            isObjAllowed: (LCDC & 0b0000_0010) == 0b0000_0010,
             isBgAndWindowEnabled: (LCDC & 0b1) == 0b1,
         };
     }
@@ -43,10 +43,9 @@ export class PPU {
         // check for STAT
         const LYC = this.ram.memory[Address.LYC];
         const LY = this.ram.memory[Address.LY];
-        const LCDC = this.ram.memory[Address.LCDC];
         // init STAT INT
         if (LY == LYC) {
-            this.ram.write(Address.LCDC, LCDC | 0b0000_0010);
+            this.ram.write(Address.STAT, this.ram.memory[Address.STAT] | 0b0000_0010);
         }
 
         // init vblank interrupt INT
