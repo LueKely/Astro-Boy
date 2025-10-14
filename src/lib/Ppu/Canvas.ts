@@ -74,8 +74,6 @@ export class GameboyCanvas {
         tileDataBuffer: ImageData[],
         tileMapIndices: Uint8Array
     ) {
-        console.log(tileMapIndices);
-
         tileMapIndices.forEach((tileMapIndex, index) => {
             const { x, y } = coordinates[index];
             ctx.putImageData(tileDataBuffer[tileMapIndex], x, y);

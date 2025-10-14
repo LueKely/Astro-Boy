@@ -14,10 +14,10 @@ export class Ram {
     }
 
     getIE() {
-        return this.memory[0xffff];
+        return this.memory[Address.IE];
     }
     getIF() {
-        return this.memory[0xff0f];
+        return this.memory[Address.IF];
     }
 
     isAllowedToInterrupt() {

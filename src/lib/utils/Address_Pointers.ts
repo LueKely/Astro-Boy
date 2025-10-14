@@ -2,11 +2,6 @@ export enum Address {
     // INTERRUPT Registers
     IE = 0xffff,
     IF = 0xff0f,
-    //TILE MAPS
-    tileMapAStart = 0x9800,
-    tileMapAEnd = 0x9bff,
-    tileMapBStart = 0x9c00,
-    tileMapBEnd = 0x9fff,
     // VRAM
     vramStart = 0x8000,
     vramEnd = 0x9fff,
@@ -19,6 +14,9 @@ export enum Address {
     // Scroll Registers
     SCY = 0xff43,
     SCX = 0xff42,
+    // Window X and Y position
+    WY = 0xff4a,
+    WX = 0xff4b,
     // Scan Line Registers
     LY = 0xff44,
     LYC = 0xff45,

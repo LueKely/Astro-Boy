@@ -24,12 +24,26 @@ export class PPU {
         this.ram.write(Address.STAT, Address.STAT | 0b0000_0010);
     }
 
+    private inferLCDC() {
+        const LCDC = this.ram.read(Address.LCDC);
+        return {
+            isEnabled: LCDC >>> 7,
+            windowTileMap:
+                (LCDC & 0b0100_0000) == 0b0100_0000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
+            isWindowEnabled: (LCDC & 0b0010_0000) == 0b0010_0000,
+            bgAndWindowTiles:
+                (LCDC & 0b0001_0000) == 0b0000_1000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
+            objSize: (LCDC & 0b0000_0100) == 0b0000_0100 ? 16 : 8,
+            isObjAllowed: (LCDC & 0b0000_0010) == 0b0000_00010,
+            isBgAndWindowEnabled: (LCDC & 0b1) == 0b1,
+        };
+    }
+
     private flagCheck() {
         // check for STAT
         const LYC = this.ram.memory[Address.LYC];
         const LY = this.ram.memory[Address.LY];
         const LCDC = this.ram.memory[Address.LCDC];
-        const STAT = this.ram.memory[Address.STAT];
         // init STAT INT
         if (LY == LYC) {
             this.ram.write(Address.LCDC, LCDC | 0b0000_0010);
@@ -44,21 +58,18 @@ export class PPU {
 
     private oamScan() {
         //  mode 2
-        const LCDC = this.ram.read(Address.LCDC);
+        const { isEnabled, isObjAllowed, objSize } = this.inferLCDC();
         const STAT = this.ram.read(Address.STAT);
         const LY = this.ram.memory[Address.LY];
 
         const interruptFlag = (STAT & 0b0010_0000) == 0b0010_0000;
-        const isOn = LCDC >>> 7;
-        const isAllowed = (LCDC & 0b0000_0010) == 0b0000_00010;
-        const spriteHeight = LCDC & 0b0000_0100 ? 16 : 8;
 
         if (interruptFlag) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
 
         // check on this is cycles are consumed during this time
-        if (!isOn || !isAllowed) {
+        if (!isEnabled || !isObjAllowed) {
             return;
         }
 
@@ -66,7 +77,7 @@ export class PPU {
             const oamAddress = Address.oamStart + i * 4;
             const sprite = this.ram.memory[oamAddress] - 16;
             const topSprite = LY >= sprite;
-            const bottomSprite = LY < sprite + spriteHeight;
+            const bottomSprite = LY < sprite + objSize;
 
             if (topSprite && bottomSprite) {
                 const object: TOam = {
@@ -84,6 +95,11 @@ export class PPU {
     }
 
     private drawRow() {
+        // check for LCDC
+        // check for traversal mode
+
+        const LCDC = this.inferLCDC();
+        const LY = this.ram.memory[Address.LY];
         // mode 3
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) & 0b1111_1100);
     }
