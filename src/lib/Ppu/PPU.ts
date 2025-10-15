@@ -9,6 +9,7 @@ import type { ICoordinates } from './types/Tile_Types';
 // memory is inaccessible to the CPU (writes are ignored, and reads
 //  return garbage values, usually $FF)."
 // testing the thing
+
 export class PPU {
     tileCoordinates: ICoordinates[] = [];
     tileDataCache: number[][][] = [];
@@ -31,8 +32,10 @@ export class PPU {
             windowTileMap:
                 (LCDC & 0b0100_0000) == 0b0100_0000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             isWindowEnabled: (LCDC & 0b0010_0000) == 0b0010_0000,
-            bgAndWindowTiles:
-                (LCDC & 0b0001_0000) == 0b0000_1000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
+            bgAndWindowTilesData:
+                (LCDC & 0b0001_0000) == 0b0001_0000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
+            bgTileMapArea:
+                (LCDC & 0b0000_1000) == 0b0000_1000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             objSize: (LCDC & 0b0000_0100) == 0b0000_0100 ? 16 : 8,
             isObjAllowed: (LCDC & 0b0000_0010) == 0b0000_0010,
             isBgAndWindowEnabled: (LCDC & 0b1) == 0b1,
@@ -99,6 +102,28 @@ export class PPU {
 
         const LCDC = this.inferLCDC();
         const LY = this.ram.memory[Address.LY];
+        const SCY = this.ram.memory[Address.SCY];
+        const SCX = this.ram.memory[Address.SCX];
+
+        const bgTileMap = this.ram.memory.slice(LCDC.bgTileMapArea[0], LCDC.bgTileMapArea[1]);
+        const bgTiles = this.ram.memory.slice(
+            LCDC.bgAndWindowTilesData[0],
+            LCDC.bgAndWindowTilesData[1]
+        );
+
+        const scanLineRow = (SCY + LY) % 256;
+        const tileMapRow = scanLineRow / 8;
+
+        // get pixel on each tile i guess
+        for (let x = 0; x < 160; x++) {
+            const tileMapCol = ((SCX + x) % 256) / 8;
+            const currentTileIndex = bgTileMap[tileMapRow * 32 + tileMapCol];
+            const pixelRow = scanLineRow % 8;
+            const pixelCol = tileMapCol % 8;
+            // above is just for one freaking pixel dude
+            // not over yet tho this aint the fucking tile dawg
+        }
+
         // mode 3
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) & 0b1111_1100);
     }
