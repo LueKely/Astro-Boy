@@ -11,6 +11,7 @@ import type { ICoordinates } from './types/Tile_Types';
 // testing the thing
 
 export class PPU {
+    // hmm i don't actually need this other than for shit posting reasons
     tileCoordinates: ICoordinates[] = [];
     tileDataCache: number[][][] = [];
     tileMapIndices1: Uint8Array = new Uint8Array();
@@ -115,15 +116,13 @@ export class PPU {
         const tileMapRow = scanLineRow / 8;
 
         // get pixel on each tile i guess
-        for (let x = 0; x < 160; x++) {
+        for (let x = 0; x < 160; x += 8) {
             const tileMapCol = ((SCX + x) % 256) / 8;
             const currentTileIndex = bgTileMap[tileMapRow * 32 + tileMapCol];
-            const pixelRow = scanLineRow % 8;
-            const pixelCol = tileMapCol % 8;
-            // above is just for one freaking pixel dude
-            // not over yet tho this aint the fucking tile dawg
+            const flattenedIndex = currentTileIndex * 16;
+            const pixelRowData = bgTiles.slice(flattenedIndex, flattenedIndex + 8);
+            // 2bit pixels here
         }
-
         // mode 3
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) & 0b1111_1100);
     }
