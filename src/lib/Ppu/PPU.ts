@@ -35,7 +35,7 @@ export class PPU {
                 (LCDC & 0b0100_0000) == 0b0100_0000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             isWindowEnabled: (LCDC & 0b0010_0000) == 0b0010_0000,
             bgAndWindowTilesData:
-                (LCDC & 0b0001_0000) == 0b0001_0000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
+                (LCDC & 0b0001_0000) == 0b0001_0000 ? [0x8000, 0x8fff] : [0x9000, 0x97ff],
             bgTileMapArea:
                 (LCDC & 0b0000_1000) == 0b0000_1000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             objSize: (LCDC & 0b0000_0100) == 0b0000_0100 ? 16 : 8,
@@ -107,6 +107,7 @@ export class PPU {
         const SCY = this.ram.memory[Address.SCY];
         const SCX = this.ram.memory[Address.SCX];
 
+        const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
         const scanLineRow = (SCY + LY) % 256;
         const tileMapRow = Math.floor(scanLineRow / 8);
         const pixelScanLineRow = [];
@@ -116,11 +117,15 @@ export class PPU {
             const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
             const currentTileIndex =
                 this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+            const flattenedTileIndex = this.transformToUnsigned(
+                currentTileIndex,
+                tileMapAddressingMode
+            );
             const pixelTileRowOffest = (scanLineRow % 8) * 2;
-            const flattenedIndex = currentTileIndex * 16 + pixelTileRowOffest;
+            const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
             const pixelTileRowData = [
-                this.ram.memory[flattenedIndex + LCDC.bgAndWindowTilesData[0]],
-                this.ram.memory[flattenedIndex + 1 + LCDC.bgAndWindowTilesData[0]],
+                this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
+                this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
             ];
             // 2bit pixels here
             const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
@@ -131,6 +136,15 @@ export class PPU {
         }
         // mode 3
         this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
+    }
+
+    private transformToUnsigned(tileIndex: number, mode: boolean) {
+        if (!mode) {
+            if (tileIndex & 0x80) {
+                return tileIndex - 256; // Convert to negative
+            }
+            return tileIndex;
+        } else return tileIndex;
     }
 
     private horizontalBlank() {
