@@ -1,5 +1,6 @@
 import type { Ram } from '../Ram/Ram';
 import { Address } from '../utils/Address_Pointers';
+import { Tile_Decoder_Utils } from './Tile_Decoder_Utils';
 import type { TOam } from './types/OAM';
 import type { ICoordinates } from './types/Tile_Types';
 
@@ -106,25 +107,30 @@ export class PPU {
         const SCY = this.ram.memory[Address.SCY];
         const SCX = this.ram.memory[Address.SCX];
 
-        const bgTileMap = this.ram.memory.slice(LCDC.bgTileMapArea[0], LCDC.bgTileMapArea[1]);
-        const bgTiles = this.ram.memory.slice(
-            LCDC.bgAndWindowTilesData[0],
-            LCDC.bgAndWindowTilesData[1]
-        );
-
         const scanLineRow = (SCY + LY) % 256;
-        const tileMapRow = scanLineRow / 8;
+        const tileMapRow = Math.floor(scanLineRow / 8);
+        const pixelScanLineRow = [];
 
         // get pixel on each tile i guess
         for (let x = 0; x < 160; x += 8) {
-            const tileMapCol = ((SCX + x) % 256) / 8;
-            const currentTileIndex = bgTileMap[tileMapRow * 32 + tileMapCol];
-            const flattenedIndex = currentTileIndex * 16;
-            const pixelRowData = bgTiles.slice(flattenedIndex, flattenedIndex + 8);
+            const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
+            const currentTileIndex =
+                this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+            const pixelTileRowOffest = (scanLineRow % 8) * 2;
+            const flattenedIndex = currentTileIndex * 16 + pixelTileRowOffest;
+            const pixelTileRowData = [
+                this.ram.memory[flattenedIndex + LCDC.bgAndWindowTilesData[0]],
+                this.ram.memory[flattenedIndex + 1 + LCDC.bgAndWindowTilesData[0]],
+            ];
             // 2bit pixels here
+            const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
+                pixelTileRowData[0],
+                pixelTileRowData[1]
+            );
+            pixelScanLineRow.push(flattendPixelRow);
         }
         // mode 3
-        this.ram.write(Address.STAT, this.ram.read(Address.STAT) & 0b1111_1100);
+        this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
 
     private horizontalBlank() {
