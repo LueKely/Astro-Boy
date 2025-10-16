@@ -35,7 +35,7 @@ export class PPU {
                 (LCDC & 0b0100_0000) == 0b0100_0000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             isWindowEnabled: (LCDC & 0b0010_0000) == 0b0010_0000,
             bgAndWindowTilesData:
-                (LCDC & 0b0001_0000) == 0b0001_0000 ? [0x8000, 0x8fff] : [0x9000, 0x97ff],
+                (LCDC & 0b0001_0000) == 0b0001_0000 ? [0x8000, 0x8fff] : [0x8800, 0x97ff],
             bgTileMapArea:
                 (LCDC & 0b0000_1000) == 0b0000_1000 ? [0x9c00, 0x9fff] : [0x9800, 0x9bff],
             objSize: (LCDC & 0b0000_0100) == 0b0000_0100 ? 16 : 8,
