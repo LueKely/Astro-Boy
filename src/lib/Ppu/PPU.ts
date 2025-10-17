@@ -99,9 +99,10 @@ export class PPU {
     }
 
     private drawRow() {
-        // check for LCDC
-        // check for traversal mode
-
+        // TODO :
+        // Implement the pallete context register
+        // OAM Pixel row scan
+        // Window Scan Line
         const LCDC = this.inferLCDC();
         const LY = this.ram.memory[Address.LY];
         const SCY = this.ram.memory[Address.SCY];
@@ -114,26 +115,35 @@ export class PPU {
 
         // get pixel on each tile i guess
         for (let x = 0; x < 160; x += 8) {
-            const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
-            const currentTileIndex =
-                this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
-            const flattenedTileIndex = this.transformToUnsigned(
-                currentTileIndex,
-                tileMapAddressingMode
-            );
-            const pixelTileRowOffest = (scanLineRow % 8) * 2;
-            const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
-            const pixelTileRowData = [
-                this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
-                this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
-            ];
-            // 2bit pixels here
-            const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
-                pixelTileRowData[0],
-                pixelTileRowData[1]
-            );
-            pixelScanLineRow.push(flattendPixelRow);
+            // check if an OAM ROW can be added here
+            if (LCDC.isObjAllowed) {
+                // CHECK FOR OAM SHIT
+                //
+            } else {
+                const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
+                const currentTileIndex =
+                    this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+                const flattenedTileIndex = this.transformToUnsigned(
+                    currentTileIndex,
+                    tileMapAddressingMode
+                );
+                const pixelTileRowOffest = (scanLineRow % 8) * 2;
+                const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
+                const pixelTileRowData = [
+                    this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
+                    this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
+                ];
+                // 2bit pixels here
+                const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
+                    pixelTileRowData[0],
+                    pixelTileRowData[1]
+                );
+                flattendPixelRow.forEach((pixel) => {
+                    pixelScanLineRow.push(pixel);
+                });
+            }
         }
+
         // mode 3
         this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
@@ -192,6 +202,7 @@ export class PPU {
             default:
                 throw new Error('This should not happen');
         }
+        // Stat int check
         this.flagCheck();
     }
 }
