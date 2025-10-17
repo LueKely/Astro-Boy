@@ -107,6 +107,8 @@ export class PPU {
         const LY = this.ram.memory[Address.LY];
         const SCY = this.ram.memory[Address.SCY];
         const SCX = this.ram.memory[Address.SCX];
+        const WY = this.ram.memory[Address.WY];
+        const WX = this.ram.memory[Address.WX];
 
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
         const scanLineRow = (SCY + LY) % 256;
@@ -116,32 +118,37 @@ export class PPU {
         // get pixel on each tile i guess
         for (let x = 0; x < 160; x += 8) {
             // check if an OAM ROW can be added here
-            if (LCDC.isObjAllowed) {
-                // CHECK FOR OAM SHIT
-                //
+            if (LCDC.isWindowEnabled && LY >= WY && x >= WX - 7) {
+                // change value to coords for window scroll
+                
             } else {
-                const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
-                const currentTileIndex =
-                    this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
-                const flattenedTileIndex = this.transformToUnsigned(
-                    currentTileIndex,
-                    tileMapAddressingMode
-                );
-                const pixelTileRowOffest = (scanLineRow % 8) * 2;
-                const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
-                const pixelTileRowData = [
-                    this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
-                    this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
-                ];
-                // 2bit pixels here
-                const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
-                    pixelTileRowData[0],
-                    pixelTileRowData[1]
-                );
-                flattendPixelRow.forEach((pixel) => {
-                    pixelScanLineRow.push(pixel);
-                });
+              // change value to coord for bg scroll 
             }
+            
+            const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
+            const currentTileIndex =
+                this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+            const flattenedTileIndex = this.transformToUnsigned(
+                currentTileIndex,
+                tileMapAddressingMode
+            );
+            const pixelTileRowOffest = (scanLineRow % 8) * 2;
+            const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
+            const pixelTileRowData = [
+                this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
+                this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
+            ];
+            // 2bit pixels here
+            const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
+                pixelTileRowData[0],
+                pixelTileRowData[1]
+            );
+          
+            flattendPixelRow.forEach((pixel) => {
+                pixelScanLineRow.push(pixel);
+            });
+            // then overwrite the pixel oam
+            // during OAM add sprite prio
         }
 
         // mode 3
