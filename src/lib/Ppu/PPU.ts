@@ -98,11 +98,10 @@ export class PPU {
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0011);
     }
 
-    private drawRow() {
+    private drawScanLine() {
         // TODO :
         // Implement the pallete context register
         // OAM Pixel row scan
-        // Window Scan Line
         const LCDC = this.inferLCDC();
         const LY = this.ram.memory[Address.LY];
         const SCY = this.ram.memory[Address.SCY];
@@ -113,28 +112,33 @@ export class PPU {
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
         let scanLineRow = 0;
         const pixelScanLineRow = [];
-        
+
         let tileMapCol = 0;
         let currentTileIndex = 0;
-        let flattenedTileIndex = 0;
-        
+        let pixelTileRowOffest = 0;
         for (let x = 0; x < 160; x += 8) {
             // check if an OAM ROW can be added here
             if (LCDC.isWindowEnabled && LY >= WY && x >= WX - 7) {
-                // put coords here
+                const winYpos = LY - WY;
+                const winXpos = x - (WX - 7);
+                scanLineRow = Math.floor(winYpos / 8);
+                tileMapCol = Math.floor(winXpos / 8);
+
+                currentTileIndex =
+                    this.ram.memory[scanLineRow * 32 + tileMapCol + LCDC.windowTileMap[0]];
+                pixelTileRowOffest = ((LY - WY) % 8) * 2;
             } else {
-                scanLineRow = Math.floor((SCY + LY) % 256 / 8) ;
+                scanLineRow = Math.floor(((SCY + LY) % 256) / 8);
                 tileMapCol = Math.floor(((SCX + x) % 256) / 8);
                 currentTileIndex =
                     this.ram.memory[scanLineRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
-                flattenedTileIndex = this.transformToUnsigned(
-                    currentTileIndex,
-                    tileMapAddressingMode
-                );
+                pixelTileRowOffest = ((SCY + LY) % 8) * 2;
             }
-       
-       
-            const pixelTileRowOffest = (scanLineRow % 8) * 2;
+
+            const flattenedTileIndex = this.transformToUnsigned(
+                currentTileIndex,
+                tileMapAddressingMode
+            );
             const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
             const pixelTileRowData = [
                 this.ram.memory[pixelIndex + LCDC.bgAndWindowTilesData[0]],
@@ -149,8 +153,6 @@ export class PPU {
             flattendPixelRow.forEach((pixel) => {
                 pixelScanLineRow.push(pixel);
             });
-            // then overwrite the pixel oam
-            // during OAM add sprite prio
         }
 
         // mode 3
@@ -205,7 +207,8 @@ export class PPU {
                 break;
             case 3:
                 if (this.dot < 172) return;
-                this.drawRow();
+                this.drawScanLine();
+
                 this.dot -= 172;
                 break;
             default:
