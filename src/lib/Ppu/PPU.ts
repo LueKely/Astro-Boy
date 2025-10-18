@@ -111,27 +111,29 @@ export class PPU {
         const WX = this.ram.memory[Address.WX];
 
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
-        const scanLineRow = (SCY + LY) % 256;
-        const tileMapRow = Math.floor(scanLineRow / 8);
+        let scanLineRow = 0;
         const pixelScanLineRow = [];
-
-        // get pixel on each tile i guess
+        
+        let tileMapCol = 0;
+        let currentTileIndex = 0;
+        let flattenedTileIndex = 0;
+        
         for (let x = 0; x < 160; x += 8) {
             // check if an OAM ROW can be added here
             if (LCDC.isWindowEnabled && LY >= WY && x >= WX - 7) {
-                // change value to coords for window scroll
-                
+                // put coords here
             } else {
-              // change value to coord for bg scroll 
+                scanLineRow = Math.floor((SCY + LY) % 256 / 8) ;
+                tileMapCol = Math.floor(((SCX + x) % 256) / 8);
+                currentTileIndex =
+                    this.ram.memory[scanLineRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+                flattenedTileIndex = this.transformToUnsigned(
+                    currentTileIndex,
+                    tileMapAddressingMode
+                );
             }
-            
-            const tileMapCol = Math.floor(((SCX + x) % 256) / 8);
-            const currentTileIndex =
-                this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
-            const flattenedTileIndex = this.transformToUnsigned(
-                currentTileIndex,
-                tileMapAddressingMode
-            );
+       
+       
             const pixelTileRowOffest = (scanLineRow % 8) * 2;
             const pixelIndex = flattenedTileIndex * 16 + pixelTileRowOffest;
             const pixelTileRowData = [
@@ -143,7 +145,7 @@ export class PPU {
                 pixelTileRowData[0],
                 pixelTileRowData[1]
             );
-          
+
             flattendPixelRow.forEach((pixel) => {
                 pixelScanLineRow.push(pixel);
             });
