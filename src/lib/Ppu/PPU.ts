@@ -110,28 +110,29 @@ export class PPU {
         const WX = this.ram.memory[Address.WX];
 
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
-        let scanLineRow = 0;
-        const pixelScanLineRow = [];
+        const scanLineBuffer = [];
 
+        let tileMapRow = 0;
         let tileMapCol = 0;
         let currentTileIndex = 0;
         let pixelTileRowOffest = 0;
         for (let x = 0; x < 160; x += 8) {
             // check if an OAM ROW can be added here
-            if (LCDC.isWindowEnabled && LY >= WY && x >= WX - 7) {
+            const isInWindowRegion = LCDC.isWindowEnabled && LY >= WY && x >= WX - 7;
+            if (isInWindowRegion) {
                 const winYpos = LY - WY;
                 const winXpos = x - (WX - 7);
-                scanLineRow = Math.floor(winYpos / 8);
+                tileMapRow = Math.floor(winYpos / 8);
                 tileMapCol = Math.floor(winXpos / 8);
 
                 currentTileIndex =
-                    this.ram.memory[scanLineRow * 32 + tileMapCol + LCDC.windowTileMap[0]];
+                    this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.windowTileMap[0]];
                 pixelTileRowOffest = ((LY - WY) % 8) * 2;
             } else {
-                scanLineRow = Math.floor(((SCY + LY) % 256) / 8);
+                tileMapRow = Math.floor(((SCY + LY) % 256) / 8);
                 tileMapCol = Math.floor(((SCX + x) % 256) / 8);
                 currentTileIndex =
-                    this.ram.memory[scanLineRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
+                    this.ram.memory[tileMapRow * 32 + tileMapCol + LCDC.bgTileMapArea[0]];
                 pixelTileRowOffest = ((SCY + LY) % 8) * 2;
             }
 
@@ -151,7 +152,7 @@ export class PPU {
             );
 
             flattendPixelRow.forEach((pixel) => {
-                pixelScanLineRow.push(pixel);
+                scanLineBuffer.push(pixel);
             });
         }
 
