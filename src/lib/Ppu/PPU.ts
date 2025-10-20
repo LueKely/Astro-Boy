@@ -76,41 +76,64 @@ export class PPU {
         if (!isEnabled || !isObjAllowed) {
             return;
         }
-
+        this.oamCache = [];
         for (let i = 0; i < 40; i++) {
             const oamAddress = Address.oamStart + i * 4;
             const sprite = this.ram.memory[oamAddress] - 16;
-            const topSprite = LY >= sprite;
-            const bottomSprite = LY < sprite + objSize;
+            const withinTop = LY >= sprite;
+            const withinBottom = LY < sprite + objSize;
 
-            if (topSprite && bottomSprite) {
+            if (withinTop && withinBottom) {
                 const object: TOam = {
-                    yPos: this.ram.memory[Address.oamStart + i],
-                    xPos: this.ram.memory[Address.oamStart + i + 1],
-                    tileIndex: this.ram.memory[Address.oamStart + i + 2],
-                    attributes: this.ram.memory[Address.oamStart + i + 3],
+                    yPos: this.ram.memory[oamAddress],
+                    xPos: this.ram.memory[oamAddress + 1],
+                    tileIndex: this.ram.memory[oamAddress + 2],
+                    attributes: this.ram.memory[oamAddress + 3],
                 };
                 this.oamCache.push(object);
                 if (this.oamCache.length == 10) break;
             }
         }
-        // change to mode 3
+        // proceed to Draw mode
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0011);
     }
 
     private drawScanLine() {
         // TODO :
-        // Implement the pallete context register
-        // OAM Pixel row scan
-        const LCDC = this.inferLCDC();
+        // deal with palette
         const LY = this.ram.memory[Address.LY];
+        let scanLineBuffer = this.bgAndWindowDraw(LY);
+        let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
+        this.ram.write(Address.LY, LY + 1);
+        //proceed to HBlank Mode
+        this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
+    }
+    private OAMOverRide(buffer: number[], LY: number) {
+        this.oamCache.forEach((sprite) => {
+            const priority = (sprite.attributes & (0b1000_0000 >> 7)) == 1;
+            const yFlip = (sprite.attributes & (0b0100_0000 >> 6)) == 1;
+            const xFlip = (sprite.attributes & (0b0010_0000 >> 5)) == 1;
+            const palette = (sprite.attributes & (0b0001_0000 >> 4)) == 1;
+            if (priority) {
+                // get tile
+                let tileLocation = this.ram.memory[Address.vramStart + sprite.tileIndex * 16];
+                let spriteRowOffset = LY - (sprite.yPos - 16);
+                let scanLineRowOffset = sprite.xPos - 8;
+            } else {
+                return buffer;
+            }
+        });
+    }
+
+    private bgAndWindowDraw(LY: number) {
+        const LCDC = this.inferLCDC();
         const SCY = this.ram.memory[Address.SCY];
         const SCX = this.ram.memory[Address.SCX];
         const WY = this.ram.memory[Address.WY];
         const WX = this.ram.memory[Address.WX];
 
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
-        const scanLineBuffer = [];
+        const scanLineBuffer: number[] = [];
 
         let tileMapRow = 0;
         let tileMapCol = 0;
@@ -146,20 +169,18 @@ export class PPU {
                 this.ram.memory[pixelIndex + 1 + LCDC.bgAndWindowTilesData[0]],
             ];
             // 2bit pixels here
-            const flattendPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
+            const flattenedPixelRow = Tile_Decoder_Utils.decodeTo2bpp(
                 pixelTileRowData[0],
                 pixelTileRowData[1]
             );
 
-            flattendPixelRow.forEach((pixel) => {
+            flattenedPixelRow.forEach((pixel) => {
                 scanLineBuffer.push(pixel);
             });
         }
 
-        // mode 3
-        this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
+        return scanLineBuffer;
     }
-
     private transformToUnsigned(tileIndex: number, mode: boolean) {
         if (!mode) {
             if (tileIndex & 0x80) {
