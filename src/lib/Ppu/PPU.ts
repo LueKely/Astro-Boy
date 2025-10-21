@@ -110,15 +110,28 @@ export class PPU {
     }
     private OAMOverRide(buffer: number[], LY: number) {
         this.oamCache.forEach((sprite) => {
-            const priority = (sprite.attributes & (0b1000_0000 >> 7)) == 1;
-            const yFlip = (sprite.attributes & (0b0100_0000 >> 6)) == 1;
-            const xFlip = (sprite.attributes & (0b0010_0000 >> 5)) == 1;
-            const palette = (sprite.attributes & (0b0001_0000 >> 4)) == 1;
+            const alteredBuffer = buffer;
+            const priority = sprite.attributes & 0b1000_0000;
+            const yFlip = sprite.attributes & 0b0100_0000;
+            const xFlip = sprite.attributes & 0b0010_0000;
+            const palette = sprite.attributes & 0b0001_0000;
             if (priority) {
                 // get tile
-                let tileLocation = this.ram.memory[Address.vramStart + sprite.tileIndex * 16];
-                let spriteRowOffset = LY - (sprite.yPos - 16);
+                let rowOffset = LY - (sprite.yPos - 16);
+                let yFlipOffset = yFlip ? rowOffset - 15 : rowOffset;
+                let tileIndex = (sprite.tileIndex + yFlipOffset) * 16;
+                let tileRows = [
+                    this.ram.memory[tileIndex + Address.vramStart],
+                    this.ram.memory[tileIndex + 1 + Address.vramStart],
+                ];
+
+                let tileRowPixels = Tile_Decoder_Utils.decodeTo2bpp(tileRows[0], tileRows[1]);
+                let alteredTileRowPixels = xFlip ? tileRowPixels.reverse() : tileRowPixels;
                 let scanLineRowOffset = sprite.xPos - 8;
+                alteredTileRowPixels.forEach((pixel, index) => {
+                    alteredBuffer[index + scanLineRowOffset] = pixel;
+                });
+                return scanLineRowOffset;
             } else {
                 return buffer;
             }
