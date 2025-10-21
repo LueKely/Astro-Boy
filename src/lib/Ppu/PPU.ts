@@ -43,6 +43,15 @@ export class PPU {
             isBgAndWindowEnabled: (LCDC & 0b1) == 0b1,
         };
     }
+    private inferObjectPalette(bit: number, id: number) {
+        let objectPalette = bit ? this.ram.memory[Address.OBP0] : this.ram.memory[Address.OBP1];
+        if (id == 0) return 0;
+        return this.inferPalette(objectPalette, id);
+    }
+    private inferPalette(palette: number, id: number) {
+        const value = (palette >>> (id * 2)) & 0b0000_0011;
+        return value;
+    }
 
     private flagCheck() {
         // check for STAT
@@ -100,11 +109,9 @@ export class PPU {
 
     private drawScanLine() {
         // TODO :
-        // deal with palette
         const LY = this.ram.memory[Address.LY];
         let scanLineBuffer = this.bgAndWindowDraw(LY);
         // final buffer
-        // idk about palette pass
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
         this.ram.write(Address.LY, LY + 1);
         //proceed to HBlank Mode
@@ -116,7 +123,7 @@ export class PPU {
             const priority = sprite.attributes & 0b1000_0000;
             const yFlip = sprite.attributes & 0b0100_0000;
             const xFlip = sprite.attributes & 0b0010_0000;
-            const palette = sprite.attributes & 0b0001_0000;
+            const paletteBit = sprite.attributes & 0b0001_0000;
             if (priority) {
                 // get tile
                 let rowOffset = LY - (sprite.yPos - 16);
@@ -131,7 +138,10 @@ export class PPU {
                 let alteredTileRowPixels = xFlip ? tileRowPixels.reverse() : tileRowPixels;
                 let scanLineRowOffset = sprite.xPos - 8;
                 alteredTileRowPixels.forEach((pixel, index) => {
-                    alteredBuffer[index + scanLineRowOffset] = pixel;
+                    alteredBuffer[index + scanLineRowOffset] = this.inferObjectPalette(
+                        paletteBit,
+                        pixel
+                    );
                 });
                 // add a palette pass bit 4
                 return scanLineRowOffset;
@@ -147,7 +157,7 @@ export class PPU {
         const SCX = this.ram.memory[Address.SCX];
         const WY = this.ram.memory[Address.WY];
         const WX = this.ram.memory[Address.WX];
-
+        const palette = this.ram.memory[Address.BGP];
         const tileMapAddressingMode = (this.ram.memory[Address.LCDC] & 0b0001_0000) == 0b0001_0000;
         const scanLineBuffer: number[] = [];
 
@@ -191,7 +201,8 @@ export class PPU {
             );
 
             flattenedPixelRow.forEach((pixel) => {
-                scanLineBuffer.push(pixel);
+                let decodedPixel = this.inferPalette(palette, pixel);
+                scanLineBuffer.push(decodedPixel);
             });
         }
 

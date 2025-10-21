@@ -20,4 +20,9 @@ export enum Address {
     // Scan Line Registers
     LY = 0xff44,
     LYC = 0xff45,
+    // Pallete BG/Window
+    BGP = 0xff47,
+    // Object Pallete
+    OBP0 = 0xff48,
+    OBP1 = 0xff49,
 }
