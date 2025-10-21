@@ -103,6 +103,8 @@ export class PPU {
         // deal with palette
         const LY = this.ram.memory[Address.LY];
         let scanLineBuffer = this.bgAndWindowDraw(LY);
+        // final buffer
+        // idk about palette pass
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
         this.ram.write(Address.LY, LY + 1);
         //proceed to HBlank Mode
@@ -131,6 +133,7 @@ export class PPU {
                 alteredTileRowPixels.forEach((pixel, index) => {
                     alteredBuffer[index + scanLineRowOffset] = pixel;
                 });
+                // add a palette pass bit 4
                 return scanLineRowOffset;
             } else {
                 return buffer;
