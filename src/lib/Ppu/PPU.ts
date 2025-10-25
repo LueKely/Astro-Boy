@@ -61,12 +61,6 @@ export class PPU {
         if (LY == LYC) {
             this.ram.write(Address.STAT, this.ram.memory[Address.STAT] | 0b0000_0010);
         }
-
-        // init vblank interrupt INT
-        if (LY == 144) {
-            const IF = this.ram.read(Address.IF) | 0b0000_0001;
-            this.ram.write(Address.IF, IF);
-        }
     }
 
     private oamScan() {
@@ -113,7 +107,6 @@ export class PPU {
         let scanLineBuffer = this.bgAndWindowDraw(LY);
         // final buffer
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
-        this.ram.write(Address.LY, LY + 1);
         //proceed to HBlank Mode
         this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
@@ -220,19 +213,26 @@ export class PPU {
     private horizontalBlank() {
         // mode 0
         const STAT = this.ram.read(Address.STAT);
+        const LY = this.ram.memory[Address.LY];
         if ((STAT & 0b0000_1000) == 0b0000_1000) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
+
+        this.ram.write(Address.LY, LY + 1);
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
     }
 
     private vBlank() {
         // mode 1
         const STAT = this.ram.read(Address.STAT);
-        if ((STAT & 0b0001_0000) == 0b0001_0000) {
+        const LY = this.ram.memory[Address.LY];
+        if ((STAT & 0b0001_0000) == 0b0001_0000 || LY == 144) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0001);
         }
+
+        this.ram.write(Address.LY, LY + 1);
         this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
+        // add if here
     }
 
     step(tCycle: number) {
@@ -263,7 +263,7 @@ export class PPU {
             default:
                 throw new Error('This should not happen');
         }
-        // Stat int check
+        // LYC
         this.flagCheck();
     }
 }
