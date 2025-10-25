@@ -6,6 +6,7 @@
 // later on i need to research on ways to clear things in the canvas
 // many solutions but all have different purposes
 
+// REWRITE LOL HAHAHAHAHA
 import type { ICoordinates } from './types/Tile_Types';
 
 export class GameboyCanvas {
@@ -22,13 +23,15 @@ export class GameboyCanvas {
 
     paletteContext;
 
-    constructor(canvas: HTMLElement | null, palette?: number[][]) {
+    constructor(palette?: number[][]) {
         this.paletteContext = palette != undefined ? palette : GameboyCanvas.defaultPalette;
+        const canvas = document.getElementById('canvas') as HTMLElement | null;
         if (canvas && canvas instanceof HTMLCanvasElement) {
             this.canvas = canvas;
             this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
 
             // look up bind method to understand
+            // i think eto ung problema kaya mali render
             this.renderTile = this.renderTile.bind(this);
             this.renderTileData = this.renderTileData.bind(this);
         } else {

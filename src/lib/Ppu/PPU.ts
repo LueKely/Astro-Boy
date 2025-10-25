@@ -1,5 +1,6 @@
 import type { Ram } from '../Ram/Ram';
 import { Address } from '../utils/Address_Pointers';
+import type { GameboyCanvas } from './Canvas';
 import { Tile_Decoder_Utils } from './Tile_Decoder_Utils';
 import type { TOam } from './types/OAM';
 import type { ICoordinates } from './types/Tile_Types';
@@ -17,13 +18,14 @@ export class PPU {
     tileDataCache: number[][][] = [];
     tileMapIndices1: Uint8Array = new Uint8Array();
     tileMapIndices2: Uint8Array = new Uint8Array();
-
+    private canvas;
     private oamCache: TOam[] = [];
     private dot = 0;
     private ram: Ram;
 
-    constructor(ram: Ram) {
+    constructor(ram: Ram, canvas: GameboyCanvas) {
         this.ram = ram;
+        this.canvas = canvas;
         this.ram.write(Address.STAT, Address.STAT | 0b0000_0010);
     }
 
@@ -44,7 +46,7 @@ export class PPU {
         };
     }
     private inferObjectPalette(bit: number, id: number) {
-        let objectPalette = bit ? this.ram.memory[Address.OBP0] : this.ram.memory[Address.OBP1];
+        let objectPalette = bit ? this.ram.memory[Address.OBP1] : this.ram.memory[Address.OBP0];
         if (id == 0) return 0;
         return this.inferPalette(objectPalette, id);
     }
@@ -107,6 +109,7 @@ export class PPU {
         let scanLineBuffer = this.bgAndWindowDraw(LY);
         // final buffer
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
+
         //proceed to HBlank Mode
         this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
@@ -223,16 +226,17 @@ export class PPU {
     }
 
     private vBlank() {
-        // mode 1
         const STAT = this.ram.read(Address.STAT);
         const LY = this.ram.memory[Address.LY];
         if ((STAT & 0b0001_0000) == 0b0001_0000 || LY == 144) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0001);
         }
-
-        this.ram.write(Address.LY, LY + 1);
-        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
-        // add if here
+        if (LY == 153) {
+            this.ram.write(Address.LY, 0);
+            this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
+        } else {
+            this.ram.write(Address.LY, LY + 1);
+        }
     }
 
     step(tCycle: number) {
@@ -257,7 +261,6 @@ export class PPU {
             case 3:
                 if (this.dot < 172) return;
                 this.drawScanLine();
-
                 this.dot -= 172;
                 break;
             default:

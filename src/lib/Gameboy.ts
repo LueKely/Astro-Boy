@@ -3,6 +3,7 @@ import { Ram } from './Ram/Ram';
 import { Register_File } from './Cpu/Register_File';
 import { Cpu_Scheduler } from './Cpu/CPU_Scheduler';
 import { PPU } from './Ppu/PPU';
+import { GameboyCanvas } from './Ppu/Canvas';
 
 export class Gameboy {
     readonly registerFile: Register_File;
@@ -10,6 +11,7 @@ export class Gameboy {
     readonly cartridge: GameBoyCatridge;
     readonly scheduler: Cpu_Scheduler;
     readonly PPU: PPU;
+    readonly canvas: GameboyCanvas;
     pause = false;
     // TODO create a class for timer
 
@@ -19,7 +21,8 @@ export class Gameboy {
         this.cartridge = new GameBoyCatridge(game);
         this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
-        this.PPU = new PPU(this.ram);
+        this.canvas = new GameboyCanvas();
+        this.PPU = new PPU(this.ram, this.canvas);
         // timer
     }
 
@@ -36,12 +39,6 @@ export class Gameboy {
             'Register L': this.registerFile.L.getRegister(),
             'Register F': this.registerFile.F.getRegister().toString(2),
 
-            // IME: this.registerFile.IME,
-            // IF: this.ram.getIF(),
-            // IE: this.ram.getIE(),
-            // HALT_BUG: this.registerFile.HALT_BUG,
-            // HALT: this.registerFile.HALT,
-            // STOP: this.registerFile.STOP,
             'Memory 0xFF01': this.ram.read(0xff01),
             'Memory 0xFF02': this.ram.read(0xff02),
         };
