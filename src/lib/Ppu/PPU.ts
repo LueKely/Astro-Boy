@@ -3,7 +3,6 @@ import { Address } from '../utils/Address_Pointers';
 import type { GameboyCanvas } from './Canvas';
 import { Tile_Decoder_Utils } from './Tile_Decoder_Utils';
 import type { TOam } from './types/OAM';
-import type { ICoordinates } from './types/Tile_Types';
 
 //TODO:
 // during MODE 2 and 3 it says that Figure this shit out:
@@ -13,12 +12,7 @@ import type { ICoordinates } from './types/Tile_Types';
 // testing the thing
 
 export class PPU {
-    // hmm i don't actually need this other than for shit posting reasons
-    tileCoordinates: ICoordinates[] = [];
-    tileDataCache: number[][][] = [];
-    tileMapIndices1: Uint8Array = new Uint8Array();
-    tileMapIndices2: Uint8Array = new Uint8Array();
-    private canvas;
+    private canvas: GameboyCanvas;
     private oamCache: TOam[] = [];
     private dot = 0;
     private ram: Ram;
@@ -76,8 +70,6 @@ export class PPU {
         if (interruptFlag) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
-
-        // check on this is cycles are consumed during this time
         if (!isEnabled || !isObjAllowed) {
             return;
         }
@@ -104,22 +96,23 @@ export class PPU {
     }
 
     private drawScanLine() {
-        // TODO :
         const LY = this.ram.memory[Address.LY];
         let scanLineBuffer = this.bgAndWindowDraw(LY);
-        // final buffer
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
-
+        const buffer = this.canvas.renderScanline(flattenedScanLineBuffer);
+        this.canvas.placeScanline(buffer, LY);
         //proceed to HBlank Mode
         this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
     private OAMOverRide(buffer: number[], LY: number) {
-        this.oamCache.forEach((sprite) => {
+        let bufferFinal: number[] = [...buffer];
+        this.oamCache.forEach((sprite, index) => {
             const alteredBuffer = buffer;
             const priority = sprite.attributes & 0b1000_0000;
             const yFlip = sprite.attributes & 0b0100_0000;
             const xFlip = sprite.attributes & 0b0010_0000;
             const paletteBit = sprite.attributes & 0b0001_0000;
+            const isLast = this.oamCache.length - (index + 1) == 0;
             if (priority) {
                 // get tile
                 let rowOffset = LY - (sprite.yPos - 16);
@@ -131,20 +124,18 @@ export class PPU {
                 ];
 
                 let tileRowPixels = Tile_Decoder_Utils.decodeTo2bpp(tileRows[0], tileRows[1]);
-                let alteredTileRowPixels = xFlip ? tileRowPixels.reverse() : tileRowPixels;
                 let scanLineRowOffset = sprite.xPos - 8;
+                let alteredTileRowPixels = xFlip ? tileRowPixels.reverse() : tileRowPixels;
                 alteredTileRowPixels.forEach((pixel, index) => {
                     alteredBuffer[index + scanLineRowOffset] = this.inferObjectPalette(
                         paletteBit,
                         pixel
                     );
                 });
-                // add a palette pass bit 4
-                return scanLineRowOffset;
-            } else {
-                return buffer;
+                if (isLast) bufferFinal = alteredTileRowPixels;
             }
         });
+        return bufferFinal;
     }
 
     private bgAndWindowDraw(LY: number) {
