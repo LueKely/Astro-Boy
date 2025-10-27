@@ -23,6 +23,7 @@ export class Cpu_Scheduler {
         this.opCodes = new CpuOpcodeRecord(this.dmg.registerFile.F);
         this.interruptHandler = new Interrupt_Handler(this.dmg);
         this.currentOpcode = this.opCodes.get(this.readByte());
+        console.log('CPU initiated');
     }
 
     private readByte() {

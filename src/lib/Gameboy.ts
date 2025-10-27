@@ -75,16 +75,6 @@ export class Gameboy {
                 this.PPU.step(this.scheduler.currentMachineCycles);
             }
             totalCycleBudget += this.scheduler.currentMachineCycles * 4;
-            // this.listALL();
         }
-    }
-
-    listALL() {
-        console.log('ALL THE OPCODES');
-        console.log(this.list);
-        console.log('0XFF01: 0x' + this.ram.read(0xff01).toString(16));
-        console.log('0XFF02: 0x' + this.ram.read(0xff02).toString(16));
-        console.log('TILE DATA');
-        console.log(this.ram.getMemory().slice(0x8000, 0x97ff));
     }
 }

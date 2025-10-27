@@ -10,7 +10,7 @@ import Layout from '../layouts/Layout.astro';
         <div class="wrapper">
             <input type="file" id="fileInput" />
             <output id="output">No Games Loaded</output>
-            <button class="button">RUN</button>
+            <button class="button">STOP</button>
             <button class="clear">CLEAR</button>
         </div>
         <!-- the original canvas lenght is 144x160 -->
@@ -28,19 +28,6 @@ import Layout from '../layouts/Layout.astro';
     const clearBtn = document.querySelector('.clear');
     const output = document.getElementById('output');
 
-    const debugPalette = [
-        [255, 0, 0, 255], // color0: bright red
-        [0, 255, 0, 255], // color1: bright green
-        [0, 0, 255, 255], // color2: bright blue
-        [255, 255, 0, 255], // color3: bright yellow
-    ];
-
-    const palette = [
-        [255, 255, 255, 255], // color0: bright red
-        [123, 255, 49, 255], // color1: bright green
-        [0, 132, 0, 255], // color2: bright blue
-        [0, 0, 0, 255], // color3: bright yellow
-    ];
     let gameboy: Gameboy | null = null;
 
     input?.addEventListener('change', async (e) => {
@@ -48,27 +35,23 @@ import Layout from '../layouts/Layout.astro';
 
         const game = await loadFile(e);
         gameboy = new Gameboy(game);
-        const { getCartridgeHeaderRaw, inferCartridgeHeader } = gameboy?.cartridge;
 
-        // console.log(getCartridgeHeaderRaw());
-        // console.log(inferCartridgeHeader());
+        console.log(gameboy?.cartridge.getCartridgeHeaderRaw());
+        console.log(gameboy?.cartridge.inferCartridgeHeader());
 
-        // gameboy.run();
+        gameboy.run();
 
         gameboy.cartridge.checkSum();
         output.innerText = 'Game Loaded';
     });
 
     button?.addEventListener('click', () => {
-        // gameboy?.stop();
-        // if (button && gameboy) {
-        // 	button.textContent = gameboy.pause ? 'unpause' : 'pause';
-        // }
-        // if (!gameboy?.pause) gameboy?.run();
-        gameboy?.run();
+        gameboy?.stop();
     });
 
-    clearBtn?.addEventListener('click', () => {});
+    clearBtn?.addEventListener('click', () => {
+        gameboy?.canvas.clear();
+    });
 </script>
 
 <style>

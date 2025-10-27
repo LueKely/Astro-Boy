@@ -26,6 +26,7 @@ export class GameboyCanvas {
         this.paletteContext = palette != undefined ? palette : GameboyCanvas.defaultPalette;
         const canvas = document.getElementById('canvas') as HTMLElement | null;
         if (canvas && canvas instanceof HTMLCanvasElement) {
+            console.log('Canvas Initiated');
             this.canvas = canvas;
             this.ctx = this.canvas.getContext('2d') as CanvasRenderingContext2D;
         } else {

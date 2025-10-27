@@ -20,7 +20,8 @@ export class PPU {
     constructor(ram: Ram, canvas: GameboyCanvas) {
         this.ram = ram;
         this.canvas = canvas;
-        this.ram.write(Address.STAT, Address.STAT | 0b0000_0010);
+        this.ram.memory[Address.STAT] = (Address.STAT & 0b01111_1100) | 0b0000_0010;
+        console.log('PPU Initiated');
     }
 
     private inferLCDC() {
@@ -55,16 +56,15 @@ export class PPU {
         const LY = this.ram.memory[Address.LY];
         // init STAT INT
         if (LY == LYC) {
+            console.log('TRIGGERED');
             this.ram.write(Address.STAT, this.ram.memory[Address.STAT] | 0b0000_0010);
         }
     }
 
     private oamScan() {
-        //  mode 2
         const { isEnabled, isObjAllowed, objSize } = this.inferLCDC();
         const STAT = this.ram.read(Address.STAT);
         const LY = this.ram.memory[Address.LY];
-
         const interruptFlag = (STAT & 0b0010_0000) == 0b0010_0000;
 
         if (interruptFlag) {
@@ -92,7 +92,6 @@ export class PPU {
             }
         }
         // proceed to Draw mode
-        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0011);
     }
 
     private drawScanLine() {
@@ -102,7 +101,6 @@ export class PPU {
         const buffer = this.canvas.renderScanline(flattenedScanLineBuffer);
         this.canvas.placeScanline(buffer, LY);
         //proceed to HBlank Mode
-        this.ram.write(Address.STAT, this.ram.memory[Address.STAT] & 0b1111_1100);
     }
     private OAMOverRide(buffer: number[], LY: number) {
         let bufferFinal: number[] = [...buffer];
@@ -211,9 +209,14 @@ export class PPU {
         if ((STAT & 0b0000_1000) == 0b0000_1000) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
+        if (LY == 143) {
+            this.ram.memory[Address.STAT] =
+                (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0001;
+        }
 
-        this.ram.write(Address.LY, LY + 1);
-        this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
+        this.ram.memory[Address.LY]++;
+        this.flagCheck();
+        console.log('LY IS NOW ', this.ram.memory[Address.LY]);
     }
 
     private vBlank() {
@@ -224,40 +227,50 @@ export class PPU {
         }
         if (LY == 153) {
             this.ram.write(Address.LY, 0);
-            this.ram.write(Address.STAT, this.ram.read(Address.STAT) | 0b0000_0010);
+            this.ram.memory[Address.STAT] =
+                (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0010;
         } else {
             this.ram.write(Address.LY, LY + 1);
+            this.flagCheck();
         }
     }
 
     step(tCycle: number) {
-        const PPU_MODE = this.ram.read(Address.STAT) & 0b0000_0011;
+        const PPU_MODE = this.ram.memory[Address.STAT] & 0b0000_0011;
         this.dot += tCycle;
         switch (PPU_MODE) {
             case 0:
-                if (this.dot < 204) return;
+                console.log('0 mode');
+                if (this.dot < 204) {
+                    break;
+                }
                 this.horizontalBlank();
                 this.dot -= 204;
                 break;
             case 1:
-                if (this.dot < 456) return;
+                console.log('1 mode');
+                if (this.dot < 456) break;
                 this.vBlank();
                 this.dot -= 456;
                 break;
             case 2:
-                if (this.dot < 80) return;
+                console.log('2 mode');
+                if (this.dot < 80) break;
                 this.oamScan();
+                this.ram.memory[Address.STAT] =
+                    (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0011;
                 this.dot -= 80;
                 break;
             case 3:
-                if (this.dot < 172) return;
+                console.log('3 mode');
+                if (this.dot < 172) break;
                 this.drawScanLine();
+                this.ram.memory[Address.STAT] =
+                    (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0000;
                 this.dot -= 172;
                 break;
             default:
                 throw new Error('This should not happen');
         }
-        // LYC
-        this.flagCheck();
     }
 }
