@@ -56,7 +56,7 @@ export class PPU {
         const LY = this.ram.memory[Address.LY];
         // init STAT INT
         if (LY == LYC) {
-            console.log('TRIGGERED');
+            // console.log('TRIGGERED');
             this.ram.write(Address.STAT, this.ram.memory[Address.STAT] | 0b0000_0010);
         }
     }
@@ -99,6 +99,7 @@ export class PPU {
         let scanLineBuffer = this.bgAndWindowDraw(LY);
         let flattenedScanLineBuffer = this.OAMOverRide(scanLineBuffer, LY);
         const buffer = this.canvas.renderScanline(flattenedScanLineBuffer);
+        // console.log('Drawing AT ', LY);
         this.canvas.placeScanline(buffer, LY);
         //proceed to HBlank Mode
     }
@@ -209,14 +210,16 @@ export class PPU {
         if ((STAT & 0b0000_1000) == 0b0000_1000) {
             this.ram.write(Address.IF, this.ram.getIF() | 0b0000_0010);
         }
-        if (LY == 143) {
+        if (LY + 1 == 143) {
             this.ram.memory[Address.STAT] =
                 (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0001;
+        } else {
+            this.ram.memory[Address.STAT] =
+                (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0011;
         }
 
         this.ram.memory[Address.LY]++;
         this.flagCheck();
-        console.log('LY IS NOW ', this.ram.memory[Address.LY]);
     }
 
     private vBlank() {
@@ -240,30 +243,30 @@ export class PPU {
         this.dot += tCycle;
         switch (PPU_MODE) {
             case 0:
-                console.log('0 mode');
                 if (this.dot < 204) {
                     break;
                 }
+                // console.log('0 mode');
                 this.horizontalBlank();
                 this.dot -= 204;
                 break;
             case 1:
-                console.log('1 mode');
                 if (this.dot < 456) break;
+                // console.log('1 mode');
                 this.vBlank();
                 this.dot -= 456;
                 break;
             case 2:
-                console.log('2 mode');
                 if (this.dot < 80) break;
+                // console.log('2 mode');
                 this.oamScan();
                 this.ram.memory[Address.STAT] =
                     (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0011;
                 this.dot -= 80;
                 break;
             case 3:
-                console.log('3 mode');
                 if (this.dot < 172) break;
+                // console.log('3 mode');
                 this.drawScanLine();
                 this.ram.memory[Address.STAT] =
                     (this.ram.memory[Address.STAT] & 0b1111_1100) | 0b0000_0000;
