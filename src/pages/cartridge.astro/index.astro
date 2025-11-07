@@ -1,0 +1,46 @@
+<div id="container">
+    
+    <div class="wrapper">
+        <input type="file" id="fileInput" />
+        <output id="output">No Games Loaded</output>
+        <button class="button">STOP</button>
+        <button class="clear">CLEAR</button>
+    </div>
+    <!-- the original canvas lenght is 144x160 -->
+    <canvas width="160" height="144" id="canvas"></canvas>
+</div>
+
+<script>
+    import { Gameboy } from '../../lib/Gameboy';
+    import { loadFile } from '../../lib/utils/File_Utils';
+
+    const input = document.getElementById('fileInput');
+    const button = document.querySelector('.button');
+    const clearBtn = document.querySelector('.clear');
+    const output = document.getElementById('output');
+
+    let gameboy: Gameboy | null = null;
+
+    input?.addEventListener('change', async (e) => {
+        if (!output) throw new Error('Output element missing');
+
+        const game = await loadFile(e);
+        gameboy = new Gameboy(game);
+
+        console.log(gameboy?.cartridge.getCartridgeHeaderRaw());
+        console.log(gameboy?.cartridge.inferCartridgeHeader());
+
+        gameboy.run();
+
+        gameboy.cartridge.checkSum();
+        output.innerText = 'Game Loaded';
+    });
+
+    button?.addEventListener('click', () => {
+        gameboy?.stop();
+    });
+
+    clearBtn?.addEventListener('click', () => {
+        gameboy?.canvas.clear();
+    });
+</script>
