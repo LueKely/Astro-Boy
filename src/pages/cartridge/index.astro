@@ -1,15 +1,22 @@
-<div id="container">
-    
-    <div class="wrapper">
-        <input type="file" id="fileInput" />
-        <output id="output">No Games Loaded</output>
-        <button class="button">STOP</button>
-        <button class="clear">CLEAR</button>
-    </div>
-    <!-- the original canvas lenght is 144x160 -->
-    <canvas width="160" height="144" id="canvas"></canvas>
-</div>
+---
+import Layout from '../../layouts/Layout.astro';
+import { Link } from '../../components/composables/link';
+---
 
+<Layout title="Cartridge">
+    <main>
+        <section>
+            <div>
+                <Link name="CPU" link="/cpu" />
+                <Link name="Catridge" link="/cartridge" />
+            </div>
+            <div class="wrapper">
+                <input type="file" id="fileInput" />
+                <output id="output">No Games Loaded</output>
+            </div>
+        </section>
+    </main>
+</Layout>
 <script>
     import { Gameboy } from '../../lib/Gameboy';
     import { loadFile } from '../../lib/utils/File_Utils';
@@ -20,7 +27,6 @@
     const output = document.getElementById('output');
 
     let gameboy: Gameboy | null = null;
-
     input?.addEventListener('change', async (e) => {
         if (!output) throw new Error('Output element missing');
 
@@ -38,9 +44,5 @@
 
     button?.addEventListener('click', () => {
         gameboy?.stop();
-    });
-
-    clearBtn?.addEventListener('click', () => {
-        gameboy?.canvas.clear();
     });
 </script>

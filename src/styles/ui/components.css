@@ -1,0 +1,15 @@
+header,
+footer {
+    width: full;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+header {
+    justify-content: space-between;
+    padding: 10px;
+}
+footer {
+    justify-content: center;
+}

@@ -10,8 +10,6 @@ export class Gameboy {
     readonly ram: Ram;
     readonly cartridge: GameBoyCatridge;
     readonly scheduler: Cpu_Scheduler;
-    readonly PPU: PPU;
-    readonly canvas: GameboyCanvas;
     pause = false;
     // TODO create a class for timer
 
@@ -21,9 +19,6 @@ export class Gameboy {
         this.cartridge = new GameBoyCatridge(game);
         this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
-        this.canvas = new GameboyCanvas();
-        this.PPU = new PPU(this.ram, this.canvas);
-        // timer
     }
 
     log() {
@@ -60,21 +55,11 @@ export class Gameboy {
 
     run() {
         this.cycle();
-        requestAnimationFrame(() => {
-            this.run();
-        });
     }
 
     cycle() {
-        // TODO: Implement a way to ignore ticks when the register STOP is true
-        const limit = 70224;
-        let totalCycleBudget = 0;
-        while (totalCycleBudget < limit) {
-            if (!this.registerFile.STOP) {
-                this.scheduler.tick();
-                this.PPU.step(this.scheduler.currentMachineCycles);
-            }
-            totalCycleBudget += this.scheduler.currentMachineCycles * 4;
+        if (!this.registerFile.STOP) {
+            this.scheduler.tick();
         }
     }
 }

@@ -1,5 +1,18 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { Link } from '../../components/composables/link';
 ---
 
-<Layout> CPU GAMING! </Layout>
+<Layout title="CPU Functions">
+    <main>
+        <section>
+            <div>
+                <Link name="CPU" link="/cpu" />
+                <Link name="Catridge" link="/cartridge" />
+            </div>
+            <div>
+                <p>Stuff are here</p>
+            </div>
+        </section>
+    </main>
+</Layout>
