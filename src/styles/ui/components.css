@@ -15,27 +15,43 @@ footer {
 }
 
 section {
-    width: 700px;
-    height: 800px;
+    display: inline-block;
+    padding: 10px;
     background-color: green;
 }
 
 div.cpu {
     background-color: red;
     display: grid;
+
+    width: 700px;
     height: 700px;
     grid-template-columns: 2.5fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
     gap: 10px;
 }
 
 form.register {
     background-color: blue;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-row: 1 / span 5;
 }
 form.ram {
     background-color: purple;
-    grid-row-start: 3;
-    grid-row-end: 4;
+    grid-row: 6 / span 6;
+}
+
+form.status {
+    background-color: pink;
+    grid-row: 1 / span 2;
+    grid-column: span 2;
+}
+form.pointers {
+    background-color: green;
+    grid-row: 3 / 3 span;
+    grid-column: span 2;
+}
+form.opcode {
+    background-color: cyan;
+    grid-row: 6 / span 6;
+    grid-column: span 2;
 }

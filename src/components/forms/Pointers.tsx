@@ -1,6 +1,6 @@
 export function PointersForm() {
     return (
-        <form>
+        <form className="pointers">
             <fieldset>
                 <legend>Pointers</legend>
             </fieldset>
