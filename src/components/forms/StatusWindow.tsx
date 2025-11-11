@@ -1,6 +1,6 @@
 export function StatusWindow() {
     return (
-        <form>
+        <form className="status">
             <fieldset>
                 <legend>Status Window</legend>
             </fieldset>

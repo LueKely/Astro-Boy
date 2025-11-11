@@ -1,6 +1,6 @@
 export function RegistersForm() {
     return (
-        <form>
+        <form className="register">
             <fieldset>
                 <legend>Opcode</legend>
             </fieldset>

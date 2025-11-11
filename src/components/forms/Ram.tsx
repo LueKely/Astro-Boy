@@ -1,8 +1,8 @@
 export function RamForm() {
     return (
-        <form>
+        <form className="ram">
             <fieldset>
-                <legend>Opcode</legend>
+                <legend>Ram</legend>
             </fieldset>
         </form>
     );

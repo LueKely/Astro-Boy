@@ -13,3 +13,29 @@ header {
 footer {
     justify-content: center;
 }
+
+section {
+    width: 700px;
+    height: 800px;
+    background-color: green;
+}
+
+div.cpu {
+    background-color: red;
+    display: grid;
+    height: 700px;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+form.register {
+    background-color: blue;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+form.ram {
+    background-color: purple;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}

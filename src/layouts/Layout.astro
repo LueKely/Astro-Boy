@@ -1,6 +1,8 @@
 ---
 import { Header } from '../components/layout/Header';
 import { Footer } from '../components/layout/Footer';
+import { Image } from 'astro:assets';
+import { lazy } from 'astro:schema';
 interface Props {
     title?: string;
 }
@@ -24,7 +26,17 @@ const { title = 'Astroboy' } = Astro.props;
         <title>{title}</title>
     </head>
     <body>
-        <Header />
+        <Header>
+            <a href="/">
+                <Image
+                    src={'/logo.png'}
+                    alt="Logo of the website"
+                    height={70}
+                    width={120}
+                    loading="eager"
+                />
+            </a>
+        </Header>
         <slot />
         <Footer />
     </body>
