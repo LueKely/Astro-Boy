@@ -1,0 +1,24 @@
+form.register {
+    background-color: blue;
+    grid-row: 1 / span 5;
+}
+form.ram {
+    background-color: purple;
+    grid-row: 6 / span 6;
+}
+
+form.status {
+    background-color: pink;
+    grid-row: 1 / span 2;
+    grid-column: span 2;
+}
+form.pointers {
+    background-color: green;
+    grid-row: 3 / 3 span;
+    grid-column: span 2;
+}
+form.opcode {
+    background-color: cyan;
+    grid-row: 6 / span 6;
+    grid-column: span 2;
+}
