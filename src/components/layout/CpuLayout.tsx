@@ -8,10 +8,7 @@ import { Link } from '../composables/link';
 export function CpuLayout() {
     return (
         <div className="cpu">
-            <div className="link--wrapper">
-                <Link name="CPU" link="/cpu" />
-                <Link name="Catridge" link="/cartridge" />
-            </div>
+            <Link name="CPU" link="/cpu" />
             <RegistersForm />
             <StatusWindow />
             <PointersForm />

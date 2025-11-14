@@ -21,8 +21,30 @@ section {
 
 /*new plan use ::before because this suck!*/
 div.cpu {
+    z-index: 2;
     position: relative;
-    z-index: 1;
+    padding: 25px;
+    padding-top: 75px;
+    /*
+    clip-path: path(
+        'M 0,25 A 25,25 0,0,1 25,0 L 250,0 A 25,25 0,0,1 275,25 A 25,25 0,0,0 300,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,50 Z'
+    );*/
+    width: 800px;
+    height: 800px;
+
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 15px;
+}
+
+div.cpu::before {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    z-index: -1;
+    content: '';
     background-image: linear-gradient(
         0deg,
         rgba(2, 35, 31, 1) 0%,
@@ -32,51 +54,32 @@ div.cpu {
         rgba(5, 150, 105, 1) 90%,
         rgba(5, 150, 105, 1) 90%
     );
-    padding: 25px;
-    display: grid;
 
     clip-path: path(
-        'M 0,50 L 50,0 L 250,0 L 300,50 L 300,75 L 325,100 L 750,100 L 800,150 L 800,750 L 750,800 L 50,800 L 0,750 L 0,50 Z'
+        'M 0,25 A 25,25 0,0,1 25,0 L 250,0 A 25,25 0,0,1 275,25 A 25,25 0,0,0 300,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,50 Z'
     );
     width: 800px;
     height: 800px;
-    grid-template-columns: 2.5fr 1fr 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    gap: 15px;
 }
-/*div.cpu::before {
-    z-index: -1;
-    position: absolute;
-    content: '';
-    top: 50%;
+div.cpu::after {
     left: 50%;
-    width: 685px;
-    height: 685px;
+    top: 50%;
     transform: translate(-50%, -50%);
-    background-color: red;
-}*/
-.link--wrapper {
-    top: -40.5px;
-    left: 0;
+    margin-inline: auto;
     position: absolute;
-    display: flex;
-    align-items: flex-end;
-    width: 700px;
-    gap: 10px;
-    a {
-        box-shadow: 0px 0px 0px 10px teal;
-        width: 100px;
-        padding: 5px;
-        display: block;
-        background-color: blue;
-    }
-    div {
-        height: 20px;
-        border: 5px solid black;
-        border-bottom: none;
-        border-left: none;
-        background-color: red;
-        flex: 1;
-        width: full;
-    }
+    z-index: -2;
+    content: '';
+    background-color: red;
+
+    clip-path: path(
+        'M 0,25 A 30,30 0,0,1 25,0 L 260,0 A 30,30 0,0,1 285,25 A 25,25 0,0,0 300,50 L 760,50 A 55,55 0,0,1 810,100 L 810,750 A 55,55 0,0,1 750,810 L 50,810 A 55,55 0,0,1 0,760 L 0,50 Z'
+    );
+    width: 810px;
+    height: 810px;
+}
+a.link {
+    top: 0;
+    left: 100px;
+    position: absolute;
+    font-size: 2rem;
 }
