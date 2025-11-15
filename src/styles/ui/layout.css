@@ -20,15 +20,32 @@ section {
 }
 
 /*new plan use ::before because this suck!*/
-div.cpu {
+div.cpu--container {
+    a.cpu--link {
+        top: 0;
+        left: 100px;
+        position: absolute;
+        font-size: 2rem;
+    }
+
+    a.cartridge--link {
+        z-index: -5;
+        top: -5px;
+        left: 275px;
+        width: 280px;
+        background-color: grey;
+        border: 5px solid black;
+        border-bottom: none;
+        position: absolute;
+        font-size: 2rem;
+        text-align: center;
+        border-radius: 20px 20px 0px 0px;
+    }
     z-index: 2;
     position: relative;
     padding: 25px;
     padding-top: 75px;
-    /*
-    clip-path: path(
-        'M 0,25 A 25,25 0,0,1 25,0 L 250,0 A 25,25 0,0,1 275,25 A 25,25 0,0,0 300,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,50 Z'
-    );*/
+
     width: 800px;
     height: 800px;
 
@@ -38,7 +55,7 @@ div.cpu {
     gap: 15px;
 }
 
-div.cpu::before {
+div.cpu--container::before {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -61,7 +78,7 @@ div.cpu::before {
     width: 800px;
     height: 800px;
 }
-div.cpu::after {
+div.cpu--container::after {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -77,9 +94,26 @@ div.cpu::after {
     width: 810px;
     height: 810px;
 }
-a.link {
-    top: 0;
-    left: 100px;
-    position: absolute;
-    font-size: 2rem;
+
+/* page for the Cartridge Layout*/
+div.cartridge--container {
+    z-index: 2;
+    position: relative;
+    padding: 25px;
+    padding-top: 75px;
+
+    width: 800px;
+    height: 800px;
+
+    a.cpu--link {
+        background-color: black;
+    }
+    a.cartridge--link {
+        background-color: red;
+    }
+}
+
+div.cartridge--container::before {
+}
+div.cartridge--container::after {
 }
