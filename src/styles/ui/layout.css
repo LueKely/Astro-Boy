@@ -62,16 +62,21 @@ div.cpu--container::before {
     position: absolute;
     z-index: -1;
     content: '';
-    background-image: linear-gradient(
-        0deg,
-        rgba(2, 35, 31, 1) 0%,
-        rgba(5, 150, 105, 1) 25%,
-        rgba(19, 244, 173, 1) 40%,
-        rgba(5, 150, 105, 1) 87%,
-        rgba(5, 150, 105, 1) 90%,
-        rgba(5, 150, 105, 1) 90%
-    );
-
+    background-image:
+        url('/triangles.svg'),
+        linear-gradient(
+            0deg,
+            rgba(0, 125, 86, 1) 0%,
+            rgba(10, 170, 120, 1) 25%,
+            rgba(19, 250, 150, 1) 50%,
+            rgba(10, 170, 120, 1) 75%,
+            rgba(0, 125, 86, 1) 100%
+        );
+    background-repeat: repeat-x, repeat;
+    background-size: 500px, auto;
+    background-position:
+        center bottom,
+        center center;
     clip-path: path(
         'M 0,25 A 25,25 0,0,1 25,0 L 250,0 A 25,25 0,0,1 275,25 A 25,25 0,0,0 300,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,50 Z'
     );
@@ -86,7 +91,14 @@ div.cpu--container::after {
     position: absolute;
     z-index: -2;
     content: '';
-    background-color: red;
+    background-image: linear-gradient(
+        0deg,
+        rgba(2, 35, 31, 1) 20%,
+        rgba(5, 150, 105, 1) 35%,
+        rgba(19, 244, 173, 1) 50%,
+        rgba(5, 150, 105, 1) 65%,
+        rgba(2, 35, 31, 1) 70%
+    );
 
     clip-path: path(
         'M 0,25 A 30,30 0,0,1 25,0 L 260,0 A 30,30 0,0,1 285,25 A 20,23 0,0,0 300,50 L 760,50 A 55,55 0,0,1 810,100 L 810,750 A 55,55 0,0,1 750,810 L 50,810 A 55,55 0,0,1 0,760 L 0,50 Z'
