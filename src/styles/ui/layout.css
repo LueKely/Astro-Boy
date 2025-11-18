@@ -27,7 +27,6 @@ div.cpu--container {
         top: 0;
         left: 100px;
         position: absolute;
-        font-size: 2rem;
     }
 
     a.cartridge--link {
@@ -35,11 +34,12 @@ div.cpu--container {
         top: -5px;
         left: 275px;
         width: 280px;
-        background-color: grey;
-        border: 5px solid black;
+
+        background-color: rgba(7, 56, 38, 1);
+        border: 5px solid rgba(2, 35, 31, 1);
+
         border-bottom: none;
         position: absolute;
-        font-size: 2rem;
         text-align: center;
         border-radius: 20px 20px 0px 0px;
     }
@@ -128,10 +128,9 @@ div.cartridge--container {
         left: -5px;
 
         position: absolute;
-        font-size: 2rem;
         text-indent: -10px;
-        background-color: grey;
-        border: 5px solid black;
+        background-color: rgba(7, 56, 38, 1);
+        border: 5px solid rgba(2, 35, 31, 1);
 
         position: absolute;
         text-align: center;
@@ -146,8 +145,6 @@ div.cartridge--container {
         left: 345px;
         z-index: 1;
         top: 0px;
-
-        font-size: 2rem;
     }
 }
 
@@ -157,11 +154,6 @@ div.cartridge--container::before {
     );
 }
 div.cartridge--container::after {
-    width: 810px;
-    height: 810px;
-    background-color: red;
-    z-index: -5;
-
     clip-path: path(
         'M 0,75 A 30,30 0,0,1 25,50 L 260,50 A 25,25 0,0,0 275,25 A 30,30 0,0,1 300,0 L 535,0 A 30,30 0,0,1 560,25 A 30,30 0,0,0 575,50 L 760,50 A 55,55 0,0,1 810,100 L 810,760 A 55,55 0,0,1 760,810 L 50,810 A 55,55 0,0,1 0,760 L 0,100 Z'
     );

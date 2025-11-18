@@ -6,6 +6,13 @@
 
 .bai-jamjuree-regular {
     font-family: 'Bai Jamjuree', sans-serif;
-    font-weight: 400;
+    font-weight: bolder;
     font-style: normal;
+}
+
+a {
+    background-color: none;
+    color: white;
+    text-decoration: none;
+    font-size: 2rem;
 }
