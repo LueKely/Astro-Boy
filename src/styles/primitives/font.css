@@ -10,9 +10,75 @@
     font-style: normal;
 }
 
-a {
+a.tab {
     background-color: none;
     color: white;
     text-decoration: none;
     font-size: 2rem;
+}
+
+.Winning-text {
+}
+a.about {
+    /*z-index: 1;*/
+    /*position: relative;*/
+    /*font-family: 'Bagel Fat One', system-ui;*/
+    /*font-weight: 400;*/
+    /*font-style: normal;*/
+    /*font-size: 2.5rem;*/
+
+    /*background: linear-gradient(-180deg, rgba(17, 76, 69, 1) 60%, rgba(65, 115, 99, 1) 60%);*/
+
+    /*-webkit-text-stroke: 10px #aa5ed3;*/
+    /*-webkit-text-fill-color: transparent;*/
+
+    /*text-decoration: none;*/
+    /*letter-spacing: -7%;*/
+    /*-webkit-background-clip: text;*/
+    /*background-clip: text;*/
+    color: red;
+
+    display: inline-block;
+    font-size: 35vw;
+    line-height: 100vh;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+    position: relative;
+    letter-spacing: -0.05em;
+    -webkit-text-stroke: 10px #aa5ed3;
+
+    background: -webkit-linear-gradient(
+        top,
+        rgba(128, 128, 128, 1) 0%,
+        rgba(59, 50, 50, 1) 58%,
+        rgba(59, 50, 50, 1) 100%
+    );
+
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    &:after {
+        color: red;
+        content: attr(data-text);
+        position: absolute;
+        -webkit-text-stroke: 0.15em #d9a3ff;
+        left: 0;
+        z-index: -2;
+        font-size: 1em;
+    }
+}
+a.about::before {
+    /*z-index: -2;
+    -webkit-text-stroke: 3rem #d9a3ff;
+    content: 'About';
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+    font-family: 'Bagel Fat One', system-ui;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 3rem;
+    letter-spacing: -7%;*/
 }

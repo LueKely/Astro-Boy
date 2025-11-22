@@ -8,153 +8,15 @@ footer {
 
 header {
     justify-content: space-between;
-    background-image: url('/tuldok.svg');
+    background-image: linear-gradient(0deg, rgba(48, 48, 48, 0.5) 0%);
     background-repeat: repeat-x;
     padding: 10px;
 }
 footer {
     justify-content: center;
+    margin-top: auto;
 }
 
-section {
-    margin-left: 200px;
-    display: inline-block;
-}
-
-/*new plan use ::before because this suck!*/
-div.cpu--container {
-    a.cpu--link {
-        top: 0;
-        left: 100px;
-        position: absolute;
-    }
-
-    a.cartridge--link {
-        z-index: -5;
-        top: -5px;
-        left: 275px;
-        width: 280px;
-
-        background-color: rgba(7, 56, 38, 1);
-        border: 5px solid rgba(2, 35, 31, 1);
-
-        border-bottom: none;
-        position: absolute;
-        text-align: center;
-        border-radius: 20px 20px 0px 0px;
-    }
-    display: grid;
-    grid-template-columns: 2.5fr 1fr 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    gap: 15px;
-}
-div.cpu--container,
-div.cartridge--container {
-    z-index: 2;
-
-    padding: 25px;
-    padding-top: 75px;
-
-    position: relative;
-    width: 800px;
-    height: 800px;
-}
-div.cpu--container::after,
-div.cartridge--container::after,
-div.cpu--container::before,
-div.cartridge--container::before {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    content: '';
-}
-div.cpu--container::before {
-    clip-path: path(
-        'M 0,25 A 25,25 0,0,1 25,0 L 250,0 A 25,25 0,0,1 275,25 A 25,25 0,0,0 300,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,50 Z'
-    );
-}
-div.cpu--container::after {
-    clip-path: path(
-        'M 0,25 A 30,30 0,0,1 25,0 L 260,0 A 30,30 0,0,1 285,25 A 20,23 0,0,0 300,50 L 760,50 A 55,55 0,0,1 810,100 L 810,750 A 55,55 0,0,1 750,810 L 50,810 A 55,55 0,0,1 0,760 L 0,50 Z'
-    );
-}
-div.cpu--container::before,
-div.cartridge--container::before {
-    background-image:
-        url('/tuldok.svg'),
-        linear-gradient(
-            0deg,
-            rgba(0, 125, 86, 1) 0%,
-            rgba(10, 170, 120, 1) 25%,
-            rgba(19, 250, 150, 1) 50%,
-            rgba(10, 170, 120, 1) 75%,
-            rgba(0, 125, 86, 1) 90%,
-            rgba(0, 90, 86, 1) 100%
-        );
-    background-repeat: repeat-x, repeat;
-    background-size: auto, auto;
-    background-position:
-        center center,
-        center center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    content: '';
-    width: 800px;
-    height: 800px;
-    z-index: -1;
-}
-
-div.cpu--container::after,
-div.cartridge--container::after {
-    width: 810px;
-    height: 810px;
-    z-index: -2;
-    background-image: linear-gradient(
-        0deg,
-        rgba(2, 35, 31, 1) 20%,
-        rgba(5, 150, 105, 1) 35%,
-        rgba(19, 244, 173, 1) 50%,
-        rgba(5, 150, 105, 1) 65%,
-        rgba(2, 35, 31, 1) 70%
-    );
-}
-
-div.cartridge--container {
-    a.cpu--link {
-        top: -5px;
-        left: -5px;
-
-        position: absolute;
-        text-indent: -10px;
-        background-color: rgba(7, 56, 38, 1);
-        border: 5px solid rgba(2, 35, 31, 1);
-
-        position: absolute;
-        text-align: center;
-        border-radius: 30px 30px 0px 0px;
-        width: 280px;
-        z-index: -6;
-        padding-bottom: 30px;
-    }
-
-    a.cartridge--link {
-        position: absolute;
-        left: 345px;
-        z-index: 1;
-        top: 0px;
-    }
-}
-
-div.cartridge--container::before {
-    clip-path: path(
-        'M 0,75 A 25,25 0,0,1 25,50 L 255,50 A 25,25 0,0,0 275,25 A 25,25 0,0,1 300,0 L 525,0 A 25,25 0,0,1 550,25 A 30,30 0,0,0 570,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,100 Z'
-    );
-}
-div.cartridge--container::after {
-    clip-path: path(
-        'M 0,75 A 30,30 0,0,1 25,50 L 260,50 A 25,25 0,0,0 275,25 A 30,30 0,0,1 300,0 L 535,0 A 30,30 0,0,1 560,25 A 30,30 0,0,0 575,50 L 760,50 A 55,55 0,0,1 810,100 L 810,760 A 55,55 0,0,1 760,810 L 50,810 A 55,55 0,0,1 0,760 L 0,100 Z'
-    );
+main {
+    padding-top: 20px;
 }

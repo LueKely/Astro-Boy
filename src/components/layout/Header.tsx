@@ -5,8 +5,8 @@ export function Header({ children }: { children: ReactNode }) {
         <header>
             {children}
 
-            <a href="/about">
-                <h1>About</h1>
+            <a href="/about" className="about">
+                <p>About</p>
             </a>
         </header>
     );
