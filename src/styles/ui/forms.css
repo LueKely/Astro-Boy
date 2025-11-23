@@ -1,24 +1,115 @@
+form {
+    fieldset {
+        border-radius: 10px;
+        border: solid 5px black;
+        width: 100%;
+        height: 100%;
+    }
+    legend {
+        font-family: 'Bai Jamjuree', sans-serif;
+        font-weight: bolder;
+        font-style: normal;
+        font-size: 1.1rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 50px;
+        text-align: center;
+
+        border: solid 5px black;
+        border-radius: 10px;
+    }
+}
+
 form.register {
-    background-color: blue;
+    fieldset,
+    legend {
+        border-color: #4e0c0c;
+    }
+    legend {
+        background-color: #ff7575;
+        color: #4e0c0c;
+        box-shadow: inset #ac3232 0px -5px;
+    }
+    fieldset {
+        background-image: url('/stripes.svg'), linear-gradient(0deg, #e5aeae 0%);
+        background-repeat: repeat, no-repeat;
+        box-shadow: inset 0px 0px 30px #811616;
+    }
     grid-row: 1 / span 5;
 }
 form.ram {
-    background-color: purple;
+    fieldset,
+    legend {
+        border-color: #014449;
+    }
+    legend {
+        background-color: #3fe7d4;
+        color: #093f49;
+        box-shadow: inset #187054 0px -5px;
+    }
+    fieldset {
+        background-image: url('/stripes.svg'), linear-gradient(0deg, #acd6d2 0%);
+        background-repeat: repeat, no-repeat;
+        box-shadow: inset 0px 0px 30px #0b4a43;
+    }
     grid-row: 6 / span 6;
 }
 
 form.status {
-    background-color: pink;
+    fieldset,
+    legend {
+        border-color: #21341c;
+    }
+    legend {
+        background-color: #cee73f;
+        color: #21341c;
+        box-shadow: inset #637018 0px -5px;
+    }
+    fieldset {
+        background-image: url('/stripes.svg'), linear-gradient(0deg, #b6ed8f 0%);
+        background-repeat: repeat, no-repeat;
+        box-shadow: inset 0px 0px 30px #21652b;
+    }
     grid-row: 1 / span 2;
     grid-column: span 2;
 }
 form.pointers {
-    background-color: green;
+    fieldset,
+    legend {
+        border-color: #391e0e;
+    }
+    legend {
+        background-color: #e16b30;
+        color: #2c1304;
+        box-shadow: inset #88420c 0px -5px;
+    }
+    fieldset {
+        background-image: url('/stripes.svg'), linear-gradient(0deg, #f6ae88 0%);
+        background-repeat: repeat, no-repeat;
+        box-shadow: inset 0px 0px 30px #8e4212;
+    }
+
     grid-row: 3 / 3 span;
     grid-column: span 2;
 }
 form.opcode {
-    background-color: cyan;
+    fieldset,
+    legend {
+        border-color: #311235;
+    }
+    legend {
+        background-color: #f273d0;
+        color: #311235;
+        box-shadow: inset #9046a9 0px -5px;
+    }
+    fieldset {
+        background-image: url('/stripes.svg'), linear-gradient(0deg, #bd7cac 0%);
+        background-repeat: repeat, no-repeat;
+        box-shadow: inset 0px 0px 30px #4c1c53;
+    }
     grid-row: 6 / span 6;
     grid-column: span 2;
 }

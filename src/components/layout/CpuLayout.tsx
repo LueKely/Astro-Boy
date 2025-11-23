@@ -10,11 +10,11 @@ export function CpuLayout() {
         <div className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />
-            {/*<RegistersForm />
+            <RegistersForm />
             <StatusWindow />
             <PointersForm />
             <RamForm />
-            <OpCodesForm />*/}
+            <OpCodesForm />
         </div>
     );
 }
