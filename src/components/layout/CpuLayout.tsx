@@ -4,10 +4,22 @@ import { RamForm } from '../forms/Ram';
 import { RegistersForm } from '../forms/Registers';
 import { StatusWindow } from '../forms/StatusWindow';
 import { Link } from '../composables/link';
-
+import type { FormEvent } from 'react';
 export function CpuLayout() {
+    async function submit(e: FormEvent<HTMLFormElement>) {
+        console.log('TEST');
+        e.preventDefault();
+        const formdata = new FormData(e.target as HTMLFormElement);
+        const response = await fetch('/api/gameboy', {
+            method: 'GET',
+            body: formdata,
+        });
+
+        const data = await response.json();
+        console.log(data);
+    }
     return (
-        <div className="cpu--container">
+        <form method="post" onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />
             <RegistersForm />
@@ -15,6 +27,6 @@ export function CpuLayout() {
             <PointersForm />
             <RamForm />
             <OpCodesForm />
-        </div>
+        </form>
     );
 }

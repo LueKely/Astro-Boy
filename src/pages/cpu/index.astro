@@ -1,4 +1,5 @@
 ---
+// export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
 import { CpuLayout } from '../../components/layout/CpuLayout';
 ---
@@ -6,7 +7,7 @@ import { CpuLayout } from '../../components/layout/CpuLayout';
 <Layout title="CPU Functions">
     <main>
         <section>
-            <CpuLayout />
+            <CpuLayout client:load />
         </section>
     </main>
 </Layout>

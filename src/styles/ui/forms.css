@@ -23,8 +23,8 @@ form {
     }
 }
 
-form.register {
-    fieldset,
+fieldset.register {
+    &,
     legend {
         border-color: #4e0c0c;
     }
@@ -33,15 +33,13 @@ form.register {
         color: #4e0c0c;
         box-shadow: inset #ac3232 0px -5px;
     }
-    fieldset {
-        background-image: url('/stripes.svg'), linear-gradient(0deg, #e5aeae 0%);
-        background-repeat: repeat, no-repeat;
-        box-shadow: inset 0px 0px 30px #811616;
-    }
+    background-image: url('/stripes.svg'), linear-gradient(0deg, #e5aeae 0%);
+    background-repeat: repeat, no-repeat;
+    box-shadow: inset 0px 0px 30px #811616;
     grid-row: 1 / span 5;
 }
-form.ram {
-    fieldset,
+fieldset.ram {
+    &,
     legend {
         border-color: #014449;
     }
@@ -50,16 +48,14 @@ form.ram {
         color: #093f49;
         box-shadow: inset #187054 0px -5px;
     }
-    fieldset {
-        background-image: url('/stripes.svg'), linear-gradient(0deg, #acd6d2 0%);
-        background-repeat: repeat, no-repeat;
-        box-shadow: inset 0px 0px 30px #0b4a43;
-    }
+    background-image: url('/stripes.svg'), linear-gradient(0deg, #acd6d2 0%);
+    background-repeat: repeat, no-repeat;
+    box-shadow: inset 0px 0px 30px #0b4a43;
     grid-row: 6 / span 6;
 }
 
-form.status {
-    fieldset,
+fieldset.status {
+    &,
     legend {
         border-color: #21341c;
     }
@@ -68,16 +64,14 @@ form.status {
         color: #21341c;
         box-shadow: inset #637018 0px -5px;
     }
-    fieldset {
-        background-image: url('/stripes.svg'), linear-gradient(0deg, #b6ed8f 0%);
-        background-repeat: repeat, no-repeat;
-        box-shadow: inset 0px 0px 30px #21652b;
-    }
+    background-image: url('/stripes.svg'), linear-gradient(0deg, #b6ed8f 0%);
+    background-repeat: repeat, no-repeat;
+    box-shadow: inset 0px 0px 30px #21652b;
     grid-row: 1 / span 2;
     grid-column: span 2;
 }
-form.pointers {
-    fieldset,
+fieldset.pointers {
+    &,
     legend {
         border-color: #391e0e;
     }
@@ -86,17 +80,15 @@ form.pointers {
         color: #2c1304;
         box-shadow: inset #88420c 0px -5px;
     }
-    fieldset {
-        background-image: url('/stripes.svg'), linear-gradient(0deg, #f6ae88 0%);
-        background-repeat: repeat, no-repeat;
-        box-shadow: inset 0px 0px 30px #8e4212;
-    }
+    background-image: url('/stripes.svg'), linear-gradient(0deg, #f6ae88 0%);
+    background-repeat: repeat, no-repeat;
+    box-shadow: inset 0px 0px 30px #8e4212;
 
     grid-row: 3 / 3 span;
     grid-column: span 2;
 }
-form.opcode {
-    fieldset,
+fieldset.opcode {
+    &,
     legend {
         border-color: #311235;
     }
@@ -105,11 +97,9 @@ form.opcode {
         color: #311235;
         box-shadow: inset #9046a9 0px -5px;
     }
-    fieldset {
-        background-image: url('/stripes.svg'), linear-gradient(0deg, #bd7cac 0%);
-        background-repeat: repeat, no-repeat;
-        box-shadow: inset 0px 0px 30px #4c1c53;
-    }
+    background-image: url('/stripes.svg'), linear-gradient(0deg, #bd7cac 0%);
+    background-repeat: repeat, no-repeat;
+    box-shadow: inset 0px 0px 30px #4c1c53;
     grid-row: 6 / span 6;
     grid-column: span 2;
 }

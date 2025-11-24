@@ -1,9 +1,7 @@
 export function OpCodesForm() {
     return (
-        <form className="opcode">
-            <fieldset>
-                <legend>Opcode</legend>
-            </fieldset>
-        </form>
+        <fieldset className="opcode">
+            <legend>Opcode</legend>
+        </fieldset>
     );
 }
