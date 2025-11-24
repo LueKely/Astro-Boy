@@ -7,11 +7,11 @@ import { Link } from '../composables/link';
 import type { FormEvent } from 'react';
 export function CpuLayout() {
     async function submit(e: FormEvent<HTMLFormElement>) {
-        console.log('TEST');
         e.preventDefault();
         const formdata = new FormData(e.target as HTMLFormElement);
         const response = await fetch('/api/gameboy', {
-            method: 'GET',
+            method: 'POST',
+
             body: formdata,
         });
 
@@ -19,7 +19,7 @@ export function CpuLayout() {
         console.log(data);
     }
     return (
-        <form method="post" onSubmit={submit} className="cpu--container">
+        <form onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />
             <RegistersForm />
