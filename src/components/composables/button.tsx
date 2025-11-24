@@ -1,3 +1,19 @@
-export function MyButton({ name }: { name: string }) {
-    return <button type="submit"> {name}</button>;
+import type { Ref } from 'react';
+
+export function FormButton({
+    name,
+    isDisabled = false,
+    onClick = () => {},
+    className = '',
+}: {
+    name: string;
+    className?: string;
+    isDisabled?: boolean;
+    onClick?: () => void;
+}) {
+    return (
+        <button className={className + ' '} disabled={isDisabled} onClick={() => onClick()}>
+            {name}
+        </button>
+    );
 }
