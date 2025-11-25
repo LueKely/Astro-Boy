@@ -58,6 +58,10 @@ fieldset.ram {
     background-repeat: repeat, no-repeat;
     box-shadow: inset 0px 0px 30px #0b4a43;
     grid-row: 6 / span 6;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
 }
 
 fieldset.status {
