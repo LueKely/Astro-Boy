@@ -10,8 +10,7 @@ export function CpuLayout() {
         e.preventDefault();
         const formdata = new FormData(e.target as HTMLFormElement);
         const response = await fetch('/api/gameboy', {
-            method: 'POST',
-
+            method: 'GET',
             body: formdata,
         });
 
@@ -19,7 +18,7 @@ export function CpuLayout() {
         console.log(data);
     }
     return (
-        <form onSubmit={submit} className="cpu--container">
+        <form method="post" onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />
             <RegistersForm />
