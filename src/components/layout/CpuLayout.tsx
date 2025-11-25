@@ -18,6 +18,7 @@ export function CpuLayout() {
         console.log(data);
     }
     return (
+        // make context thingy mabob
         <form method="post" onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />

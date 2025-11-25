@@ -7,6 +7,13 @@
         border-radius: 10px;
         border: solid 4px black;
         box-shadow: inset 0px 0px 10px black;
+
+        font-family: 'Bai Jamjuree', sans-serif;
+
+        font-weight: bolder;
+        font-style: normal;
+
+        font-size: 1.2rem;
     }
     label {
         font-family: 'Bai Jamjuree', sans-serif;

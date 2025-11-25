@@ -9,11 +9,11 @@ export function PointersForm() {
             <legend>Pointers</legend>
             <FormInput
                 inputName="Program Counter"
-                styleName={{ textAlign: 'center' }}
+                styleName={{ textAlign: 'center', width: '230px' }}
                 ref={pc}></FormInput>
             <FormInput
                 inputName="Stack Pointer"
-                styleName={{ textAlign: 'center' }}
+                styleName={{ textAlign: 'center', width: '230px' }}
                 ref={sp}></FormInput>
         </fieldset>
     );
