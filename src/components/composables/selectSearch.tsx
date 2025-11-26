@@ -3,7 +3,7 @@ export interface IOpcodeSearch {
     opCodeName: string;
     isPrefix: boolean;
     value: number;
-    display: string;
+    // display: string;
 }
 
 function opcodes(): IOpcodeSearch[] {
@@ -17,7 +17,7 @@ function opcodes(): IOpcodeSearch[] {
                 opCodeName: `0x${i.toString(16)}`,
                 value: i,
                 isPrefix: false,
-                display: 'block',
+                // display: 'block',
             });
         }
     }
@@ -26,7 +26,7 @@ function opcodes(): IOpcodeSearch[] {
             opCodeName: `0x${i.toString(16)} cb prefix`,
             value: i,
             isPrefix: true,
-            display: 'block',
+            // display: 'block',
         });
     }
 
@@ -42,7 +42,7 @@ function useOpCode(): [IOpcodeSearch[], (e: ChangeEvent<HTMLInputElement>) => vo
                         opCodeName: code.opCodeName,
                         isPrefix: code.isPrefix,
                         value: code.value,
-                        display: 'none',
+                        // display: 'none',
                     };
                 }
 
@@ -59,16 +59,15 @@ export function SelectSearchInput() {
     // context provider after fetching
     // filtering each of these stupid opcodes 500 plus including prefix fuck my chungus life
 
-    const [listOpcode, filterOpcode] = useOpCode();
+    const list = opcodes();
     return (
-        <span>
-            {/*this filters out the option on change*/}
-            <input type="text" onChange={filterOpcode} placeholder="Search Here"></input>
-            <select name="opcode">
-                {listOpcode.map((code, index) => {
+        <div className="select--wrapper">
+            {/*<label htmlFor="opcode">Opcode</label>*/}
+            <select name="opcode" id="opcode">
+                {list.map((code, index) => {
                     return (
                         <option
-                            style={{ display: code.display }}
+                            // style={{ display: code.display }}
                             key={index}
                             value={JSON.stringify(code)}>
                             {code.opCodeName}
@@ -76,6 +75,6 @@ export function SelectSearchInput() {
                     );
                 })}
             </select>
-        </span>
+        </div>
     );
 }

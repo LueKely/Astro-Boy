@@ -23,3 +23,51 @@
         font-size: 1.2rem;
     }
 }
+
+.select--wrapper {
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 1.2rem;
+
+    select {
+        border: solid 4px black;
+        box-shadow: inset 0px 0px 10px black;
+        border-radius: 10px;
+        width: 250px;
+        height: 40px;
+    }
+}
+button.form {
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-weight: bolder;
+    font-style: normal;
+    font-size: 1.2rem;
+    width: 250px;
+    height: 45px;
+    border-radius: 100px;
+    border: solid black 5px;
+    background: #6dfb98;
+    background: linear-gradient(
+        -180deg,
+        rgba(109, 251, 152, 1) 0%,
+        rgba(89, 224, 130, 1) 13%,
+        rgba(49, 169, 85, 1) 27%,
+        rgba(64, 190, 102, 1) 41%,
+        rgba(109, 251, 152, 1) 67%,
+        rgba(79, 210, 118, 1) 93%,
+        rgba(49, 169, 85, 1) 100%
+    );
+
+    box-shadow: inset 0px 0px 10px black;
+
+    transition: transform cubic-bezier(0.68, -0.6, 0.32, 1.6) 50ms;
+    &:active {
+        transition: transform cubic-bezier(0.68, -0.6, 0.32, 1.6) 75ms;
+        transform: scale(0.95);
+    }
+}
+
+button:hover {
+    cursor: pointer;
+}

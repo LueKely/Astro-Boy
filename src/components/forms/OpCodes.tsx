@@ -1,3 +1,4 @@
+import { FormButton } from '../composables/button';
 import { SelectSearchInput } from '../composables/selectSearch';
 
 export function OpCodesForm() {
@@ -5,6 +6,7 @@ export function OpCodesForm() {
         <fieldset className="opcode">
             <legend>Opcode</legend>
             <SelectSearchInput />
+            <FormButton name="Execute!" />
         </fieldset>
     );
 }

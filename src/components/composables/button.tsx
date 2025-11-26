@@ -13,7 +13,7 @@ export function FormButton({
 }) {
     return (
         <button
-            className={className + ' '}
+            className={className + ' form'}
             type="submit"
             disabled={isDisabled}
             onClick={() => onClick()}>

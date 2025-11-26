@@ -10,7 +10,7 @@ export function CpuLayout() {
         e.preventDefault();
         const formdata = new FormData(e.target as HTMLFormElement);
         const response = await fetch('/api/gameboy', {
-            method: 'GET',
+            method: 'POST',
             body: formdata,
         });
 
