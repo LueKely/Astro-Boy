@@ -62,9 +62,15 @@ button.form {
     box-shadow: inset 0px 0px 10px black;
 
     transition: transform cubic-bezier(0.68, -0.6, 0.32, 1.6) 50ms;
-    &:active {
+    &:active:not(&:disabled) {
         transition: transform cubic-bezier(0.68, -0.6, 0.32, 1.6) 75ms;
         transform: scale(0.95);
+    }
+    &:disabled {
+        filter: saturate(0%);
+    }
+    &:disabled:hover {
+        cursor: not-allowed;
     }
 }
 

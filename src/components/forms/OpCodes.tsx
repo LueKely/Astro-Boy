@@ -6,7 +6,7 @@ export function OpCodesForm() {
         <fieldset className="opcode">
             <legend>Opcode</legend>
             <SelectSearchInput />
-            <FormButton name="Execute!" />
+            <FormButton isDisabled={true} name="Execute!" />
         </fieldset>
     );
 }

@@ -18,7 +18,15 @@ export function CpuLayout() {
         console.log(data);
     }
     return (
-        // make context thingy mabob
+        // todo
+        // make context thingy mabo
+        // make error when invalid format for the input
+        // as well as a hover to say "hey you can't do that"
+
+        // need global checker to see if everything is goochie
+        // string value must be a legal hexadecimal
+        // a regular number
+        // not over 0xff
         <form method="post" onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
             <Link name="Catridge" link="cartridge" />
