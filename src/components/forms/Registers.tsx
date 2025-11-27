@@ -9,6 +9,7 @@ export function RegistersForm() {
     const fRegister = useRef<HTMLInputElement>(null);
     const hRegister = useRef<HTMLInputElement>(null);
     const lRegister = useRef<HTMLInputElement>(null);
+
     return (
         <fieldset className="register">
             <legend>Registers</legend>
