@@ -1,12 +1,12 @@
 import { FormButton } from '../composables/button';
 import { SelectSearchInput } from '../composables/selectSearch';
 
-export function OpCodesForm() {
+export function OpCodesForm({ isDisabled }: { isDisabled: boolean }) {
     return (
         <fieldset className="opcode">
             <legend>Opcode</legend>
             <SelectSearchInput />
-            <FormButton isDisabled={true} name="Execute!" />
+            <FormButton isDisabled={isDisabled} name="Execute!" />
         </fieldset>
     );
 }

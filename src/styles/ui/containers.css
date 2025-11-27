@@ -144,3 +144,16 @@ div.cartridge--container::after {
         'M 0,75 A 30,30 0,0,1 25,50 L 260,50 A 25,25 0,0,0 275,25 A 30,30 0,0,1 300,0 L 535,0 A 30,30 0,0,1 560,25 A 30,30 0,0,0 575,50 L 760,50 A 55,55 0,0,1 810,100 L 810,760 A 55,55 0,0,1 760,810 L 50,810 A 55,55 0,0,1 0,760 L 0,100 Z'
     );
 }
+
+.provider--container {
+    position: fixed;
+    width: 100svw;
+    height: 100svh;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background-color: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}

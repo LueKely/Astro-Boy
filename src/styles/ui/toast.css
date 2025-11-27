@@ -1,0 +1,20 @@
+.toast--wrapper {
+    background-color: red;
+    animation-name: move;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+@keyframes move {
+    0% {
+        transform: translateX(200px);
+    }
+    25% {
+        transform: translate(0px);
+    }
+    75% {
+        transform: translate(0px);
+    }
+    100% {
+        transform: translateX(200px);
+    }
+}

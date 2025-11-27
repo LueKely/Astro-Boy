@@ -1,13 +1,15 @@
 ---
 // export const prerender = true;
 import Layout from '../../layouts/Layout.astro';
-import { CpuLayout } from '../../components/layout/CpuLayout';
+import { CpuLayout } from '../../components/layout/CpuContainer';
+import { ToastProvider } from '../../components/toast/ToastProvider';
 ---
 
 <Layout title="CPU Functions">
     <main>
         <section>
             <CpuLayout client:load />
+            <ToastProvider client:load />
         </section>
     </main>
 </Layout>

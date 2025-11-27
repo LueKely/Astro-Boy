@@ -4,17 +4,28 @@ import { RamForm } from '../forms/Ram';
 import { RegistersForm } from '../forms/Registers';
 import { StatusWindow } from '../forms/StatusWindow';
 import { Link } from '../composables/link';
-import type { FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
+import { $toast } from '../../store/notificationStore';
 export function CpuLayout() {
+    const [disable, setDisable] = useState(false);
     async function submit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+        setDisable(true);
         const formdata = new FormData(e.target as HTMLFormElement);
         const response = await fetch('/api/gameboy', {
             method: 'POST',
             body: formdata,
         });
+        $toast.set([{ message: 'loading for result', type: 'loading' }]);
+        setTimeout(() => {
+            $toast.set([]);
+            // only set disable after having a response you know?
+            setDisable(false);
+        }, 2000);
 
         const data = await response.json();
+        if (response.ok) {
+        }
         console.log(data);
     }
     return (
@@ -34,7 +45,7 @@ export function CpuLayout() {
             <StatusWindow />
             <PointersForm />
             <RamForm />
-            <OpCodesForm />
+            <OpCodesForm isDisabled={disable} />
         </form>
     );
 }
