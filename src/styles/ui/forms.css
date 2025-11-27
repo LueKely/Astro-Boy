@@ -101,8 +101,8 @@ fieldset.pointers {
     flex-direction: column;
     justify-content: start;
     align-items: center;
-    gap: 10px;
-    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 5px;
 }
 fieldset.opcode {
     &,
