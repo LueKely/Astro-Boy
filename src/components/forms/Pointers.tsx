@@ -6,16 +6,20 @@ export function PointersForm() {
         <fieldset className="pointers">
             <legend>Pointers</legend>
             <FormInput
-                inputName="Program Counter"
+                displayName="PC"
+                inputName="pc"
                 styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
             <FormInput
-                inputName="Stack Pointer"
+                displayName="SP"
+                inputName="sp"
                 styleName={{ textAlign: 'center', width: '230px' }}></FormInput>{' '}
             <FormInput
-                inputName="Lower Bit"
+                displayName="Lower Bit"
+                inputName="lb"
                 styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
             <FormInput
-                inputName="Upper Bit"
+                displayName="Upper Bit"
+                inputName="ub"
                 styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
         </fieldset>
     );

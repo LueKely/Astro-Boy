@@ -6,8 +6,8 @@ export function ToastProvider() {
     // i need to set up a queuing system here cuh
     return (
         <div className="provider--container">
-            {toastData.map((toast) => {
-                return <Toast prop={toast}></Toast>;
+            {toastData.map((toast, index) => {
+                return <Toast key={index} prop={toast}></Toast>;
             })}
         </div>
     );

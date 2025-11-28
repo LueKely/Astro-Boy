@@ -6,8 +6,14 @@ export function RamForm() {
         <fieldset className="ram">
             <legend>Ram</legend>
             {/*<FormButton name="Gaming"></FormButton>*/}
-            <FormInput ref={null} styleName={{ width: '200px' }} inputName="Address"></FormInput>
-            <FormInput ref={null} styleName={{ width: '200px' }} inputName="Value"></FormInput>
+            <FormInput
+                displayName="Address"
+                styleName={{ width: '200px' }}
+                inputName="addressPointer"></FormInput>
+            <FormInput
+                displayName="Value"
+                styleName={{ width: '200px' }}
+                inputName="addressValue"></FormInput>
         </fieldset>
     );
 }
