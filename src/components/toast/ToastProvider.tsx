@@ -1,12 +1,29 @@
 import { useStore } from '@nanostores/react';
-import { $toast } from '../../store/notificationStore';
+import { $toast, type IToast } from '../../store/notificationStore';
 import { Toast } from './Toast';
+import { useQueue } from '../../hooks/useQueue';
+import { useEffect } from 'react';
 export function ToastProvider() {
     const toastData = useStore($toast);
-    // i need to set up a queuing system here cuh
+    const [items, enqueue, deqeueu] = useQueue<IToast>([]);
+
+    useEffect(() => {
+        if (toastData.length != 0) {
+            enqueue(toastData[0]);
+        }
+    }, [toastData]);
+
+    useEffect(() => {
+        if (items.length != 0) {
+            setTimeout(() => {
+                deqeueu();
+            }, 2000);
+        }
+    }, [items]);
+
     return (
         <div className="provider--container">
-            {toastData.map((toast, index) => {
+            {items.map((toast, index) => {
                 return <Toast key={index} prop={toast}></Toast>;
             })}
         </div>

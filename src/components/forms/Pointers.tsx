@@ -8,19 +8,19 @@ export function PointersForm() {
             <FormInput
                 displayName="PC"
                 inputName="pc"
-                styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
+                styleName={{ textAlign: 'center' }}></FormInput>
             <FormInput
                 displayName="SP"
                 inputName="sp"
-                styleName={{ textAlign: 'center', width: '230px' }}></FormInput>{' '}
+                styleName={{ textAlign: 'center' }}></FormInput>{' '}
             <FormInput
                 displayName="Lower Bit"
                 inputName="lb"
-                styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
+                styleName={{ textAlign: 'center' }}></FormInput>
             <FormInput
                 displayName="Upper Bit"
                 inputName="ub"
-                styleName={{ textAlign: 'center', width: '230px' }}></FormInput>
+                styleName={{ textAlign: 'center' }}></FormInput>
         </fieldset>
     );
 }

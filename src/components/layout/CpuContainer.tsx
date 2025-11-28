@@ -17,12 +17,6 @@ export function CpuLayout() {
             body: formdata,
         });
         $toast.set([{ message: 'loading for result', type: 'loading' }]);
-        setTimeout(() => {
-            $toast.set([]);
-            // only set disable after having a response you know?
-            setDisable(false);
-        }, 2000);
-
         const data = await response.json();
         if (response.ok) {
         }
@@ -30,7 +24,6 @@ export function CpuLayout() {
     }
     return (
         // todo
-        // make context thingy mabo
         // make error when invalid format for the input
         // as well as a hover to say "hey you can't do that"
 

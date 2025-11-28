@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { useEffect, useImperativeHandle, useRef, useState, type Ref } from 'react';
+import { useEffect, useState } from 'react';
 import { $formResponseStore, type TFormKey } from '../../store/formDataStore';
 
 export function FormInput({
@@ -12,7 +12,6 @@ export function FormInput({
     displayName: string;
 }) {
     const store = useStore($formResponseStore);
-    const inputRef = useRef<HTMLInputElement>(null);
     const [input, setInputValue] = useState<string>('');
     useEffect(() => {
         setInputValue(store[inputName as TFormKey]);
@@ -22,7 +21,6 @@ export function FormInput({
         <div className="input--wrapper" style={styleName}>
             <label htmlFor={inputName}> {displayName}</label>
             <input
-                ref={inputRef}
                 type="text"
                 onChange={(e) => {
                     setInputValue(e.currentTarget.value);
