@@ -1,12 +1,23 @@
 .toast--wrapper {
-    background-color: red;
-    animation-name: move;
+    background-color: green;
+    width: 300px;
+    display: flex;
+    & > .message--wrapper {
+        font-family: 'Bai Jamjuree', sans-serif;
+        font-weight: bolder;
+        font-style: normal;
+        font-size: 1rem;
+    }
+    border-radius: 20px;
+    border: solid 5px black;
+    padding: 10px;
+    /*animation-name: move;*/
     animation-duration: 2s;
     animation-fill-mode: forwards;
 }
 @keyframes move {
     0% {
-        transform: translateX(200px);
+        transform: translateX(300px);
     }
     25% {
         transform: translate(0px);
@@ -15,6 +26,6 @@
         transform: translate(0px);
     }
     100% {
-        transform: translateX(200px);
+        transform: translateX(300px);
     }
 }
