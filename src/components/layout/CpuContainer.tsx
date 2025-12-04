@@ -11,16 +11,30 @@ export function CpuLayout() {
     async function submit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setDisable(true);
-        const formdata = new FormData(e.target as HTMLFormElement);
-        const response = await fetch('/api/gameboy', {
-            method: 'POST',
-            body: formdata,
-        });
-        $toast.set([{ message: 'loading for result', type: 'loading' }]);
-        const data = await response.json();
-        if (response.ok) {
+        try {
+            const formdata = new FormData(e.target as HTMLFormElement);
+            const response = await fetch('/api/gameboy', {
+                method: 'POST',
+                body: formdata,
+            });
+            $toast.set([{ message: 'loading for result', type: 'loading' }]);
+            if (response.ok) {
+                const data = await response.json();
+                $toast.set([{ message: 'Operation Successfull', type: 'success' }]);
+                setTimeout(() => {
+                    setDisable(false);
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    setDisable(false);
+                }, 2000);
+                $toast.set([{ message: 'Error', type: 'failure' }]);
+            }
+        } catch {
+            setTimeout(() => {
+                setDisable(false);
+            }, 2000);
         }
-        console.log(data);
     }
     return (
         // todo
