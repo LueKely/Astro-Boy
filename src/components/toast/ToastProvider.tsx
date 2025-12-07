@@ -26,7 +26,7 @@ export function ToastProvider() {
     return (
         <div className="provider--container">
             {items.map((toast, index) => {
-                return <Toast key={index} prop={toast}></Toast>;
+                return <Toast key={index} prop={{ ...toast, index: index }}></Toast>;
             })}
         </div>
     );

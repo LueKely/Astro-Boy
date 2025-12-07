@@ -1,3 +1,7 @@
 img.icon {
     image-rendering: pixelated;
 }
+
+img.icon.failure {
+    transform: scale(1, -1);
+}

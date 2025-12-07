@@ -17,10 +17,9 @@ export function CpuLayout() {
                 method: 'POST',
                 body: formdata,
             });
-            $toast.set([{ message: 'loading for result', type: 'loading' }]);
             if (response.ok) {
                 const data = await response.json();
-                $toast.set([{ message: 'Operation Successfull', type: 'success' }]);
+                $toast.set([{ message: 'Operation Successful', type: 'success' }]);
                 setTimeout(() => {
                     setDisable(false);
                 }, 2000);
