@@ -1,16 +1,31 @@
 .toast--wrapper {
-    background-color: red;
+    background-image:
+        url('/background.svg'),
+        linear-gradient(
+            180deg,
+            rgba(0, 125, 86, 1) 0%,
+            rgba(10, 170, 120, 1) 40%,
+            rgba(19, 250, 150, 1) 100%
+        );
+
+    background-repeat: no-repeat, repeat;
+    background-size: auto, auto;
+    background-position:
+        center center,
+        center center;
     width: 300px;
     height: 85px;
     display: flex;
 
     margin-bottom: 15px;
-    /*border-radius: 20px;*/
-    border: solid 5px black;
+    border-radius: 20px;
     padding: 10px;
     animation-name: move;
     animation-duration: 2s;
     animation-fill-mode: forwards;
+    border-style: solid;
+    border-width: 5px;
+    border-color: rgba(2, 35, 31, 1);
 }
 
 .message--wrapper {
@@ -25,7 +40,7 @@
     }
     p:nth-child(2) {
         color: black;
-        opacity: 70%;
+        opacity: 80%;
     }
 }
 
