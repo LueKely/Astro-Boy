@@ -1,8 +1,15 @@
 import type { APIRoute } from 'astro';
+import type { TFormKey } from '../../store/formDataStore';
 
 export const POST: APIRoute = async ({ request }) => {
     const data = await request.formData();
-    const name = data.get('A');
+    const name = data.entries();
+    const test: Partial<Record<TFormKey, FormDataEntryValue>> = {};
+
+    for (const pair of name) {
+        test[pair[0] as TFormKey] = pair[1];
+    }
+
     // Validate the data - you'll probably want to do more than this
     if (!true) {
         return new Response(
@@ -16,7 +23,7 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(
         JSON.stringify({
             message: 'Success!',
-            payload: data.get('A'),
+            payload: test,
         }),
         { status: 200 }
     );

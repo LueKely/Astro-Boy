@@ -19,6 +19,7 @@ export function CpuLayout() {
             });
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 $toast.set([{ message: 'Operation Successful', type: 'success' }]);
                 setTimeout(() => {
                     setDisable(false);

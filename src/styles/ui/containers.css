@@ -146,6 +146,7 @@ div.cartridge--container::after {
 }
 
 .provider--container {
+    z-index: 100;
     position: fixed;
     width: 100svw;
     height: 100svh;
