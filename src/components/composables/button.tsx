@@ -1,4 +1,6 @@
+import { useStore } from '@nanostores/react';
 import type { Ref } from 'react';
+import { $validatorStore } from '../../store/validateStore';
 
 export function FormButton({
     name,
@@ -11,11 +13,12 @@ export function FormButton({
     isDisabled?: boolean;
     onClick?: () => void;
 }) {
+    const store = useStore($validatorStore);
     return (
         <button
             className={className + ' form'}
             type="submit"
-            disabled={isDisabled}
+            disabled={isDisabled || store}
             onClick={() => onClick()}>
             {name}
         </button>

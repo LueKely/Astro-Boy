@@ -15,6 +15,13 @@
 
         font-size: 1.2rem;
     }
+    input:invalid {
+        border: solid 4px red;
+    }
+    input:invalid {
+        outline: red solid 1px;
+        outline-offset: 1px;
+    }
 }
 .label--wrapper {
     display: flex;
