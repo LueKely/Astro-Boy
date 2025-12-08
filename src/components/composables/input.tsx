@@ -19,7 +19,12 @@ export function FormInput({
 
     return (
         <div className="input--wrapper" style={styleName}>
-            <label htmlFor={inputName}> {displayName}</label>
+            <span className="label--wrapper">
+                <label htmlFor={inputName}> {displayName}</label>
+                <span className="img--wrapper">
+                    <img src="/warning-icon.png" width="30" height="30" />
+                </span>
+            </span>
             <input
                 type="text"
                 onChange={(e) => {

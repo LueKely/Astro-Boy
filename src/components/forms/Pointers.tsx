@@ -5,22 +5,10 @@ export function PointersForm() {
     return (
         <fieldset className="pointers">
             <legend>Pointers</legend>
-            <FormInput
-                displayName="PC"
-                inputName="pc"
-                styleName={{ textAlign: 'center' }}></FormInput>
-            <FormInput
-                displayName="SP"
-                inputName="sp"
-                styleName={{ textAlign: 'center' }}></FormInput>{' '}
-            <FormInput
-                displayName="Lower Bit"
-                inputName="lb"
-                styleName={{ textAlign: 'center' }}></FormInput>
-            <FormInput
-                displayName="Upper Bit"
-                inputName="ub"
-                styleName={{ textAlign: 'center' }}></FormInput>
+            <FormInput displayName="PC" inputName="pc"></FormInput>
+            <FormInput displayName="SP" inputName="sp"></FormInput>{' '}
+            <FormInput displayName="Lower Bit" inputName="lb"></FormInput>
+            <FormInput displayName="Upper Bit" inputName="ub"></FormInput>
         </fieldset>
     );
 }
