@@ -1,5 +1,8 @@
 import { describe, expect, test } from 'vitest';
 import { Gameboy } from '../../Gameboy';
+import { Ram } from '../../Ram/Ram';
+import { GameBoyCatridge } from '../../Cartridge/Cartridge';
+import { Register_File } from '../Register_File';
 
 // DONE
 describe('lD R16', () => {
@@ -7,7 +10,10 @@ describe('lD R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { SP } = gameboy.registerFile.pointers;
@@ -32,7 +38,10 @@ describe('lD R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { HL } = gameboy.registerFile.register16Bit;
@@ -56,7 +65,10 @@ describe('LD R8, R8', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { B, C, D, E, F, H, L } = gameboy.registerFile;
@@ -78,7 +90,10 @@ describe('LD R8, [HL]', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { B, C, D, E, F, H, L } = gameboy.registerFile;

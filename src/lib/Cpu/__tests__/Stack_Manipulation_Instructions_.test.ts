@@ -1,12 +1,18 @@
 import { describe, expect, test } from 'vitest';
 import { Gameboy } from '../../Gameboy';
+import { Ram } from '../../Ram/Ram';
+import { GameBoyCatridge } from '../../Cartridge/Cartridge';
+import { Register_File } from '../Register_File';
 
 describe('PUSH R16', () => {
     test('PUSH BC', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { B, C } = gameboy.registerFile;
@@ -27,7 +33,10 @@ describe('PUSH R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { D, E } = gameboy.registerFile;
@@ -50,7 +59,10 @@ describe('PUSH R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { H, L } = gameboy.registerFile;
@@ -74,7 +86,10 @@ describe('PUSH R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { A, F } = gameboy.registerFile;
@@ -99,7 +114,10 @@ describe('POP R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { B, C } = gameboy.registerFile;
@@ -120,7 +138,10 @@ describe('POP R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { D, E } = gameboy.registerFile;
@@ -141,7 +162,10 @@ describe('POP R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { D, E } = gameboy.registerFile;
@@ -162,7 +186,10 @@ describe('POP R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { H, L } = gameboy.registerFile;
@@ -187,7 +214,10 @@ describe('POP R16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
         const { A, F } = gameboy.registerFile;
@@ -209,7 +239,10 @@ describe('LDNNSP', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
         gameboy.registerFile.pointers.SP.setRegister(0xabcd);
 
@@ -231,7 +264,10 @@ describe('LD HL, SP+e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
         gameboy.registerFile.pointers.SP.setRegister(0xfff0);
@@ -252,7 +288,10 @@ describe('LD HL, SP+e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x2000);
         gameboy.registerFile.pointers.SP.setRegister(0x0100);
@@ -273,7 +312,10 @@ describe('LD HL, SP+e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x1234);
@@ -294,7 +336,10 @@ describe('LD HL, SP+e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x00ff);
@@ -315,7 +360,10 @@ describe('ADD SP, e', () => {
     test('Add 1 to SP', () => {
         const dummyRom = new ArrayBuffer(1024);
 
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x00ff);
@@ -334,7 +382,10 @@ describe('ADD SP, e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -353,7 +404,10 @@ describe('ADD SP, e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { F } = gameboy.registerFile;
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x0005);
@@ -375,7 +429,10 @@ describe('INC and DEC SP', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x0005);
@@ -391,7 +448,10 @@ describe('INC and DEC SP', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.registerFile.pointers.SP.setRegister(0x0005);

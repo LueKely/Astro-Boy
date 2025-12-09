@@ -10,13 +10,19 @@ import {
     RETI,
     RSTN,
 } from '../instructions/Jumps_And _Subroutine_Instructions';
+import { GameBoyCatridge } from '../../Cartridge/Cartridge';
+import { Ram } from '../../Ram/Ram';
+import { Register_File } from '../Register_File';
 
 describe('Tests for CALL NN', () => {
     test(' first ', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -38,7 +44,10 @@ describe('Tests for CALL NN', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0200);
         gameboy.registerFile.pointers.SP.setRegister(0xd000);
@@ -60,7 +69,10 @@ describe('Tests for CALL NN', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -84,7 +96,10 @@ describe('Tests for JUMP N16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0100);
 
@@ -102,7 +117,10 @@ describe('Tests for JUMP N16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0500);
 
@@ -120,7 +138,10 @@ describe('Tests for JUMP N16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
 
@@ -138,7 +159,10 @@ describe('Tests for JUMP N16', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
 
@@ -157,7 +181,10 @@ describe('Tests for JP [HL]', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x0150);
         gameboy.registerFile.register16Bit.HL.setRegister(0x200);
@@ -173,7 +200,10 @@ describe('Tests for RET', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x200);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -193,7 +223,10 @@ describe('Tests for RET', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x300);
         gameboy.registerFile.pointers.SP.setRegister(0xfff0);
@@ -213,7 +246,10 @@ describe('Tests for RET', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
 
         gameboy.registerFile.pointers.PC.setRegister(0x100);
         gameboy.registerFile.pointers.SP.setRegister(0xffff);
@@ -235,7 +271,10 @@ describe('Tests for RETI', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         expect(gameboy.registerFile.IME).toBe(false);
         gameboy.registerFile.pointers.PC.setRegister(0x200);
         gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -256,7 +295,10 @@ describe('Tests for RETI', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         expect(gameboy.registerFile.IME).toBe(false);
 
         gameboy.registerFile.pointers.PC.setRegister(0x300);
@@ -277,7 +319,10 @@ describe('Tests for RETI', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         expect(gameboy.registerFile.IME).toBe(false);
 
         gameboy.registerFile.pointers.PC.setRegister(0x100);
@@ -304,7 +349,10 @@ describe('Tests for RST N', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             gameboy.registerFile.pointers.PC.setRegister(0x0100);
             gameboy.registerFile.pointers.SP.setRegister(0x0000);
@@ -325,7 +373,10 @@ describe('Tests for RST N', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             gameboy.registerFile.pointers.PC.setRegister(0x1234);
             gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -346,7 +397,10 @@ describe('Tests for RST N', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             gameboy.registerFile.pointers.PC.setRegister(0x100);
             gameboy.registerFile.pointers.SP.setRegister(0x0001);
@@ -368,7 +422,10 @@ describe('JR e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x1000);
         gameboy.ram.write(0x1001, 0x05);
 
@@ -383,7 +440,10 @@ describe('JR e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x2000);
         gameboy.ram.write(0x2001, 0xfb);
 
@@ -398,7 +458,10 @@ describe('JR e', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         gameboy.registerFile.pointers.PC.setRegister(0x3000);
         gameboy.ram.write(0x3001, 0x0a);
 
@@ -459,7 +522,10 @@ describe('Tests for CALLCCN16', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             value.ccIsFalse(gameboy);
 
@@ -482,7 +548,10 @@ describe('Tests for CALLCCN16', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             value.ccIsTrue(gameboy);
 
@@ -552,7 +621,10 @@ describe('JR CC e', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsTrue(gameboy);
             gameboy.registerFile.pointers.PC.setRegister(0x1000);
             gameboy.ram.write(0x1000, value.opcode);
@@ -569,7 +641,10 @@ describe('JR CC e', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsFalse(gameboy);
             gameboy.registerFile.pointers.PC.setRegister(0x1000);
             gameboy.ram.write(0x1000, value.opcode);
@@ -631,7 +706,10 @@ describe('RET CC ', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsTrue(gameboy);
 
             gameboy.registerFile.pointers.PC.setRegister(0x200);
@@ -653,7 +731,10 @@ describe('RET CC ', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsFalse(gameboy);
 
             gameboy.registerFile.pointers.PC.setRegister(0x200);
@@ -721,7 +802,10 @@ describe('Tests for JP CC NN', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsTrue(gameboy);
 
             gameboy.registerFile.pointers.PC.setRegister(0x0100);
@@ -740,7 +824,10 @@ describe('Tests for JP CC NN', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             value.ccIsFalse(gameboy);
 
             gameboy.registerFile.pointers.PC.setRegister(0x0100);
@@ -805,7 +892,10 @@ describe('Tests for CALL NN', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             gameboy.registerFile.pointers.PC.setRegister(0x0150);
             gameboy.registerFile.pointers.SP.setRegister(0xfffe);
@@ -830,7 +920,10 @@ describe('Tests for CALL NN', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
 
             gameboy.registerFile.pointers.PC.setRegister(0x0150);
             gameboy.registerFile.pointers.SP.setRegister(0xfffe);
