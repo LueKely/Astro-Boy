@@ -16,10 +16,10 @@
         font-size: 1.2rem;
     }
     input:invalid {
-        border: solid 4px red;
+        border: solid 4px #cc0000;
     }
     input:invalid {
-        outline: red solid 1px;
+        outline: #cc0000 solid 1px;
         outline-offset: 1px;
     }
 }
@@ -28,11 +28,14 @@
     justify-content: space-between;
     img {
         image-rendering: pixelated;
+        animation-name: popinimg;
+        animation-duration: 150ms;
+        animation-fill-mode: forwards;
     }
 
     .img--wrapper:hover::after {
         position: absolute;
-        content: 'Value must be a valid hexadecimal, binary or decimal.';
+        content: 'Value must be a valid hexadecimal.';
         font-family: 'Bai Jamjuree', sans-serif;
         font-weight: bolder;
         font-style: normal;
@@ -44,7 +47,7 @@
         padding: 10px;
         color: white;
         animation-name: popin;
-        animation-duration: 150ms;
+        animation-duration: 100ms;
         animation-fill-mode: forwards;
     }
 
@@ -122,5 +125,14 @@ button:hover {
     }
     to {
         transform: translate(-50%, -100%) scale(1);
+    }
+}
+
+@keyframes popinimg {
+    from {
+        transform: translate(-10%, 0%) scale(0);
+    }
+    to {
+        transform: translate(0%, 0%) scale(1);
     }
 }

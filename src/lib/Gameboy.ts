@@ -11,12 +11,11 @@ export class Gameboy {
     readonly cartridge: GameBoyCatridge;
     readonly scheduler: Cpu_Scheduler;
     pause = false;
-    // TODO create a class for timer
 
-    constructor(game: ArrayBuffer) {
-        this.registerFile = new Register_File();
-        this.ram = new Ram();
-        this.cartridge = new GameBoyCatridge(game);
+    constructor(ram: Ram, cartridge: GameBoyCatridge, registerFile: Register_File) {
+        this.registerFile = registerFile;
+        this.ram = ram;
+        this.cartridge = cartridge;
         this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
     }

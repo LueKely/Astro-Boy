@@ -1,3 +1,4 @@
+import type { TFormKey } from '../../store/formDataStore';
 import { Ram } from '../Ram/Ram';
 import { Cpu_Flag_Register } from './CPU_Flag_Register';
 import { Program_Counter_Register, Stack_Pointer_Register } from './CPU_Pointer_Register';
@@ -27,6 +28,18 @@ export class Register_File {
     H = new Cpu_Register<'H'>(0);
     L = new Cpu_Register<'L'>(0);
 
+    constructor(register?: Record<TFormKey, string>) {
+        if (register) {
+            this.A.setRegister(parseInt(register['A'], 16));
+            this.B.setRegister(parseInt(register['B'], 16));
+            this.C.setRegister(parseInt(register['C'], 16));
+            this.D.setRegister(parseInt(register['D'], 16));
+            this.E.setRegister(parseInt(register['E'], 16));
+            this.F.setRegister(parseInt(register['F'], 16));
+            this.H.setRegister(parseInt(register['H'], 16));
+            this.L.setRegister(parseInt(register['L'], 16));
+        }
+    }
     // i think i might've shoot myself on the foot
     //this'll be a temporary solution for now (i hope)
     private S = new Cpu_Register<any>(0);

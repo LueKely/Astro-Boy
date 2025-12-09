@@ -6,12 +6,18 @@ export const POST: APIRoute = async ({ request }) => {
     const name = data.entries();
     const test: Partial<Record<TFormKey, FormDataEntryValue>> = {};
 
-    for (const pair of name) {
-        test[pair[0] as TFormKey] = pair[1];
-    }
-
-    // Validate the data - you'll probably want to do more than this
-    if (!true) {
+    try {
+        for (const pair of name) {
+            test[pair[0] as TFormKey] = pair[1];
+        }
+        return new Response(
+            JSON.stringify({
+                message: 'Success!',
+                payload: test,
+            }),
+            { status: 200 }
+        );
+    } catch {
         return new Response(
             JSON.stringify({
                 message: 'Missing required fields',
@@ -19,20 +25,4 @@ export const POST: APIRoute = async ({ request }) => {
             { status: 400 }
         );
     }
-    // Do something with the data, then return a success response
-    return new Response(
-        JSON.stringify({
-            message: 'Success!',
-            payload: test,
-        }),
-        { status: 200 }
-    );
-};
-
-export const GET: APIRoute = ({ params, request }) => {
-    return new Response(
-        JSON.stringify({
-            message: 'This was a GET!',
-        })
-    );
 };

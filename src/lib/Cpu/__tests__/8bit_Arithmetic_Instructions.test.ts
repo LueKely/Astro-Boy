@@ -23,6 +23,7 @@ import {
 } from '../instructions/8bit_Arithmetic_Instructions';
 import { Ram } from '../../Ram/Ram';
 import { Gameboy } from '../../Gameboy';
+import { GameBoyCatridge } from '../../Cartridge/Cartridge';
 // DONE
 describe('ADC A, R8 Functionalitys', () => {
     test('The result of adding the value of register B to A is 1 — flags should all be 0', () => {
@@ -1467,7 +1468,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
             gameboy.ram.write(0x0100, value.opcode);
@@ -1487,7 +1491,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1508,7 +1515,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1529,7 +1539,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1552,7 +1565,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1575,7 +1591,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1596,7 +1615,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1617,7 +1639,10 @@ describe('ADC R8', () => {
             const dummyRom = new ArrayBuffer(1024);
 
             // init gameboy
-            const gameboy = new Gameboy(dummyRom);
+            const ram = new Ram();
+            const cart = new GameBoyCatridge(dummyRom);
+            const registerFile = new Register_File();
+            const gameboy = new Gameboy(ram, cart, registerFile);
             const { PC } = gameboy.registerFile.pointers;
             const { F } = gameboy.registerFile;
 
@@ -1641,7 +1666,10 @@ describe('ADC A', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
         gameboy.ram.write(0x0100, 0x8f);
@@ -1661,7 +1689,10 @@ describe('ADC A', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
         gameboy.ram.write(0x0100, 0x8f);
@@ -1679,7 +1710,10 @@ describe('ADC A', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
         gameboy.ram.write(0x0100, 0x07);
@@ -1697,7 +1731,10 @@ describe('ADC A', () => {
         const dummyRom = new ArrayBuffer(1024);
 
         // init gameboy
-        const gameboy = new Gameboy(dummyRom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(dummyRom);
+        const registerFile = new Register_File();
+        const gameboy = new Gameboy(ram, cart, registerFile);
         const { PC } = gameboy.registerFile.pointers;
         const { F } = gameboy.registerFile;
         gameboy.ram.write(0x0100, 0x07);
