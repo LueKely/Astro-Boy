@@ -14,7 +14,8 @@ export type TFormKey =
     | 'ub'
     | 'lb'
     | 'addressPointer'
-    | 'addressValue';
+    | 'addressValue'
+    | 'opcodeName';
 
 export const $formResponseStore = map<Record<TFormKey, string>>({
     A: '0xff',
@@ -31,4 +32,5 @@ export const $formResponseStore = map<Record<TFormKey, string>>({
     lb: '0xff',
     addressPointer: '0xff',
     addressValue: '0xff',
+    opcodeName: '',
 });
