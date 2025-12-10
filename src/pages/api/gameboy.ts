@@ -32,8 +32,8 @@ export const POST: APIRoute = async ({ request }) => {
     try {
         // console.log(JSON.parse(registerRecord.opcodeName as string));
         const rom = new ArrayBuffer(1024);
-        const ram = new Ram(registerRecord as Record<TFormKey, string>);
-        const cart = new GameBoyCatridge(rom);
+        const ram = new Ram();
+        const cart = new GameBoyCatridge(rom, registerRecord as Record<TFormKey, string>);
         const registerFile = new Register_File(registerRecord as Record<TFormKey, string>);
         const gameboy = new Gameboy(ram, cart, registerFile);
         console.log(gameboy.ram.memory[0x100]);

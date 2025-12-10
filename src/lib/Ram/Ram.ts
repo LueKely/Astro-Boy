@@ -1,36 +1,10 @@
-// features to do
-// logging feature
-// making some addresses readonly prolly make this some sort of hook
-
-import type { IOpcodeSearch } from '../../components/composables/selectSearch';
-import type { TFormKey } from '../../store/formDataStore';
 import { Address } from '../utils/Address_Pointers';
 
 export class Ram {
     memory: Uint8Array;
     TRANSFER = false;
-    constructor(register?: Record<TFormKey, string>) {
+    constructor() {
         this.memory = new Uint8Array(0x10000);
-        if (!register) return;
-
-        // check first if prefix
-
-        const poop: IOpcodeSearch = JSON.parse(register.opcode);
-        console.log(poop.isPrefix);
-        if (poop.isPrefix) {
-            this.memory[parseInt(register.pc)] = 0xcb;
-            this.memory[parseInt(register.pc) + 1] = poop.value;
-            this.memory[parseInt(register.pc) + 2] = parseInt(register.ub, 16);
-            this.memory[parseInt(register.pc) + 3] = parseInt(register.lb, 16);
-        } else {
-            console.log('HELLO' + ' ' + poop.value);
-            this.memory[parseInt(register.pc, 16)] = poop.value;
-
-            console.log(this.memory[parseInt(register.pc, 16)]);
-            this.memory[parseInt(register.pc, 16) + 1] = parseInt(register.ub, 16);
-            this.memory[parseInt(register.pc, 16) + 2] = parseInt(register.lb, 16);
-        }
-        this.memory[parseInt(register.addressPointer, 16)] = parseInt(register.addressValue, 16);
     }
 
     getIE() {
