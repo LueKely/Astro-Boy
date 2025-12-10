@@ -15,22 +15,22 @@ export type TFormKey =
     | 'lb'
     | 'addressPointer'
     | 'addressValue'
-    | 'opcodeName';
+    | 'opcode';
 
 export const $formResponseStore = map<Record<TFormKey, string>>({
-    A: '0xff',
-    F: '0xff',
-    B: '0xff',
-    C: '0xff',
-    D: '0xff',
-    E: '0xff',
-    H: '0xff',
-    L: '0xff',
-    pc: '0xff',
-    sp: '0xff',
-    ub: '0xff',
-    lb: '0xff',
-    addressPointer: '0xff',
-    addressValue: '0xff',
-    opcodeName: '',
+    A: '0x00',
+    F: '0x00',
+    B: '0x00',
+    C: '0x00',
+    D: '0x00',
+    E: '0x00',
+    H: '0x00',
+    L: '0x00',
+    pc: '0x100',
+    sp: '0xffee',
+    ub: '0x00',
+    lb: '0x00',
+    addressPointer: '0x00',
+    addressValue: '0x00',
+    opcode: '',
 });

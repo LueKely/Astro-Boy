@@ -15,8 +15,9 @@ export class Gameboy {
     constructor(ram: Ram, cartridge: GameBoyCatridge, registerFile: Register_File) {
         this.registerFile = registerFile;
         this.ram = ram;
+        this.log();
         this.cartridge = cartridge;
-        this.ram.copyROM(this.cartridge.CartDataToBytes);
+        // this.ram.copyROM(this.cartridge.CartDataToBytes);
         this.scheduler = new Cpu_Scheduler(this);
     }
 

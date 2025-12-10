@@ -15,21 +15,22 @@ export class Ram {
 
         // check first if prefix
 
-        const poop: IOpcodeSearch = JSON.parse(register.opcodeName);
+        const poop: IOpcodeSearch = JSON.parse(register.opcode);
+        console.log(poop.isPrefix);
         if (poop.isPrefix) {
-            this.memory[parseInt(register.pc, 16)] = 0xcb;
-            this.memory[parseInt(register.pc, 16) + 1] = poop.value;
-            this.memory[parseInt(register.pc, 16) + 2] = parseInt(register.ub, 16);
-            this.memory[parseInt(register.pc, 16) + 3] = parseInt(register.lb, 16);
+            this.memory[parseInt(register.pc)] = 0xcb;
+            this.memory[parseInt(register.pc) + 1] = poop.value;
+            this.memory[parseInt(register.pc) + 2] = parseInt(register.ub, 16);
+            this.memory[parseInt(register.pc) + 3] = parseInt(register.lb, 16);
         } else {
+            console.log('HELLO' + ' ' + poop.value);
             this.memory[parseInt(register.pc, 16)] = poop.value;
+
+            console.log(this.memory[parseInt(register.pc, 16)]);
             this.memory[parseInt(register.pc, 16) + 1] = parseInt(register.ub, 16);
             this.memory[parseInt(register.pc, 16) + 2] = parseInt(register.lb, 16);
         }
         this.memory[parseInt(register.addressPointer, 16)] = parseInt(register.addressValue, 16);
-
-        // this ain't accurate chief
-        // this.memory.fill(0);
     }
 
     getIE() {
