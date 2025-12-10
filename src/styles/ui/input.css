@@ -79,7 +79,8 @@ label {
         height: 40px;
     }
 }
-button.form {
+button.form,
+.file--button {
     font-family: 'Bai Jamjuree', sans-serif;
     font-weight: bolder;
     font-style: normal;
@@ -115,7 +116,9 @@ button.form {
     }
 }
 
-button:hover {
+button:hover,
+.file--button:hover {
+    filter: contrast(150%) grayscale(10%);
     cursor: pointer;
 }
 
@@ -135,4 +138,13 @@ button:hover {
     to {
         transform: translate(0%, 0%) scale(1);
     }
+}
+
+input[type='file'] {
+    display: none;
+}
+.file--button {
+    width: auto;
+    height: auto;
+    padding: 10px;
 }

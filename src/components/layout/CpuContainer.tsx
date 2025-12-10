@@ -12,13 +12,13 @@ export function CpuLayout() {
     async function submit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         setDisable(true);
-
         try {
             const formdata = new FormData(e.target as HTMLFormElement);
             const response = await fetch('/api/gameboy', {
                 method: 'POST',
                 body: formdata,
             });
+
             if (response.ok) {
                 const data = await response.json();
                 $formResponseStore.set(data.payload);
@@ -42,7 +42,7 @@ export function CpuLayout() {
     return (
         <form method="post" onSubmit={submit} className="cpu--container">
             <Link name="CPU" link="cpu" />
-            <Link name="Catridge" link="cartridge" />
+            <Link name="Cartridge" link="cartridge" />
             <RegistersForm />
             <StatusWindow />
             <PointersForm />

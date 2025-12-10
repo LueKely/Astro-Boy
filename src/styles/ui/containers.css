@@ -33,7 +33,7 @@ form.cpu--container {
     gap: 15px;
 }
 form.cpu--container,
-div.cartridge--container {
+form.cartridge--container {
     z-index: 2;
 
     padding: 25px;
@@ -44,9 +44,9 @@ div.cartridge--container {
     height: 800px;
 }
 form.cpu--container::after,
-div.cartridge--container::after,
+form.cartridge--container::after,
 form.cpu--container::before,
-div.cartridge--container::before {
+form.cartridge--container::before {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -64,7 +64,7 @@ form.cpu--container::after {
     );
 }
 form.cpu--container::before,
-div.cartridge--container::before {
+form.cartridge--container::before {
     background-image:
         url('/tuldok.svg'),
         linear-gradient(
@@ -92,7 +92,7 @@ div.cartridge--container::before {
 }
 
 form.cpu--container::after,
-div.cartridge--container::after {
+form.cartridge--container::after {
     width: 810px;
     height: 810px;
     z-index: -2;
@@ -106,7 +106,7 @@ div.cartridge--container::after {
     );
 }
 
-div.cartridge--container {
+form.cartridge--container {
     a.cpu--link {
         top: -5px;
         left: -5px;
@@ -134,12 +134,12 @@ div.cartridge--container {
     }
 }
 
-div.cartridge--container::before {
+form.cartridge--container::before {
     clip-path: path(
         'M 0,75 A 25,25 0,0,1 25,50 L 255,50 A 25,25 0,0,0 275,25 A 25,25 0,0,1 300,0 L 525,0 A 25,25 0,0,1 550,25 A 30,30 0,0,0 570,50 L 750,50 A 50,50 0,0,1 800,100 L 800,750 A 50,50 0,0,1 750,800 L 50,800 A 50,50 0,0,1 0,750 L 0,100 Z'
     );
 }
-div.cartridge--container::after {
+form.cartridge--container::after {
     clip-path: path(
         'M 0,75 A 30,30 0,0,1 25,50 L 260,50 A 25,25 0,0,0 275,25 A 30,30 0,0,1 300,0 L 535,0 A 30,30 0,0,1 560,25 A 30,30 0,0,0 575,50 L 760,50 A 55,55 0,0,1 810,100 L 810,760 A 55,55 0,0,1 760,810 L 50,810 A 55,55 0,0,1 0,760 L 0,100 Z'
     );
