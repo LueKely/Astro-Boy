@@ -148,3 +148,11 @@ input[type='file'] {
     height: auto;
     padding: 10px;
 }
+.alt {
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+    height: 50px;
+    font-size: 1rem;
+    align-self: flex-end;
+}

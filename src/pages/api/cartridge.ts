@@ -7,14 +7,8 @@ export const POST: APIRoute = async ({ request }) => {
     const file = data.get('fileInput') as File;
     const buffer = file.arrayBuffer();
     const cartridge = new GameBoyCatridge(await buffer);
-    if (!true) {
-        return new Response(
-            JSON.stringify({
-                message: 'Missing required fields',
-            }),
-            { status: 400 }
-        );
-    }
+    console.log(cartridge.inferCartridgeHeader());
+
     return new Response(
         JSON.stringify({
             message: 'Success!',

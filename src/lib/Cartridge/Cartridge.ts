@@ -1,6 +1,7 @@
 import type { IOpcodeSearch } from '../../components/composables/selectSearch';
 import type { TFormKey } from '../../store/formDataStore';
 import { CartHeaderAdress } from './types/Catridge_Address_Reader';
+import type { ICartridge } from './types/InferCartridge';
 
 export class GameBoyCatridge {
     #rawGame: ArrayBuffer;
@@ -127,31 +128,33 @@ export class GameBoyCatridge {
         };
     }
 
-    inferCartridgeHeader() {
+    // this is the most ugliest code i've ever made
+    inferCartridgeHeader(): ICartridge {
         const header = this.getCartridgeHeaderRaw();
-        const { globalCheckSum, manufactureCode, entryPoint, checkSum, nintendoLogo } =
-            this.getCartridgeHeaderRaw();
+
         return {
-            type: CartHeaderAdress.CartridgeType.get(Number(header.type)),
-            romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)),
-            ramSize: CartHeaderAdress.RamSize.get(Number(header.ramSize)),
-            destination: CartHeaderAdress.DestinationCode.get(Number(header.destinationCode)),
-            title: GameBoyCatridge.#ReadSubArray(header.title),
+            type: CartHeaderAdress.CartridgeType.get(Number(header.type)) as string,
+            romSize: CartHeaderAdress.RomSize.get(Number(header.romSize)) as number,
+            ramSize: CartHeaderAdress.RamSize.get(Number(header.ramSize)) as number,
+            destination: CartHeaderAdress.DestinationCode.get(
+                Number(header.destinationCode)
+            ) as string,
+            title: GameBoyCatridge.#ReadSubArray(header.title) as string,
             oldLicenseeCode: CartHeaderAdress.OldLicenseeCode.get(
                 Number('0x' + header.oldLicenseeCode)
-            ),
+            ) as string,
             newLicenseeCode: CartHeaderAdress.NewLicenseeCode.get(
                 GameBoyCatridge.#CipherAscii(header.newLicenseeCode)
-            ),
+            ) as string,
             cgbFlag:
                 CartHeaderAdress.CgbFlag.get(Number(header.cgbFlag)) ||
                 "Doesn't seem to work wdym 32",
             maskRomVersionNumber: header.maskRomVersionNumber,
-            globalCheckSum,
-            manufactureCode,
-            entryPoint,
-            checkSum,
-            nintendoLogo,
+            globalCheckSum: header.globalCheckSum,
+            manufactureCode: header.manufactureCode,
+            entryPoint: header.entryPoint,
+            checkSum: header.checkSum,
+            nintendoLogo: header.nintendoLogo,
         };
     }
 
