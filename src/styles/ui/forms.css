@@ -79,6 +79,14 @@ fieldset.status {
     box-shadow: inset 0px 0px 30px #21652b;
     grid-row: 1 / span 2;
     grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        image-rendering: pixelated;
+        filter: contrast(70%) drop-shadow(2px 2px 0px #21652b) hue-rotate(45deg);
+        margin-bottom: 30px;
+    }
 }
 fieldset.pointers {
     &,
