@@ -1,5 +1,4 @@
-# Astro-Boy
+# Astro-Bit
 
-A gameboy emulator built with typescript &amp; astro.
-this will be a long term project to enhance my skills of low level subjects
-and programming as well.
+A failed attempts to an emulator and now just a DMG CPU and RAM simulator that runs opcodes as well as a cartridge reader
+
