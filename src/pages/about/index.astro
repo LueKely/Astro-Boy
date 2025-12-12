@@ -2,4 +2,42 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
-<Layout title="About"> ABOUT GAMING! </Layout>
+<Layout title="About">
+    <article>
+        <p>
+            Eight months ago I wanted to try and emulate a simple gameboy using typescript. It
+            started out smoothly for the first 3 months, working on the CPU instructions and
+            registers but it became a balancing act of focusing on academics, having troubles with
+            IRL stuff and sadly I'm no juggler and fumbled trying to keep everything up, especially
+            the PPU in which I poorly impelemented. What should be a working emulator is now a
+            working CPU and RAM that can interpet all the instructions of a DMG cpu as well as
+            reading gameboy cartridges. I still wanted to salavage this project so bad. Anyways I
+            hope you enjoy tinkering alot with this site as much as I did.
+        </p>
+    </article>
+</Layout>
+
+<style>
+    article {
+        margin-top: 10px;
+        padding-top: 50px;
+        width: 750px;
+        height: 100%;
+        padding-inline: 20px;
+        background-image: linear-gradient(0deg, rgba(48, 48, 48, 0.5) 0%);
+        margin-left: 200px;
+    }
+    article > p:first-of-type::first-letter {
+        float: left;
+        font-size: 8rem;
+    }
+    p {
+        color: white;
+        margin-bottom: 100px;
+        font-size: 1.3rem;
+        font-family: 'Bai Jamjuree', sans-serif;
+        font-weight: bolder;
+        font-style: normal;
+        text-align: justify;
+    }
+</style>
